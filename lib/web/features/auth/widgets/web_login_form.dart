@@ -73,7 +73,7 @@ class _WebLoginFormState extends State<WebLoginForm> {
                   'Email',
                   style: TextStyle(
                     fontSize: 14,
-                    //color: emailColor,
+                    color: emailColor,
                   ),
                 ),
                 fillColor: Colors.black,
