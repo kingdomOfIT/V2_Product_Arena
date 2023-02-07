@@ -207,7 +207,10 @@ class _WebLoginFormState extends State<WebLoginForm> {
                 minimumSize: const Size(double.infinity, 56),
               ),
               child: const Text('Login'),
-            )
+            ),
+            const SizedBox(
+              height: 20,
+            ),
           ],
         ),
       ),
