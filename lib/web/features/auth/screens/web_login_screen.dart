@@ -14,7 +14,7 @@ class WebLoginScreen extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize:
-            Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
+            Size.fromHeight(MediaQuery.of(context).size.height * 0.06),
         child: WebAppBar(
           text: 'Sign Up',
           routeName: WebSignUpScreen.routeName,

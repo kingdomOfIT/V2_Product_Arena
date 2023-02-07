@@ -152,9 +152,8 @@ class _WebLoginFormState extends State<WebLoginForm> {
                   },
                   child: Icon(
                     viewPassword ? Icons.visibility : Icons.visibility_off,
-                    color: viewPassword
-                        ? Colors.black
-                        : const Color.fromARGB(255, 96, 93, 102),
+                    color:
+                        viewPassword ? Colors.black : const Color(0xFF605D66),
                     size: 30,
                   ),
                 ),
