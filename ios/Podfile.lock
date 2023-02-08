@@ -73,6 +73,8 @@ PODS:
   - flutter_inappwebview/Core (0.0.1):
     - Flutter
     - OrderedSet (~> 5.0)
+  - integration_test (0.0.1):
+    - Flutter
   - ObjectMapper (4.2.0)
   - OrderedSet (5.0.0)
   - path_provider_foundation (0.0.1):
@@ -101,6 +103,7 @@ DEPENDENCIES:
   - amplify_flutter_ios (from `.symlinks/plugins/amplify_flutter_ios/ios`)
   - Flutter (from `Flutter`)
   - flutter_inappwebview (from `.symlinks/plugins/flutter_inappwebview/ios`)
+  - integration_test (from `.symlinks/plugins/integration_test/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
   - video_player_avfoundation (from `.symlinks/plugins/video_player_avfoundation/ios`)
@@ -140,6 +143,8 @@ EXTERNAL SOURCES:
     :path: Flutter
   flutter_inappwebview:
     :path: ".symlinks/plugins/flutter_inappwebview/ios"
+  integration_test:
+    :path: ".symlinks/plugins/integration_test/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/ios"
   url_launcher_ios:
@@ -168,6 +173,7 @@ SPEC CHECKSUMS:
   AWSPluginsCore: 93f813579479fa4c5bfff58817df89e0e10f9f3b
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_inappwebview: bfd58618f49dc62f2676de690fc6dcda1d6c3721
+  integration_test: a1e7d09bd98eca2fc37aefd79d4f41ad37bdbbe5
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
   OrderedSet: aaeb196f7fef5a9edf55d89760da9176ad40b93c
   path_provider_foundation: 37748e03f12783f9de2cb2c4eadfaa25fe6d4852
