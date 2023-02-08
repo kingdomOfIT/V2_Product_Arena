@@ -1,8 +1,8 @@
 // ignore_for_file: depend_on_referenced_packages, body_might_complete_normally_nullable, sort_child_properties_last, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
-import 'package:v2_product_arena/amplifyconfiguration.dart';
 import 'package:v2_product_arena/constants/global_variables.dart';
+import 'package:v2_product_arena/mobile/features/auth/screens/email_verification_screen.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/mobile_login_screen.dart';
 import 'package:v2_product_arena/mobile/features/auth/widgets/mobile_signup_form.dart';
 import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
@@ -95,7 +95,11 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
         phoneController.text,
         emailController.text,
         passwordController.text,
+        context,
+        EmailVerificationScreen.routeName,
       );
+      Provider.of<MobileAuth>(context, listen: false).userEmail =
+          emailController.text;
       //Provider.of<MobileAuth>(context, listen: false).isLoading = false;
     }
   }

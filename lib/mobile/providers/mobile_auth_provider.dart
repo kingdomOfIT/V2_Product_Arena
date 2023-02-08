@@ -7,6 +7,7 @@ import 'package:v2_product_arena/amplifyconfiguration.dart';
 
 class MobileAuth with ChangeNotifier {
   String errorText = '';
+  String userEmail = '';
   bool isSignUpComplete = false;
   bool isLoading = false;
 
@@ -33,6 +34,8 @@ class MobileAuth with ChangeNotifier {
     String phone,
     String email,
     String password,
+    BuildContext context,
+    String routeName,
   ) async {
     await _configureAmplify();
 
@@ -58,5 +61,17 @@ class MobileAuth with ChangeNotifier {
       errorText = e.message;
     }
     notifyListeners();
+    Navigator.of(context).pushReplacementNamed(routeName);
+  }
+
+  Future<void> confirmUser(String email, String confirmationCode) async {
+    try {
+      final result = await Amplify.Auth.confirmSignUp(
+          username: email, confirmationCode: confirmationCode);
+      // print(result);
+
+    } on AuthException catch (e) {
+      safePrint(e.message);
+    }
   }
 }
