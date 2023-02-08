@@ -39,9 +39,12 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Product Arena V2',
+        theme: ThemeData(
+          primarySwatch: Colors.green,
+        ),
         home: defaultTargetPlatform == TargetPlatform.android ||
                 defaultTargetPlatform == TargetPlatform.iOS
-            ? const MobileLoginScreen()
+            ? const MobileSignupScreen()
             : const WebLoginScreen(),
         routes: {
           MobileLoginScreen.routeName: (context) => const MobileLoginScreen(),
