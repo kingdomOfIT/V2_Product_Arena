@@ -8,6 +8,7 @@ import 'package:v2_product_arena/amplifyconfiguration.dart';
 class MobileAuth with ChangeNotifier {
   String errorText = '';
   bool isSignUpComplete = false;
+  bool isLoading = false;
 
   Future<void> _configureAmplify() async {
     try {
@@ -51,9 +52,11 @@ class MobileAuth with ChangeNotifier {
         options: CognitoSignUpOptions(userAttributes: userAttributes),
       );
       isSignUpComplete = result.isSignUpComplete;
+      notifyListeners();
     } on AuthException catch (e) {
       safePrint(e.message);
       errorText = e.message;
     }
+    notifyListeners();
   }
 }
