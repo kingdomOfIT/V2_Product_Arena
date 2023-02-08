@@ -17,4 +17,10 @@ class GlobalVariables {
       'url': 'https://www.tech387.com/',
     },
   ];
+
+  static const List<String> status = [
+    'Student',
+    'Employed',
+    'Unemployed',
+  ];
 }
