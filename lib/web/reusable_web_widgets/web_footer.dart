@@ -85,7 +85,7 @@ class WebFooter extends StatelessWidget {
                             ),
                           ),
                         ],
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -125,36 +125,37 @@ class WebFooter extends StatelessWidget {
                   ),
                 ),
                 Container(
-                    width: deviceWidth * 0.296,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        InkWell(
-                          onTap: () {},
-                          child: Text(
-                            'Privacy',
-                            style: TextStyle(
-                              color: Colors.black45,
-                              fontSize: deviceHeight * 0.011,
-                            ),
+                  width: deviceWidth * 0.296,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      InkWell(
+                        onTap: () {},
+                        child: Text(
+                          'Privacy',
+                          style: TextStyle(
+                            color: Colors.black45,
+                            fontSize: deviceHeight * 0.011,
                           ),
                         ),
-                        SizedBox(
-                          width: deviceWidth * 0.02,
-                        ),
-                        InkWell(
-                          onTap: () {},
-                          child: Text(
-                            'Terms',
-                            style: TextStyle(
-                              color: Colors.black45,
-                              fontSize: deviceHeight * 0.011,
-                            ),
+                      ),
+                      SizedBox(
+                        width: deviceWidth * 0.02,
+                      ),
+                      InkWell(
+                        onTap: () {},
+                        child: Text(
+                          'Terms',
+                          style: TextStyle(
+                            color: Colors.black45,
+                            fontSize: deviceHeight * 0.011,
                           ),
                         ),
-                      ],
-                    )),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           )
