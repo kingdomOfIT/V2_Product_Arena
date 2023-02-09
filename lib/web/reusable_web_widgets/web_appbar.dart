@@ -34,6 +34,7 @@ class _WebAppBarState extends State<WebAppBar> {
       ),
       leadingWidth: 240,
       automaticallyImplyLeading: false,
+      centerTitle: true,
       title: const Text(
         'Tech387',
         style: TextStyle(
@@ -50,11 +51,12 @@ class _WebAppBarState extends State<WebAppBar> {
               const SizedBox(width: 20),
               Container(
                 decoration: BoxDecoration(
+                  color: Colors.black,
+                  border: Border.all(
+                    width: 2,
                     color: Colors.black,
-                    border: Border.all(
-                      width: 2,
-                      color: Colors.black,
-                    )),
+                  ),
+                ),
                 child: ElevatedButton(
                   style:
                       ElevatedButton.styleFrom(backgroundColor: Colors.black),
@@ -73,7 +75,7 @@ class _WebAppBarState extends State<WebAppBar> {
               ),
             ],
           ),
-        )
+        ),
       ],
     );
   }

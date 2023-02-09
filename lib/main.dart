@@ -9,12 +9,15 @@ import 'package:v2_product_arena/mobile/features/home/screens/mobile_home_screen
 import 'package:v2_product_arena/mobile/features/onboarding/screens/mobile_onboarding_screen.dart';
 import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
 import 'package:v2_product_arena/mobile/providers/mobile_onboarding_provider.dart';
+import 'package:v2_product_arena/web/features/auth/screens/web_email_verifed.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_login_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_signup_screen.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_home_screen.dart';
 import 'package:v2_product_arena/web/features/onboarding/screens/web_onboarding_screen.dart';
 import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
+
+import 'web/features/auth/screens/web_verification_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -54,10 +57,12 @@ class MyApp extends StatelessWidget {
               const MobileOnboardingScreen(),
           MobileHomeScreen.routeName: (context) => const MobileHomeScreen(),
           WebLoginScreen.routeName: (context) => const WebLoginScreen(),
-          WebSignUpScreen.routeName: (context) => const WebSignUpScreen(),
+          WebSignUpScreen.routeName: (context) => WebSignUpScreen(),
           WebOnboardingScreen.routeName: (context) =>
               const WebOnboardingScreen(),
           WebHomeScreen.routeName: (context) => const WebHomeScreen(),
+          SignupConfirmation.routeName: (context) => SignupConfirmation(),
+          Verifed.routeName: (context) => Verifed(),
           EmailVerificationScreen.routeName: (context) =>
               EmailVerificationScreen(),
         },
