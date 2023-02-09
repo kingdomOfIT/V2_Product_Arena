@@ -1,4 +1,6 @@
+import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_home_screen.dart';
 
 class WebLoginForm extends StatefulWidget {
@@ -69,9 +71,20 @@ class _WebLoginFormState extends State<WebLoginForm> {
               },
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(
+                suffixIcon: Visibility(
+                  visible: emailErrored,
+                  child: const Icon(
+                    Icons.error,
+                    color: Color(0xFFB3261E),
+                    size: 30,
+                  ),
+                ),
+                errorStyle: GoogleFonts.notoSans(
+                  color: const Color(0xFFB3261E),
+                ),
                 label: Text(
                   'Email',
-                  style: TextStyle(
+                  style: GoogleFonts.notoSans(
                     fontSize: 14,
                     color: emailColor,
                   ),
@@ -98,7 +111,7 @@ class _WebLoginFormState extends State<WebLoginForm> {
                   ),
                 ),
               ),
-              style: const TextStyle(
+              style: GoogleFonts.notoSans(
                 fontWeight: FontWeight.w700,
                 fontSize: 14,
               ),
@@ -144,6 +157,9 @@ class _WebLoginFormState extends State<WebLoginForm> {
               },
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(
+                errorStyle: GoogleFonts.notoSans(
+                  color: const Color(0xFFB3261E),
+                ),
                 suffixIcon: InkWell(
                   onTap: () {
                     setState(() {
@@ -159,7 +175,7 @@ class _WebLoginFormState extends State<WebLoginForm> {
                 ),
                 label: Text(
                   'Password',
-                  style: TextStyle(
+                  style: GoogleFonts.notoSans(
                     fontSize: 14,
                     color: passwordColor,
                   ),
@@ -185,7 +201,7 @@ class _WebLoginFormState extends State<WebLoginForm> {
                   ),
                 ),
               ),
-              style: const TextStyle(
+              style: GoogleFonts.notoSans(
                 color: Colors.black,
                 fontWeight: FontWeight.w700,
                 fontSize: 14,
@@ -197,8 +213,37 @@ class _WebLoginFormState extends State<WebLoginForm> {
             ElevatedButton(
               onPressed: () async {
                 if (_loginFormKey.currentState!.validate()) {
-                  Navigator.of(context)
-                      .pushReplacementNamed(WebHomeScreen.routeName);
+                  try {
+                    final result = await Amplify.Auth.signIn(
+                      username: emailController.text,
+                      password: passwordController.text,
+                    );
+                    if (result.isSignedIn && mounted) {
+                      Navigator.of(context)
+                          .pushReplacementNamed(WebHomeScreen.routeName);
+                    } else if (result.nextStep?.signInStep ==
+                        "CONFIRM_SIGN_UP_STEP") {
+                      safePrint("User didn't verify account");
+                      await Amplify.Auth.resendSignUpCode(
+                        username: emailController.text,
+                      );
+                    }
+                  } on UserNotFoundException {
+                    safePrint('The user is not found. Please register');
+                  } on UserNotConfirmedException {
+                    // TODO
+                  } on NotAuthorizedException {
+                    safePrint(
+                        'Username or password is wrong. Please try again');
+                  } on Exception catch (error) {
+                    safePrint(
+                        'An unexpected error has happened. Check the logs for detail');
+                    safePrint(error.toString());
+                  }
+                  emailController.clear();
+                  passwordController.clear();
+                  // Navigator.of(context)
+                  //     .pushReplacementNamed(WebHomeScreen.routeName);
                 }
               },
               style: ElevatedButton.styleFrom(
