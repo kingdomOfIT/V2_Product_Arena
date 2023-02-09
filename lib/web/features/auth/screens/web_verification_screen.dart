@@ -12,12 +12,20 @@ import 'package:provider/provider.dart';
 
 class SignupConfirmation extends StatefulWidget {
   static const routeName = '/confirmation';
-
   @override
   State<SignupConfirmation> createState() => _SignupConfirmationState();
 }
 
 class _SignupConfirmationState extends State<SignupConfirmation> {
+  final _formKey = GlobalKey();
+
+  final _otpController1 = TextEditingController();
+  final _otpController2 = TextEditingController();
+  final _otpController3 = TextEditingController();
+  final _otpController4 = TextEditingController();
+  final _otpController5 = TextEditingController();
+  final _otpController6 = TextEditingController();
+
   Future<void> confirmUserr(String email, String confirmationCode) async {
     try {
       final result = await Amplify.Auth.confirmSignUp(
@@ -96,6 +104,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                             width: MediaQuery.of(context).size.width,
                             height: 85,
                             child: Form(
+                              key: _formKey,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -103,7 +112,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                     height: 80,
                                     width: 80,
                                     child: TextFormField(
-                                      onSaved: (pin1) {},
+                                      controller: _otpController1,
                                       onChanged: (value) {
                                         if (value.length == 1) {
                                           FocusScope.of(context).nextFocus();
@@ -142,7 +151,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                     height: 80,
                                     width: 80,
                                     child: TextFormField(
-                                      onSaved: (pin2) {},
+                                      controller: _otpController2,
                                       onChanged: (value) {
                                         if (value.length == 1) {
                                           FocusScope.of(context).nextFocus();
@@ -181,7 +190,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                     height: 80,
                                     width: 80,
                                     child: TextFormField(
-                                      onSaved: (pin3) {},
+                                      controller: _otpController3,
                                       onChanged: (value) {
                                         if (value.length == 1) {
                                           FocusScope.of(context).nextFocus();
@@ -220,7 +229,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                     height: 80,
                                     width: 80,
                                     child: TextFormField(
-                                      onSaved: (pin4) {},
+                                      controller: _otpController4,
                                       onChanged: (value) {
                                         if (value.length == 1) {
                                           FocusScope.of(context).nextFocus();
@@ -259,7 +268,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                     height: 80,
                                     width: 80,
                                     child: TextFormField(
-                                      onSaved: (pin5) {},
+                                      controller: _otpController5,
                                       onChanged: (value) {
                                         if (value.length == 1) {
                                           FocusScope.of(context).nextFocus();
@@ -298,7 +307,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                     height: 80,
                                     width: 80,
                                     child: TextFormField(
-                                      onSaved: (pin6) {},
+                                      controller: _otpController6,
                                       onChanged: (value) {
                                         if (value.length == 1) {
                                           FocusScope.of(context).nextFocus();
@@ -348,10 +357,17 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                 backgroundColor: Colors.black,
                               ),
                               onPressed: () {
-                                Navigator.of(context)
-                                    .pushReplacementNamed('/verifed');
+                                final otp = _otpController1.text +
+                                    _otpController2.text +
+                                    _otpController3.text +
+                                    _otpController4.text +
+                                    _otpController5.text +
+                                    _otpController6.text;
                                 confirmUserr(
-                                    Provider.of<WebAuth>(context).email, '');
+                                    Provider.of<WebAuth>(context, listen: false)
+                                        .userEmail,
+                                    otp);
+                                return print(otp);
                               },
                               child: const Text(
                                 'Verify',

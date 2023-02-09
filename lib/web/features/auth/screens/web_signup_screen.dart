@@ -2,14 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:v2_product_arena/amplifyconfiguration.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_login_screen.dart';
+import 'package:v2_product_arena/web/features/auth/screens/web_verification_screen.dart';
 import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_appbar.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_footer.dart';
-import 'package:amplify_flutter/amplify_flutter.dart';
-import 'package:amplify_api/amplify_api.dart';
-import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+
 import 'package:provider/provider.dart';
 
 class WebSignUpScreen extends StatefulWidget {
@@ -32,7 +30,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
 
   var dropdownValue;
 
-  var _text = '';
+  final _text = '';
 
   void onSubmitSignup() async {
     final isValid = _formKey.currentState!.validate();
@@ -40,55 +38,26 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
 
     if (isValid) {
       _formKey.currentState!.save();
-      setState(() {});
-    }
-  }
-
-  Future<void> _configureAmplify() async {
-    try {
-      // amplify plugins
-
-      final apiPlugin = AmplifyAPI();
-      final authPlugin = AmplifyAuthCognito();
-
-      // add Amplify plugins
-      await Amplify.addPlugins([apiPlugin, authPlugin]);
-
-      await Amplify.configure(amplifyconfig);
-    } catch (e) {}
-  }
-
-  Future<void> signUpUser() async {
-    await _configureAmplify();
-    try {
-      final userAttributes = <CognitoUserAttributeKey, String>{
-        CognitoUserAttributeKey.email: emailController.text,
-        CognitoUserAttributeKey.phoneNumber: phoneController.text,
-        CognitoUserAttributeKey.givenName: nameController.text,
-        CognitoUserAttributeKey.familyName: surnameController.text,
-        CognitoUserAttributeKey.address: cityController.text,
-        CognitoUserAttributeKey.birthdate: birthdateController.text,
-        const CognitoUserAttributeKey.custom("status"): dropdownValue
-      };
-      final result = await Amplify.Auth.signUp(
-        username: emailController.text,
-        password: passwordController.text,
-        options: CognitoSignUpOptions(userAttributes: userAttributes),
+      await Provider.of<WebAuth>(context, listen: false).signUpUser(
+        nameController.text,
+        surnameController.text,
+        birthdateController.text,
+        cityController.text,
+        dropdownValue!,
+        phoneController.text,
+        emailController.text,
+        passwordController.text,
+        context,
+        SignupConfirmation.routeName,
       );
-      Provider.of<WebAuth>(context).email = emailController.text;
-      print(result);
-      setState(() {
-        var isSignUpComplete = result.isSignUpComplete;
-      });
-    } on AuthException catch (e) {
-      safePrint(e.message);
+      Provider.of<WebAuth>(context, listen: false).userEmail =
+          emailController.text;
     }
   }
 
   @override
   Widget build(BuildContext context) {
     double maxwidth = MediaQuery.of(context).size.width;
-    // double maxheight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       appBar: PreferredSize(
@@ -539,7 +508,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                     Navigator.of(context)
                                         .pushReplacementNamed('/confirmation');
 
-                                    // signUpUser();
+                                    onSubmitSignup();
                                   },
                                   child: const Text(
                                     'Create your Account',
