@@ -1,11 +1,14 @@
-// ignore_for_file: use_key_in_widget_constructors
+// ignore_for_file: use_key_in_widget_constructors, avoid_print, depend_on_referenced_packages
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:amplify_flutter/amplify_flutter.dart';
+import '../../../providers/web_auth_provider.dart';
 import '../../../reusable_web_widgets/web_appbar.dart';
 import '../../../reusable_web_widgets/web_footer.dart';
 import 'web_login_screen.dart';
+import 'package:provider/provider.dart';
 
 class SignupConfirmation extends StatefulWidget {
   static const routeName = '/confirmation';
@@ -15,6 +18,16 @@ class SignupConfirmation extends StatefulWidget {
 }
 
 class _SignupConfirmationState extends State<SignupConfirmation> {
+  Future<void> confirmUserr(String email, String confirmationCode) async {
+    try {
+      final result = await Amplify.Auth.confirmSignUp(
+          username: email, confirmationCode: confirmationCode);
+      print(result);
+    } on AuthException catch (e) {
+      safePrint(e.message);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double maxwidth = MediaQuery.of(context).size.width;
@@ -89,7 +102,12 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                   SizedBox(
                                     height: 80,
                                     width: 80,
-                                    child: TextField(
+                                    child: TextFormField(
+                                      onChanged: (value) {
+                                        if (value.length == 1) {
+                                          FocusScope.of(context).nextFocus();
+                                        }
+                                      },
                                       style: GoogleFonts.notoSans(
                                         fontSize: 32,
                                         fontWeight: FontWeight.w900,
@@ -122,7 +140,12 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                   SizedBox(
                                     height: 80,
                                     width: 80,
-                                    child: TextField(
+                                    child: TextFormField(
+                                      onChanged: (value) {
+                                        if (value.length == 1) {
+                                          FocusScope.of(context).nextFocus();
+                                        }
+                                      },
                                       style: GoogleFonts.notoSans(
                                         fontSize: 32,
                                         fontWeight: FontWeight.w900,
@@ -155,7 +178,12 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                   SizedBox(
                                     height: 80,
                                     width: 80,
-                                    child: TextField(
+                                    child: TextFormField(
+                                      onChanged: (value) {
+                                        if (value.length == 1) {
+                                          FocusScope.of(context).nextFocus();
+                                        }
+                                      },
                                       style: GoogleFonts.notoSans(
                                         fontSize: 32,
                                         fontWeight: FontWeight.w900,
@@ -188,7 +216,12 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                   SizedBox(
                                     height: 80,
                                     width: 80,
-                                    child: TextField(
+                                    child: TextFormField(
+                                      onChanged: (value) {
+                                        if (value.length == 1) {
+                                          FocusScope.of(context).nextFocus();
+                                        }
+                                      },
                                       style: GoogleFonts.notoSans(
                                         fontSize: 32,
                                         fontWeight: FontWeight.w900,
@@ -221,7 +254,12 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                   SizedBox(
                                     height: 80,
                                     width: 80,
-                                    child: TextField(
+                                    child: TextFormField(
+                                      onChanged: (value) {
+                                        if (value.length == 1) {
+                                          FocusScope.of(context).nextFocus();
+                                        }
+                                      },
                                       style: GoogleFonts.notoSans(
                                         fontSize: 32,
                                         fontWeight: FontWeight.w900,
@@ -254,7 +292,15 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                   SizedBox(
                                     height: 80,
                                     width: 80,
-                                    child: TextField(
+                                    child: TextFormField(
+                                      onChanged: (value) {
+                                        if (value.length == 1) {
+                                          FocusScope.of(context).nextFocus();
+                                        }
+                                      },
+                                      showCursor: false,
+                                      readOnly: false,
+                                      textAlign: TextAlign.center,
                                       style: GoogleFonts.notoSans(
                                         fontSize: 32,
                                         fontWeight: FontWeight.w900,
@@ -276,7 +322,6 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                           ),
                                         ),
                                       ),
-                                      textAlign: TextAlign.center,
                                       inputFormatters: [
                                         LengthLimitingTextInputFormatter(1),
                                         FilteringTextInputFormatter.digitsOnly,
@@ -299,6 +344,8 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                               onPressed: () {
                                 Navigator.of(context)
                                     .pushReplacementNamed('/verifed');
+                                confirmUserr(
+                                    Provider.of<WebAuth>(context).email, '');
                               },
                               child: const Text(
                                 'Verify',
