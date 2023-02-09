@@ -539,7 +539,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                     Navigator.of(context)
                                         .pushReplacementNamed('/confirmation');
 
-                                    // signUpUser();
+                                    signUpUser();
                                   },
                                   child: const Text(
                                     'Create your Account',
