@@ -103,6 +103,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                     height: 80,
                                     width: 80,
                                     child: TextFormField(
+                                      onSaved: (pin1) {},
                                       onChanged: (value) {
                                         if (value.length == 1) {
                                           FocusScope.of(context).nextFocus();
@@ -141,6 +142,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                     height: 80,
                                     width: 80,
                                     child: TextFormField(
+                                      onSaved: (pin2) {},
                                       onChanged: (value) {
                                         if (value.length == 1) {
                                           FocusScope.of(context).nextFocus();
@@ -179,6 +181,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                     height: 80,
                                     width: 80,
                                     child: TextFormField(
+                                      onSaved: (pin3) {},
                                       onChanged: (value) {
                                         if (value.length == 1) {
                                           FocusScope.of(context).nextFocus();
@@ -217,6 +220,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                     height: 80,
                                     width: 80,
                                     child: TextFormField(
+                                      onSaved: (pin4) {},
                                       onChanged: (value) {
                                         if (value.length == 1) {
                                           FocusScope.of(context).nextFocus();
@@ -255,6 +259,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                     height: 80,
                                     width: 80,
                                     child: TextFormField(
+                                      onSaved: (pin5) {},
                                       onChanged: (value) {
                                         if (value.length == 1) {
                                           FocusScope.of(context).nextFocus();
@@ -293,6 +298,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                     height: 80,
                                     width: 80,
                                     child: TextFormField(
+                                      onSaved: (pin6) {},
                                       onChanged: (value) {
                                         if (value.length == 1) {
                                           FocusScope.of(context).nextFocus();
