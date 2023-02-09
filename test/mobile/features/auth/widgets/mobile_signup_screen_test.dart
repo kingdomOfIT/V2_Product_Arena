@@ -203,7 +203,7 @@ void main() {
         findsNothing);
   });
   testWidgets(
-      'GIVEN signup screen, WHEN widget is built, THEN all input fields should be visible',
+      'GIVEN signup screen, WHEN user that already have account click on login, THEN he should be redirected to login screen',
       (tester) async {
     await tester.pumpWidget(createMobileSignupScreen());
     expect(find.byKey(const Key('loginRedirection')), findsOneWidget);
