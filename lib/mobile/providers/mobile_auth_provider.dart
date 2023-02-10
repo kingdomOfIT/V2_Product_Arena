@@ -6,6 +6,8 @@ import 'package:v2_product_arena/amplifyconfiguration.dart';
 
 class MobileAuth with ChangeNotifier {
   String errorText = '';
+  String errorTextOTP = '';
+  bool isOTPerror = false;
   String userEmail = '';
   bool isSignUpComplete = false;
   bool isLoading = false;
@@ -54,23 +56,35 @@ class MobileAuth with ChangeNotifier {
         options: CognitoSignUpOptions(userAttributes: userAttributes),
       );
       isSignUpComplete = result.isSignUpComplete;
+      Navigator.of(context).pushReplacementNamed(routeName);
       notifyListeners();
     } on AuthException catch (e) {
       safePrint(e.message);
       errorText = e.message;
     }
     notifyListeners();
-    Navigator.of(context).pushReplacementNamed(routeName);
   }
 
-  Future<void> confirmUser(String email, String confirmationCode) async {
+  Future<void> confirmUser(
+    String email,
+    String confirmationCode,
+    BuildContext context,
+    String routeName,
+  ) async {
     try {
       final result = await Amplify.Auth.confirmSignUp(
           username: email, confirmationCode: confirmationCode);
+      Navigator.of(context).pushReplacementNamed(routeName);
+
       // print(result);
 
     } on AuthException catch (e) {
       safePrint(e.message);
+      errorTextOTP = e.message;
+      if (errorTextOTP.isNotEmpty) {
+        isOTPerror = true;
+        notifyListeners();
+      }
     }
   }
 }
