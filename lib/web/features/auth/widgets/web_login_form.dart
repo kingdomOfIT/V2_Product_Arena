@@ -235,13 +235,22 @@ class _WebLoginFormState extends State<WebLoginForm> {
                       });
                       Navigator.of(context)
                           .pushReplacementNamed(WebHomeScreen.routeName);
-                    } else if (result.nextStep?.signInStep ==
-                        "CONFIRM_SIGN_UP_STEP") {
-                      safePrint("User didn't verify account");
-                      await Amplify.Auth.resendSignUpCode(
-                        username: emailController.text,
-                      );
-                    } else if (result.nextStep?.signInStep ==
+                    }
+                    //TODO Add redirection to Verification screen
+                    // else if (result.nextStep?.signInStep ==
+                    //     "CONFIRM_SIGN_UP_STEP") {
+                    //   safePrint("User didn't verify account");
+                    //   await Amplify.Auth.resendSignUpCode(
+                    //     username: emailController.text,
+                    //   );
+                    // setState(() {
+                    //     _backError = false;
+                    //     _backErrorMsg = null;
+                    //   });
+                    // Navigator.of(context)
+                    //      .pushReplacementNamed(SignupConfirmation.routeName);
+                    //}
+                    else if (result.nextStep?.signInStep ==
                         'CONFIRM_SIGN_IN_WITH_NEW_PASSWORD') {
                       setState(() {
                         _backError = false;
@@ -252,12 +261,10 @@ class _WebLoginFormState extends State<WebLoginForm> {
                       safePrint('Please create an account through app');
                     }
                   } on NotAuthorizedException {
-                    safePrint(
-                        'Username or password is wrong. Please try again');
+                    safePrint('Incorrect email or password.');
                     setState(() {
                       _backError = true;
-                      _backErrorMsg =
-                          'Username or password is wrong. Please try again';
+                      _backErrorMsg = 'Incorrect email or password.';
                       emailColor = const Color(0xFFB3261E);
                       passwordColor = const Color(0xFFB3261E);
                     });
