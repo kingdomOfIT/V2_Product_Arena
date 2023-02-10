@@ -7,7 +7,6 @@ import 'package:v2_product_arena/web/features/auth/screens/web_verification_scre
 import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_appbar.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_footer.dart';
-
 import 'package:provider/provider.dart';
 
 class WebSignUpScreen extends StatefulWidget {
@@ -31,13 +30,40 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
   var dropdownValue;
 
   final _text = '';
+  bool isHiddenPassword = true;
 
-  void onSubmitSignup() async {
+  // void onSubmitSignup() async {
+  //   final isValid = _formKey.currentState!.validate();
+  //   FocusScope.of(context).unfocus();
+
+  //   if (isValid) {
+  //     _formKey.currentState!.save();
+  //     await Provider.of<WebAuth>(context, listen: false).signUpUser(
+  //       nameController.text,
+  //       surnameController.text,
+  //       birthdateController.text,
+  //       cityController.text,
+  //       dropdownValue!,
+  //       phoneController.text,
+  //       emailController.text,
+  //       passwordController.text,
+  //       context,
+  //       SignupConfirmation.routeName,
+  //     );
+  //     Navigator.of(context).pushReplacementNamed('/confirmation');
+  //     Provider.of<WebAuth>(context, listen: false).userEmail =
+  //         emailController.text;
+  //   }
+  // }
+  void onSubmitSignUp() async {
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
-
     if (isValid) {
       _formKey.currentState!.save();
+      //  Provider.of<MobileAuth>(context, listen: false).isLoading = true;
+      // setState(() {
+      //   isLoading = true;
+      // });
       await Provider.of<WebAuth>(context, listen: false).signUpUser(
         nameController.text,
         surnameController.text,
@@ -52,7 +78,22 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
       );
       Provider.of<WebAuth>(context, listen: false).userEmail =
           emailController.text;
+      Navigator.of(context).pushReplacementNamed('/confirmation');
     }
+  }
+
+  RegExp birthDate =
+      RegExp(r'^(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])/[0-9]{4}$');
+
+  RegExp phoneNumber = RegExp(r'^[0-9]+$');
+
+  RegExp email = RegExp(
+      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
+
+  void togglePasswordView() {
+    setState(() {
+      isHiddenPassword = !isHiddenPassword;
+    });
   }
 
   @override
@@ -435,12 +476,24 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                     const SizedBox(height: 30),
                                     //Password
                                     TextFormField(
+                                      obscureText: isHiddenPassword,
                                       style: GoogleFonts.notoSans(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w700,
                                       ),
                                       cursorColor: const Color(0xFF22E974),
                                       decoration: InputDecoration(
+                                        suffixIcon: InkWell(
+                                            onTap: togglePasswordView,
+                                            child: Icon(
+                                              isHiddenPassword
+                                                  ? Icons.visibility_off
+                                                  : Icons.visibility,
+                                              size: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.027,
+                                            )),
                                         focusedBorder: const OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFF22E974),
@@ -463,12 +516,20 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                       ),
                                       controller: passwordController,
                                       validator: (value) {
+                                        RegExp password = RegExp(
+                                            r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
                                         if (value!.isEmpty) {
                                           return 'Please fill the required field.';
-                                        } else {
-                                          return null;
+                                        }
+                                        if (value.length < 8) {
+                                          return 'Password must contain a minimum of 8 characters, uppercase, lower case, number and special character.';
+                                        }
+                                        if (!password.hasMatch(value)) {
+                                          return 'Password must contain a minimum of 8 characters, uppercase, lower case, number and special character.';
                                         }
                                       },
+                                      onEditingComplete: () =>
+                                          FocusScope.of(context).unfocus(),
                                     ),
                                   ],
                                 ),
@@ -503,13 +564,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.black,
                                   ),
-                                  onPressed: () {
-                                    if (_formKey.currentState!.validate()) {}
-                                    Navigator.of(context)
-                                        .pushReplacementNamed('/confirmation');
-
-                                    onSubmitSignup();
-                                  },
+                                  onPressed: onSubmitSignUp,
                                   child: const Text(
                                     'Create your Account',
                                   ),

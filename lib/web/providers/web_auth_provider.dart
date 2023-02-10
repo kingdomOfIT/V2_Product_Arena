@@ -2,12 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
-import 'package:amplify_core/amplify_core.dart' as prefix;
 import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:v2_product_arena/amplifyconfiguration.dart';
 
 class WebAuth with ChangeNotifier {
+  String errorTextOTP = '';
+  bool isOTPerror = false;
   String errorText = '';
   String userEmail = '';
   bool isSignUpComplete = false;
@@ -66,14 +67,26 @@ class WebAuth with ChangeNotifier {
     Navigator.of(context).pushReplacementNamed(routeName);
   }
 
-  Future<void> confirmUser(String email, String confirmationCode) async {
+  Future<void> confirmUser(
+    String email,
+    String confirmationCode,
+    BuildContext context,
+    String routeName,
+  ) async {
     try {
       final result = await Amplify.Auth.confirmSignUp(
           username: email, confirmationCode: confirmationCode);
+      Navigator.of(context).pushReplacementNamed(routeName);
+
       // print(result);
 
     } on AuthException catch (e) {
       safePrint(e.message);
+      errorTextOTP = e.message;
+      if (errorTextOTP.isNotEmpty) {
+        isOTPerror = true;
+        notifyListeners();
+      }
     }
   }
 }

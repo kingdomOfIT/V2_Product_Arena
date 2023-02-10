@@ -9,6 +9,7 @@ import 'package:v2_product_arena/mobile/features/onboarding/screens/mobile_onboa
 import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
 import 'package:v2_product_arena/mobile/providers/mobile_onboarding_provider.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_email_verifed.dart';
+import 'package:v2_product_arena/web/features/auth/screens/web_email_verified.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_login_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_signup_screen.dart';
@@ -42,6 +43,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Product Arena V2',
+        theme: ThemeData(
+          primarySwatch: Colors.green,
+        ),
         home: defaultTargetPlatform == TargetPlatform.android ||
                 defaultTargetPlatform == TargetPlatform.iOS
             ? const MobileLoginScreen()
@@ -59,6 +63,7 @@ class MyApp extends StatelessWidget {
           WebHomeScreen.routeName: (context) => const WebHomeScreen(),
           SignupConfirmation.routeName: (context) => SignupConfirmation(),
           Verifed.routeName: (context) => Verifed(),
+          VerifiedScreen.routeName: (context) => const VerifiedScreen(),
         },
       ),
     );

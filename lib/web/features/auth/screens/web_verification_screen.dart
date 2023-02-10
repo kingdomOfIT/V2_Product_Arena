@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
+import 'package:v2_product_arena/web/features/auth/screens/web_email_verified.dart';
 import '../../../providers/web_auth_provider.dart';
 import '../../../reusable_web_widgets/web_appbar.dart';
 import '../../../reusable_web_widgets/web_footer.dart';
@@ -26,18 +27,9 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
   final _otpController5 = TextEditingController();
   final _otpController6 = TextEditingController();
 
-  Future<void> confirmUserr(String email, String confirmationCode) async {
-    try {
-      final result = await Amplify.Auth.confirmSignUp(
-          username: email, confirmationCode: confirmationCode);
-      print(result);
-    } on AuthException catch (e) {
-      safePrint(e.message);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    final webAuth = Provider.of<WebAuth>(context, listen: false);
     double maxwidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: PreferredSize(
@@ -363,11 +355,14 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                     _otpController4.text +
                                     _otpController5.text +
                                     _otpController6.text;
-                                confirmUserr(
-                                    Provider.of<WebAuth>(context, listen: false)
-                                        .userEmail,
-                                    otp);
-                                return print(otp);
+
+                                webAuth.confirmUser(
+                                  webAuth.userEmail,
+                                  otp,
+                                  context,
+                                  VerifiedScreen.routeName,
+                                );
+                                print(webAuth.userEmail);
                               },
                               child: const Text(
                                 'Verify',
