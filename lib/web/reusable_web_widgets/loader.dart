@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class RedirectingScreen extends StatefulWidget {
+  static const routeName = '/redirection';
   const RedirectingScreen({super.key});
 
   @override
