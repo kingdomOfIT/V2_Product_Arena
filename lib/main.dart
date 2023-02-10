@@ -3,6 +3,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/email_verification_screen.dart';
+import 'package:v2_product_arena/mobile/features/auth/screens/email_verified_screen.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/mobile_login_screen.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/mobile_signup_screen.dart';
 import 'package:v2_product_arena/mobile/features/home/screens/mobile_home_screen.dart';
@@ -45,7 +46,7 @@ class MyApp extends StatelessWidget {
         ),
         home: defaultTargetPlatform == TargetPlatform.android ||
                 defaultTargetPlatform == TargetPlatform.iOS
-            ? MobileSignupScreen()
+            ? const MobileSignupScreen()
             : const WebLoginScreen(),
         routes: {
           MobileLoginScreen.routeName: (context) => const MobileLoginScreen(),
@@ -60,6 +61,7 @@ class MyApp extends StatelessWidget {
           WebHomeScreen.routeName: (context) => const WebHomeScreen(),
           EmailVerificationScreen.routeName: (context) =>
               EmailVerificationScreen(),
+          EmailVerified.routeName: (context) => EmailVerified(),
         },
       ),
     );

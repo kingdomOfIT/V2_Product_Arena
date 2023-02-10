@@ -65,7 +65,7 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
   bool isHiddenPassword = true;
 
   RegExp birthDate =
-      RegExp(r'^(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])/[0-9]{4}$');
+      RegExp(r'^(0[1-9]|[1-2][0-9]|3[0-1])-(0[1-9]|1[0-2])-\d{4}$');
 
   RegExp phoneNumber = RegExp(r'^[0-9]+$');
 
@@ -74,6 +74,8 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
 
   RegExp password =
       RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+
+  final String bosnianDialCode = '+387';
 
   bool isLoading = false;
 
@@ -92,7 +94,7 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
         birthDateController.text,
         cityController.text,
         selectedValue!,
-        phoneController.text,
+        bosnianDialCode + phoneController.text,
         emailController.text,
         passwordController.text,
         context,
@@ -100,7 +102,6 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
       );
       Provider.of<MobileAuth>(context, listen: false).userEmail =
           emailController.text;
-      //Provider.of<MobileAuth>(context, listen: false).isLoading = false;
     }
   }
 
@@ -326,8 +327,8 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                     if (value!.isEmpty) {
                                       return 'Please fill the required field.';
                                     }
-                                    if (value.length < 10) {
-                                      return 'Invalid birth date format';
+                                    if (!birthDate.hasMatch(value)) {
+                                      return 'Invalid birth date format. Valid format: dd-mm-yyyy';
                                     }
                                   },
                                   onEditingComplete: () =>
@@ -469,6 +470,14 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                         fontWeight: FontWeight.w700,
                                       ),
                                     ),
+                                    prefix: Padding(
+                                      padding: const EdgeInsets.all(4),
+                                      child: Text(
+                                        bosnianDialCode,
+                                        style: const TextStyle(
+                                            color: Colors.black54),
+                                      ),
+                                    ),
                                   ),
                                   validator: (value) {
                                     if (value!.isEmpty) {
@@ -590,7 +599,7 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                     if (value!.isEmpty) {
                                       return 'Please fill the required field.';
                                     }
-                                    if (value.length < 8) {
+                                    if (value.length < 8 && value.length > 16) {
                                       return 'Password must contain a minimum of 8 characters, uppercase, lower case, number and special character.';
                                     }
                                     if (!password.hasMatch(value)) {

@@ -1,132 +1,235 @@
 import 'package:flutter/material.dart';
+import 'package:v2_product_arena/mobile/features/auth/screens/email_verified_screen.dart';
+import 'package:v2_product_arena/mobile/features/auth/screens/mobile_login_screen.dart';
+import 'package:v2_product_arena/mobile/features/auth/widgets/textFieldOTP.dart';
+import 'package:v2_product_arena/mobile/features/onboarding/screens/mobile_onboarding_screen.dart';
 import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
+import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/custom_button.dart';
 import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/mobile_appbar.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/mobile_footer.dart';
 
-class EmailVerificationScreen extends StatelessWidget {
+class EmailVerificationScreen extends StatefulWidget {
   static const routeName = '/email-verification';
   EmailVerificationScreen({super.key});
-  final confirmCodeController = TextEditingController();
+
+  @override
+  State<EmailVerificationScreen> createState() =>
+      _EmailVerificationScreenState();
+}
+
+class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
+  String oneTimePassword = '';
+
+  final firstController = TextEditingController();
+
+  final secondController = TextEditingController();
+
+  final thirdController = TextEditingController();
+
+  final fourthController = TextEditingController();
+
+  final fifthController = TextEditingController();
+
+  final sixthController = TextEditingController();
+
+  final firstFocusNode = FocusNode();
+
+  final secondFocusNode = FocusNode();
+
+  final thirdFocusNode = FocusNode();
+
+  final fourthFocusNode = FocusNode();
+
+  final fifthFocusNode = FocusNode();
+
+  final sixthFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
+    final mobileAuth = Provider.of<MobileAuth>(context);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize:
             Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
         child: const MobileAppBar(),
       ),
-      body: Padding(
-        padding: EdgeInsets.only(
-          top: deviceHeight * 0.053,
-          right: deviceWidth * 0.091,
-          left: deviceWidth * 0.091,
-        ),
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'Just to be sure...',
-                style: GoogleFonts.notoSans(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400,
-                  fontSize: deviceHeight * 0.037,
-                ),
+      body: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(
+                top: deviceHeight * 0.053,
+                right: deviceWidth * 0.091,
+                left: deviceWidth * 0.091,
               ),
-              SizedBox(
-                height: deviceHeight * 0.027,
-              ),
-              Text(
-                'We’ve sent a 6-digit code to your e-mail',
-                style: GoogleFonts.notoSans(
-                  color: Colors.black54,
-                  fontWeight: FontWeight.w400,
-                  fontSize: deviceHeight * 0.016,
-                ),
-              ),
-              SizedBox(
-                height: deviceHeight * 0.093,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Column(
                 children: <Widget>[
-                  // Container(
-                  //   width: deviceWidth * 0.13,
-                  //   height: deviceHeight * 0.065,
-                  //   alignment: Alignment.center,
-                  //   decoration: BoxDecoration(
-                  //     border: Border.all(
-                  //       color: const Color(0xFF605D66),
-                  //       width: 1.5,
-                  //     ),
-                  //     borderRadius: BorderRadius.circular(8.0),
-                  //   ),
-                  //   child: const TextField(
-                  //     cursorColor: Color(0xFF22E974),
-                  //     textAlign: TextAlign.center,
-                  //     style: TextStyle(
-                  //         color: Colors.black,
-                  //         fontFamily: 'Noto Sans',
-                  //         fontSize: 32,
-                  //         fontWeight: FontWeight.w900),
-                  //     keyboardType: TextInputType.number,
-                  //     maxLength: 1,
-                  //     decoration: InputDecoration(
-                  //       border: InputBorder.none,
-                  //       counterText: '',
-                  //     ),
-                  //   ),
-                  // ),
-                  _textFieldOTP(first: true, last: false),
-                  _textFieldOTP(first: false, last: false),
-                  _textFieldOTP(first: false, last: false),
-                  _textFieldOTP(first: false, last: false),
-                  _textFieldOTP(first: false, last: false),
-                  _textFieldOTP(first: false, last: true),
+                  Text(
+                    'Just to be sure...',
+                    style: GoogleFonts.notoSans(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400,
+                      fontSize: deviceHeight * 0.037,
+                    ),
+                  ),
+                  SizedBox(
+                    height: deviceHeight * 0.027,
+                  ),
+                  Text(
+                    'We’ve sent a 6-digit code to your e-mail',
+                    style: GoogleFonts.notoSans(
+                      color: Colors.black54,
+                      fontWeight: FontWeight.w400,
+                      fontSize: deviceHeight * 0.016,
+                    ),
+                  ),
+                  SizedBox(
+                    height: deviceHeight * 0.093,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      TextFieldOTP(
+                        first: true,
+                        last: false,
+                        controller: firstController,
+                        focusNode: firstFocusNode,
+                      ),
+                      TextFieldOTP(
+                        first: false,
+                        last: false,
+                        controller: secondController,
+                        focusNode: secondFocusNode,
+                      ),
+                      TextFieldOTP(
+                        first: false,
+                        last: false,
+                        controller: thirdController,
+                        focusNode: thirdFocusNode,
+                      ),
+                      TextFieldOTP(
+                        first: false,
+                        last: false,
+                        controller: fourthController,
+                        focusNode: fourthFocusNode,
+                      ),
+                      TextFieldOTP(
+                        first: false,
+                        last: false,
+                        controller: fifthController,
+                        focusNode: fifthFocusNode,
+                      ),
+                      TextFieldOTP(
+                        first: false,
+                        last: true,
+                        controller: sixthController,
+                        focusNode: sixthFocusNode,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: deviceHeight * 0.013,
+                  ),
+                  mobileAuth.isOTPerror
+                      ? Text(
+                          'Confirmation code does not match',
+                          style: GoogleFonts.notoSans(
+                            color: Colors.red,
+                            fontWeight: FontWeight.w700,
+                            fontSize: deviceHeight * 0.019,
+                          ),
+                        )
+                      : SizedBox(
+                          height: deviceHeight * 0.07,
+                        ),
+                  SizedBox(
+                    height: deviceHeight * 0.05,
+                  ),
+                  CustomButton(
+                    content: Text(
+                      'Verify',
+                      style: GoogleFonts.notoSans(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                        fontSize: deviceHeight * 0.019,
+                      ),
+                    ),
+                    buttonFunction: () {
+                      oneTimePassword = firstController.text +
+                          secondController.text +
+                          thirdController.text +
+                          fourthController.text +
+                          fifthController.text +
+                          sixthController.text;
+                      Provider.of<MobileAuth>(context, listen: false)
+                          .confirmUser(
+                        Provider.of<MobileAuth>(context, listen: false)
+                            .userEmail,
+                        oneTimePassword,
+                        context,
+                        EmailVerified.routeName,
+                      );
+                      print(mobileAuth.errorTextOTP);
+                      print(mobileAuth.isOTPerror);
+                    },
+                    color: Colors.black,
+                  ),
+                  SizedBox(
+                    height: deviceHeight * 0.013,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'Already have an account?',
+                        style: GoogleFonts.notoSans(
+                          fontSize: deviceHeight * 0.013,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 3,
+                      ),
+                      InkWell(
+                        key: const Key('loginRedirection'),
+                        onTap: () {
+                          Navigator.of(context).pushReplacementNamed(
+                              MobileLoginScreen.routeName);
+                        },
+                        child: Text(
+                          'Log in',
+                          style: GoogleFonts.notoSans(
+                            fontSize: deviceHeight * 0.013,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: deviceHeight * 0.15,
+                  ),
+                  Container(
+                    height: deviceHeight * 0.07,
+                    width: deviceHeight * 0.07,
+                    child: Image.asset(
+                      'assets/images/tech.png',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ],
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _textFieldOTP({first, last, BuildContext? context}) {
-    return Container(
-      height: 70,
-      width: 50,
-      child: AspectRatio(
-        aspectRatio: 1.0,
-        child: TextField(
-          autofocus: true,
-          onChanged: (value) {
-            if (value.length == 1 && last == false) {
-              FocusScope.of(context!).nextFocus();
-            }
-            if (value.length == 0 && first == false) {
-              FocusScope.of(context!).previousFocus();
-            }
-          },
-          showCursor: false,
-          readOnly: false,
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          keyboardType: TextInputType.number,
-          maxLength: 1,
-          decoration: InputDecoration(
-            counter: Offstage(),
-            enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(width: 2, color: Colors.black12),
-                borderRadius: BorderRadius.circular(12)),
-            focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(width: 2, color: Colors.black),
-                borderRadius: BorderRadius.circular(12)),
-          ),
+              ),
+            ),
+            const MobileFooter(),
+          ],
         ),
       ),
     );

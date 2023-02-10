@@ -19,11 +19,15 @@
       "function": {
         "initializeUserAlfa": {
           "deploymentBucketName": "amplify-alfapa-staging-141712-deployment",
-          "s3Key": "amplify-builds/initializeUserAlfa-36564464716341702f4c-build.zip"
+          "s3Key": "amplify-builds/initializeUserAlfa-795048506f6d57564d4e-build.zip"
         },
         "onboardnigformGetterAlfa": {
           "deploymentBucketName": "amplify-alfapa-staging-141712-deployment",
           "s3Key": "amplify-builds/onboardnigformGetterAlfa-57592f354f4f372f3545-build.zip"
+        },
+        "validationFunctionAlfa": {
+          "deploymentBucketName": "amplify-alfapa-staging-141712-deployment",
+          "s3Key": "amplify-builds/validationFunctionAlfa-6f6c75556850364f6441-build.zip"
         }
       }
     }
