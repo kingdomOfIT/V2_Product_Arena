@@ -40,7 +40,6 @@ class _MyAppState extends State<MyApp> {
     try {
       final auth = AmplifyAuthCognito();
       await Amplify.addPlugin(auth);
-
       // call Amplify.configure to use the initialized categories in your app
       await Amplify.configure(amplifyconfig);
     } on Exception catch (e) {

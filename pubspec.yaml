@@ -40,6 +40,7 @@ dependencies:
   amplify_auth_cognito: ^1.0.0-next.0
   amplify_api: ^1.0.0-next.0
   flutter_html: ^3.0.0-alpha.6
+  flutter_spinkit: ^5.1.0
 
 dev_dependencies:
   flutter_test:
@@ -58,7 +59,6 @@ dev_dependencies:
   url_launcher: ^6.1.8
   youtube_player_flutter: ^8.1.2
   universal_html: ^2.0.8
-  flutter_spinkit: ^5.1.0
   http: ^0.13.5
   mockito:
   mocktail:
