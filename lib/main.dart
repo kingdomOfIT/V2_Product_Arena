@@ -11,10 +11,10 @@ import 'package:v2_product_arena/mobile/features/onboarding/screens/mobile_onboa
 import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
 import 'package:v2_product_arena/mobile/providers/mobile_onboarding_provider.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_email_verifed.dart';
-import 'package:v2_product_arena/web/features/auth/screens/web_email_verified.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_login_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_signup_screen.dart';
+import 'package:v2_product_arena/web/features/auth/widgets/loading_spinner.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_home_screen.dart';
 import 'package:v2_product_arena/web/features/onboarding/screens/web_onboarding_screen.dart';
 import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
