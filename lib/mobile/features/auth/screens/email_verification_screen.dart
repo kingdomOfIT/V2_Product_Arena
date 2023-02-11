@@ -52,6 +52,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
     final deviceHeight = MediaQuery.of(context).size.height;
     final mobileAuth = Provider.of<MobileAuth>(context);
     return Scaffold(
+      backgroundColor: Color.fromRGBO(243, 243, 249, 1),
       appBar: PreferredSize(
         preferredSize:
             Size.fromHeight(MediaQuery.of(context).size.height * 0.07),

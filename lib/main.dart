@@ -2,6 +2,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:v2_product_arena/constants/global_variables.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/email_verification_screen.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/email_verified_screen.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/mobile_login_screen.dart';
@@ -23,7 +24,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -42,11 +42,23 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Product Arena V2',
         theme: ThemeData(
-          primarySwatch: Colors.green,
+          // primaryColor: GlobalVariables.myColor,
+          primarySwatch: MaterialColor(0xff22E974, {
+            50: Color(0xff22E974),
+            100: Color(0xff22E974),
+            200: Color(0xff22E974),
+            300: Color(0xff22E974),
+            400: Color(0xff22E974),
+            500: Color(0xff22E974),
+            600: Color(0xff22E974),
+            700: Color(0xff22E974),
+            800: Color(0xff22E974),
+            900: Color(0xff22E974),
+          }),
         ),
         home: defaultTargetPlatform == TargetPlatform.android ||
                 defaultTargetPlatform == TargetPlatform.iOS
-            ? const MobileSignupScreen()
+            ? MobileSignupScreen()
             : const WebLoginScreen(),
         routes: {
           MobileLoginScreen.routeName: (context) => const MobileLoginScreen(),

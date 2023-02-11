@@ -67,8 +67,6 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
   RegExp birthDate =
       RegExp(r'^(0[1-9]|[1-2][0-9]|3[0-1])-(0[1-9]|1[0-2])-\d{4}$');
 
-  RegExp phoneNumber = RegExp(r'^[0-9]+$');
-
   RegExp email = RegExp(
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
 
@@ -212,17 +210,28 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                     label: Text(
                                       'Name',
                                       style: GoogleFonts.notoSans(
-                                        color: Colors.black54,
                                         fontWeight: FontWeight.w700,
                                       ),
+                                    ),
+                                    suffixIcon: Icon(
+                                      mobileAuth.isNameError
+                                          ? Icons.error
+                                          : null,
+                                      color: Colors.red,
+                                      size: deviceHeight * 0.03,
                                     ),
                                   ),
                                   validator: (value) {
                                     if (value!.isEmpty) {
+                                      mobileAuth.isNameError = true;
+
                                       return 'Please fill the required field.';
-                                    }
-                                    if (value.length < 4) {
+                                    } else if (value.length < 4) {
+                                      mobileAuth.isNameError = true;
+
                                       return 'Name must contain a minimum of 4 characters.';
+                                    } else {
+                                      mobileAuth.isNameError = false;
                                     }
                                   },
                                   onEditingComplete: () =>
@@ -265,17 +274,26 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                     label: Text(
                                       'Surname',
                                       style: GoogleFonts.notoSans(
-                                        color: Colors.black54,
                                         fontWeight: FontWeight.w700,
                                       ),
+                                    ),
+                                    suffixIcon: Icon(
+                                      mobileAuth.isSurnameError
+                                          ? Icons.error
+                                          : null,
+                                      color: Colors.red,
+                                      size: deviceHeight * 0.03,
                                     ),
                                   ),
                                   validator: (value) {
                                     if (value!.isEmpty) {
+                                      mobileAuth.isSurnameError = true;
                                       return 'Please fill the required field.';
-                                    }
-                                    if (value.length < 4) {
+                                    } else if (value.length < 4) {
+                                      mobileAuth.isSurnameError = true;
                                       return 'Surname must contain a minimum of 4 characters.';
+                                    } else {
+                                      mobileAuth.isSurnameError = false;
                                     }
                                   },
                                   onEditingComplete: () =>
@@ -318,17 +336,26 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                     label: Text(
                                       'Birth Date',
                                       style: GoogleFonts.notoSans(
-                                        color: Colors.black54,
                                         fontWeight: FontWeight.w700,
                                       ),
+                                    ),
+                                    suffixIcon: Icon(
+                                      mobileAuth.isBirthDateError
+                                          ? Icons.error
+                                          : null,
+                                      color: Colors.red,
+                                      size: deviceHeight * 0.03,
                                     ),
                                   ),
                                   validator: (value) {
                                     if (value!.isEmpty) {
+                                      mobileAuth.isBirthDateError = true;
                                       return 'Please fill the required field.';
-                                    }
-                                    if (!birthDate.hasMatch(value)) {
+                                    } else if (!birthDate.hasMatch(value)) {
+                                      mobileAuth.isBirthDateError = true;
                                       return 'Invalid birth date format. Valid format: dd-mm-yyyy';
+                                    } else {
+                                      mobileAuth.isBirthDateError = false;
                                     }
                                   },
                                   onEditingComplete: () =>
@@ -371,14 +398,23 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                     label: Text(
                                       'City',
                                       style: GoogleFonts.notoSans(
-                                        color: Colors.black54,
                                         fontWeight: FontWeight.w700,
                                       ),
+                                    ),
+                                    suffixIcon: Icon(
+                                      mobileAuth.isCityError
+                                          ? Icons.error
+                                          : null,
+                                      color: Colors.red,
+                                      size: deviceHeight * 0.03,
                                     ),
                                   ),
                                   validator: (value) {
                                     if (value!.isEmpty) {
+                                      mobileAuth.isCityError = true;
                                       return 'Please fill the required field.';
+                                    } else {
+                                      mobileAuth.isCityError = false;
                                     }
                                   },
                                   onEditingComplete: () =>
@@ -466,7 +502,6 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                     label: Text(
                                       'Phone',
                                       style: GoogleFonts.notoSans(
-                                        color: Colors.black54,
                                         fontWeight: FontWeight.w700,
                                       ),
                                     ),
@@ -478,14 +513,21 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                             color: Colors.black54),
                                       ),
                                     ),
+                                    suffixIcon: Icon(
+                                      mobileAuth.isPhoneNumError
+                                          ? Icons.error
+                                          : null,
+                                      color: Colors.red,
+                                      size: deviceHeight * 0.03,
+                                    ),
                                   ),
                                   validator: (value) {
                                     if (value!.isEmpty) {
+                                      mobileAuth.isPhoneNumError = true;
                                       return 'Please fill the required field.';
+                                    } else {
+                                      mobileAuth.isPhoneNumError = false;
                                     }
-                                    // if (!phoneNumber.hasMatch(value)) {
-                                    //   return 'Enter a valid number';
-                                    // }
                                   },
                                   onEditingComplete: () =>
                                       FocusScope.of(context)
@@ -527,17 +569,26 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                     label: Text(
                                       'Email',
                                       style: GoogleFonts.notoSans(
-                                        color: Colors.black54,
                                         fontWeight: FontWeight.w700,
                                       ),
+                                    ),
+                                    suffixIcon: Icon(
+                                      mobileAuth.isEmailError
+                                          ? Icons.error
+                                          : null,
+                                      color: Colors.red,
+                                      size: deviceHeight * 0.03,
                                     ),
                                   ),
                                   validator: (value) {
                                     if (value!.isEmpty) {
+                                      mobileAuth.isEmailError = true;
                                       return 'Please fill the required field.';
-                                    }
-                                    if (!email.hasMatch(value)) {
+                                    } else if (!email.hasMatch(value)) {
+                                      mobileAuth.isEmailError = true;
                                       return 'Invalid email format';
+                                    } else {
+                                      mobileAuth.isEmailError = false;
                                     }
                                   },
                                   onEditingComplete: () =>
@@ -559,13 +610,17 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                   keyboardType: TextInputType.name,
                                   decoration: InputDecoration(
                                     suffixIcon: InkWell(
-                                        onTap: togglePasswordView,
-                                        child: Icon(
-                                          isHiddenPassword
-                                              ? Icons.visibility_off
-                                              : Icons.visibility,
-                                          size: deviceHeight * 0.027,
-                                        )),
+                                      onTap: togglePasswordView,
+                                      child: Icon(
+                                        isHiddenPassword
+                                            ? Icons.visibility_off
+                                            : Icons.visibility,
+                                        size: deviceHeight * 0.03,
+                                        color: mobileAuth.isPasswordError
+                                            ? Colors.red
+                                            : null,
+                                      ),
+                                    ),
                                     isDense: true,
                                     labelStyle: const TextStyle(fontSize: 20),
                                     border: OutlineInputBorder(
@@ -589,7 +644,6 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                     label: Text(
                                       'Password',
                                       style: GoogleFonts.notoSans(
-                                        color: Colors.black54,
                                         fontWeight: FontWeight.w700,
                                       ),
                                     ),
@@ -597,13 +651,17 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                   ),
                                   validator: (value) {
                                     if (value!.isEmpty) {
+                                      mobileAuth.isPasswordError = true;
                                       return 'Please fill the required field.';
-                                    }
-                                    if (value.length < 8 && value.length > 16) {
+                                    } else if (value.length < 8 &&
+                                        value.length > 16) {
+                                      mobileAuth.isPasswordError = true;
                                       return 'Password must contain a minimum of 8 characters, uppercase, lower case, number and special character.';
-                                    }
-                                    if (!password.hasMatch(value)) {
+                                    } else if (!password.hasMatch(value)) {
+                                      mobileAuth.isPasswordError = true;
                                       return 'Password must contain a minimum of 8 characters, uppercase, lower case, number and special character.';
+                                    } else {
+                                      mobileAuth.isPasswordError = false;
                                     }
                                   },
                                   onEditingComplete: () =>

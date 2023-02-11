@@ -1,4 +1,8 @@
+import 'package:flutter/material.dart';
+
 class GlobalVariables {
+  static const myColor = Color(0xFF22E974);
+
   static const List<Map<String, String>> socialMedia = [
     {
       'image': 'assets/images/facebook.png',
