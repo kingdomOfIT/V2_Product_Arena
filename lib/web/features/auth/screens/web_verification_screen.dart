@@ -3,8 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:amplify_flutter/amplify_flutter.dart';
-import 'package:v2_product_arena/web/features/auth/screens/web_email_verified.dart';
+import 'package:v2_product_arena/web/features/auth/screens/web_email_verifed.dart';
 import '../../../providers/web_auth_provider.dart';
 import '../../../reusable_web_widgets/web_appbar.dart';
 import '../../../reusable_web_widgets/web_footer.dart';
@@ -30,6 +29,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
   @override
   Widget build(BuildContext context) {
     final webAuth = Provider.of<WebAuth>(context, listen: false);
+    final isError = Provider.of<WebAuth>(context, listen: false).isOTPerror;
     double maxwidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: PreferredSize(
@@ -117,17 +117,20 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                       textAlignVertical:
                                           TextAlignVertical.center,
                                       cursorColor: const Color(0xFF22E974),
-                                      decoration: const InputDecoration(
-                                        contentPadding: EdgeInsets.all(20),
-                                        border: OutlineInputBorder(),
-                                        focusedBorder: OutlineInputBorder(
+                                      decoration: InputDecoration(
+                                        contentPadding:
+                                            const EdgeInsets.all(20),
+                                        border: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0xFF22E974),
+                                            width: 2,
+                                            color: isError
+                                                ? Colors.red
+                                                : Colors.black12,
                                           ),
                                         ),
-                                        focusedErrorBorder: OutlineInputBorder(
+                                        focusedBorder: const OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Colors.red,
+                                            color: Color(0xFF22E974),
                                           ),
                                         ),
                                       ),
@@ -360,7 +363,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                   webAuth.userEmail,
                                   otp,
                                   context,
-                                  VerifiedScreen.routeName,
+                                  Verifed.routeName,
                                 );
                                 print(webAuth.userEmail);
                               },

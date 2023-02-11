@@ -1,10 +1,13 @@
-// ignore_for_file: depend_on_referenced_packages, use_build_context_synchronously, prefer_const_constructors
+// ignore_for_file: depend_on_referenced_packages, use_build_context_synchronously, prefer_const_constructors, unused_local_variable, empty_catches
 
 import 'package:flutter/material.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:v2_product_arena/amplifyconfiguration.dart';
+
+import '../features/auth/screens/web_email_verifed.dart';
+import '../features/auth/widgets/loading_spinner.dart';
 
 class WebAuth with ChangeNotifier {
   String errorTextOTP = '';
@@ -41,6 +44,15 @@ class WebAuth with ChangeNotifier {
     String routeName,
   ) async {
     await _configureAmplify();
+    //Loading icon
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Center(
+            child: Loader(),
+          );
+        });
+    //////////////
 
     try {
       final userAttributes = <CognitoUserAttributeKey, String>{
@@ -64,7 +76,7 @@ class WebAuth with ChangeNotifier {
       errorText = e.message;
     }
     notifyListeners();
-    Navigator.of(context).pushReplacementNamed(routeName);
+    Navigator.of(context).pushReplacementNamed('/confirmation');
   }
 
   Future<void> confirmUser(
@@ -76,10 +88,16 @@ class WebAuth with ChangeNotifier {
     try {
       final result = await Amplify.Auth.confirmSignUp(
           username: email, confirmationCode: confirmationCode);
-      Navigator.of(context).pushReplacementNamed(routeName);
 
-      // print(result);
+      showDialog(
+          context: context,
+          builder: (context) {
+            return Center(
+              child: Verifed(),
+            );
+          });
 
+      Navigator.of(context).pushReplacementNamed('/web-onboarding');
     } on AuthException catch (e) {
       safePrint(e.message);
       errorTextOTP = e.message;

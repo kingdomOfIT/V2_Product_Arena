@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_login_screen.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_verification_screen.dart';
+import 'package:v2_product_arena/web/features/auth/widgets/loading_spinner.dart';
 import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_appbar.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_footer.dart';
@@ -32,38 +33,15 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
   final _text = '';
   bool isHiddenPassword = true;
 
-  // void onSubmitSignup() async {
-  //   final isValid = _formKey.currentState!.validate();
-  //   FocusScope.of(context).unfocus();
-
-  //   if (isValid) {
-  //     _formKey.currentState!.save();
-  //     await Provider.of<WebAuth>(context, listen: false).signUpUser(
-  //       nameController.text,
-  //       surnameController.text,
-  //       birthdateController.text,
-  //       cityController.text,
-  //       dropdownValue!,
-  //       phoneController.text,
-  //       emailController.text,
-  //       passwordController.text,
-  //       context,
-  //       SignupConfirmation.routeName,
-  //     );
-  //     Navigator.of(context).pushReplacementNamed('/confirmation');
-  //     Provider.of<WebAuth>(context, listen: false).userEmail =
-  //         emailController.text;
-  //   }
-  // }
   void onSubmitSignUp() async {
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
     if (isValid) {
       _formKey.currentState!.save();
-      //  Provider.of<MobileAuth>(context, listen: false).isLoading = true;
-      // setState(() {
-      //   isLoading = true;
-      // });
+      Provider.of<WebAuth>(context, listen: false).isLoading = true;
+      setState(() {
+        // isLoading = true;
+      });
       await Provider.of<WebAuth>(context, listen: false).signUpUser(
         nameController.text,
         surnameController.text,
@@ -76,9 +54,9 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
         context,
         SignupConfirmation.routeName,
       );
+
       Provider.of<WebAuth>(context, listen: false).userEmail =
           emailController.text;
-      Navigator.of(context).pushReplacementNamed('/confirmation');
     }
   }
 
@@ -99,6 +77,8 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
   @override
   Widget build(BuildContext context) {
     double maxwidth = MediaQuery.of(context).size.width;
+    final maxheight = MediaQuery.of(context).size.height;
+    final webAuth = Provider.of<WebAuth>(context, listen: false);
 
     return Scaffold(
       appBar: PreferredSize(
@@ -168,11 +148,12 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                 key: _formKey,
                                 child: Column(
                                   children: [
-                                    //Name
                                     Row(
                                       children: [
+                                        //Name
                                         Expanded(
                                           child: TextFormField(
+                                            key: const Key('nameSignup'),
                                             style: GoogleFonts.notoSans(
                                               fontSize: 14,
                                               fontWeight: FontWeight.w700,
@@ -413,7 +394,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                         ),
                                         border: const OutlineInputBorder(),
                                         label: Text(
-                                          'Phone(+123 00 000000)',
+                                          'Phone(+38760000000)',
                                           style: GoogleFonts.notoSans(
                                             fontSize: 14,
                                             fontWeight: FontWeight.w700,
@@ -463,11 +444,8 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                         if (value!.isEmpty) {
                                           return 'Please fill the required field.';
                                         }
-                                        if (!value.contains('@')) {
-                                          return 'Invalid email address';
-                                        }
-                                        if (!value.contains('.com')) {
-                                          return 'Invalid email address';
+                                        if (!email.hasMatch(value)) {
+                                          return 'Invalid email format';
                                         } else {
                                           return null;
                                         }
@@ -513,6 +491,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                             fontWeight: FontWeight.w700,
                                           ),
                                         ),
+                                        errorMaxLines: 2,
                                       ),
                                       controller: passwordController,
                                       validator: (value) {
@@ -526,6 +505,8 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                         }
                                         if (!password.hasMatch(value)) {
                                           return 'Password must contain a minimum of 8 characters, uppercase, lower case, number and special character.';
+                                        } else {
+                                          return null;
                                         }
                                       },
                                       onEditingComplete: () =>
@@ -538,7 +519,18 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                             /////////////
                             ///////////
                             ///////////
-                            const SizedBox(height: 23),
+                            webAuth.isSignUpComplete == false
+                                ? Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10),
+                                    child: Text(
+                                      webAuth.errorText,
+                                      style: const TextStyle(color: Colors.red),
+                                    ),
+                                  )
+                                : SizedBox(
+                                    height: maxheight * 0.06,
+                                  ),
                             SizedBox(
                               width: 457,
                               child: InkWell(
