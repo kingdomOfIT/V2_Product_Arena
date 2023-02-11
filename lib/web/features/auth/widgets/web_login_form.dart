@@ -268,6 +268,14 @@ class _WebLoginFormState extends State<WebLoginForm> {
                       emailColor = const Color(0xFFB3261E);
                       passwordColor = const Color(0xFFB3261E);
                     });
+                  } on UserNotFoundException {
+                    safePrint('User does not exist.');
+                    setState(() {
+                      _backError = true;
+                      _backErrorMsg = 'Incorrect email or password.';
+                      emailColor = const Color(0xFFB3261E);
+                      passwordColor = const Color(0xFFB3261E);
+                    });
                   } on Exception catch (e) {
                     safePrint(
                         'An unexpected error has happened. Check the logs for detail');
