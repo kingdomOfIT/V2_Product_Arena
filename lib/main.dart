@@ -11,6 +11,7 @@ import 'package:v2_product_arena/mobile/features/onboarding/screens/mobile_onboa
 import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
 import 'package:v2_product_arena/mobile/providers/mobile_onboarding_provider.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_email_verifed.dart';
+import 'package:v2_product_arena/web/features/auth/screens/web_email_verified.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_login_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_signup_screen.dart';
@@ -47,6 +48,9 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.green,
         ),
+        theme: ThemeData(
+          primarySwatch: Colors.green,
+        ),
         home: defaultTargetPlatform == TargetPlatform.android ||
                 defaultTargetPlatform == TargetPlatform.iOS
             ? const MobileSignupScreen()
@@ -67,6 +71,7 @@ class MyApp extends StatelessWidget {
           EmailVerificationScreen.routeName: (context) =>
               EmailVerificationScreen(),
           EmailVerified.routeName: (context) => EmailVerified(),
+          VerifiedScreen.routeName: (context) => const VerifiedScreen(),
         },
       ),
     );

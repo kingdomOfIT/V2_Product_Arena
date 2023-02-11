@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
+import 'package:v2_product_arena/web/features/auth/screens/web_email_verified.dart';
 import '../../../providers/web_auth_provider.dart';
 import '../../../reusable_web_widgets/web_appbar.dart';
 import '../../../reusable_web_widgets/web_footer.dart';
@@ -12,24 +13,23 @@ import 'package:provider/provider.dart';
 
 class SignupConfirmation extends StatefulWidget {
   static const routeName = '/confirmation';
-
   @override
   State<SignupConfirmation> createState() => _SignupConfirmationState();
 }
 
 class _SignupConfirmationState extends State<SignupConfirmation> {
-  Future<void> confirmUserr(String email, String confirmationCode) async {
-    try {
-      final result = await Amplify.Auth.confirmSignUp(
-          username: email, confirmationCode: confirmationCode);
-      print(result);
-    } on AuthException catch (e) {
-      safePrint(e.message);
-    }
-  }
+  final _formKey = GlobalKey();
+
+  final _otpController1 = TextEditingController();
+  final _otpController2 = TextEditingController();
+  final _otpController3 = TextEditingController();
+  final _otpController4 = TextEditingController();
+  final _otpController5 = TextEditingController();
+  final _otpController6 = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final webAuth = Provider.of<WebAuth>(context, listen: false);
     double maxwidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: PreferredSize(
@@ -96,6 +96,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                             width: MediaQuery.of(context).size.width,
                             height: 85,
                             child: Form(
+                              key: _formKey,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -103,7 +104,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                     height: 80,
                                     width: 80,
                                     child: TextFormField(
-                                      onSaved: (pin1) {},
+                                      controller: _otpController1,
                                       onChanged: (value) {
                                         if (value.length == 1) {
                                           FocusScope.of(context).nextFocus();
@@ -142,7 +143,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                     height: 80,
                                     width: 80,
                                     child: TextFormField(
-                                      onSaved: (pin2) {},
+                                      controller: _otpController2,
                                       onChanged: (value) {
                                         if (value.length == 1) {
                                           FocusScope.of(context).nextFocus();
@@ -181,7 +182,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                     height: 80,
                                     width: 80,
                                     child: TextFormField(
-                                      onSaved: (pin3) {},
+                                      controller: _otpController3,
                                       onChanged: (value) {
                                         if (value.length == 1) {
                                           FocusScope.of(context).nextFocus();
@@ -220,7 +221,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                     height: 80,
                                     width: 80,
                                     child: TextFormField(
-                                      onSaved: (pin4) {},
+                                      controller: _otpController4,
                                       onChanged: (value) {
                                         if (value.length == 1) {
                                           FocusScope.of(context).nextFocus();
@@ -259,7 +260,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                     height: 80,
                                     width: 80,
                                     child: TextFormField(
-                                      onSaved: (pin5) {},
+                                      controller: _otpController5,
                                       onChanged: (value) {
                                         if (value.length == 1) {
                                           FocusScope.of(context).nextFocus();
@@ -298,7 +299,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                     height: 80,
                                     width: 80,
                                     child: TextFormField(
-                                      onSaved: (pin6) {},
+                                      controller: _otpController6,
                                       onChanged: (value) {
                                         if (value.length == 1) {
                                           FocusScope.of(context).nextFocus();
@@ -348,10 +349,20 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                 backgroundColor: Colors.black,
                               ),
                               onPressed: () {
-                                Navigator.of(context)
-                                    .pushReplacementNamed('/verifed');
-                                confirmUserr(
-                                    Provider.of<WebAuth>(context).email, '');
+                                final otp = _otpController1.text +
+                                    _otpController2.text +
+                                    _otpController3.text +
+                                    _otpController4.text +
+                                    _otpController5.text +
+                                    _otpController6.text;
+
+                                webAuth.confirmUser(
+                                  webAuth.userEmail,
+                                  otp,
+                                  context,
+                                  VerifiedScreen.routeName,
+                                );
+                                print(webAuth.userEmail);
                               },
                               child: const Text(
                                 'Verify',
