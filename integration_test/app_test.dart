@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:provider/provider.dart';
-import 'package:v2_product_arena/main.dart' as app;
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:v2_product_arena/amplifyconfiguration.dart';
+import 'package:v2_product_arena/mobile/features/auth/screens/email_verification_screen.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/mobile_login_screen.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/mobile_signup_screen.dart';
 import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
@@ -26,8 +26,7 @@ Widget createMobileSignupScreen() => ChangeNotifierProvider<MobileAuth>(
     );
 void main() {
   group('Testing App Performance Tests', () {
-    final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized()
-        as IntegrationTestWidgetsFlutterBinding;
+    IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
     test('can configure Amplify', () async {
       AmplifyAuthCognito authPlugin = AmplifyAuthCognito();
@@ -84,6 +83,8 @@ void main() {
 
       await tester.tap(find.byKey(const Key('signupButton')));
       await tester.pumpAndSettle();
+
+      expect(find.byType(EmailVerificationScreen), findsOneWidget);
     });
   });
 }
