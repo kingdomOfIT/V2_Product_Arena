@@ -15,6 +15,7 @@ import 'package:amplify_core/amplify_core.dart';
 import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:country_code_picker/country_code_picker.dart';
 
 class MobileSignupScreen extends StatefulWidget {
   static const routeName = '/mobile-signup';
@@ -73,9 +74,8 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
   RegExp password =
       RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
 
-  final String bosnianDialCode = '+387';
-
   bool isLoading = false;
+  String dialCodeDigits = "+387";
 
   void onSubmitSignUp() async {
     final isValid = formKey.currentState!.validate();
@@ -92,7 +92,7 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
         birthDateController.text,
         cityController.text,
         selectedValue!,
-        bosnianDialCode + phoneController.text,
+        dialCodeDigits + phoneController.text,
         emailController.text,
         passwordController.text,
         context,
@@ -495,9 +495,11 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                         borderSide: const BorderSide(
                                           color: Colors.black,
                                         )),
-                                    contentPadding: EdgeInsets.symmetric(
-                                      vertical: deviceHeight * 0.02,
-                                      horizontal: deviceWidth * 0.05,
+                                    contentPadding: EdgeInsets.only(
+                                      top: deviceHeight * 0.007,
+                                      bottom: deviceHeight * 0.007,
+                                      right: deviceWidth * 0.05,
+                                      left: deviceWidth * 0.05,
                                     ),
                                     label: Text(
                                       'Phone',
@@ -505,12 +507,23 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                         fontWeight: FontWeight.w700,
                                       ),
                                     ),
-                                    prefix: Padding(
-                                      padding: const EdgeInsets.all(4),
-                                      child: Text(
-                                        bosnianDialCode,
-                                        style: const TextStyle(
-                                            color: Colors.black54),
+                                    prefix: Container(
+                                      child: SizedBox(
+                                        width: 120,
+                                        height: 50,
+                                        child: CountryCodePicker(
+                                          onChanged: (country) {
+                                            setState(() {
+                                              dialCodeDigits =
+                                                  country.dialCode!;
+                                            });
+                                          },
+                                          initialSelection: "BA",
+                                          showCountryOnly: false,
+                                          showOnlyCountryWhenClosed: false,
+                                          // flagWidth: 20,
+                                          favorite: const ["+387", "BA"],
+                                        ),
                                       ),
                                     ),
                                     suffixIcon: Icon(
