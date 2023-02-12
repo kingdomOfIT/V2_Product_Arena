@@ -4,6 +4,7 @@ import 'package:amplify_core/amplify_core.dart';
 import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:v2_product_arena/amplifyconfiguration.dart';
+import 'package:v2_product_arena/mobile/features/auth/screens/mobile_login_screen.dart';
 
 class MobileAuth with ChangeNotifier {
   String errorText = '';
@@ -69,6 +70,7 @@ class MobileAuth with ChangeNotifier {
         options: CognitoSignUpOptions(userAttributes: userAttributes),
       );
       isSignUpComplete = result.isSignUpComplete;
+      print(userAttributes);
       Navigator.of(context).pushReplacementNamed(routeName);
       notifyListeners();
     } on AuthException catch (e) {
@@ -116,6 +118,16 @@ class MobileAuth with ChangeNotifier {
     } on AuthException catch (e) {
       safePrint(e.message);
       errorText = e.message;
+    }
+    notifyListeners();
+  }
+
+  Future<void> signOutCurrentUser(BuildContext context) async {
+    try {
+      await Amplify.Auth.signOut();
+      Navigator.of(context).pushReplacementNamed(MobileLoginScreen.routeName);
+    } on AuthException catch (e) {
+      print(e.message);
     }
     notifyListeners();
   }

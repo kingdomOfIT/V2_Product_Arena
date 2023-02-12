@@ -16,6 +16,7 @@ import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:country_code_picker/country_code_picker.dart';
+import 'package:intl/intl.dart';
 
 class MobileSignupScreen extends StatefulWidget {
   static const routeName = '/mobile-signup';
@@ -77,15 +78,29 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
   bool isLoading = false;
   String dialCodeDigits = "+387";
 
+  DateTime date = DateTime(2022, 02, 02);
+
+  void _selectBirthDate() {
+    showDatePicker(
+      context: context,
+      initialDate: date,
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+    ).then((pickedDate) {
+      if (pickedDate == null) {
+        return;
+      }
+      String formattedDate = DateFormat("dd-MM-yyyy").format(pickedDate);
+
+      birthDateController.text = formattedDate;
+    });
+  }
+
   void onSubmitSignUp() async {
     final isValid = formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
     if (isValid) {
       formKey.currentState!.save();
-      //  Provider.of<MobileAuth>(context, listen: false).isLoading = true;
-      // setState(() {
-      //   isLoading = true;
-      // });
       await Provider.of<MobileAuth>(context, listen: false).signUpUser(
         nameController.text,
         surnameController.text,
@@ -337,6 +352,13 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                       'Birth Date',
                                       style: GoogleFonts.notoSans(
                                         fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                    prefixIcon: InkWell(
+                                      onTap: _selectBirthDate,
+                                      child: Icon(
+                                        Icons.calendar_month,
+                                        size: deviceHeight * 0.03,
                                       ),
                                     ),
                                     suffixIcon: Icon(
@@ -696,17 +718,6 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                               ],
                             ),
                           ),
-                          // mobileAuth.isSignUpComplete == false
-                          //     ? Padding(
-                          //         padding: const EdgeInsets.symmetric(vertical: 10),
-                          //         child: Text(
-                          //           mobileAuth.errorText,
-                          //           style: const TextStyle(color: Colors.red),
-                          //         ),
-                          //       )
-                          //     : SizedBox(
-                          //         height: deviceHeight * 0.06,
-                          //       ),
                           SizedBox(
                             height: deviceHeight * 0.04,
                           ),
