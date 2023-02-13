@@ -49,7 +49,7 @@ Widget createMobileSignupScreen() => ChangeNotifierProvider<MobileAuth>(
       },
       child: MaterialApp(
         routes: {
-          '/email-verification': (context) => const EmailVerificationScreen(),
+          '/email-verification': (context) => EmailVerificationScreen(),
           '/email-verified': (context) => const EmailVerified(),
           '/mobile-onboarding': (context) => const MobileOnboardingScreen(),
         },
@@ -135,6 +135,7 @@ void main() {
           "123456789",
           "testing@gmail.com",
           "Testing1!",
+          mockContext,
           "/email-verification");
 
       await tester.tap(find.byKey(const Key('emailverificationField1')));
