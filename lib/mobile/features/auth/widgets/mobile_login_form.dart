@@ -69,7 +69,7 @@ class LoginForm extends StatelessWidget {
               suffixIcon: Icon(
                 mobileAuth.isLoginEmailError ? Icons.error : null,
                 color: Colors.red,
-                size: deviceHeight * 0.025,
+                size: deviceHeight * 0.03,
               ),
             ),
             validator: (value) {
@@ -119,6 +119,7 @@ class LoginForm extends StatelessWidget {
                 horizontal: deviceWidth * 0.05,
               ),
               suffixIcon: InkWell(
+                key: const Key('togglePasswordViewLogin'),
                 onTap: togglePasswordView,
                 child: Icon(
                   isHiddenPassword ? Icons.visibility : Icons.visibility_off,

@@ -115,6 +115,7 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
                       height: deviceHeight * 0.042,
                     ),
                     CustomButton(
+                      key: const Key('loginButton'),
                       content: Text(
                         'Login',
                         style: GoogleFonts.notoSans(
@@ -144,7 +145,7 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
                           width: 3,
                         ),
                         InkWell(
-                          key: const Key('loginRedirection'),
+                          key: const Key('signUpRedirection'),
                           onTap: () {
                             Navigator.of(context).pushReplacementNamed(
                                 MobileSignupScreen.routeName);

@@ -96,6 +96,11 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
     });
   }
 
+  void navigateToEmailVerificationScreen(BuildContext context) {
+    Navigator.of(context)
+        .pushReplacementNamed(EmailVerificationScreen.routeName);
+  }
+
   void onSubmitSignUp() async {
     final isValid = formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
@@ -355,6 +360,7 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                       ),
                                     ),
                                     prefixIcon: InkWell(
+                                      key: const Key('datePicker'),
                                       onTap: _selectBirthDate,
                                       child: Icon(
                                         Icons.calendar_month,
@@ -460,6 +466,7 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   child: DropdownButton<String>(
+                                    key: const Key('dropDownButton'),
                                     items: GlobalVariables.status
                                         .map((e) => DropdownMenuItem(
                                               child: Text(e),
@@ -534,6 +541,7 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                         width: 120,
                                         height: 50,
                                         child: CountryCodePicker(
+                                          key: const Key('countryCodePicker'),
                                           onChanged: (country) {
                                             setState(() {
                                               dialCodeDigits =
@@ -633,31 +641,88 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                 SizedBox(
                                   height: deviceHeight * 0.032,
                                 ),
+                                // TextFormField(
+                                //   key: const Key('passwordTextField'),
+                                //   controller: passwordController,
+                                //   focusNode: passwordFocusNode,
+                                //   obscureText: isHiddenPassword,
+                                //   style: GoogleFonts.notoSans(
+                                //     color: Colors.black,
+                                //     fontWeight: FontWeight.w700,
+                                //   ),
+                                //   keyboardType: TextInputType.name,
+                                //   decoration: InputDecoration(
+                                //     suffixIcon: InkWell(
+                                //       key: const Key('tooglePasswordView'),
+                                //       onTap: togglePasswordView,
+                                //       child: Icon(
+                                //         isHiddenPassword
+                                //             ? Icons.visibility_off
+                                //             : Icons.visibility,
+                                //         size: deviceHeight * 0.03,
+                                //         color: mobileAuth.isPasswordError
+                                //             ? Colors.red
+                                //             : null,
+                                //       ),
+                                //     ),
+                                //     isDense: true,
+                                //     labelStyle: const TextStyle(fontSize: 20),
+                                //     border: OutlineInputBorder(
+                                //       borderRadius: BorderRadius.circular(10),
+                                //     ),
+                                //     focusedBorder: OutlineInputBorder(
+                                //         borderRadius: BorderRadius.circular(10),
+                                //         borderSide: const BorderSide(
+                                //           color:
+                                //               Color.fromRGBO(34, 233, 116, 1),
+                                //         )),
+                                //     enabledBorder: OutlineInputBorder(
+                                //         borderRadius: BorderRadius.circular(10),
+                                //         borderSide: const BorderSide(
+                                //           color: Colors.black,
+                                //         )),
+                                //     contentPadding: EdgeInsets.symmetric(
+                                //       vertical: deviceHeight * 0.02,
+                                //       horizontal: deviceWidth * 0.05,
+                                //     ),
+                                //     label: Text(
+                                //       'Password',
+                                //       style: GoogleFonts.notoSans(
+                                //         fontWeight: FontWeight.w700,
+                                //       ),
+                                //     ),
+                                //     errorMaxLines: 2,
+                                //   ),
+                                //   validator: (value) {
+                                //     if (value!.isEmpty) {
+                                //       mobileAuth.isPasswordError = true;
+                                //       return 'Please fill the required field.';
+                                //     } else if (value.length < 8 &&
+                                //         value.length > 16) {
+                                //       mobileAuth.isPasswordError = true;
+                                //       return 'Password must contain a minimum of 8 characters, uppercase, lower case, number and special character.';
+                                //     } else if (!password.hasMatch(value)) {
+                                //       mobileAuth.isPasswordError = true;
+                                //       return 'Password must contain a minimum of 8 characters, uppercase, lower case, number and special character.';
+                                //     } else {
+                                //       mobileAuth.isPasswordError = false;
+                                //     }
+                                //   },
+                                //   onEditingComplete: () =>
+                                //       FocusScope.of(context).unfocus(),
+                                // ),
                                 TextFormField(
-                                  key: const Key('passwordTextField'),
+                                  key: const Key('passwordSignUpTextField'),
                                   controller: passwordController,
-                                  focusNode: passwordFocusNode,
-                                  obscureText: isHiddenPassword,
-                                  style: GoogleFonts.notoSans(
+                                  style: TextStyle(
                                     color: Colors.black,
+                                    fontSize: deviceHeight * 0.0187,
                                     fontWeight: FontWeight.w700,
                                   ),
-                                  keyboardType: TextInputType.name,
+                                  obscureText: isHiddenPassword,
                                   decoration: InputDecoration(
-                                    suffixIcon: InkWell(
-                                      onTap: togglePasswordView,
-                                      child: Icon(
-                                        isHiddenPassword
-                                            ? Icons.visibility_off
-                                            : Icons.visibility,
-                                        size: deviceHeight * 0.03,
-                                        color: mobileAuth.isPasswordError
-                                            ? Colors.red
-                                            : null,
-                                      ),
-                                    ),
                                     isDense: true,
-                                    labelStyle: const TextStyle(fontSize: 20),
+                                    labelStyle: TextStyle(fontSize: 20),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10),
                                     ),
@@ -673,34 +738,44 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                           color: Colors.black,
                                         )),
                                     contentPadding: EdgeInsets.symmetric(
-                                      vertical: deviceHeight * 0.02,
+                                      vertical: deviceHeight * 0.018,
                                       horizontal: deviceWidth * 0.05,
+                                    ),
+                                    suffixIcon: InkWell(
+                                      key: const Key('togglePasswordViewLogin'),
+                                      onTap: togglePasswordView,
+                                      child: Icon(
+                                        isHiddenPassword
+                                            ? Icons.visibility
+                                            : Icons.visibility_off,
+                                        color: mobileAuth.isLoginPasswordError
+                                            ? Colors.red
+                                            : null,
+                                        size: deviceHeight * 0.03,
+                                      ),
                                     ),
                                     label: Text(
                                       'Password',
-                                      style: GoogleFonts.notoSans(
+                                      style: TextStyle(
+                                        fontSize: deviceHeight * 0.0175,
                                         fontWeight: FontWeight.w700,
                                       ),
                                     ),
-                                    errorMaxLines: 2,
                                   ),
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      mobileAuth.isPasswordError = true;
-                                      return 'Please fill the required field.';
-                                    } else if (value.length < 8 &&
-                                        value.length > 16) {
-                                      mobileAuth.isPasswordError = true;
-                                      return 'Password must contain a minimum of 8 characters, uppercase, lower case, number and special character.';
-                                    } else if (!password.hasMatch(value)) {
-                                      mobileAuth.isPasswordError = true;
-                                      return 'Password must contain a minimum of 8 characters, uppercase, lower case, number and special character.';
-                                    } else {
-                                      mobileAuth.isPasswordError = false;
-                                    }
-                                  },
+                                  focusNode: passwordFocusNode,
                                   onEditingComplete: () =>
                                       FocusScope.of(context).unfocus(),
+                                  validator: (value) {
+                                    if (value == null || value == '') {
+                                      mobileAuth.isLoginPasswordError = true;
+                                      return 'Please enter password';
+                                    } else if (value.length < 8) {
+                                      mobileAuth.isLoginPasswordError = true;
+                                      return 'Password is too short';
+                                    } else {
+                                      mobileAuth.isLoginPasswordError = false;
+                                    }
+                                  },
                                 ),
                                 mobileAuth.isSignUpComplete == false
                                     ? Padding(
@@ -735,6 +810,7 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                             height: deviceHeight * 0.032,
                           ),
                           CustomButton(
+                            key: const Key('createYourAccount'),
                             content: Text(
                               'Create Your Account',
                               style: GoogleFonts.notoSans(

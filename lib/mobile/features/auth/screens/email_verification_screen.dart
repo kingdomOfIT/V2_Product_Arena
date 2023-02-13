@@ -46,11 +46,17 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
 
   final sixthFocusNode = FocusNode();
 
+  void navigateToEmailVerificationScreen(BuildContext context) {
+    Navigator.of(context).pushReplacementNamed(EmailVerified.routeName);
+  }
+
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
-    final mobileAuth = Provider.of<MobileAuth>(context);
+    final mobileAuth = Provider.of<MobileAuth>(
+      context,
+    );
     return Scaffold(
       backgroundColor: Color.fromRGBO(243, 243, 249, 1),
       appBar: PreferredSize(
