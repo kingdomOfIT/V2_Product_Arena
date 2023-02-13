@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
         title: 'Product Arena V2',
         theme: ThemeData(
           // primaryColor: GlobalVariables.myColor,
-          primarySwatch: MaterialColor(0xff22E974, {
+          primarySwatch: const MaterialColor(0xff22E974, {
             50: Color(0xff22E974),
             100: Color(0xff22E974),
             200: Color(0xff22E974),
