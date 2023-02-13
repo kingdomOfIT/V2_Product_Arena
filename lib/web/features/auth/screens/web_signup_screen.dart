@@ -172,7 +172,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                                 webAuth.isNameError
                                                     ? Icons.error
                                                     : null,
-                                                color: Colors.red,
+                                                color: const Color(0xFFB3261E),
                                               ),
                                               focusedBorder:
                                                   const OutlineInputBorder(
@@ -183,7 +183,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                               focusedErrorBorder:
                                                   const OutlineInputBorder(
                                                 borderSide: BorderSide(
-                                                  color: Colors.red,
+                                                  color: Color(0xFFB3261E),
                                                 ),
                                               ),
                                               border:
@@ -214,6 +214,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                         //Surname
                                         Expanded(
                                           child: TextFormField(
+                                            key: const Key('surnameSignup'),
                                             style: GoogleFonts.notoSans(
                                               fontSize: 14,
                                               fontWeight: FontWeight.w700,
@@ -225,7 +226,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                                 webAuth.isNameError
                                                     ? Icons.error
                                                     : null,
-                                                color: Colors.red,
+                                                color: const Color(0xFFB3261E),
                                               ),
                                               focusedBorder:
                                                   const OutlineInputBorder(
@@ -236,7 +237,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                               focusedErrorBorder:
                                                   const OutlineInputBorder(
                                                 borderSide: BorderSide(
-                                                  color: Colors.red,
+                                                  color: Color(0xFFB3261E),
                                                 ),
                                               ),
                                               border:
@@ -266,6 +267,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                     const SizedBox(height: 30),
                                     //Birthdate
                                     TextFormField(
+                                      key: const Key('birthdateSignup'),
                                       style: GoogleFonts.notoSans(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w700,
@@ -276,7 +278,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                           webAuth.isNameError
                                               ? Icons.error
                                               : null,
-                                          color: Colors.red,
+                                          color: const Color(0xFFB3261E),
                                         ),
                                         focusedBorder: const OutlineInputBorder(
                                           borderSide: BorderSide(
@@ -286,7 +288,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                         focusedErrorBorder:
                                             const OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Colors.red,
+                                            color: Color(0xFFB3261E),
                                           ),
                                         ),
                                         border: const OutlineInputBorder(),
@@ -316,6 +318,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                     const SizedBox(height: 30),
                                     //City
                                     TextFormField(
+                                      key: const Key('citySignup'),
                                       style: GoogleFonts.notoSans(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w700,
@@ -326,7 +329,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                           webAuth.isNameError
                                               ? Icons.error
                                               : null,
-                                          color: Colors.red,
+                                          color: const Color(0xFFB3261E),
                                         ),
                                         focusedBorder: const OutlineInputBorder(
                                           borderSide: BorderSide(
@@ -336,7 +339,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                         focusedErrorBorder:
                                             const OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Colors.red,
+                                            color: Color(0xFFB3261E),
                                           ),
                                         ),
                                         border: const OutlineInputBorder(),
@@ -364,6 +367,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                     SizedBox(
                                       height: 56,
                                       child: DropdownButtonFormField<String>(
+                                        key: const Key('dropdownButtonSignup'),
                                         value: dropdownValue,
                                         decoration: InputDecoration(
                                           border: const OutlineInputBorder(),
@@ -409,6 +413,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                     const SizedBox(height: 30),
                                     //Phone
                                     TextFormField(
+                                      key: const Key('phoneSignup'),
                                       style: GoogleFonts.notoSans(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w700,
@@ -419,7 +424,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                           webAuth.isNameError
                                               ? Icons.error
                                               : null,
-                                          color: Colors.red,
+                                          color: const Color(0xFFB3261E),
                                         ),
                                         focusedBorder: const OutlineInputBorder(
                                           borderSide: BorderSide(
@@ -429,7 +434,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                         focusedErrorBorder:
                                             const OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Colors.red,
+                                            color: Color(0xFFB3261E),
                                           ),
                                         ),
                                         border: const OutlineInputBorder(),
@@ -455,6 +460,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                     const SizedBox(height: 30),
                                     //email
                                     TextFormField(
+                                      key: const Key('emailSignup'),
                                       style: GoogleFonts.notoSans(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w700,
@@ -465,7 +471,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                           webAuth.isNameError
                                               ? Icons.error
                                               : null,
-                                          color: Colors.red,
+                                          color: const Color(0xFFB3261E),
                                         ),
                                         focusedBorder: const OutlineInputBorder(
                                           borderSide: BorderSide(
@@ -475,7 +481,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                         focusedErrorBorder:
                                             const OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Colors.red,
+                                            color: Color(0xFFB3261E),
                                           ),
                                         ),
                                         border: const OutlineInputBorder(),
@@ -505,6 +511,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                     const SizedBox(height: 30),
                                     //Password
                                     TextFormField(
+                                      key: const Key('passwordSignup'),
                                       obscureText: isHiddenPassword,
                                       style: GoogleFonts.notoSans(
                                         fontSize: 14,
@@ -513,14 +520,15 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                       cursorColor: const Color(0xFF22E974),
                                       decoration: InputDecoration(
                                         suffixIcon: InkWell(
+                                          key: const Key('togglePasswordView'),
                                           onTap: togglePasswordView,
                                           child: Icon(
                                             isHiddenPassword
                                                 ? Icons.visibility_off
                                                 : Icons.visibility,
                                             color: webAuth.isPasswordError
-                                                ? Colors.red
-                                                : null,
+                                                ? const Color(0xFFB3261E)
+                                                : Colors.black,
                                             size: MediaQuery.of(context)
                                                     .size
                                                     .height *
@@ -578,7 +586,8 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                         vertical: 10),
                                     child: Text(
                                       webAuth.errorText,
-                                      style: const TextStyle(color: Colors.red),
+                                      style: const TextStyle(
+                                          color: Color(0xFFB3261E)),
                                     ),
                                   )
                                 : SizedBox(
@@ -606,12 +615,17 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                 width: 452,
                                 height: 56,
                                 child: ElevatedButton(
+                                  key: const Key('signupButton'),
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.black,
                                   ),
                                   onPressed: onSubmitSignUp,
-                                  child: const Text(
+                                  child: Text(
                                     'Create your Account',
+                                    style: GoogleFonts.notoSans(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w700,
+                                    ),
                                   ),
                                 ),
                               ),

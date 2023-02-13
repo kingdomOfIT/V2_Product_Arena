@@ -18,7 +18,7 @@ class EmailVerified extends StatefulWidget {
 }
 
 class _EmailVerifiedState extends State<EmailVerified> {
-  bool _isLoading = true;
+  bool _isLoading = false;
   @override
   void initState() {
     super.initState();

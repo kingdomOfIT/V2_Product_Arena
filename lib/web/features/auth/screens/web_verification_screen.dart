@@ -107,6 +107,8 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                         child: SizedBox(
                                           width: maxwidth * 0.06,
                                           child: TextFormField(
+                                            key:
+                                                const Key('verificationField1'),
                                             controller: _otpController1,
                                             onChanged: (value) {
                                               if (value.length == 1) {
@@ -159,6 +161,8 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                         child: SizedBox(
                                           width: maxwidth * 0.06,
                                           child: TextFormField(
+                                            key:
+                                                const Key('verificationField2'),
                                             controller: _otpController2,
                                             onChanged: (value) {
                                               if (value.length == 1) {
@@ -211,6 +215,8 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                         child: SizedBox(
                                           width: maxwidth * 0.06,
                                           child: TextFormField(
+                                            key:
+                                                const Key('verificationField3'),
                                             controller: _otpController3,
                                             onChanged: (value) {
                                               if (value.length == 1) {
@@ -263,6 +269,8 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                         child: SizedBox(
                                           width: maxwidth * 0.06,
                                           child: TextFormField(
+                                            key:
+                                                const Key('verificationField4'),
                                             controller: _otpController4,
                                             onChanged: (value) {
                                               if (value.length == 1) {
@@ -317,6 +325,8 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                         child: SizedBox(
                                           width: maxwidth * 0.06,
                                           child: TextFormField(
+                                            key:
+                                                const Key('verificationField5'),
                                             controller: _otpController5,
                                             onChanged: (value) {
                                               if (value.length == 1) {
@@ -369,6 +379,8 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                         child: SizedBox(
                                           width: maxwidth * 0.06,
                                           child: TextFormField(
+                                            key:
+                                                const Key('verificationField6'),
                                             controller: _otpController6,
                                             onChanged: (value) {
                                               if (value.length == 1) {
@@ -441,6 +453,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                               width: 452,
                               height: 56,
                               child: ElevatedButton(
+                                key: const Key('verifyButton'),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.black,
                                 ),
@@ -456,7 +469,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                     webAuth.userEmail,
                                     otp,
                                     context,
-                                    EmailVerified.routeName,
+                                    Verifed.routeName,
                                   );
                                   print(webAuth.userEmail);
                                   print(isError);
