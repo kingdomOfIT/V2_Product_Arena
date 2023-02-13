@@ -714,9 +714,8 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                 TextFormField(
                                   key: const Key('passwordSignUpTextField'),
                                   controller: passwordController,
-                                  style: TextStyle(
+                                  style: GoogleFonts.notoSans(
                                     color: Colors.black,
-                                    fontSize: deviceHeight * 0.0187,
                                     fontWeight: FontWeight.w700,
                                   ),
                                   obscureText: isHiddenPassword,
@@ -756,8 +755,7 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                     ),
                                     label: Text(
                                       'Password',
-                                      style: TextStyle(
-                                        fontSize: deviceHeight * 0.0175,
+                                      style: GoogleFonts.notoSans(
                                         fontWeight: FontWeight.w700,
                                       ),
                                     ),

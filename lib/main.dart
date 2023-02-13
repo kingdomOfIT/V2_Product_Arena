@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
         ),
         home: defaultTargetPlatform == TargetPlatform.android ||
                 defaultTargetPlatform == TargetPlatform.iOS
-            ? MobileSignupScreen()
+            ? const MobileLoginScreen()
             : const WebLoginScreen(),
         routes: {
           MobileLoginScreen.routeName: (context) => const MobileLoginScreen(),
