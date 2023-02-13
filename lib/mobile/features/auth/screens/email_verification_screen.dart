@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/email_verified_screen.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/mobile_login_screen.dart';
 import 'package:v2_product_arena/mobile/features/auth/widgets/textFieldOTP.dart';
+import 'package:v2_product_arena/mobile/features/onboarding/screens/mobile_onboarding_screen.dart';
 import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
 import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/custom_button.dart';
 import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/mobile_appbar.dart';
@@ -57,7 +58,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
       context,
     );
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(243, 243, 249, 1),
+      backgroundColor: Color.fromRGBO(243, 243, 249, 1),
       appBar: PreferredSize(
         preferredSize:
             Size.fromHeight(MediaQuery.of(context).size.height * 0.07),

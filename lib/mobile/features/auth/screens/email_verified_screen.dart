@@ -1,10 +1,18 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:v2_product_arena/mobile/features/auth/screens/mobile_login_screen.dart';
+import 'package:v2_product_arena/mobile/features/home/screens/mobile_home_screen.dart';
 import 'package:v2_product_arena/mobile/features/onboarding/screens/mobile_onboarding_screen.dart';
+import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/mobile_appbar.dart';
 import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/mobile_footer.dart';
+
+import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:v2_product_arena/mobile/features/onboarding/screens/mobile_onboarding_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class EmailVerified extends StatefulWidget {
   static const routeName = '/email-verified';
