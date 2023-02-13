@@ -100,7 +100,7 @@ class LoginForm extends StatelessWidget {
             obscureText: isHiddenPassword,
             decoration: InputDecoration(
               isDense: true,
-              labelStyle: TextStyle(fontSize: 20),
+              labelStyle: const TextStyle(fontSize: 20),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
