@@ -5,8 +5,7 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:v2_product_arena/amplifyconfiguration.dart';
-
-import '../features/auth/screens/web_email_verifed.dart';
+import 'package:v2_product_arena/web/features/auth/screens/web_verification_screen.dart';
 import '../features/auth/widgets/loading_spinner.dart';
 
 class WebAuth with ChangeNotifier {
@@ -16,6 +15,14 @@ class WebAuth with ChangeNotifier {
   String userEmail = '';
   bool isSignUpComplete = false;
   bool isLoading = false;
+
+  bool isNameError = false;
+  bool isSurnameError = false;
+  bool isBirthDateError = false;
+  bool isCityError = false;
+  bool isPhoneNumError = false;
+  bool isEmailError = false;
+  bool isPasswordError = false;
 
   Future<void> _configureAmplify() async {
     try {
@@ -44,15 +51,6 @@ class WebAuth with ChangeNotifier {
     String routeName,
   ) async {
     await _configureAmplify();
-    //Loading icon
-    showDialog(
-        context: context,
-        builder: (context) {
-          return Center(
-            child: Loader(),
-          );
-        });
-    //////////////
 
     try {
       final userAttributes = <CognitoUserAttributeKey, String>{
@@ -70,13 +68,23 @@ class WebAuth with ChangeNotifier {
         options: CognitoSignUpOptions(userAttributes: userAttributes),
       );
       isSignUpComplete = result.isSignUpComplete;
+      // // //Loading icon
+      // showDialog(
+      //     context: context,
+      //     builder: (context) {
+      //       return Center(
+      //         child: Loader(),
+      //       );
+      //     });
+      // // //////////////
+      Navigator.of(context).pushNamed(SignupConfirmation.routeName);
       notifyListeners();
     } on AuthException catch (e) {
       safePrint(e.message);
       errorText = e.message;
     }
     notifyListeners();
-    Navigator.of(context).pushReplacementNamed('/confirmation');
+    // Navigator.of(context).pushReplacementNamed('/confirmation');
   }
 
   Future<void> confirmUser(
@@ -88,14 +96,6 @@ class WebAuth with ChangeNotifier {
     try {
       final result = await Amplify.Auth.confirmSignUp(
           username: email, confirmationCode: confirmationCode);
-
-      showDialog(
-          context: context,
-          builder: (context) {
-            return Center(
-              child: Verifed(),
-            );
-          });
 
       Navigator.of(context).pushReplacementNamed('/web-onboarding');
     } on AuthException catch (e) {
