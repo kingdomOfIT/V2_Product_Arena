@@ -32,6 +32,11 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
     final isError = Provider.of<WebAuth>(context, listen: false).isOTPerror;
     double maxwidth = MediaQuery.of(context).size.width;
     double maxheight = MediaQuery.of(context).size.height;
+
+    if (MediaQuery.of(context).size.width < 980) {
+      return const Icon(Icons.favorite);
+    }
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize:

@@ -6,7 +6,6 @@ import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:v2_product_arena/amplifyconfiguration.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_verification_screen.dart';
-import '../features/auth/widgets/loading_spinner.dart';
 
 class WebAuth with ChangeNotifier {
   String errorTextOTP = '';
@@ -68,6 +67,7 @@ class WebAuth with ChangeNotifier {
         options: CognitoSignUpOptions(userAttributes: userAttributes),
       );
       isSignUpComplete = result.isSignUpComplete;
+      print('dosao do navigatora 1');
       // // //Loading icon
       // showDialog(
       //     context: context,
@@ -79,6 +79,7 @@ class WebAuth with ChangeNotifier {
       // // //////////////
       Navigator.of(context).pushNamed(SignupConfirmation.routeName);
       notifyListeners();
+      print('prosao navigator 1');
     } on AuthException catch (e) {
       safePrint(e.message);
       errorText = e.message;
@@ -96,8 +97,9 @@ class WebAuth with ChangeNotifier {
     try {
       final result = await Amplify.Auth.confirmSignUp(
           username: email, confirmationCode: confirmationCode);
-
+      print('dosao do navigatora 2');
       Navigator.of(context).pushReplacementNamed('/web-onboarding');
+      print('prosao navigator 2');
     } on AuthException catch (e) {
       safePrint(e.message);
       errorTextOTP = e.message;

@@ -6,7 +6,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:v2_product_arena/amplifyconfiguration.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/email_verification_screen.dart';
-import 'package:v2_product_arena/mobile/features/auth/screens/email_verified_screen.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/mobile_login_screen.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/mobile_signup_screen.dart';
 import 'package:v2_product_arena/mobile/features/home/screens/mobile_home_screen.dart';
