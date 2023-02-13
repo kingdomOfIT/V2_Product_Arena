@@ -52,7 +52,7 @@ class TextFieldOTP extends StatelessWidget {
             counter: Offstage(),
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                  width: 2, color: isError ? Colors.red : Colors.black12),
+                  width: 2, color: isError ? Colors.red : Colors.black),
               borderRadius: BorderRadius.circular(12),
             ),
             focusedBorder: OutlineInputBorder(
@@ -60,6 +60,8 @@ class TextFieldOTP extends StatelessWidget {
                   width: 2, color: isError ? Colors.red : Colors.black),
               borderRadius: BorderRadius.circular(12),
             ),
+            filled: true,
+            fillColor: Colors.white,
           ),
           inputFormatters: [
             FilteringTextInputFormatter.allow(RegExp(r'^[0-9]+$')),

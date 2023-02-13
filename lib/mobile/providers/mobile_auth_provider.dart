@@ -3,6 +3,7 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:v2_product_arena/amplifyconfiguration.dart';
+import 'package:v2_product_arena/mobile/features/auth/screens/mobile_login_screen.dart';
 
 class MobileAuth with ChangeNotifier {
   String errorText = '';
@@ -10,7 +11,19 @@ class MobileAuth with ChangeNotifier {
   bool isOTPerror = false;
   String userEmail = '';
   bool isSignUpComplete = false;
+  bool isSignInComplete = false;
+
   bool isLoading = false;
+  bool isNameError = false;
+  bool isSurnameError = false;
+  bool isBirthDateError = false;
+  bool isCityError = false;
+  bool isPhoneNumError = false;
+  bool isEmailError = false;
+  bool isPasswordError = false;
+
+  bool isLoginEmailError = false;
+  bool isLoginPasswordError = false;
 
   Future<void> _configureAmplify() async {
     try {
@@ -56,6 +69,7 @@ class MobileAuth with ChangeNotifier {
         options: CognitoSignUpOptions(userAttributes: userAttributes),
       );
       isSignUpComplete = result.isSignUpComplete;
+      print(userAttributes);
       Navigator.of(context).pushReplacementNamed(routeName);
       notifyListeners();
     } on AuthException catch (e) {
@@ -86,5 +100,34 @@ class MobileAuth with ChangeNotifier {
         notifyListeners();
       }
     }
+  }
+
+  Future<void> signInUser(String username, String password,
+      BuildContext context, String routeName) async {
+    await _configureAmplify();
+    try {
+      final result = await Amplify.Auth.signIn(
+        username: username,
+        password: password,
+      );
+
+      isSignInComplete = result.isSignedIn;
+      notifyListeners();
+      Navigator.of(context).pushReplacementNamed(routeName);
+    } on AuthException catch (e) {
+      safePrint(e.message);
+      errorText = e.message;
+    }
+    notifyListeners();
+  }
+
+  Future<void> signOutCurrentUser(BuildContext context) async {
+    try {
+      await Amplify.Auth.signOut();
+      Navigator.of(context).pushReplacementNamed(MobileLoginScreen.routeName);
+    } on AuthException catch (e) {
+      print(e.message);
+    }
+    notifyListeners();
   }
 }
