@@ -5,10 +5,10 @@ import 'package:provider/provider.dart';
 import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
 
 class TextFieldOTP extends StatelessWidget {
-  bool first;
-  bool last;
-  TextEditingController controller;
-  FocusNode focusNode;
+  final bool first;
+  final bool last;
+  final TextEditingController controller;
+  final FocusNode focusNode;
   TextFieldOTP({
     super.key,
     required this.first,
@@ -16,13 +16,13 @@ class TextFieldOTP extends StatelessWidget {
     required this.controller,
     required this.focusNode,
   });
-  RegExp onlyNum = RegExp(r'^[0-9]+$');
+  final RegExp onlyNum = RegExp(r'^[0-9]+$');
 
   @override
   Widget build(BuildContext context) {
     final isError = Provider.of<MobileAuth>(context, listen: false).isOTPerror;
     final deviceHeight = MediaQuery.of(context).size.height;
-    return Container(
+    return SizedBox(
       height: 70,
       width: 50,
       child: AspectRatio(
@@ -35,7 +35,7 @@ class TextFieldOTP extends StatelessWidget {
             if (value.length == 1 && last == false) {
               FocusScope.of(context).nextFocus();
             }
-            if (value.length == 0 && first == false) {
+            if (value.isEmpty && first == false) {
               FocusScope.of(context).previousFocus();
             }
           },
@@ -49,7 +49,7 @@ class TextFieldOTP extends StatelessWidget {
           keyboardType: TextInputType.number,
           maxLength: 1,
           decoration: InputDecoration(
-            counter: Offstage(),
+            counter: const Offstage(),
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
                   width: 2, color: isError ? Colors.red : Colors.black),

@@ -4,16 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:v2_product_arena/constants/global_variables.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/email_verification_screen.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/mobile_login_screen.dart';
-import 'package:v2_product_arena/mobile/features/auth/widgets/mobile_signup_form.dart';
 import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
 import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/custom_button.dart';
 import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/mobile_appbar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/mobile_footer.dart';
-import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
-import 'package:amplify_core/amplify_core.dart';
-import 'package:amplify_api/amplify_api.dart';
-import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:intl/intl.dart';
@@ -536,24 +531,21 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                         fontWeight: FontWeight.w700,
                                       ),
                                     ),
-                                    prefix: Container(
-                                      child: SizedBox(
-                                        width: 120,
-                                        height: 50,
-                                        child: CountryCodePicker(
-                                          key: const Key('countryCodePicker'),
-                                          onChanged: (country) {
-                                            setState(() {
-                                              dialCodeDigits =
-                                                  country.dialCode!;
-                                            });
-                                          },
-                                          initialSelection: "BA",
-                                          showCountryOnly: false,
-                                          showOnlyCountryWhenClosed: false,
-                                          // flagWidth: 20,
-                                          favorite: const ["+387", "BA"],
-                                        ),
+                                    prefix: SizedBox(
+                                      width: 120,
+                                      height: 50,
+                                      child: CountryCodePicker(
+                                        key: const Key('countryCodePicker'),
+                                        onChanged: (country) {
+                                          setState(() {
+                                            dialCodeDigits = country.dialCode!;
+                                          });
+                                        },
+                                        initialSelection: "BA",
+                                        showCountryOnly: false,
+                                        showOnlyCountryWhenClosed: false,
+                                        // flagWidth: 20,
+                                        favorite: const ["+387", "BA"],
                                       ),
                                     ),
                                     suffixIcon: Icon(
@@ -722,7 +714,7 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                   obscureText: isHiddenPassword,
                                   decoration: InputDecoration(
                                     isDense: true,
-                                    labelStyle: TextStyle(fontSize: 20),
+                                    labelStyle: const TextStyle(fontSize: 20),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10),
                                     ),

@@ -9,7 +9,7 @@ packages:
     source: hosted
     version: "47.0.0"
   amplify_api:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: amplify_api
       url: "https://pub.dartlang.org"
@@ -37,7 +37,7 @@ packages:
     source: hosted
     version: "1.0.0-next.4"
   amplify_auth_cognito:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: amplify_auth_cognito
       url: "https://pub.dartlang.org"
@@ -79,7 +79,7 @@ packages:
     source: hosted
     version: "1.0.0-next.4"
   amplify_flutter:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: amplify_flutter
       url: "https://pub.dartlang.org"
@@ -390,7 +390,7 @@ packages:
     source: hosted
     version: "2.0.1"
   flutter_spinkit:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: flutter_spinkit
       url: "https://pub.dartlang.org"
@@ -426,7 +426,7 @@ packages:
     source: hosted
     version: "2.1.0"
   google_fonts:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: google_fonts
       url: "https://pub.dartlang.org"
@@ -704,7 +704,7 @@ packages:
     source: hosted
     version: "4.2.4"
   provider:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: provider
       url: "https://pub.dartlang.org"

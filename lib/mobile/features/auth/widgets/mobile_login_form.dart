@@ -81,6 +81,7 @@ class LoginForm extends StatelessWidget {
                 return 'Enter valid email';
               } else {
                 mobileAuth.isLoginEmailError = false;
+                return null;
               }
             },
             onEditingComplete: () =>
@@ -146,6 +147,7 @@ class LoginForm extends StatelessWidget {
                 return 'Password is too short';
               } else {
                 mobileAuth.isLoginPasswordError = false;
+                return null;
               }
             },
           ),

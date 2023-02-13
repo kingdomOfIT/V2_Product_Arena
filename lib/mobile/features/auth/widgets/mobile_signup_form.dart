@@ -104,6 +104,8 @@ class _MobileSignupFormState extends State<MobileSignupForm> {
               }
               if (value.length < 4) {
                 return 'Name must contain a minimum of 4 characters.';
+              } else {
+                return null;
               }
             },
             onEditingComplete: () =>
@@ -155,6 +157,8 @@ class _MobileSignupFormState extends State<MobileSignupForm> {
               }
               if (value.length < 4) {
                 return 'Surname must contain a minimum of 4 characters.';
+              } else {
+                return null;
               }
             },
             onEditingComplete: () =>
@@ -206,6 +210,8 @@ class _MobileSignupFormState extends State<MobileSignupForm> {
               }
               if (value.length < 10) {
                 return 'Invalid birth date format';
+              } else {
+                return null;
               }
             },
             onEditingComplete: () =>
@@ -254,6 +260,8 @@ class _MobileSignupFormState extends State<MobileSignupForm> {
             validator: (value) {
               if (value!.isEmpty) {
                 return 'Please fill the required field.';
+              } else {
+                return null;
               }
             },
             onEditingComplete: () => FocusScope.of(context).unfocus(),
@@ -278,8 +286,8 @@ class _MobileSignupFormState extends State<MobileSignupForm> {
             child: DropdownButton<String>(
               items: GlobalVariables.status
                   .map((e) => DropdownMenuItem(
-                        child: Text(e),
                         value: e,
+                        child: Text(e),
                       ))
                   .toList(),
               value: widget.selectedValue,
@@ -351,6 +359,9 @@ class _MobileSignupFormState extends State<MobileSignupForm> {
               // if (!phoneNumber.hasMatch(value)) {
               //   return 'Enter a valid number';
               // }
+              else {
+                return null;
+              }
             },
             onEditingComplete: () =>
                 FocusScope.of(context).requestFocus(widget.emailFocusNode),
@@ -401,6 +412,8 @@ class _MobileSignupFormState extends State<MobileSignupForm> {
               }
               if (!email.hasMatch(value)) {
                 return 'Invalid email format';
+              } else {
+                return null;
               }
             },
             onEditingComplete: () =>
@@ -455,6 +468,8 @@ class _MobileSignupFormState extends State<MobileSignupForm> {
               }
               if (!password.hasMatch(value)) {
                 return 'Password must contain a minimum of 8 characters, uppercase, lower case, number and special character.';
+              } else {
+                return null;
               }
             },
             onEditingComplete: () => FocusScope.of(context).unfocus(),

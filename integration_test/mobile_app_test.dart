@@ -49,7 +49,7 @@ Widget createMobileSignupScreen() => ChangeNotifierProvider<MobileAuth>(
       },
       child: MaterialApp(
         routes: {
-          '/email-verification': (context) => EmailVerificationScreen(),
+          '/email-verification': (context) => const EmailVerificationScreen(),
           '/email-verified': (context) => const EmailVerified(),
           '/mobile-onboarding': (context) => const MobileOnboardingScreen(),
         },

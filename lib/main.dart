@@ -71,7 +71,7 @@ class _MyAppState extends State<MyApp> {
         title: 'Product Arena V2',
         theme: ThemeData(
           // primaryColor: GlobalVariables.myColor,
-          primarySwatch: MaterialColor(0xff22E974, {
+          primarySwatch: const MaterialColor(0xff22E974, {
             50: Color(0xff22E974),
             100: Color(0xff22E974),
             200: Color(0xff22E974),
@@ -86,7 +86,7 @@ class _MyAppState extends State<MyApp> {
         ),
         home: defaultTargetPlatform == TargetPlatform.android ||
                 defaultTargetPlatform == TargetPlatform.iOS
-            ? MobileSignupScreen()
+            ? const MobileSignupScreen()
             : const WebLoginScreen(),
         routes: {
           MobileLoginScreen.routeName: (context) => const MobileLoginScreen(),
@@ -102,8 +102,8 @@ class _MyAppState extends State<MyApp> {
           SignupConfirmation.routeName: (context) => SignupConfirmation(),
           Verifed.routeName: (context) => Verifed(),
           EmailVerificationScreen.routeName: (context) =>
-              EmailVerificationScreen(),
-          EmailVerified.routeName: (context) => EmailVerified(),
+              const EmailVerificationScreen(),
+          EmailVerified.routeName: (context) => const EmailVerified(),
         },
       ),
     );

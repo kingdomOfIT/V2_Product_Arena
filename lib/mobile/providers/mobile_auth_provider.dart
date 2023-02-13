@@ -61,7 +61,7 @@ class MobileAuth with ChangeNotifier {
         CognitoUserAttributeKey.familyName: surname,
         CognitoUserAttributeKey.address: city,
         CognitoUserAttributeKey.birthdate: birthDate,
-        CognitoUserAttributeKey.custom("status"): status,
+        const CognitoUserAttributeKey.custom("status"): status,
       };
       final result = await Amplify.Auth.signUp(
         username: email,
@@ -69,7 +69,6 @@ class MobileAuth with ChangeNotifier {
         options: CognitoSignUpOptions(userAttributes: userAttributes),
       );
       isSignUpComplete = result.isSignUpComplete;
-      print(userAttributes);
       Navigator.of(context).pushReplacementNamed(routeName);
       notifyListeners();
     } on AuthException catch (e) {
@@ -125,9 +124,7 @@ class MobileAuth with ChangeNotifier {
     try {
       await Amplify.Auth.signOut();
       Navigator.of(context).pushReplacementNamed(MobileLoginScreen.routeName);
-    } on AuthException catch (e) {
-      print(e.message);
-    }
+    } on AuthException catch (e) {}
     notifyListeners();
   }
 }

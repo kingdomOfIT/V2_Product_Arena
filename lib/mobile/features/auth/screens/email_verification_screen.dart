@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/email_verified_screen.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/mobile_login_screen.dart';
-import 'package:v2_product_arena/mobile/features/auth/widgets/textFieldOTP.dart';
-import 'package:v2_product_arena/mobile/features/onboarding/screens/mobile_onboarding_screen.dart';
+import 'package:v2_product_arena/mobile/features/auth/widgets/text_field_otp.dart';
 import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
 import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/custom_button.dart';
 import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/mobile_appbar.dart';
@@ -12,7 +11,7 @@ import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/mobile_footer.da
 
 class EmailVerificationScreen extends StatefulWidget {
   static const routeName = '/email-verification';
-  EmailVerificationScreen({super.key});
+  const EmailVerificationScreen({super.key});
 
   @override
   State<EmailVerificationScreen> createState() =>
@@ -58,7 +57,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
       context,
     );
     return Scaffold(
-      backgroundColor: Color.fromRGBO(243, 243, 249, 1),
+      backgroundColor: const Color.fromRGBO(243, 243, 249, 1),
       appBar: PreferredSize(
         preferredSize:
             Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
@@ -182,8 +181,6 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                         context,
                         EmailVerified.routeName,
                       );
-                      print(mobileAuth.errorTextOTP);
-                      print(mobileAuth.isOTPerror);
                     },
                     color: Colors.black,
                   ),
@@ -224,7 +221,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                   SizedBox(
                     height: deviceHeight * 0.15,
                   ),
-                  Container(
+                  SizedBox(
                     height: deviceHeight * 0.07,
                     width: deviceHeight * 0.07,
                     child: Image.asset(

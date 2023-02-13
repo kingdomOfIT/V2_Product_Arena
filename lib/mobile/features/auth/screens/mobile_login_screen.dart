@@ -62,7 +62,7 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: Color.fromRGBO(233, 233, 233, 1),
+      backgroundColor: const Color.fromRGBO(233, 233, 233, 1),
       appBar: PreferredSize(
         preferredSize:
             Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
@@ -82,7 +82,7 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
                 child: Column(
                   children: <Widget>[
                     Column(
-                      children: <Widget>[],
+                      children: const <Widget>[],
                     ),
                     Text(
                       'Welcome to',
@@ -164,7 +164,7 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
                     SizedBox(
                       height: deviceHeight * 0.13,
                     ),
-                    Container(
+                    SizedBox(
                       height: deviceHeight * 0.07,
                       width: deviceHeight * 0.07,
                       child: Image.asset(

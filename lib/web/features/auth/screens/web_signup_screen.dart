@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_login_screen.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_verification_screen.dart';
-import 'package:v2_product_arena/web/features/auth/widgets/loading_spinner.dart';
 import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_appbar.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_footer.dart';
