@@ -63,6 +63,7 @@ class MyApp extends StatelessWidget {
           WebHomeScreen.routeName: (context) => const WebHomeScreen(),
           SignupConfirmation.routeName: (context) => SignupConfirmation(),
           Verifed.routeName: (context) => Verifed(),
+          EmailVerified.routeName: (context) => const EmailVerified(),
         },
       ),
     );

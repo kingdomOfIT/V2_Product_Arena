@@ -33,16 +33,17 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
   final _text = '';
   bool isHiddenPassword = true;
 
+  void navigateToEmailVerificationScreen(BuildContext context) {
+    Navigator.of(context).pushReplacementNamed(SignupConfirmation.routeName);
+  }
+
   void onSubmitSignUp() async {
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
     if (isValid) {
       _formKey.currentState!.save();
-      Provider.of<WebAuth>(context, listen: false).isLoading = true;
-      setState(() {
-        // isLoading = true;
-      });
-      await Provider.of<WebAuth>(context, listen: false).signUpUser(
+      final provider = Provider.of<WebAuth>(context, listen: false);
+      await provider.signUpUser(
         nameController.text,
         surnameController.text,
         birthdateController.text,
@@ -50,13 +51,15 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
         dropdownValue!,
         phoneController.text,
         emailController.text,
-        passwordController.text,
+        passwordController.text, //ovdje je obrisan context
         context,
-        SignupConfirmation.routeName,
+        SignupConfirmation
+            .routeName, //dodana linija da se proslijedjuje ruta od ovog screena
       );
-
-      Provider.of<WebAuth>(context, listen: false).userEmail =
-          emailController.text;
+      // .then((_) => navigateToEmailVerificationScreen(
+      //     context)); //dodana navigacija do screena
+      provider.userEmail = emailController
+          .text; //prebacen Provider.of<MobileAuth>(context, listen: false); u funkciju onSubmitSignUp jer i on koristi context tako da mora biti u asinhronoj funkciji
     }
   }
 
@@ -79,6 +82,10 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
     double maxwidth = MediaQuery.of(context).size.width;
     final maxheight = MediaQuery.of(context).size.height;
     final webAuth = Provider.of<WebAuth>(context, listen: false);
+
+    if (MediaQuery.of(context).size.width < 980) {
+      return const Icon(Icons.favorite);
+    }
 
     return Scaffold(
       appBar: PreferredSize(
@@ -161,6 +168,12 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                             cursorColor:
                                                 const Color(0xFF22E974),
                                             decoration: InputDecoration(
+                                              suffixIcon: Icon(
+                                                webAuth.isNameError
+                                                    ? Icons.error
+                                                    : null,
+                                                color: Colors.red,
+                                              ),
                                               focusedBorder:
                                                   const OutlineInputBorder(
                                                 borderSide: BorderSide(
@@ -188,8 +201,10 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                             controller: nameController,
                                             validator: (value) {
                                               if (value!.isEmpty) {
+                                                webAuth.isNameError = true;
                                                 return 'Please fill the required field.';
                                               } else {
+                                                webAuth.isNameError = false;
                                                 return null;
                                               }
                                             },
@@ -206,6 +221,12 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                             cursorColor:
                                                 const Color(0xFF22E974),
                                             decoration: InputDecoration(
+                                              suffixIcon: Icon(
+                                                webAuth.isNameError
+                                                    ? Icons.error
+                                                    : null,
+                                                color: Colors.red,
+                                              ),
                                               focusedBorder:
                                                   const OutlineInputBorder(
                                                 borderSide: BorderSide(
@@ -231,8 +252,10 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                             controller: surnameController,
                                             validator: (value) {
                                               if (value!.isEmpty) {
+                                                webAuth.isSurnameError = true;
                                                 return 'Please fill the required field.';
                                               } else {
+                                                webAuth.isSurnameError = false;
                                                 return null;
                                               }
                                             },
@@ -249,6 +272,12 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                       ),
                                       cursorColor: const Color(0xFF22E974),
                                       decoration: InputDecoration(
+                                        suffixIcon: Icon(
+                                          webAuth.isNameError
+                                              ? Icons.error
+                                              : null,
+                                          color: Colors.red,
+                                        ),
                                         focusedBorder: const OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFF22E974),
@@ -262,7 +291,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                         ),
                                         border: const OutlineInputBorder(),
                                         label: Text(
-                                          'Birthdate',
+                                          'Birth date',
                                           style: GoogleFonts.notoSans(
                                             fontSize: 14,
                                             fontWeight: FontWeight.w700,
@@ -272,11 +301,14 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                       controller: birthdateController,
                                       validator: (value) {
                                         if (value!.isEmpty) {
+                                          webAuth.isBirthDateError = true;
                                           return 'Please fill the required field.';
                                         }
                                         if (value.length < 10) {
+                                          webAuth.isBirthDateError = true;
                                           return 'Insert correct format DD-MM-YYYY';
                                         } else {
+                                          webAuth.isBirthDateError = false;
                                           return null;
                                         }
                                       },
@@ -290,6 +322,12 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                       ),
                                       cursorColor: const Color(0xFF22E974),
                                       decoration: InputDecoration(
+                                        suffixIcon: Icon(
+                                          webAuth.isNameError
+                                              ? Icons.error
+                                              : null,
+                                          color: Colors.red,
+                                        ),
                                         focusedBorder: const OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFF22E974),
@@ -313,8 +351,10 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                       controller: cityController,
                                       validator: (value) {
                                         if (value!.isEmpty) {
+                                          webAuth.isCityError = true;
                                           return 'Please fill the required field.';
                                         } else {
+                                          webAuth.isCityError = false;
                                           return null;
                                         }
                                       },
@@ -326,12 +366,6 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                       child: DropdownButtonFormField<String>(
                                         value: dropdownValue,
                                         decoration: InputDecoration(
-                                          focusedErrorBorder:
-                                              const OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color: Colors.red,
-                                            ),
-                                          ),
                                           border: const OutlineInputBorder(),
                                           focusedBorder:
                                               const OutlineInputBorder(
@@ -381,6 +415,12 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                       ),
                                       cursorColor: const Color(0xFF22E974),
                                       decoration: InputDecoration(
+                                        suffixIcon: Icon(
+                                          webAuth.isNameError
+                                              ? Icons.error
+                                              : null,
+                                          color: Colors.red,
+                                        ),
                                         focusedBorder: const OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFF22E974),
@@ -394,7 +434,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                         ),
                                         border: const OutlineInputBorder(),
                                         label: Text(
-                                          'Phone(+38760000000)',
+                                          'Phone',
                                           style: GoogleFonts.notoSans(
                                             fontSize: 14,
                                             fontWeight: FontWeight.w700,
@@ -404,8 +444,10 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                       controller: phoneController,
                                       validator: (value) {
                                         if (value!.isEmpty) {
+                                          webAuth.isPhoneNumError = true;
                                           return 'Please fill the required field.';
                                         } else {
+                                          webAuth.isPhoneNumError = false;
                                           return null;
                                         }
                                       },
@@ -419,6 +461,12 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                       ),
                                       cursorColor: const Color(0xFF22E974),
                                       decoration: InputDecoration(
+                                        suffixIcon: Icon(
+                                          webAuth.isNameError
+                                              ? Icons.error
+                                              : null,
+                                          color: Colors.red,
+                                        ),
                                         focusedBorder: const OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFF22E974),
@@ -442,11 +490,14 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                       controller: emailController,
                                       validator: (value) {
                                         if (value!.isEmpty) {
+                                          webAuth.isNameError = true;
                                           return 'Please fill the required field.';
                                         }
                                         if (!email.hasMatch(value)) {
+                                          webAuth.isEmailError = true;
                                           return 'Invalid email format';
                                         } else {
+                                          webAuth.isEmailError = false;
                                           return null;
                                         }
                                       },
@@ -462,25 +513,23 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                       cursorColor: const Color(0xFF22E974),
                                       decoration: InputDecoration(
                                         suffixIcon: InkWell(
-                                            onTap: togglePasswordView,
-                                            child: Icon(
-                                              isHiddenPassword
-                                                  ? Icons.visibility_off
-                                                  : Icons.visibility,
-                                              size: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.027,
-                                            )),
+                                          onTap: togglePasswordView,
+                                          child: Icon(
+                                            isHiddenPassword
+                                                ? Icons.visibility_off
+                                                : Icons.visibility,
+                                            color: webAuth.isPasswordError
+                                                ? Colors.red
+                                                : null,
+                                            size: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.027,
+                                          ),
+                                        ),
                                         focusedBorder: const OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFF22E974),
-                                          ),
-                                        ),
-                                        focusedErrorBorder:
-                                            const OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: Colors.red,
                                           ),
                                         ),
                                         border: const OutlineInputBorder(),
@@ -498,14 +547,18 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                         RegExp password = RegExp(
                                             r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
                                         if (value!.isEmpty) {
+                                          webAuth.isPasswordError = true;
                                           return 'Please fill the required field.';
-                                        }
-                                        if (value.length < 8) {
+                                        } else if (value.length < 8) {
+                                          webAuth.isPasswordError = true;
+
                                           return 'Password must contain a minimum of 8 characters, uppercase, lower case, number and special character.';
-                                        }
-                                        if (!password.hasMatch(value)) {
+                                        } else if (!password.hasMatch(value)) {
+                                          webAuth.isPasswordError = true;
+
                                           return 'Password must contain a minimum of 8 characters, uppercase, lower case, number and special character.';
                                         } else {
+                                          webAuth.isPasswordError = false;
                                           return null;
                                         }
                                       },
