@@ -72,8 +72,8 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
   RegExp email = RegExp(
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
 
-  RegExp password =
-      RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+  RegExp password = RegExp(
+      r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$%^&+=]).{8,16}$');
 
   bool isLoading = false;
   String dialCodeDigits = "+387";
@@ -177,23 +177,6 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                           SizedBox(
                             height: deviceHeight * 0.05,
                           ),
-                          // MobileSignupForm(
-                          //   nameController: nameController,
-                          //   surnameController: surnameController,
-                          //   birthDateController: birthDateController,
-                          //   cityController: cityController,
-                          //   emailController: emailController,
-                          //   passwordController: passwordController,
-                          //   phoneController: phoneController,
-                          //   surnameFocusNode: surnameFocusNode,
-                          //   birthDateFocusNode: birthDateFocusNode,
-                          //   cityFocusNode: cityFocusNode,
-                          //   phoneFocusNode: phoneFocusNode,
-                          //   emailFocusNode: emailFocusNode,
-                          //   passwordFocusNode: passwordFocusNode,
-                          //   formKey: formKey,
-                          //   selectedValue: selectedValue,
-                          // ),
                           Form(
                             key: formKey,
                             child: Column(
@@ -568,6 +551,9 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                     if (value!.isEmpty) {
                                       mobileAuth.isPhoneNumError = true;
                                       return 'Please fill the required field.';
+                                    } else if (value.length < 9) {
+                                      mobileAuth.isPhoneNumError = true;
+                                      return 'Phone number must contain a minimum of 9 numbers.';
                                     } else {
                                       mobileAuth.isPhoneNumError = false;
                                     }
@@ -766,10 +752,10 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                   validator: (value) {
                                     if (value == null || value == '') {
                                       mobileAuth.isLoginPasswordError = true;
-                                      return 'Please enter password';
-                                    } else if (value.length < 8) {
+                                      return 'Please fill the required field.';
+                                    } else if (!password.hasMatch(value)) {
                                       mobileAuth.isLoginPasswordError = true;
-                                      return 'Password is too short';
+                                      return 'Password must contain a minimum of 8 characters, uppercase, lower case, number and special character.';
                                     } else {
                                       mobileAuth.isLoginPasswordError = false;
                                     }
