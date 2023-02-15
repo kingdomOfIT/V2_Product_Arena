@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:v2_product_arena/web/features/onboarding/web_constansts_ob.dart';
 
 import '../../../providers/web_ob_role.dart';
 
@@ -25,10 +26,11 @@ class _RoleTileState extends State<RoleTile> {
   @override
   Widget build(BuildContext context) {
     int i = widget.index + 1;
-    return InkWell(
+    return GestureDetector(
       onTap: () {
         if (context.read<Role>().hasRole(widget.role)) {
           context.read<Role>().removeItem(widget.role);
+
           setState(() {
             context
                 .read<Role>()
@@ -36,6 +38,7 @@ class _RoleTileState extends State<RoleTile> {
           });
         } else {
           context.read<Role>().addItem(widget.role);
+
           setState(() {
             context.read<Role>().change('assets/images/rolevectorwhite$i.png');
           });
@@ -46,7 +49,8 @@ class _RoleTileState extends State<RoleTile> {
         height: (160 / 1440) * MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
           color: context.read<Role>().bck,
-          border: Border.all(width: 1, color: Color.fromRGBO(50, 47, 55, 1)),
+          border:
+              Border.all(width: 1, color: const Color.fromRGBO(50, 47, 55, 1)),
           borderRadius: BorderRadius.circular(6),
         ),
         child: Column(
@@ -58,13 +62,13 @@ class _RoleTileState extends State<RoleTile> {
                 height: (35 / 1440) * MediaQuery.of(context).size.width,
                 width: (35 / 140) * MediaQuery.of(context).size.width,
                 child: context.read<Role>().hasRole(widget.role)
-                    ? Image.asset(context.read<Role>().img)
+                    ? Image.asset(listRoleSel[widget.index].image)
                     : Image.asset(widget.imageName),
               ),
             ),
             Center(
               child: Text(
-                widget.role.name,
+                widget.role.name['forFrontend']!,
                 style: GoogleFonts.notoSans(
                     fontSize: (14 / 1440) * MediaQuery.of(context).size.width,
                     fontWeight: FontWeight.w700,

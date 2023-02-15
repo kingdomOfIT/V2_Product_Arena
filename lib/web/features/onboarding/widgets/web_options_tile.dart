@@ -60,8 +60,8 @@ class _OptionsTileState extends State<OptionsTile> {
                     groupValue: _daNe,
                     onChanged: ((Opcija? value) => setState(() {
                           da = !ne;
-                          context.read<AnswerProvider>().changeSelected(0);
-                          context.read<AnswerProvider>().changeFirst('True');
+                          context.read<AnswerProvider>().removeItem('False');
+                          context.read<AnswerProvider>().addItem('True');
 
                           _daNe = value!;
                         })),
@@ -96,8 +96,6 @@ class _OptionsTileState extends State<OptionsTile> {
                     groupValue: _daNe,
                     onChanged: ((Opcija? value) => setState(() {
                           ne = !da;
-                          context.read<AnswerProvider>().changeSelected(1);
-                          context.read<AnswerProvider>().changeFirst('False');
 
                           _daNe = value!;
                         })),

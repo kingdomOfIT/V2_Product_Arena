@@ -27,7 +27,7 @@ class VideoTile extends StatelessWidget {
         ),
         borderRadius: BorderRadius.circular(8),
       ),
-      padding: const EdgeInsets.only(top: 26, bottom: 24),
+      padding: const EdgeInsets.only(top: 26),
       child: SingleChildScrollView(
         child: Column(
           children: [
@@ -38,7 +38,7 @@ class VideoTile extends StatelessWidget {
                     14,
                     FontWeight.w700)),
             Container(
-              height: 321,
+              height: 280,
               width: 465,
               padding: const EdgeInsets.all(23),
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(6)),
