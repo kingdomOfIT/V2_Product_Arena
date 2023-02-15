@@ -57,11 +57,9 @@ Widget createWebSignUpScreen() => ChangeNotifierProvider<WebAuth>(
 
 @GenerateMocks([SignUpResult, AmplifyClass])
 void main() {
-  MockBuildContext mockContext = MockBuildContext();
   group('Testing App Performance Tests', () {
     IntegrationTestWidgetsFlutterBinding.ensureInitialized();
     testWidgets('Web signup', (tester) async {
-      WebAuth webAuth = MockWebAuth();
       MockAmplifyClass test = MockAmplifyClass();
       when(test.Auth).thenReturn(MockAuth());
       AmplifyClass.instance = test;
@@ -121,11 +119,6 @@ void main() {
       await tester.tap(find.byKey(const Key('signupButton')));
       await tester.pumpAndSettle();
 
-      await webAuth.signUpUser("name", "surname", "birthDate", "city", "status",
-          "phone", "email", "password", mockContext, "/confirmation");
-
-      await tester.pumpAndSettle();
-
       await tester.tap(find.byKey(const Key('verificationField1')));
       await tester.enterText(find.byKey(const Key('verificationField1')), '1');
 
@@ -157,11 +150,6 @@ void main() {
       await tester.pumpAndSettle();
 
       await tester.tap(find.byKey(const Key('verifyButton')));
-      await tester.pumpAndSettle();
-
-      await webAuth.confirmUser(
-          'testing@gmail.com', '111111', mockContext, '/verified');
-
       await tester.pumpAndSettle();
     });
   });

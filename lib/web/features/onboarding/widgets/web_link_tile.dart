@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:v2_product_arena/web/providers/web_ob_answers.dart';
+import 'package:provider/provider.dart';
 import '../web_constansts_ob.dart';
 
 class LinkTile extends StatelessWidget {
@@ -41,6 +42,9 @@ class LinkTile extends StatelessWidget {
             height: 34,
             child: TextFormField(
               controller: controller,
+              onFieldSubmitted: (value) {
+                context.read<AnswerProvider>().addItem(value);
+              },
               style: const TextStyle(
                 fontSize: 14,
               ),

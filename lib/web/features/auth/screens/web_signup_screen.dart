@@ -63,7 +63,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
   }
 
   RegExp birthDate =
-      RegExp(r'^(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])/[0-9]{4}$');
+      RegExp(r'^(0[1-9]|[1-2][0-9]|3[0-1])-(0[1-9]|1[0-2])-\d{4}$');
 
   RegExp phoneNumber = RegExp(r'^[0-9]+$');
 
@@ -320,9 +320,9 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                           webAuth.isBirthDateError = true;
                                           return 'Please fill the required field.';
                                         }
-                                        if (value.length < 10) {
+                                        if (!birthDate.hasMatch(value)) {
                                           webAuth.isBirthDateError = true;
-                                          return 'Insert correct format DD-MM-YYYY';
+                                          return 'Invalid birth date format. Valid format: dd-mm-yyyy';
                                         } else {
                                           webAuth.isBirthDateError = false;
                                           return null;

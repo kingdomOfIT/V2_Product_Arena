@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomButton extends StatelessWidget {
-  final Function onPressed;
+  final VoidCallback? onPressed;
 
   const CustomButton({super.key, required this.onPressed});
 
@@ -18,8 +18,8 @@ class CustomButton extends StatelessWidget {
         ),
         borderRadius: BorderRadius.circular(6),
       ),
-      child: ElevatedButton(
-        onPressed: onPressed(),
+      child: MaterialButton(
+        onPressed: onPressed,
         child: Text(
           'Pošalji',
           style: GoogleFonts.notoSans(color: Color(0xFFFFFFFF)),

@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:v2_product_arena/main.dart';
+import 'package:v2_product_arena/web/providers/web_ob_answers.dart';
 import 'package:v2_product_arena/web/providers/web_ob_role.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_ob_appbar.dart';
 import '../../../reusable_web_widgets/web_footer.dart';
@@ -16,6 +18,7 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:v2_product_arena/amplifyconfiguration.dart';
+import 'package:provider/provider.dart';
 
 class WebOnboardingView extends StatefulWidget {
   const WebOnboardingView({super.key});
@@ -27,6 +30,7 @@ class WebOnboardingView extends StatefulWidget {
 
 class _WebOnboardingViewState extends State<WebOnboardingView>
     with SingleTickerProviderStateMixin {
+  final _formKey = GlobalKey<FormState>();
   @override
   void initState() {
     super.initState();
@@ -50,7 +54,7 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
     await _configureAmplify();
     try {
       final result = await Amplify.Auth.signIn(
-        username: "mirza.karic595@gmail.com", // email of user
+        username: "mkaric@pa.tech387.com", // email of user
         password: "Pass123!",
       );
 
@@ -70,22 +74,23 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
   }
 
   Future<void> submitOnboarding(List<String> s1, List<String> s2) async {
+    //final isValid = _formKey.currentState!.validate();
     await signInUser();
 
     try {
       final restOperation = Amplify.API.post("/api/onboarding/submit",
           body: HttpPayload.json({
             "date": "Feb2023",
-            "roles": s1,
+            "roles": ['fullstack', 'backend'],
             "answers": {
               // answers are in the same order as questions, null if not answered
-              "0": s2[0],
-              "1": s2[1],
-              "2": s2[2],
-              "3": s2[3],
-              "4": s2[4],
-              "5": s2[5],
-              "6": s2[6],
+              "0": "True",
+              "1": "apple",
+              "2": "orange",
+              "3": "banana",
+              "4": null,
+              "5": "sample",
+              "6": "answer",
             },
           }),
           apiName: "userDataInitAlfa");
@@ -102,6 +107,14 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
   TextEditingController linkController = TextEditingController();
   List<TextEditingController> controllers =
       List.generate(6, (i) => TextEditingController());
+  static const List<Key> globalKey = [
+    Key('prvi'),
+    Key('drugi'),
+    Key('treci'),
+    Key('cetvrti'),
+    Key('peti'),
+    Key('sesti')
+  ];
 
   void sendData() {
     setState(() {
@@ -118,6 +131,8 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
 */
   @override
   Widget build(BuildContext context) {
+    List<String> s1 = context.read<Role>().selctRole;
+    List<String> s2 = context.read<AnswerProvider>().answ;
     double maxWidth = MediaQuery.of(context).size.width;
     double maxHeight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -203,6 +218,7 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
                                 height: tileHeights[index],
                                 question: tileQuestions[index],
                                 controller: controllers[index],
+                                formKey: globalKey[index],
                               );
                             },
                             separatorBuilder:
@@ -213,7 +229,7 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
                             itemCount: tileHeights.length),
                       ),
                       Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Flexible(
                             flex: 1,
@@ -238,7 +254,19 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          CustomButton(onPressed: () {}),
+                          CustomButton(onPressed: () {
+                            // print(s1);
+                            // int i;
+                            // for (i = 1; i < 7; i++) {
+                            //   if (context
+                            //       .read<AnswerProvider>()
+                            //       .answ[i]
+                            //       .isEmpty) {
+                            //     consumer[i] = true;
+                            //   }
+                            // }
+                            // submitOnboarding(s1, s2);
+                          }),
                           SizedBox(
                             height: 60,
                             width: (190 / 1440) * maxWidth - 1,
