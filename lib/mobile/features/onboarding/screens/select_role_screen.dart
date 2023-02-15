@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:v2_product_arena/amplifyconfiguration.dart';
 import 'package:v2_product_arena/constants/global_variables.dart';
 import 'package:v2_product_arena/mobile/features/home/screens/mobile_home_screen.dart';
+import 'package:v2_product_arena/mobile/features/onboarding/screens/mobile_verified_onboarding_screen.dart';
 import 'package:v2_product_arena/mobile/features/onboarding/widgets/form_button.dart';
 import 'package:v2_product_arena/mobile/features/onboarding/widgets/role_tile.dart';
 import 'package:v2_product_arena/mobile/providers/answer_provider.dart';
@@ -87,7 +88,8 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
       final response = await restOperation.response;
       Map<String, dynamic> responseMap = jsonDecode(response.decodeBody());
       print('POST call succeeded');
-      Navigator.of(context).pushReplacementNamed(MobileHomeScreen.routeName);
+      Navigator.of(context)
+          .pushReplacementNamed(MobileVerifiedOnboardingScreen.routeName);
       print(responseMap['lectures']);
     } on ApiException catch (e) {
       print('POST call failed: $e');

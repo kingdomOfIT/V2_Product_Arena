@@ -9,6 +9,7 @@ import 'package:v2_product_arena/mobile/features/onboarding/screens/video_screen
 import 'package:v2_product_arena/mobile/features/onboarding/widgets/mobile_onboarding_form.dart';
 import 'package:v2_product_arena/mobile/features/onboarding/widgets/screen_indicator.dart';
 import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/mobile_appbar.dart';
+import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/mobile_footer.dart';
 
 class MobileOnboardingScreen extends StatefulWidget {
   const MobileOnboardingScreen({super.key});
@@ -96,6 +97,7 @@ class _MobileOnboardingScreenState extends State<MobileOnboardingScreen> {
               totalPages: 8,
             ),
           ),
+          Positioned(bottom: 0, right: 0, left: 0, child: MobileFooter())
         ],
       ),
     );

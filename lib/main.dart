@@ -9,6 +9,7 @@ import 'package:v2_product_arena/mobile/features/auth/screens/mobile_login_scree
 import 'package:v2_product_arena/mobile/features/auth/screens/mobile_signup_screen.dart';
 import 'package:v2_product_arena/mobile/features/home/screens/mobile_home_screen.dart';
 import 'package:v2_product_arena/mobile/features/onboarding/screens/mobile_onboarding_screen.dart';
+import 'package:v2_product_arena/mobile/features/onboarding/screens/mobile_verified_onboarding_screen.dart';
 import 'package:v2_product_arena/mobile/providers/answer_provider.dart';
 import 'package:v2_product_arena/mobile/providers/error_message_provider.dart';
 import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
@@ -70,7 +71,7 @@ class MyApp extends StatelessWidget {
         ),
         home: defaultTargetPlatform == TargetPlatform.android ||
                 defaultTargetPlatform == TargetPlatform.iOS
-            ? const MobileSignupScreen()
+            ? const MobileLoginScreen()
             : const WebLoginScreen(),
         routes: {
           MobileLoginScreen.routeName: (context) => const MobileLoginScreen(),
@@ -85,7 +86,9 @@ class MyApp extends StatelessWidget {
           WebHomeScreen.routeName: (context) => const WebHomeScreen(),
           EmailVerificationScreen.routeName: (context) =>
               EmailVerificationScreen(),
-          EmailVerified.routeName: (context) => EmailVerified(),
+          EmailVerified.routeName: (context) => const EmailVerified(),
+          MobileVerifiedOnboardingScreen.routeName: (context) =>
+              const MobileVerifiedOnboardingScreen(),
         },
       ),
     );
