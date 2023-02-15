@@ -7,7 +7,9 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:v2_product_arena/amplifyconfiguration.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/email_verification_screen.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/email_verified_screen.dart';
+import 'package:v2_product_arena/mobile/features/auth/screens/mobile_login_screen.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/mobile_signup_screen.dart';
+import 'package:v2_product_arena/mobile/features/home/screens/mobile_home_screen.dart';
 import 'package:v2_product_arena/mobile/features/onboarding/screens/mobile_onboarding_screen.dart';
 import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
 import 'package:mockito/mockito.dart';
@@ -38,28 +40,47 @@ class MockAuth extends Mock implements AuthCategory {
     when(result.isSignUpComplete).thenReturn(true);
     return result;
   }
+
+  @override
+  Future<SignInResult<AuthUserAttributeKey>> signIn(
+      {required String username,
+      String? password,
+      SignInOptions? options}) async {
+    var result = MockSignInResult();
+    when(result.isSignedIn).thenReturn(true);
+    return result;
+  }
+
+  @override
+  Future<SignOutResult> signOut({SignOutOptions? options}) async {
+    var result = MockSignOutResult();
+    when(result.runtimeTypeName).thenReturn('');
+    return result;
+  }
 }
 
 late MobileAuth mobileAuthent;
 
-Widget createMobileSignupScreen() => ChangeNotifierProvider<MobileAuth>(
+Widget createMobileLoginScreen() => ChangeNotifierProvider<MobileAuth>(
       create: (context) {
         mobileAuthent = MobileAuth();
         return mobileAuthent;
       },
       child: MaterialApp(
         routes: {
+          '/mobile-login': (context) => const MobileLoginScreen(),
+          '/mobile-signup': (context) => const MobileSignupScreen(),
+          '/mobile-home': (context) => const MobileHomeScreen(),
           '/email-verification': (context) => const EmailVerificationScreen(),
           '/email-verified': (context) => const EmailVerified(),
           '/mobile-onboarding': (context) => const MobileOnboardingScreen(),
         },
-        home: const MobileSignupScreen(),
+        home: const MobileLoginScreen(),
       ),
     );
 
-@GenerateMocks([SignUpResult, AmplifyClass])
+@GenerateMocks([SignInResult, SignUpResult, AmplifyClass])
 void main() {
-  MockBuildContext mockContext = MockBuildContext();
   group('Testing App Performance Tests', () {
     IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
@@ -75,11 +96,32 @@ void main() {
       }
     });
     testWidgets('Mobile signup', (tester) async {
-      MobileAuth mobileAuth = MockMobileAuth();
       MockAmplifyClass test = MockAmplifyClass();
       when(test.Auth).thenReturn(MockAuth());
       AmplifyClass.instance = test;
-      await tester.pumpWidget(createMobileSignupScreen());
+      await tester.pumpWidget(createMobileLoginScreen());
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key('emailLoginTextField')));
+      await tester.enterText(find.byKey(const Key('emailLoginTextField')),
+          'bkaric@pa.tech387.com');
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key('passwordLoginTextField')));
+      await tester.enterText(
+          find.byKey(const Key('passwordLoginTextField')), 'Testing1!');
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key('togglePasswordViewLogin')));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key('loginButton')));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key('logOutButton')));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key('signUpRedirection')));
       await tester.pumpAndSettle();
 
       await tester.tap(find.byKey(const Key('nameTextField')));
@@ -100,7 +142,7 @@ void main() {
           find.byKey(const Key('cityTextField')), 'Sarajevo');
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(const Key('dropdownButton')));
+      await tester.tap(find.byKey(const Key('dropDownButton')));
       await tester.pump(const Duration(seconds: 1));
       final dropdownItem = find.text('Student').last;
       await tester.tap(dropdownItem);
@@ -117,26 +159,18 @@ void main() {
           find.byKey(const Key('emailTextField')), 'testing@gmail.com');
       await tester.pumpAndSettle();
 
-      await tester.ensureVisible(find.byKey(const Key('passwordTextField')));
-      await tester.tap(find.byKey(const Key('passwordTextField')));
+      await tester
+          .ensureVisible(find.byKey(const Key('passwordSignUpTextField')));
+      await tester.tap(find.byKey(const Key('passwordSignUpTextField')));
       await tester.enterText(
-          find.byKey(const Key('passwordTextField')), 'Testing1!');
+          find.byKey(const Key('passwordSignUpTextField')), 'Testing1!');
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(const Key('signupButton')));
+      await tester.tap(find.byKey(const Key('togglePasswordViewSignUp')));
       await tester.pumpAndSettle();
 
-      await mobileAuth.signUpUser(
-          "Test",
-          "Test",
-          "01-01-1997",
-          "Sarajevo",
-          "Student",
-          "123456789",
-          "testing@gmail.com",
-          "Testing1!",
-          mockContext,
-          "/email-verification");
+      await tester.tap(find.byKey(const Key('createYourAccount')));
+      await tester.pumpAndSettle();
 
       await tester.tap(find.byKey(const Key('emailverificationField1')));
       await tester.enterText(
@@ -174,11 +208,9 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(const Key('emailverifyButton')));
+      await tester.tap(find.byKey(const Key('emailVerifyButton')));
       await tester.pumpAndSettle();
 
-      await mobileAuth.confirmUser(
-          'testing@gmail.com', '111111', mockContext, '/email-verified');
       await tester.pumpAndSettle();
     });
   });

@@ -5,13 +5,13 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i6;
 
-import 'package:amplify_core/amplify_core.dart' as _i2;
+import 'package:amplify_core/amplify_core.dart' as _i1;
 import 'package:amplify_core/src/types/storage/base/storage_operation_options.dart'
     as _i3;
 import 'package:flutter/foundation.dart' as _i5;
 import 'package:flutter/src/widgets/framework.dart' as _i4;
 import 'package:flutter/src/widgets/notification_listener.dart' as _i7;
-import 'package:mockito/mockito.dart' as _i1;
+import 'package:mockito/mockito.dart' as _i2;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -24,9 +24,9 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeAuthNextSignUpStep_0 extends _i1.SmartFake
-    implements _i2.AuthNextSignUpStep {
-  _FakeAuthNextSignUpStep_0(
+class _FakeAuthNextSignInStep_0<Key extends _i1.AuthUserAttributeKey>
+    extends _i2.SmartFake implements _i1.AuthNextSignInStep<Key> {
+  _FakeAuthNextSignInStep_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -35,47 +35,58 @@ class _FakeAuthNextSignUpStep_0 extends _i1.SmartFake
         );
 }
 
-class _FakeAuthCategory_1<
-        PluginAuthUser extends _i2.AuthUser<_i2.SignInDetails>,
-        PluginUserAttributeKey extends _i2.AuthUserAttributeKey,
-        PluginAuthUserAttribute extends _i2
+class _FakeAuthNextSignUpStep_1 extends _i2.SmartFake
+    implements _i1.AuthNextSignUpStep {
+  _FakeAuthNextSignUpStep_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeAuthCategory_2<
+        PluginAuthUser extends _i1.AuthUser<_i1.SignInDetails>,
+        PluginUserAttributeKey extends _i1.AuthUserAttributeKey,
+        PluginAuthUserAttribute extends _i1
             .AuthUserAttribute<PluginUserAttributeKey>,
-        PluginAuthDevice extends _i2.AuthDevice,
-        PluginSignUpOptions extends _i2.SignUpOptions,
-        PluginSignUpResult extends _i2.SignUpResult,
-        PluginConfirmSignUpOptions extends _i2.ConfirmSignUpOptions,
-        PluginConfirmSignUpResult extends _i2.SignUpResult,
-        PluginResendSignUpCodeOptions extends _i2.ResendSignUpCodeOptions,
-        PluginResendSignUpCodeResult extends _i2.ResendSignUpCodeResult,
-        PluginSignInOptions extends _i2.SignInOptions,
-        PluginSignInResult extends _i2.SignInResult<PluginUserAttributeKey>,
-        PluginConfirmSignInOptions extends _i2.ConfirmSignInOptions,
-        PluginConfirmSignInResult extends _i2.SignInResult<PluginUserAttributeKey>,
-        PluginSignOutOptions extends _i2.SignOutOptions,
-        PluginSignOutResult extends _i2.SignOutResult,
-        PluginUpdatePasswordOptions extends _i2.UpdatePasswordOptions,
-        PluginUpdatePasswordResult extends _i2.UpdatePasswordResult,
-        PluginResetPasswordOptions extends _i2.ResetPasswordOptions,
-        PluginResetPasswordResult extends _i2.ResetPasswordResult,
-        PluginConfirmResetPasswordOptions extends _i2.ConfirmResetPasswordOptions,
-        PluginConfirmResetPasswordResult extends _i2.UpdatePasswordResult,
-        PluginAuthUserOptions extends _i2.AuthUserOptions,
-        PluginFetchUserAttributeOptions extends _i2.FetchUserAttributesOptions,
-        PluginAuthSessionOptions extends _i2.AuthSessionOptions,
-        PluginAuthSession extends _i2.AuthSession,
-        PluginSignInWithWebUIOptions extends _i2.SignInWithWebUIOptions,
-        PluginSignInWithWebUIResult extends _i2
+        PluginAuthDevice extends _i1.AuthDevice,
+        PluginSignUpOptions extends _i1.SignUpOptions,
+        PluginSignUpResult extends _i1.SignUpResult,
+        PluginConfirmSignUpOptions extends _i1.ConfirmSignUpOptions,
+        PluginConfirmSignUpResult extends _i1.SignUpResult,
+        PluginResendSignUpCodeOptions extends _i1.ResendSignUpCodeOptions,
+        PluginResendSignUpCodeResult extends _i1.ResendSignUpCodeResult,
+        PluginSignInOptions extends _i1.SignInOptions,
+        PluginSignInResult extends _i1.SignInResult<PluginUserAttributeKey>,
+        PluginConfirmSignInOptions extends _i1.ConfirmSignInOptions,
+        PluginConfirmSignInResult extends _i1.SignInResult<PluginUserAttributeKey>,
+        PluginSignOutOptions extends _i1.SignOutOptions,
+        PluginSignOutResult extends _i1.SignOutResult,
+        PluginUpdatePasswordOptions extends _i1.UpdatePasswordOptions,
+        PluginUpdatePasswordResult extends _i1.UpdatePasswordResult,
+        PluginResetPasswordOptions extends _i1.ResetPasswordOptions,
+        PluginResetPasswordResult extends _i1.ResetPasswordResult,
+        PluginConfirmResetPasswordOptions extends _i1.ConfirmResetPasswordOptions,
+        PluginConfirmResetPasswordResult extends _i1.UpdatePasswordResult,
+        PluginAuthUserOptions extends _i1.AuthUserOptions,
+        PluginFetchUserAttributeOptions extends _i1.FetchUserAttributesOptions,
+        PluginAuthSessionOptions extends _i1.AuthSessionOptions,
+        PluginAuthSession extends _i1.AuthSession,
+        PluginSignInWithWebUIOptions extends _i1.SignInWithWebUIOptions,
+        PluginSignInWithWebUIResult extends _i1
             .SignInResult<PluginUserAttributeKey>,
-        PluginUpdateUserAttributeOptions extends _i2.UpdateUserAttributeOptions,
-        PluginUpdateUserAttributeResult extends _i2.UpdateUserAttributeResult,
-        PluginUpdateUserAttributesOptions extends _i2.UpdateUserAttributesOptions,
-        PluginConfirmUserAttributeOptions extends _i2.ConfirmUserAttributeOptions,
-        PluginConfirmUserAttributeResult extends _i2.ConfirmUserAttributeResult,
-        PluginResendUserAttributeConfirmationCodeOptions extends _i2
+        PluginUpdateUserAttributeOptions extends _i1.UpdateUserAttributeOptions,
+        PluginUpdateUserAttributeResult extends _i1.UpdateUserAttributeResult,
+        PluginUpdateUserAttributesOptions extends _i1.UpdateUserAttributesOptions,
+        PluginConfirmUserAttributeOptions extends _i1.ConfirmUserAttributeOptions,
+        PluginConfirmUserAttributeResult extends _i1.ConfirmUserAttributeResult,
+        PluginResendUserAttributeConfirmationCodeOptions extends _i1
             .ResendUserAttributeConfirmationCodeOptions,
-        PluginResendUserAttributeConfirmationCodeResult extends _i2
+        PluginResendUserAttributeConfirmationCodeResult extends _i1
             .ResendUserAttributeConfirmationCodeResult,
-        Plugin extends _i2.AuthPluginInterface<
+        Plugin extends _i1.AuthPluginInterface<
             PluginAuthUser,
             PluginUserAttributeKey,
             PluginAuthUserAttribute,
@@ -111,9 +122,9 @@ class _FakeAuthCategory_1<
             PluginConfirmUserAttributeResult,
             PluginResendUserAttributeConfirmationCodeOptions,
             PluginResendUserAttributeConfirmationCodeResult>>
-    extends _i1.SmartFake
+    extends _i2.SmartFake
     implements
-        _i2.AuthCategory<
+        _i1.AuthCategory<
             PluginAuthUser,
             PluginUserAttributeKey,
             PluginAuthUserAttribute,
@@ -150,7 +161,7 @@ class _FakeAuthCategory_1<
             PluginResendUserAttributeConfirmationCodeOptions,
             PluginResendUserAttributeConfirmationCodeResult,
             Plugin> {
-  _FakeAuthCategory_1(
+  _FakeAuthCategory_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -159,9 +170,9 @@ class _FakeAuthCategory_1<
         );
 }
 
-class _FakeAnalyticsCategory_2 extends _i1.SmartFake
-    implements _i2.AnalyticsCategory {
-  _FakeAnalyticsCategory_2(
+class _FakeAnalyticsCategory_3 extends _i2.SmartFake
+    implements _i1.AnalyticsCategory {
+  _FakeAnalyticsCategory_3(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -170,54 +181,54 @@ class _FakeAnalyticsCategory_2 extends _i1.SmartFake
         );
 }
 
-class _FakeStorageCategory_3<
-        PluginStorageListOperation extends _i2.StorageListOperation<
-            _i2.StorageListRequest<_i2.StorageListOptions>,
-            _i2.StorageListResult<_i2.StorageItem>>,
-        PluginStorageListOptions extends _i2.StorageListOptions,
-        PluginStorageGetPropertiesOperation extends _i2.StorageGetPropertiesOperation<
-            _i2.StorageGetPropertiesRequest<_i3.StorageOperationOptions>,
-            _i2.StorageGetPropertiesResult<_i2.StorageItem>>,
-        PluginStorageGetPropertiesOptions extends _i2.StorageGetPropertiesOptions,
-        PluginStorageGetUrlOperation extends _i2.StorageGetUrlOperation<
-            _i2.StorageGetUrlRequest<_i2.StorageGetUrlOptions>,
-            _i2.StorageGetUrlResult>,
-        PluginStorageGetUrlOptions extends _i2.StorageGetUrlOptions,
-        PluginStorageUploadDataOperation extends _i2.StorageUploadDataOperation<
-            _i2.StorageUploadDataRequest<_i3.StorageOperationOptions>,
-            _i2.StorageUploadDataResult<_i2.StorageItem>>,
-        PluginStorageUploadDataOptions extends _i2.StorageUploadDataOptions,
-        PluginStorageUploadFileOperation extends _i2.StorageUploadFileOperation<
-            _i2.StorageUploadFileRequest<_i3.StorageOperationOptions>,
-            _i2.StorageUploadFileResult<_i2.StorageItem>>,
-        PluginStorageUploadFileOptions extends _i2.StorageUploadFileOptions,
-        PluginStorageDownloadDataOperation extends _i2.StorageDownloadDataOperation<
-            _i2.StorageDownloadDataRequest<_i2.StorageDownloadDataOptions>,
-            _i2.StorageDownloadDataResult<_i2.StorageItem>>,
-        PluginStorageDownloadDataOptions extends _i2.StorageDownloadDataOptions,
-        PluginStorageDownloadFileOperation extends _i2.StorageDownloadFileOperation<
-            _i2.StorageDownloadFileRequest<_i2.StorageDownloadFileOptions>,
-            _i2.StorageDownloadFileResult<_i2.StorageItem>>,
-        PluginStorageDownloadFileOptions extends _i2.StorageDownloadFileOptions,
-        PluginStorageCopyOperation extends _i2.StorageCopyOperation<
-            _i2.StorageCopyRequest<_i2.StorageItem, _i2.StorageCopyOptions>,
-            _i2.StorageCopyResult<_i2.StorageItem>>,
-        PluginStorageCopyOptions extends _i2.StorageCopyOptions,
-        PluginStorageMoveOperation extends _i2.StorageMoveOperation<
-            _i2.StorageMoveRequest<_i2.StorageItem, _i2.StorageMoveOptions>,
-            _i2.StorageMoveResult<_i2.StorageItem>>,
-        PluginStorageMoveOptions extends _i2.StorageMoveOptions,
-        PluginStorageRemoveOperation extends _i2.StorageRemoveOperation<
-            _i2.StorageRemoveRequest<_i2.StorageRemoveOptions>,
-            _i2.StorageRemoveResult<_i2.StorageItem>>,
-        PluginStorageRemoveOptions extends _i2.StorageRemoveOptions,
-        PluginStorageRemoveManyOperation extends _i2.StorageRemoveManyOperation<
-            _i2.StorageRemoveManyRequest<_i2.StorageRemoveManyOptions>,
-            _i2.StorageRemoveManyResult<_i2.StorageItem>>,
-        PluginStorageRemoveManyOptions extends _i2.StorageRemoveManyOptions,
-        PluginStorageItem extends _i2.StorageItem,
-        PluginTransferProgress extends _i2.StorageTransferProgress,
-        Plugin extends _i2.StoragePluginInterface<
+class _FakeStorageCategory_4<
+        PluginStorageListOperation extends _i1.StorageListOperation<
+            _i1.StorageListRequest<_i1.StorageListOptions>,
+            _i1.StorageListResult<_i1.StorageItem>>,
+        PluginStorageListOptions extends _i1.StorageListOptions,
+        PluginStorageGetPropertiesOperation extends _i1.StorageGetPropertiesOperation<
+            _i1.StorageGetPropertiesRequest<_i3.StorageOperationOptions>,
+            _i1.StorageGetPropertiesResult<_i1.StorageItem>>,
+        PluginStorageGetPropertiesOptions extends _i1.StorageGetPropertiesOptions,
+        PluginStorageGetUrlOperation extends _i1.StorageGetUrlOperation<
+            _i1.StorageGetUrlRequest<_i1.StorageGetUrlOptions>,
+            _i1.StorageGetUrlResult>,
+        PluginStorageGetUrlOptions extends _i1.StorageGetUrlOptions,
+        PluginStorageUploadDataOperation extends _i1.StorageUploadDataOperation<
+            _i1.StorageUploadDataRequest<_i3.StorageOperationOptions>,
+            _i1.StorageUploadDataResult<_i1.StorageItem>>,
+        PluginStorageUploadDataOptions extends _i1.StorageUploadDataOptions,
+        PluginStorageUploadFileOperation extends _i1.StorageUploadFileOperation<
+            _i1.StorageUploadFileRequest<_i3.StorageOperationOptions>,
+            _i1.StorageUploadFileResult<_i1.StorageItem>>,
+        PluginStorageUploadFileOptions extends _i1.StorageUploadFileOptions,
+        PluginStorageDownloadDataOperation extends _i1.StorageDownloadDataOperation<
+            _i1.StorageDownloadDataRequest<_i1.StorageDownloadDataOptions>,
+            _i1.StorageDownloadDataResult<_i1.StorageItem>>,
+        PluginStorageDownloadDataOptions extends _i1.StorageDownloadDataOptions,
+        PluginStorageDownloadFileOperation extends _i1.StorageDownloadFileOperation<
+            _i1.StorageDownloadFileRequest<_i1.StorageDownloadFileOptions>,
+            _i1.StorageDownloadFileResult<_i1.StorageItem>>,
+        PluginStorageDownloadFileOptions extends _i1.StorageDownloadFileOptions,
+        PluginStorageCopyOperation extends _i1.StorageCopyOperation<
+            _i1.StorageCopyRequest<_i1.StorageItem, _i1.StorageCopyOptions>,
+            _i1.StorageCopyResult<_i1.StorageItem>>,
+        PluginStorageCopyOptions extends _i1.StorageCopyOptions,
+        PluginStorageMoveOperation extends _i1.StorageMoveOperation<
+            _i1.StorageMoveRequest<_i1.StorageItem, _i1.StorageMoveOptions>,
+            _i1.StorageMoveResult<_i1.StorageItem>>,
+        PluginStorageMoveOptions extends _i1.StorageMoveOptions,
+        PluginStorageRemoveOperation extends _i1.StorageRemoveOperation<
+            _i1.StorageRemoveRequest<_i1.StorageRemoveOptions>,
+            _i1.StorageRemoveResult<_i1.StorageItem>>,
+        PluginStorageRemoveOptions extends _i1.StorageRemoveOptions,
+        PluginStorageRemoveManyOperation extends _i1.StorageRemoveManyOperation<
+            _i1.StorageRemoveManyRequest<_i1.StorageRemoveManyOptions>,
+            _i1.StorageRemoveManyResult<_i1.StorageItem>>,
+        PluginStorageRemoveManyOptions extends _i1.StorageRemoveManyOptions,
+        PluginStorageItem extends _i1.StorageItem,
+        PluginTransferProgress extends _i1.StorageTransferProgress,
+        Plugin extends _i1.StoragePluginInterface<
             PluginStorageListOperation,
             PluginStorageListOptions,
             PluginStorageGetPropertiesOperation,
@@ -241,9 +252,9 @@ class _FakeStorageCategory_3<
             PluginStorageRemoveManyOperation,
             PluginStorageRemoveManyOptions,
             PluginStorageItem,
-            PluginTransferProgress>> extends _i1.SmartFake
+            PluginTransferProgress>> extends _i2.SmartFake
     implements
-        _i2.StorageCategory<
+        _i1.StorageCategory<
             PluginStorageListOperation,
             PluginStorageListOptions,
             PluginStorageGetPropertiesOperation,
@@ -269,7 +280,7 @@ class _FakeStorageCategory_3<
             PluginStorageItem,
             PluginTransferProgress,
             Plugin> {
-  _FakeStorageCategory_3(
+  _FakeStorageCategory_4(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -278,9 +289,9 @@ class _FakeStorageCategory_3<
         );
 }
 
-class _FakeDataStoreCategory_4 extends _i1.SmartFake
-    implements _i2.DataStoreCategory {
-  _FakeDataStoreCategory_4(
+class _FakeDataStoreCategory_5 extends _i2.SmartFake
+    implements _i1.DataStoreCategory {
+  _FakeDataStoreCategory_5(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -289,8 +300,8 @@ class _FakeDataStoreCategory_4 extends _i1.SmartFake
         );
 }
 
-class _FakeAPICategory_5 extends _i1.SmartFake implements _i2.APICategory {
-  _FakeAPICategory_5(
+class _FakeAPICategory_6 extends _i2.SmartFake implements _i1.APICategory {
+  _FakeAPICategory_6(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -299,8 +310,8 @@ class _FakeAPICategory_5 extends _i1.SmartFake implements _i2.APICategory {
         );
 }
 
-class _FakeAmplifyHub_6 extends _i1.SmartFake implements _i2.AmplifyHub {
-  _FakeAmplifyHub_6(
+class _FakeAmplifyHub_7 extends _i2.SmartFake implements _i1.AmplifyHub {
+  _FakeAmplifyHub_7(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -309,8 +320,8 @@ class _FakeAmplifyHub_6 extends _i1.SmartFake implements _i2.AmplifyHub {
         );
 }
 
-class _FakeAmplifyConfig_7 extends _i1.SmartFake implements _i2.AmplifyConfig {
-  _FakeAmplifyConfig_7(
+class _FakeAmplifyConfig_8 extends _i2.SmartFake implements _i1.AmplifyConfig {
+  _FakeAmplifyConfig_8(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -319,8 +330,8 @@ class _FakeAmplifyConfig_7 extends _i1.SmartFake implements _i2.AmplifyConfig {
         );
 }
 
-class _FakeWidget_8 extends _i1.SmartFake implements _i4.Widget {
-  _FakeWidget_8(
+class _FakeWidget_9 extends _i2.SmartFake implements _i4.Widget {
+  _FakeWidget_9(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -333,9 +344,9 @@ class _FakeWidget_8 extends _i1.SmartFake implements _i4.Widget {
       super.toString();
 }
 
-class _FakeInheritedWidget_9 extends _i1.SmartFake
+class _FakeInheritedWidget_10 extends _i2.SmartFake
     implements _i4.InheritedWidget {
-  _FakeInheritedWidget_9(
+  _FakeInheritedWidget_10(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -348,9 +359,9 @@ class _FakeInheritedWidget_9 extends _i1.SmartFake
       super.toString();
 }
 
-class _FakeDiagnosticsNode_10 extends _i1.SmartFake
+class _FakeDiagnosticsNode_11 extends _i2.SmartFake
     implements _i5.DiagnosticsNode {
-  _FakeDiagnosticsNode_10(
+  _FakeDiagnosticsNode_11(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -366,12 +377,54 @@ class _FakeDiagnosticsNode_10 extends _i1.SmartFake
       super.toString();
 }
 
+/// A class which mocks [SignInResult].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSignInResult<Key extends _i1.AuthUserAttributeKey> extends _i2.Mock
+    implements _i1.SignInResult<Key> {
+  MockSignInResult() {
+    _i2.throwOnMissingStub(this);
+  }
+
+  @override
+  bool get isSignedIn => (super.noSuchMethod(
+        Invocation.getter(#isSignedIn),
+        returnValue: false,
+      ) as bool);
+  @override
+  _i1.AuthNextSignInStep<Key> get nextStep => (super.noSuchMethod(
+        Invocation.getter(#nextStep),
+        returnValue: _FakeAuthNextSignInStep_0<Key>(
+          this,
+          Invocation.getter(#nextStep),
+        ),
+      ) as _i1.AuthNextSignInStep<Key>);
+  @override
+  List<Object?> get props => (super.noSuchMethod(
+        Invocation.getter(#props),
+        returnValue: <Object?>[],
+      ) as List<Object?>);
+  @override
+  String get runtimeTypeName => (super.noSuchMethod(
+        Invocation.getter(#runtimeTypeName),
+        returnValue: '',
+      ) as String);
+  @override
+  Map<String, Object?> toJson() => (super.noSuchMethod(
+        Invocation.method(
+          #toJson,
+          [],
+        ),
+        returnValue: <String, Object?>{},
+      ) as Map<String, Object?>);
+}
+
 /// A class which mocks [SignUpResult].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSignUpResult extends _i1.Mock implements _i2.SignUpResult {
+class MockSignUpResult extends _i2.Mock implements _i1.SignUpResult {
   MockSignUpResult() {
-    _i1.throwOnMissingStub(this);
+    _i2.throwOnMissingStub(this);
   }
 
   @override
@@ -380,13 +433,13 @@ class MockSignUpResult extends _i1.Mock implements _i2.SignUpResult {
         returnValue: false,
       ) as bool);
   @override
-  _i2.AuthNextSignUpStep get nextStep => (super.noSuchMethod(
+  _i1.AuthNextSignUpStep get nextStep => (super.noSuchMethod(
         Invocation.getter(#nextStep),
-        returnValue: _FakeAuthNextSignUpStep_0(
+        returnValue: _FakeAuthNextSignUpStep_1(
           this,
           Invocation.getter(#nextStep),
         ),
-      ) as _i2.AuthNextSignUpStep);
+      ) as _i1.AuthNextSignUpStep);
   @override
   List<Object?> get props => (super.noSuchMethod(
         Invocation.getter(#props),
@@ -410,369 +463,369 @@ class MockSignUpResult extends _i1.Mock implements _i2.SignUpResult {
 /// A class which mocks [AmplifyClass].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAmplifyClass extends _i1.Mock implements _i2.AmplifyClass {
+class MockAmplifyClass extends _i2.Mock implements _i1.AmplifyClass {
   MockAmplifyClass() {
-    _i1.throwOnMissingStub(this);
+    _i2.throwOnMissingStub(this);
   }
 
   @override
-  _i2.AuthCategory<
-          _i2.AuthUser<_i2.SignInDetails>,
-          _i2.AuthUserAttributeKey,
-          _i2.AuthUserAttribute<_i2.AuthUserAttributeKey>,
-          _i2.AuthDevice,
-          _i2.SignUpOptions,
-          _i2.SignUpResult,
-          _i2.ConfirmSignUpOptions,
-          _i2.SignUpResult,
-          _i2.ResendSignUpCodeOptions,
-          _i2.ResendSignUpCodeResult,
-          _i2.SignInOptions,
-          _i2.SignInResult<_i2.AuthUserAttributeKey>,
-          _i2.ConfirmSignInOptions,
-          _i2.SignInResult<_i2.AuthUserAttributeKey>,
-          _i2.SignOutOptions,
-          _i2.SignOutResult,
-          _i2.UpdatePasswordOptions,
-          _i2.UpdatePasswordResult,
-          _i2.ResetPasswordOptions,
-          _i2.ResetPasswordResult,
-          _i2.ConfirmResetPasswordOptions,
-          _i2.UpdatePasswordResult,
-          _i2.AuthUserOptions,
-          _i2.FetchUserAttributesOptions,
-          _i2.AuthSessionOptions,
-          _i2.AuthSession,
-          _i2.SignInWithWebUIOptions,
-          _i2.SignInResult<_i2.AuthUserAttributeKey>,
-          _i2.UpdateUserAttributeOptions,
-          _i2.UpdateUserAttributeResult,
-          _i2.UpdateUserAttributesOptions,
-          _i2.ConfirmUserAttributeOptions,
-          _i2.ConfirmUserAttributeResult,
-          _i2.ResendUserAttributeConfirmationCodeOptions,
-          _i2.ResendUserAttributeConfirmationCodeResult,
-          _i2.AuthPluginInterface<_i2.AuthUser<_i2.SignInDetails>, _i2.AuthUserAttributeKey, _i2.AuthUserAttribute<_i2.AuthUserAttributeKey>, _i2.AuthDevice, _i2.SignUpOptions, _i2.SignUpResult, _i2.ConfirmSignUpOptions, _i2.SignUpResult, _i2.ResendSignUpCodeOptions, _i2.ResendSignUpCodeResult, _i2.SignInOptions, _i2.SignInResult<_i2.AuthUserAttributeKey>, _i2.ConfirmSignInOptions, _i2.SignInResult<_i2.AuthUserAttributeKey>, _i2.SignOutOptions, _i2.SignOutResult, _i2.UpdatePasswordOptions, _i2.UpdatePasswordResult, _i2.ResetPasswordOptions, _i2.ResetPasswordResult, _i2.ConfirmResetPasswordOptions, _i2.UpdatePasswordResult, _i2.AuthUserOptions, _i2.FetchUserAttributesOptions, _i2.AuthSessionOptions, _i2.AuthSession, _i2.SignInWithWebUIOptions, _i2.SignInResult<_i2.AuthUserAttributeKey>, _i2.UpdateUserAttributeOptions, _i2.UpdateUserAttributeResult, _i2.UpdateUserAttributesOptions, _i2.ConfirmUserAttributeOptions, _i2.ConfirmUserAttributeResult, _i2.ResendUserAttributeConfirmationCodeOptions, _i2.ResendUserAttributeConfirmationCodeResult>>
+  _i1.AuthCategory<
+          _i1.AuthUser<_i1.SignInDetails>,
+          _i1.AuthUserAttributeKey,
+          _i1.AuthUserAttribute<_i1.AuthUserAttributeKey>,
+          _i1.AuthDevice,
+          _i1.SignUpOptions,
+          _i1.SignUpResult,
+          _i1.ConfirmSignUpOptions,
+          _i1.SignUpResult,
+          _i1.ResendSignUpCodeOptions,
+          _i1.ResendSignUpCodeResult,
+          _i1.SignInOptions,
+          _i1.SignInResult<_i1.AuthUserAttributeKey>,
+          _i1.ConfirmSignInOptions,
+          _i1.SignInResult<_i1.AuthUserAttributeKey>,
+          _i1.SignOutOptions,
+          _i1.SignOutResult,
+          _i1.UpdatePasswordOptions,
+          _i1.UpdatePasswordResult,
+          _i1.ResetPasswordOptions,
+          _i1.ResetPasswordResult,
+          _i1.ConfirmResetPasswordOptions,
+          _i1.UpdatePasswordResult,
+          _i1.AuthUserOptions,
+          _i1.FetchUserAttributesOptions,
+          _i1.AuthSessionOptions,
+          _i1.AuthSession,
+          _i1.SignInWithWebUIOptions,
+          _i1.SignInResult<_i1.AuthUserAttributeKey>,
+          _i1.UpdateUserAttributeOptions,
+          _i1.UpdateUserAttributeResult,
+          _i1.UpdateUserAttributesOptions,
+          _i1.ConfirmUserAttributeOptions,
+          _i1.ConfirmUserAttributeResult,
+          _i1.ResendUserAttributeConfirmationCodeOptions,
+          _i1.ResendUserAttributeConfirmationCodeResult,
+          _i1.AuthPluginInterface<_i1.AuthUser<_i1.SignInDetails>, _i1.AuthUserAttributeKey, _i1.AuthUserAttribute<_i1.AuthUserAttributeKey>, _i1.AuthDevice, _i1.SignUpOptions, _i1.SignUpResult, _i1.ConfirmSignUpOptions, _i1.SignUpResult, _i1.ResendSignUpCodeOptions, _i1.ResendSignUpCodeResult, _i1.SignInOptions, _i1.SignInResult<_i1.AuthUserAttributeKey>, _i1.ConfirmSignInOptions, _i1.SignInResult<_i1.AuthUserAttributeKey>, _i1.SignOutOptions, _i1.SignOutResult, _i1.UpdatePasswordOptions, _i1.UpdatePasswordResult, _i1.ResetPasswordOptions, _i1.ResetPasswordResult, _i1.ConfirmResetPasswordOptions, _i1.UpdatePasswordResult, _i1.AuthUserOptions, _i1.FetchUserAttributesOptions, _i1.AuthSessionOptions, _i1.AuthSession, _i1.SignInWithWebUIOptions, _i1.SignInResult<_i1.AuthUserAttributeKey>, _i1.UpdateUserAttributeOptions, _i1.UpdateUserAttributeResult, _i1.UpdateUserAttributesOptions, _i1.ConfirmUserAttributeOptions, _i1.ConfirmUserAttributeResult, _i1.ResendUserAttributeConfirmationCodeOptions, _i1.ResendUserAttributeConfirmationCodeResult>>
       get Auth => (super.noSuchMethod(
             Invocation.getter(#Auth),
-            returnValue: _FakeAuthCategory_1<
-                _i2.AuthUser<_i2.SignInDetails>,
-                _i2.AuthUserAttributeKey,
-                _i2.AuthUserAttribute<_i2.AuthUserAttributeKey>,
-                _i2.AuthDevice,
-                _i2.SignUpOptions,
-                _i2.SignUpResult,
-                _i2.ConfirmSignUpOptions,
-                _i2.SignUpResult,
-                _i2.ResendSignUpCodeOptions,
-                _i2.ResendSignUpCodeResult,
-                _i2.SignInOptions,
-                _i2.SignInResult<_i2.AuthUserAttributeKey>,
-                _i2.ConfirmSignInOptions,
-                _i2.SignInResult<_i2.AuthUserAttributeKey>,
-                _i2.SignOutOptions,
-                _i2.SignOutResult,
-                _i2.UpdatePasswordOptions,
-                _i2.UpdatePasswordResult,
-                _i2.ResetPasswordOptions,
-                _i2.ResetPasswordResult,
-                _i2.ConfirmResetPasswordOptions,
-                _i2.UpdatePasswordResult,
-                _i2.AuthUserOptions,
-                _i2.FetchUserAttributesOptions,
-                _i2.AuthSessionOptions,
-                _i2.AuthSession,
-                _i2.SignInWithWebUIOptions,
-                _i2.SignInResult<_i2.AuthUserAttributeKey>,
-                _i2.UpdateUserAttributeOptions,
-                _i2.UpdateUserAttributeResult,
-                _i2.UpdateUserAttributesOptions,
-                _i2.ConfirmUserAttributeOptions,
-                _i2.ConfirmUserAttributeResult,
-                _i2.ResendUserAttributeConfirmationCodeOptions,
-                _i2.ResendUserAttributeConfirmationCodeResult,
-                _i2.AuthPluginInterface<
-                    _i2.AuthUser<_i2.SignInDetails>,
-                    _i2.AuthUserAttributeKey,
-                    _i2.AuthUserAttribute<_i2.AuthUserAttributeKey>,
-                    _i2.AuthDevice,
-                    _i2.SignUpOptions,
-                    _i2.SignUpResult,
-                    _i2.ConfirmSignUpOptions,
-                    _i2.SignUpResult,
-                    _i2.ResendSignUpCodeOptions,
-                    _i2.ResendSignUpCodeResult,
-                    _i2.SignInOptions,
-                    _i2.SignInResult<_i2.AuthUserAttributeKey>,
-                    _i2.ConfirmSignInOptions,
-                    _i2.SignInResult<_i2.AuthUserAttributeKey>,
-                    _i2.SignOutOptions,
-                    _i2.SignOutResult,
-                    _i2.UpdatePasswordOptions,
-                    _i2.UpdatePasswordResult,
-                    _i2.ResetPasswordOptions,
-                    _i2.ResetPasswordResult,
-                    _i2.ConfirmResetPasswordOptions,
-                    _i2.UpdatePasswordResult,
-                    _i2.AuthUserOptions,
-                    _i2.FetchUserAttributesOptions,
-                    _i2.AuthSessionOptions,
-                    _i2.AuthSession,
-                    _i2.SignInWithWebUIOptions,
-                    _i2.SignInResult<_i2.AuthUserAttributeKey>,
-                    _i2.UpdateUserAttributeOptions,
-                    _i2.UpdateUserAttributeResult,
-                    _i2.UpdateUserAttributesOptions,
-                    _i2.ConfirmUserAttributeOptions,
-                    _i2.ConfirmUserAttributeResult,
-                    _i2.ResendUserAttributeConfirmationCodeOptions,
-                    _i2.ResendUserAttributeConfirmationCodeResult>>(
+            returnValue: _FakeAuthCategory_2<
+                _i1.AuthUser<_i1.SignInDetails>,
+                _i1.AuthUserAttributeKey,
+                _i1.AuthUserAttribute<_i1.AuthUserAttributeKey>,
+                _i1.AuthDevice,
+                _i1.SignUpOptions,
+                _i1.SignUpResult,
+                _i1.ConfirmSignUpOptions,
+                _i1.SignUpResult,
+                _i1.ResendSignUpCodeOptions,
+                _i1.ResendSignUpCodeResult,
+                _i1.SignInOptions,
+                _i1.SignInResult<_i1.AuthUserAttributeKey>,
+                _i1.ConfirmSignInOptions,
+                _i1.SignInResult<_i1.AuthUserAttributeKey>,
+                _i1.SignOutOptions,
+                _i1.SignOutResult,
+                _i1.UpdatePasswordOptions,
+                _i1.UpdatePasswordResult,
+                _i1.ResetPasswordOptions,
+                _i1.ResetPasswordResult,
+                _i1.ConfirmResetPasswordOptions,
+                _i1.UpdatePasswordResult,
+                _i1.AuthUserOptions,
+                _i1.FetchUserAttributesOptions,
+                _i1.AuthSessionOptions,
+                _i1.AuthSession,
+                _i1.SignInWithWebUIOptions,
+                _i1.SignInResult<_i1.AuthUserAttributeKey>,
+                _i1.UpdateUserAttributeOptions,
+                _i1.UpdateUserAttributeResult,
+                _i1.UpdateUserAttributesOptions,
+                _i1.ConfirmUserAttributeOptions,
+                _i1.ConfirmUserAttributeResult,
+                _i1.ResendUserAttributeConfirmationCodeOptions,
+                _i1.ResendUserAttributeConfirmationCodeResult,
+                _i1.AuthPluginInterface<
+                    _i1.AuthUser<_i1.SignInDetails>,
+                    _i1.AuthUserAttributeKey,
+                    _i1.AuthUserAttribute<_i1.AuthUserAttributeKey>,
+                    _i1.AuthDevice,
+                    _i1.SignUpOptions,
+                    _i1.SignUpResult,
+                    _i1.ConfirmSignUpOptions,
+                    _i1.SignUpResult,
+                    _i1.ResendSignUpCodeOptions,
+                    _i1.ResendSignUpCodeResult,
+                    _i1.SignInOptions,
+                    _i1.SignInResult<_i1.AuthUserAttributeKey>,
+                    _i1.ConfirmSignInOptions,
+                    _i1.SignInResult<_i1.AuthUserAttributeKey>,
+                    _i1.SignOutOptions,
+                    _i1.SignOutResult,
+                    _i1.UpdatePasswordOptions,
+                    _i1.UpdatePasswordResult,
+                    _i1.ResetPasswordOptions,
+                    _i1.ResetPasswordResult,
+                    _i1.ConfirmResetPasswordOptions,
+                    _i1.UpdatePasswordResult,
+                    _i1.AuthUserOptions,
+                    _i1.FetchUserAttributesOptions,
+                    _i1.AuthSessionOptions,
+                    _i1.AuthSession,
+                    _i1.SignInWithWebUIOptions,
+                    _i1.SignInResult<_i1.AuthUserAttributeKey>,
+                    _i1.UpdateUserAttributeOptions,
+                    _i1.UpdateUserAttributeResult,
+                    _i1.UpdateUserAttributesOptions,
+                    _i1.ConfirmUserAttributeOptions,
+                    _i1.ConfirmUserAttributeResult,
+                    _i1.ResendUserAttributeConfirmationCodeOptions,
+                    _i1.ResendUserAttributeConfirmationCodeResult>>(
               this,
               Invocation.getter(#Auth),
             ),
-          ) as _i2.AuthCategory<
-              _i2.AuthUser<_i2.SignInDetails>,
-              _i2.AuthUserAttributeKey,
-              _i2.AuthUserAttribute<_i2.AuthUserAttributeKey>,
-              _i2.AuthDevice,
-              _i2.SignUpOptions,
-              _i2.SignUpResult,
-              _i2.ConfirmSignUpOptions,
-              _i2.SignUpResult,
-              _i2.ResendSignUpCodeOptions,
-              _i2.ResendSignUpCodeResult,
-              _i2.SignInOptions,
-              _i2.SignInResult<_i2.AuthUserAttributeKey>,
-              _i2.ConfirmSignInOptions,
-              _i2.SignInResult<_i2.AuthUserAttributeKey>,
-              _i2.SignOutOptions,
-              _i2.SignOutResult,
-              _i2.UpdatePasswordOptions,
-              _i2.UpdatePasswordResult,
-              _i2.ResetPasswordOptions,
-              _i2.ResetPasswordResult,
-              _i2.ConfirmResetPasswordOptions,
-              _i2.UpdatePasswordResult,
-              _i2.AuthUserOptions,
-              _i2.FetchUserAttributesOptions,
-              _i2.AuthSessionOptions,
-              _i2.AuthSession,
-              _i2.SignInWithWebUIOptions,
-              _i2.SignInResult<_i2.AuthUserAttributeKey>,
-              _i2.UpdateUserAttributeOptions,
-              _i2.UpdateUserAttributeResult,
-              _i2.UpdateUserAttributesOptions,
-              _i2.ConfirmUserAttributeOptions,
-              _i2.ConfirmUserAttributeResult,
-              _i2.ResendUserAttributeConfirmationCodeOptions,
-              _i2.ResendUserAttributeConfirmationCodeResult,
-              _i2.AuthPluginInterface<_i2.AuthUser<_i2.SignInDetails>, _i2.AuthUserAttributeKey, _i2.AuthUserAttribute<_i2.AuthUserAttributeKey>, _i2.AuthDevice, _i2.SignUpOptions, _i2.SignUpResult, _i2.ConfirmSignUpOptions, _i2.SignUpResult, _i2.ResendSignUpCodeOptions, _i2.ResendSignUpCodeResult, _i2.SignInOptions, _i2.SignInResult<_i2.AuthUserAttributeKey>, _i2.ConfirmSignInOptions, _i2.SignInResult<_i2.AuthUserAttributeKey>, _i2.SignOutOptions, _i2.SignOutResult, _i2.UpdatePasswordOptions, _i2.UpdatePasswordResult, _i2.ResetPasswordOptions, _i2.ResetPasswordResult, _i2.ConfirmResetPasswordOptions, _i2.UpdatePasswordResult, _i2.AuthUserOptions, _i2.FetchUserAttributesOptions, _i2.AuthSessionOptions, _i2.AuthSession, _i2.SignInWithWebUIOptions, _i2.SignInResult<_i2.AuthUserAttributeKey>, _i2.UpdateUserAttributeOptions, _i2.UpdateUserAttributeResult, _i2.UpdateUserAttributesOptions, _i2.ConfirmUserAttributeOptions, _i2.ConfirmUserAttributeResult, _i2.ResendUserAttributeConfirmationCodeOptions, _i2.ResendUserAttributeConfirmationCodeResult>>);
+          ) as _i1.AuthCategory<
+              _i1.AuthUser<_i1.SignInDetails>,
+              _i1.AuthUserAttributeKey,
+              _i1.AuthUserAttribute<_i1.AuthUserAttributeKey>,
+              _i1.AuthDevice,
+              _i1.SignUpOptions,
+              _i1.SignUpResult,
+              _i1.ConfirmSignUpOptions,
+              _i1.SignUpResult,
+              _i1.ResendSignUpCodeOptions,
+              _i1.ResendSignUpCodeResult,
+              _i1.SignInOptions,
+              _i1.SignInResult<_i1.AuthUserAttributeKey>,
+              _i1.ConfirmSignInOptions,
+              _i1.SignInResult<_i1.AuthUserAttributeKey>,
+              _i1.SignOutOptions,
+              _i1.SignOutResult,
+              _i1.UpdatePasswordOptions,
+              _i1.UpdatePasswordResult,
+              _i1.ResetPasswordOptions,
+              _i1.ResetPasswordResult,
+              _i1.ConfirmResetPasswordOptions,
+              _i1.UpdatePasswordResult,
+              _i1.AuthUserOptions,
+              _i1.FetchUserAttributesOptions,
+              _i1.AuthSessionOptions,
+              _i1.AuthSession,
+              _i1.SignInWithWebUIOptions,
+              _i1.SignInResult<_i1.AuthUserAttributeKey>,
+              _i1.UpdateUserAttributeOptions,
+              _i1.UpdateUserAttributeResult,
+              _i1.UpdateUserAttributesOptions,
+              _i1.ConfirmUserAttributeOptions,
+              _i1.ConfirmUserAttributeResult,
+              _i1.ResendUserAttributeConfirmationCodeOptions,
+              _i1.ResendUserAttributeConfirmationCodeResult,
+              _i1.AuthPluginInterface<_i1.AuthUser<_i1.SignInDetails>, _i1.AuthUserAttributeKey, _i1.AuthUserAttribute<_i1.AuthUserAttributeKey>, _i1.AuthDevice, _i1.SignUpOptions, _i1.SignUpResult, _i1.ConfirmSignUpOptions, _i1.SignUpResult, _i1.ResendSignUpCodeOptions, _i1.ResendSignUpCodeResult, _i1.SignInOptions, _i1.SignInResult<_i1.AuthUserAttributeKey>, _i1.ConfirmSignInOptions, _i1.SignInResult<_i1.AuthUserAttributeKey>, _i1.SignOutOptions, _i1.SignOutResult, _i1.UpdatePasswordOptions, _i1.UpdatePasswordResult, _i1.ResetPasswordOptions, _i1.ResetPasswordResult, _i1.ConfirmResetPasswordOptions, _i1.UpdatePasswordResult, _i1.AuthUserOptions, _i1.FetchUserAttributesOptions, _i1.AuthSessionOptions, _i1.AuthSession, _i1.SignInWithWebUIOptions, _i1.SignInResult<_i1.AuthUserAttributeKey>, _i1.UpdateUserAttributeOptions, _i1.UpdateUserAttributeResult, _i1.UpdateUserAttributesOptions, _i1.ConfirmUserAttributeOptions, _i1.ConfirmUserAttributeResult, _i1.ResendUserAttributeConfirmationCodeOptions, _i1.ResendUserAttributeConfirmationCodeResult>>);
   @override
-  _i2.AnalyticsCategory get Analytics => (super.noSuchMethod(
+  _i1.AnalyticsCategory get Analytics => (super.noSuchMethod(
         Invocation.getter(#Analytics),
-        returnValue: _FakeAnalyticsCategory_2(
+        returnValue: _FakeAnalyticsCategory_3(
           this,
           Invocation.getter(#Analytics),
         ),
-      ) as _i2.AnalyticsCategory);
+      ) as _i1.AnalyticsCategory);
   @override
-  _i2.StorageCategory<_i2.StorageListOperation<_i2.StorageListRequest<_i2.StorageListOptions>, _i2.StorageListResult<_i2.StorageItem>>, _i2.StorageListOptions, _i2.StorageGetPropertiesOperation<_i2.StorageGetPropertiesRequest<_i3.StorageOperationOptions>, _i2.StorageGetPropertiesResult<_i2.StorageItem>>, _i2.StorageGetPropertiesOptions, _i2.StorageGetUrlOperation<_i2.StorageGetUrlRequest<_i2.StorageGetUrlOptions>, _i2.StorageGetUrlResult>, _i2.StorageGetUrlOptions, _i2.StorageUploadDataOperation<_i2.StorageUploadDataRequest<_i3.StorageOperationOptions>, _i2.StorageUploadDataResult<_i2.StorageItem>>, _i2.StorageUploadDataOptions, _i2.StorageUploadFileOperation<_i2.StorageUploadFileRequest<_i3.StorageOperationOptions>, _i2.StorageUploadFileResult<_i2.StorageItem>>, _i2.StorageUploadFileOptions, _i2.StorageDownloadDataOperation<_i2.StorageDownloadDataRequest<_i2.StorageDownloadDataOptions>, _i2.StorageDownloadDataResult<_i2.StorageItem>>, _i2.StorageDownloadDataOptions, _i2.StorageDownloadFileOperation<_i2.StorageDownloadFileRequest<_i2.StorageDownloadFileOptions>, _i2.StorageDownloadFileResult<_i2.StorageItem>>, _i2.StorageDownloadFileOptions, _i2.StorageCopyOperation<_i2.StorageCopyRequest<_i2.StorageItem, _i2.StorageCopyOptions>, _i2.StorageCopyResult<_i2.StorageItem>>, _i2.StorageCopyOptions, _i2.StorageMoveOperation<_i2.StorageMoveRequest<_i2.StorageItem, _i2.StorageMoveOptions>, _i2.StorageMoveResult<_i2.StorageItem>>, _i2.StorageMoveOptions, _i2.StorageRemoveOperation<_i2.StorageRemoveRequest<_i2.StorageRemoveOptions>, _i2.StorageRemoveResult<_i2.StorageItem>>, _i2.StorageRemoveOptions, _i2.StorageRemoveManyOperation<_i2.StorageRemoveManyRequest<_i2.StorageRemoveManyOptions>, _i2.StorageRemoveManyResult<_i2.StorageItem>>, _i2.StorageRemoveManyOptions, _i2.StorageItem, _i2.StorageTransferProgress, _i2.StoragePluginInterface<_i2.StorageListOperation<_i2.StorageListRequest<_i2.StorageListOptions>, _i2.StorageListResult<_i2.StorageItem>>, _i2.StorageListOptions, _i2.StorageGetPropertiesOperation<_i2.StorageGetPropertiesRequest<_i3.StorageOperationOptions>, _i2.StorageGetPropertiesResult<_i2.StorageItem>>, _i2.StorageGetPropertiesOptions, _i2.StorageGetUrlOperation<_i2.StorageGetUrlRequest<_i2.StorageGetUrlOptions>, _i2.StorageGetUrlResult>, _i2.StorageGetUrlOptions, _i2.StorageUploadDataOperation<_i2.StorageUploadDataRequest<_i3.StorageOperationOptions>, _i2.StorageUploadDataResult<_i2.StorageItem>>, _i2.StorageUploadDataOptions, _i2.StorageUploadFileOperation<_i2.StorageUploadFileRequest<_i3.StorageOperationOptions>, _i2.StorageUploadFileResult<_i2.StorageItem>>, _i2.StorageUploadFileOptions, _i2.StorageDownloadDataOperation<_i2.StorageDownloadDataRequest<_i2.StorageDownloadDataOptions>, _i2.StorageDownloadDataResult<_i2.StorageItem>>, _i2.StorageDownloadDataOptions, _i2.StorageDownloadFileOperation<_i2.StorageDownloadFileRequest<_i2.StorageDownloadFileOptions>, _i2.StorageDownloadFileResult<_i2.StorageItem>>, _i2.StorageDownloadFileOptions, _i2.StorageCopyOperation<_i2.StorageCopyRequest<_i2.StorageItem, _i2.StorageCopyOptions>, _i2.StorageCopyResult<_i2.StorageItem>>, _i2.StorageCopyOptions, _i2.StorageMoveOperation<_i2.StorageMoveRequest<_i2.StorageItem, _i2.StorageMoveOptions>, _i2.StorageMoveResult<_i2.StorageItem>>, _i2.StorageMoveOptions, _i2.StorageRemoveOperation<_i2.StorageRemoveRequest<_i2.StorageRemoveOptions>, _i2.StorageRemoveResult<_i2.StorageItem>>, _i2.StorageRemoveOptions, _i2.StorageRemoveManyOperation<_i2.StorageRemoveManyRequest<_i2.StorageRemoveManyOptions>, _i2.StorageRemoveManyResult<_i2.StorageItem>>, _i2.StorageRemoveManyOptions, _i2.StorageItem, _i2.StorageTransferProgress>> get Storage =>
+  _i1.StorageCategory<_i1.StorageListOperation<_i1.StorageListRequest<_i1.StorageListOptions>, _i1.StorageListResult<_i1.StorageItem>>, _i1.StorageListOptions, _i1.StorageGetPropertiesOperation<_i1.StorageGetPropertiesRequest<_i3.StorageOperationOptions>, _i1.StorageGetPropertiesResult<_i1.StorageItem>>, _i1.StorageGetPropertiesOptions, _i1.StorageGetUrlOperation<_i1.StorageGetUrlRequest<_i1.StorageGetUrlOptions>, _i1.StorageGetUrlResult>, _i1.StorageGetUrlOptions, _i1.StorageUploadDataOperation<_i1.StorageUploadDataRequest<_i3.StorageOperationOptions>, _i1.StorageUploadDataResult<_i1.StorageItem>>, _i1.StorageUploadDataOptions, _i1.StorageUploadFileOperation<_i1.StorageUploadFileRequest<_i3.StorageOperationOptions>, _i1.StorageUploadFileResult<_i1.StorageItem>>, _i1.StorageUploadFileOptions, _i1.StorageDownloadDataOperation<_i1.StorageDownloadDataRequest<_i1.StorageDownloadDataOptions>, _i1.StorageDownloadDataResult<_i1.StorageItem>>, _i1.StorageDownloadDataOptions, _i1.StorageDownloadFileOperation<_i1.StorageDownloadFileRequest<_i1.StorageDownloadFileOptions>, _i1.StorageDownloadFileResult<_i1.StorageItem>>, _i1.StorageDownloadFileOptions, _i1.StorageCopyOperation<_i1.StorageCopyRequest<_i1.StorageItem, _i1.StorageCopyOptions>, _i1.StorageCopyResult<_i1.StorageItem>>, _i1.StorageCopyOptions, _i1.StorageMoveOperation<_i1.StorageMoveRequest<_i1.StorageItem, _i1.StorageMoveOptions>, _i1.StorageMoveResult<_i1.StorageItem>>, _i1.StorageMoveOptions, _i1.StorageRemoveOperation<_i1.StorageRemoveRequest<_i1.StorageRemoveOptions>, _i1.StorageRemoveResult<_i1.StorageItem>>, _i1.StorageRemoveOptions, _i1.StorageRemoveManyOperation<_i1.StorageRemoveManyRequest<_i1.StorageRemoveManyOptions>, _i1.StorageRemoveManyResult<_i1.StorageItem>>, _i1.StorageRemoveManyOptions, _i1.StorageItem, _i1.StorageTransferProgress, _i1.StoragePluginInterface<_i1.StorageListOperation<_i1.StorageListRequest<_i1.StorageListOptions>, _i1.StorageListResult<_i1.StorageItem>>, _i1.StorageListOptions, _i1.StorageGetPropertiesOperation<_i1.StorageGetPropertiesRequest<_i3.StorageOperationOptions>, _i1.StorageGetPropertiesResult<_i1.StorageItem>>, _i1.StorageGetPropertiesOptions, _i1.StorageGetUrlOperation<_i1.StorageGetUrlRequest<_i1.StorageGetUrlOptions>, _i1.StorageGetUrlResult>, _i1.StorageGetUrlOptions, _i1.StorageUploadDataOperation<_i1.StorageUploadDataRequest<_i3.StorageOperationOptions>, _i1.StorageUploadDataResult<_i1.StorageItem>>, _i1.StorageUploadDataOptions, _i1.StorageUploadFileOperation<_i1.StorageUploadFileRequest<_i3.StorageOperationOptions>, _i1.StorageUploadFileResult<_i1.StorageItem>>, _i1.StorageUploadFileOptions, _i1.StorageDownloadDataOperation<_i1.StorageDownloadDataRequest<_i1.StorageDownloadDataOptions>, _i1.StorageDownloadDataResult<_i1.StorageItem>>, _i1.StorageDownloadDataOptions, _i1.StorageDownloadFileOperation<_i1.StorageDownloadFileRequest<_i1.StorageDownloadFileOptions>, _i1.StorageDownloadFileResult<_i1.StorageItem>>, _i1.StorageDownloadFileOptions, _i1.StorageCopyOperation<_i1.StorageCopyRequest<_i1.StorageItem, _i1.StorageCopyOptions>, _i1.StorageCopyResult<_i1.StorageItem>>, _i1.StorageCopyOptions, _i1.StorageMoveOperation<_i1.StorageMoveRequest<_i1.StorageItem, _i1.StorageMoveOptions>, _i1.StorageMoveResult<_i1.StorageItem>>, _i1.StorageMoveOptions, _i1.StorageRemoveOperation<_i1.StorageRemoveRequest<_i1.StorageRemoveOptions>, _i1.StorageRemoveResult<_i1.StorageItem>>, _i1.StorageRemoveOptions, _i1.StorageRemoveManyOperation<_i1.StorageRemoveManyRequest<_i1.StorageRemoveManyOptions>, _i1.StorageRemoveManyResult<_i1.StorageItem>>, _i1.StorageRemoveManyOptions, _i1.StorageItem, _i1.StorageTransferProgress>> get Storage =>
       (super.noSuchMethod(
         Invocation.getter(#Storage),
-        returnValue: _FakeStorageCategory_3<
-            _i2.StorageListOperation<
-                _i2.StorageListRequest<_i2.StorageListOptions>,
-                _i2.StorageListResult<_i2.StorageItem>>,
-            _i2.StorageListOptions,
-            _i2.StorageGetPropertiesOperation<
-                _i2.StorageGetPropertiesRequest<_i3.StorageOperationOptions>,
-                _i2.StorageGetPropertiesResult<_i2.StorageItem>>,
-            _i2.StorageGetPropertiesOptions,
-            _i2.StorageGetUrlOperation<
-                _i2.StorageGetUrlRequest<_i2.StorageGetUrlOptions>,
-                _i2.StorageGetUrlResult>,
-            _i2.StorageGetUrlOptions,
-            _i2.StorageUploadDataOperation<
-                _i2.StorageUploadDataRequest<_i3.StorageOperationOptions>,
-                _i2.StorageUploadDataResult<_i2.StorageItem>>,
-            _i2.StorageUploadDataOptions,
-            _i2.StorageUploadFileOperation<
-                _i2.StorageUploadFileRequest<_i3.StorageOperationOptions>,
-                _i2.StorageUploadFileResult<_i2.StorageItem>>,
-            _i2.StorageUploadFileOptions,
-            _i2.StorageDownloadDataOperation<
-                _i2.StorageDownloadDataRequest<_i2.StorageDownloadDataOptions>,
-                _i2.StorageDownloadDataResult<_i2.StorageItem>>,
-            _i2.StorageDownloadDataOptions,
-            _i2.StorageDownloadFileOperation<
-                _i2.StorageDownloadFileRequest<_i2.StorageDownloadFileOptions>,
-                _i2.StorageDownloadFileResult<_i2.StorageItem>>,
-            _i2.StorageDownloadFileOptions,
-            _i2.StorageCopyOperation<
-                _i2.StorageCopyRequest<_i2.StorageItem, _i2.StorageCopyOptions>,
-                _i2.StorageCopyResult<_i2.StorageItem>>,
-            _i2.StorageCopyOptions,
-            _i2.StorageMoveOperation<
-                _i2.StorageMoveRequest<_i2.StorageItem, _i2.StorageMoveOptions>,
-                _i2.StorageMoveResult<_i2.StorageItem>>,
-            _i2.StorageMoveOptions,
-            _i2.StorageRemoveOperation<
-                _i2.StorageRemoveRequest<_i2.StorageRemoveOptions>,
-                _i2.StorageRemoveResult<_i2.StorageItem>>,
-            _i2.StorageRemoveOptions,
-            _i2.StorageRemoveManyOperation<
-                _i2.StorageRemoveManyRequest<_i2.StorageRemoveManyOptions>,
-                _i2.StorageRemoveManyResult<_i2.StorageItem>>,
-            _i2.StorageRemoveManyOptions,
-            _i2.StorageItem,
-            _i2.StorageTransferProgress,
-            _i2.StoragePluginInterface<
-                _i2.StorageListOperation<
-                    _i2.StorageListRequest<_i2.StorageListOptions>,
-                    _i2.StorageListResult<_i2.StorageItem>>,
-                _i2.StorageListOptions,
-                _i2.StorageGetPropertiesOperation<
-                    _i2.StorageGetPropertiesRequest<
+        returnValue: _FakeStorageCategory_4<
+            _i1.StorageListOperation<
+                _i1.StorageListRequest<_i1.StorageListOptions>,
+                _i1.StorageListResult<_i1.StorageItem>>,
+            _i1.StorageListOptions,
+            _i1.StorageGetPropertiesOperation<
+                _i1.StorageGetPropertiesRequest<_i3.StorageOperationOptions>,
+                _i1.StorageGetPropertiesResult<_i1.StorageItem>>,
+            _i1.StorageGetPropertiesOptions,
+            _i1.StorageGetUrlOperation<
+                _i1.StorageGetUrlRequest<_i1.StorageGetUrlOptions>,
+                _i1.StorageGetUrlResult>,
+            _i1.StorageGetUrlOptions,
+            _i1.StorageUploadDataOperation<
+                _i1.StorageUploadDataRequest<_i3.StorageOperationOptions>,
+                _i1.StorageUploadDataResult<_i1.StorageItem>>,
+            _i1.StorageUploadDataOptions,
+            _i1.StorageUploadFileOperation<
+                _i1.StorageUploadFileRequest<_i3.StorageOperationOptions>,
+                _i1.StorageUploadFileResult<_i1.StorageItem>>,
+            _i1.StorageUploadFileOptions,
+            _i1.StorageDownloadDataOperation<
+                _i1.StorageDownloadDataRequest<_i1.StorageDownloadDataOptions>,
+                _i1.StorageDownloadDataResult<_i1.StorageItem>>,
+            _i1.StorageDownloadDataOptions,
+            _i1.StorageDownloadFileOperation<
+                _i1.StorageDownloadFileRequest<_i1.StorageDownloadFileOptions>,
+                _i1.StorageDownloadFileResult<_i1.StorageItem>>,
+            _i1.StorageDownloadFileOptions,
+            _i1.StorageCopyOperation<
+                _i1.StorageCopyRequest<_i1.StorageItem, _i1.StorageCopyOptions>,
+                _i1.StorageCopyResult<_i1.StorageItem>>,
+            _i1.StorageCopyOptions,
+            _i1.StorageMoveOperation<
+                _i1.StorageMoveRequest<_i1.StorageItem, _i1.StorageMoveOptions>,
+                _i1.StorageMoveResult<_i1.StorageItem>>,
+            _i1.StorageMoveOptions,
+            _i1.StorageRemoveOperation<
+                _i1.StorageRemoveRequest<_i1.StorageRemoveOptions>,
+                _i1.StorageRemoveResult<_i1.StorageItem>>,
+            _i1.StorageRemoveOptions,
+            _i1.StorageRemoveManyOperation<
+                _i1.StorageRemoveManyRequest<_i1.StorageRemoveManyOptions>,
+                _i1.StorageRemoveManyResult<_i1.StorageItem>>,
+            _i1.StorageRemoveManyOptions,
+            _i1.StorageItem,
+            _i1.StorageTransferProgress,
+            _i1.StoragePluginInterface<
+                _i1.StorageListOperation<
+                    _i1.StorageListRequest<_i1.StorageListOptions>,
+                    _i1.StorageListResult<_i1.StorageItem>>,
+                _i1.StorageListOptions,
+                _i1.StorageGetPropertiesOperation<
+                    _i1.StorageGetPropertiesRequest<
                         _i3.StorageOperationOptions>,
-                    _i2.StorageGetPropertiesResult<_i2.StorageItem>>,
-                _i2.StorageGetPropertiesOptions,
-                _i2.StorageGetUrlOperation<
-                    _i2.StorageGetUrlRequest<_i2.StorageGetUrlOptions>,
-                    _i2.StorageGetUrlResult>,
-                _i2.StorageGetUrlOptions,
-                _i2.StorageUploadDataOperation<
-                    _i2.StorageUploadDataRequest<_i3.StorageOperationOptions>,
-                    _i2.StorageUploadDataResult<_i2.StorageItem>>,
-                _i2.StorageUploadDataOptions,
-                _i2.StorageUploadFileOperation<
-                    _i2.StorageUploadFileRequest<_i3.StorageOperationOptions>,
-                    _i2.StorageUploadFileResult<_i2.StorageItem>>,
-                _i2.StorageUploadFileOptions,
-                _i2.StorageDownloadDataOperation<
-                    _i2.StorageDownloadDataRequest<
-                        _i2.StorageDownloadDataOptions>,
-                    _i2.StorageDownloadDataResult<_i2.StorageItem>>,
-                _i2.StorageDownloadDataOptions,
-                _i2.StorageDownloadFileOperation<
-                    _i2.StorageDownloadFileRequest<
-                        _i2.StorageDownloadFileOptions>,
-                    _i2.StorageDownloadFileResult<_i2.StorageItem>>,
-                _i2.StorageDownloadFileOptions,
-                _i2.StorageCopyOperation<
-                    _i2.StorageCopyRequest<_i2.StorageItem,
-                        _i2.StorageCopyOptions>,
-                    _i2.StorageCopyResult<_i2.StorageItem>>,
-                _i2.StorageCopyOptions,
-                _i2.StorageMoveOperation<
-                    _i2.StorageMoveRequest<_i2.StorageItem,
-                        _i2.StorageMoveOptions>,
-                    _i2.StorageMoveResult<_i2.StorageItem>>,
-                _i2.StorageMoveOptions,
-                _i2.StorageRemoveOperation<
-                    _i2.StorageRemoveRequest<_i2.StorageRemoveOptions>,
-                    _i2.StorageRemoveResult<_i2.StorageItem>>,
-                _i2.StorageRemoveOptions,
-                _i2.StorageRemoveManyOperation<
-                    _i2.StorageRemoveManyRequest<_i2.StorageRemoveManyOptions>,
-                    _i2.StorageRemoveManyResult<_i2.StorageItem>>,
-                _i2.StorageRemoveManyOptions,
-                _i2.StorageItem,
-                _i2.StorageTransferProgress>>(
+                    _i1.StorageGetPropertiesResult<_i1.StorageItem>>,
+                _i1.StorageGetPropertiesOptions,
+                _i1.StorageGetUrlOperation<
+                    _i1.StorageGetUrlRequest<_i1.StorageGetUrlOptions>,
+                    _i1.StorageGetUrlResult>,
+                _i1.StorageGetUrlOptions,
+                _i1.StorageUploadDataOperation<
+                    _i1.StorageUploadDataRequest<_i3.StorageOperationOptions>,
+                    _i1.StorageUploadDataResult<_i1.StorageItem>>,
+                _i1.StorageUploadDataOptions,
+                _i1.StorageUploadFileOperation<
+                    _i1.StorageUploadFileRequest<_i3.StorageOperationOptions>,
+                    _i1.StorageUploadFileResult<_i1.StorageItem>>,
+                _i1.StorageUploadFileOptions,
+                _i1.StorageDownloadDataOperation<
+                    _i1.StorageDownloadDataRequest<
+                        _i1.StorageDownloadDataOptions>,
+                    _i1.StorageDownloadDataResult<_i1.StorageItem>>,
+                _i1.StorageDownloadDataOptions,
+                _i1.StorageDownloadFileOperation<
+                    _i1.StorageDownloadFileRequest<
+                        _i1.StorageDownloadFileOptions>,
+                    _i1.StorageDownloadFileResult<_i1.StorageItem>>,
+                _i1.StorageDownloadFileOptions,
+                _i1.StorageCopyOperation<
+                    _i1.StorageCopyRequest<_i1.StorageItem,
+                        _i1.StorageCopyOptions>,
+                    _i1.StorageCopyResult<_i1.StorageItem>>,
+                _i1.StorageCopyOptions,
+                _i1.StorageMoveOperation<
+                    _i1.StorageMoveRequest<_i1.StorageItem,
+                        _i1.StorageMoveOptions>,
+                    _i1.StorageMoveResult<_i1.StorageItem>>,
+                _i1.StorageMoveOptions,
+                _i1.StorageRemoveOperation<
+                    _i1.StorageRemoveRequest<_i1.StorageRemoveOptions>,
+                    _i1.StorageRemoveResult<_i1.StorageItem>>,
+                _i1.StorageRemoveOptions,
+                _i1.StorageRemoveManyOperation<
+                    _i1.StorageRemoveManyRequest<_i1.StorageRemoveManyOptions>,
+                    _i1.StorageRemoveManyResult<_i1.StorageItem>>,
+                _i1.StorageRemoveManyOptions,
+                _i1.StorageItem,
+                _i1.StorageTransferProgress>>(
           this,
           Invocation.getter(#Storage),
         ),
-      ) as _i2.StorageCategory<
-          _i2.StorageListOperation<
-              _i2.StorageListRequest<_i2.StorageListOptions>,
-              _i2.StorageListResult<_i2.StorageItem>>,
-          _i2.StorageListOptions,
-          _i2.StorageGetPropertiesOperation<
-              _i2.StorageGetPropertiesRequest<_i3.StorageOperationOptions>,
-              _i2.StorageGetPropertiesResult<_i2.StorageItem>>,
-          _i2.StorageGetPropertiesOptions,
-          _i2.StorageGetUrlOperation<
-              _i2.StorageGetUrlRequest<_i2.StorageGetUrlOptions>,
-              _i2.StorageGetUrlResult>,
-          _i2.StorageGetUrlOptions,
-          _i2.StorageUploadDataOperation<
-              _i2.StorageUploadDataRequest<_i3.StorageOperationOptions>,
-              _i2.StorageUploadDataResult<_i2.StorageItem>>,
-          _i2.StorageUploadDataOptions,
-          _i2.StorageUploadFileOperation<
-              _i2.StorageUploadFileRequest<_i3.StorageOperationOptions>,
-              _i2.StorageUploadFileResult<_i2.StorageItem>>,
-          _i2.StorageUploadFileOptions,
-          _i2.StorageDownloadDataOperation<
-              _i2.StorageDownloadDataRequest<_i2.StorageDownloadDataOptions>,
-              _i2.StorageDownloadDataResult<_i2.StorageItem>>,
-          _i2.StorageDownloadDataOptions,
-          _i2.StorageDownloadFileOperation<
-              _i2.StorageDownloadFileRequest<_i2.StorageDownloadFileOptions>,
-              _i2.StorageDownloadFileResult<_i2.StorageItem>>,
-          _i2.StorageDownloadFileOptions,
-          _i2.StorageCopyOperation<
-              _i2.StorageCopyRequest<_i2.StorageItem, _i2.StorageCopyOptions>,
-              _i2.StorageCopyResult<_i2.StorageItem>>,
-          _i2.StorageCopyOptions,
-          _i2.StorageMoveOperation<
-              _i2.StorageMoveRequest<_i2.StorageItem, _i2.StorageMoveOptions>,
-              _i2.StorageMoveResult<_i2.StorageItem>>,
-          _i2.StorageMoveOptions,
-          _i2.StorageRemoveOperation<
-              _i2.StorageRemoveRequest<_i2.StorageRemoveOptions>,
-              _i2.StorageRemoveResult<_i2.StorageItem>>,
-          _i2.StorageRemoveOptions,
-          _i2.StorageRemoveManyOperation<
-              _i2.StorageRemoveManyRequest<_i2.StorageRemoveManyOptions>,
-              _i2.StorageRemoveManyResult<_i2.StorageItem>>,
-          _i2.StorageRemoveManyOptions,
-          _i2.StorageItem,
-          _i2.StorageTransferProgress,
-          _i2.StoragePluginInterface<_i2.StorageListOperation<_i2.StorageListRequest<_i2.StorageListOptions>, _i2.StorageListResult<_i2.StorageItem>>, _i2.StorageListOptions, _i2.StorageGetPropertiesOperation<_i2.StorageGetPropertiesRequest<_i3.StorageOperationOptions>, _i2.StorageGetPropertiesResult<_i2.StorageItem>>, _i2.StorageGetPropertiesOptions, _i2.StorageGetUrlOperation<_i2.StorageGetUrlRequest<_i2.StorageGetUrlOptions>, _i2.StorageGetUrlResult>, _i2.StorageGetUrlOptions, _i2.StorageUploadDataOperation<_i2.StorageUploadDataRequest<_i3.StorageOperationOptions>, _i2.StorageUploadDataResult<_i2.StorageItem>>, _i2.StorageUploadDataOptions, _i2.StorageUploadFileOperation<_i2.StorageUploadFileRequest<_i3.StorageOperationOptions>, _i2.StorageUploadFileResult<_i2.StorageItem>>, _i2.StorageUploadFileOptions, _i2.StorageDownloadDataOperation<_i2.StorageDownloadDataRequest<_i2.StorageDownloadDataOptions>, _i2.StorageDownloadDataResult<_i2.StorageItem>>, _i2.StorageDownloadDataOptions, _i2.StorageDownloadFileOperation<_i2.StorageDownloadFileRequest<_i2.StorageDownloadFileOptions>, _i2.StorageDownloadFileResult<_i2.StorageItem>>, _i2.StorageDownloadFileOptions, _i2.StorageCopyOperation<_i2.StorageCopyRequest<_i2.StorageItem, _i2.StorageCopyOptions>, _i2.StorageCopyResult<_i2.StorageItem>>, _i2.StorageCopyOptions, _i2.StorageMoveOperation<_i2.StorageMoveRequest<_i2.StorageItem, _i2.StorageMoveOptions>, _i2.StorageMoveResult<_i2.StorageItem>>, _i2.StorageMoveOptions, _i2.StorageRemoveOperation<_i2.StorageRemoveRequest<_i2.StorageRemoveOptions>, _i2.StorageRemoveResult<_i2.StorageItem>>, _i2.StorageRemoveOptions, _i2.StorageRemoveManyOperation<_i2.StorageRemoveManyRequest<_i2.StorageRemoveManyOptions>, _i2.StorageRemoveManyResult<_i2.StorageItem>>, _i2.StorageRemoveManyOptions, _i2.StorageItem, _i2.StorageTransferProgress>>);
+      ) as _i1.StorageCategory<
+          _i1.StorageListOperation<
+              _i1.StorageListRequest<_i1.StorageListOptions>,
+              _i1.StorageListResult<_i1.StorageItem>>,
+          _i1.StorageListOptions,
+          _i1.StorageGetPropertiesOperation<
+              _i1.StorageGetPropertiesRequest<_i3.StorageOperationOptions>,
+              _i1.StorageGetPropertiesResult<_i1.StorageItem>>,
+          _i1.StorageGetPropertiesOptions,
+          _i1.StorageGetUrlOperation<
+              _i1.StorageGetUrlRequest<_i1.StorageGetUrlOptions>,
+              _i1.StorageGetUrlResult>,
+          _i1.StorageGetUrlOptions,
+          _i1.StorageUploadDataOperation<
+              _i1.StorageUploadDataRequest<_i3.StorageOperationOptions>,
+              _i1.StorageUploadDataResult<_i1.StorageItem>>,
+          _i1.StorageUploadDataOptions,
+          _i1.StorageUploadFileOperation<
+              _i1.StorageUploadFileRequest<_i3.StorageOperationOptions>,
+              _i1.StorageUploadFileResult<_i1.StorageItem>>,
+          _i1.StorageUploadFileOptions,
+          _i1.StorageDownloadDataOperation<
+              _i1.StorageDownloadDataRequest<_i1.StorageDownloadDataOptions>,
+              _i1.StorageDownloadDataResult<_i1.StorageItem>>,
+          _i1.StorageDownloadDataOptions,
+          _i1.StorageDownloadFileOperation<
+              _i1.StorageDownloadFileRequest<_i1.StorageDownloadFileOptions>,
+              _i1.StorageDownloadFileResult<_i1.StorageItem>>,
+          _i1.StorageDownloadFileOptions,
+          _i1.StorageCopyOperation<
+              _i1.StorageCopyRequest<_i1.StorageItem, _i1.StorageCopyOptions>,
+              _i1.StorageCopyResult<_i1.StorageItem>>,
+          _i1.StorageCopyOptions,
+          _i1.StorageMoveOperation<
+              _i1.StorageMoveRequest<_i1.StorageItem, _i1.StorageMoveOptions>,
+              _i1.StorageMoveResult<_i1.StorageItem>>,
+          _i1.StorageMoveOptions,
+          _i1.StorageRemoveOperation<
+              _i1.StorageRemoveRequest<_i1.StorageRemoveOptions>,
+              _i1.StorageRemoveResult<_i1.StorageItem>>,
+          _i1.StorageRemoveOptions,
+          _i1.StorageRemoveManyOperation<
+              _i1.StorageRemoveManyRequest<_i1.StorageRemoveManyOptions>,
+              _i1.StorageRemoveManyResult<_i1.StorageItem>>,
+          _i1.StorageRemoveManyOptions,
+          _i1.StorageItem,
+          _i1.StorageTransferProgress,
+          _i1.StoragePluginInterface<_i1.StorageListOperation<_i1.StorageListRequest<_i1.StorageListOptions>, _i1.StorageListResult<_i1.StorageItem>>, _i1.StorageListOptions, _i1.StorageGetPropertiesOperation<_i1.StorageGetPropertiesRequest<_i3.StorageOperationOptions>, _i1.StorageGetPropertiesResult<_i1.StorageItem>>, _i1.StorageGetPropertiesOptions, _i1.StorageGetUrlOperation<_i1.StorageGetUrlRequest<_i1.StorageGetUrlOptions>, _i1.StorageGetUrlResult>, _i1.StorageGetUrlOptions, _i1.StorageUploadDataOperation<_i1.StorageUploadDataRequest<_i3.StorageOperationOptions>, _i1.StorageUploadDataResult<_i1.StorageItem>>, _i1.StorageUploadDataOptions, _i1.StorageUploadFileOperation<_i1.StorageUploadFileRequest<_i3.StorageOperationOptions>, _i1.StorageUploadFileResult<_i1.StorageItem>>, _i1.StorageUploadFileOptions, _i1.StorageDownloadDataOperation<_i1.StorageDownloadDataRequest<_i1.StorageDownloadDataOptions>, _i1.StorageDownloadDataResult<_i1.StorageItem>>, _i1.StorageDownloadDataOptions, _i1.StorageDownloadFileOperation<_i1.StorageDownloadFileRequest<_i1.StorageDownloadFileOptions>, _i1.StorageDownloadFileResult<_i1.StorageItem>>, _i1.StorageDownloadFileOptions, _i1.StorageCopyOperation<_i1.StorageCopyRequest<_i1.StorageItem, _i1.StorageCopyOptions>, _i1.StorageCopyResult<_i1.StorageItem>>, _i1.StorageCopyOptions, _i1.StorageMoveOperation<_i1.StorageMoveRequest<_i1.StorageItem, _i1.StorageMoveOptions>, _i1.StorageMoveResult<_i1.StorageItem>>, _i1.StorageMoveOptions, _i1.StorageRemoveOperation<_i1.StorageRemoveRequest<_i1.StorageRemoveOptions>, _i1.StorageRemoveResult<_i1.StorageItem>>, _i1.StorageRemoveOptions, _i1.StorageRemoveManyOperation<_i1.StorageRemoveManyRequest<_i1.StorageRemoveManyOptions>, _i1.StorageRemoveManyResult<_i1.StorageItem>>, _i1.StorageRemoveManyOptions, _i1.StorageItem, _i1.StorageTransferProgress>>);
   @override
-  _i2.DataStoreCategory get DataStore => (super.noSuchMethod(
+  _i1.DataStoreCategory get DataStore => (super.noSuchMethod(
         Invocation.getter(#DataStore),
-        returnValue: _FakeDataStoreCategory_4(
+        returnValue: _FakeDataStoreCategory_5(
           this,
           Invocation.getter(#DataStore),
         ),
-      ) as _i2.DataStoreCategory);
+      ) as _i1.DataStoreCategory);
   @override
-  _i2.APICategory get API => (super.noSuchMethod(
+  _i1.APICategory get API => (super.noSuchMethod(
         Invocation.getter(#API),
-        returnValue: _FakeAPICategory_5(
+        returnValue: _FakeAPICategory_6(
           this,
           Invocation.getter(#API),
         ),
-      ) as _i2.APICategory);
+      ) as _i1.APICategory);
   @override
-  _i2.AmplifyHub get Hub => (super.noSuchMethod(
+  _i1.AmplifyHub get Hub => (super.noSuchMethod(
         Invocation.getter(#Hub),
-        returnValue: _FakeAmplifyHub_6(
+        returnValue: _FakeAmplifyHub_7(
           this,
           Invocation.getter(#Hub),
         ),
-      ) as _i2.AmplifyHub);
+      ) as _i1.AmplifyHub);
   @override
   bool get isConfigured => (super.noSuchMethod(
         Invocation.getter(#isConfigured),
         returnValue: false,
       ) as bool);
   @override
-  _i6.Future<_i2.AmplifyConfig> get asyncConfig => (super.noSuchMethod(
+  _i6.Future<_i1.AmplifyConfig> get asyncConfig => (super.noSuchMethod(
         Invocation.getter(#asyncConfig),
-        returnValue: _i6.Future<_i2.AmplifyConfig>.value(_FakeAmplifyConfig_7(
+        returnValue: _i6.Future<_i1.AmplifyConfig>.value(_FakeAmplifyConfig_8(
           this,
           Invocation.getter(#asyncConfig),
         )),
-      ) as _i6.Future<_i2.AmplifyConfig>);
+      ) as _i6.Future<_i1.AmplifyConfig>);
   @override
   String get version => (super.noSuchMethod(
         Invocation.getter(#version),
         returnValue: '',
       ) as String);
   @override
-  _i6.Future<void> addPlugin(_i2.AmplifyPluginInterface? plugin) =>
+  _i6.Future<void> addPlugin(_i1.AmplifyPluginInterface? plugin) =>
       (super.noSuchMethod(
         Invocation.method(
           #addPlugin,
@@ -782,7 +835,7 @@ class MockAmplifyClass extends _i1.Mock implements _i2.AmplifyClass {
         returnValueForMissingStub: _i6.Future<void>.value(),
       ) as _i6.Future<void>);
   @override
-  _i6.Future<void> addPlugins(List<_i2.AmplifyPluginInterface>? plugins) =>
+  _i6.Future<void> addPlugins(List<_i1.AmplifyPluginInterface>? plugins) =>
       (super.noSuchMethod(
         Invocation.method(
           #addPlugins,
@@ -823,15 +876,15 @@ class MockAmplifyClass extends _i1.Mock implements _i2.AmplifyClass {
 /// A class which mocks [BuildContext].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockBuildContext extends _i1.Mock implements _i4.BuildContext {
+class MockBuildContext extends _i2.Mock implements _i4.BuildContext {
   MockBuildContext() {
-    _i1.throwOnMissingStub(this);
+    _i2.throwOnMissingStub(this);
   }
 
   @override
   _i4.Widget get widget => (super.noSuchMethod(
         Invocation.getter(#widget),
-        returnValue: _FakeWidget_8(
+        returnValue: _FakeWidget_9(
           this,
           Invocation.getter(#widget),
         ),
@@ -852,7 +905,7 @@ class MockBuildContext extends _i1.Mock implements _i4.BuildContext {
           [ancestor],
           {#aspect: aspect},
         ),
-        returnValue: _FakeInheritedWidget_9(
+        returnValue: _FakeInheritedWidget_10(
           this,
           Invocation.method(
             #dependOnInheritedElement,
@@ -898,7 +951,7 @@ class MockBuildContext extends _i1.Mock implements _i4.BuildContext {
           [name],
           {#style: style},
         ),
-        returnValue: _FakeDiagnosticsNode_10(
+        returnValue: _FakeDiagnosticsNode_11(
           this,
           Invocation.method(
             #describeElement,
@@ -918,7 +971,7 @@ class MockBuildContext extends _i1.Mock implements _i4.BuildContext {
           [name],
           {#style: style},
         ),
-        returnValue: _FakeDiagnosticsNode_10(
+        returnValue: _FakeDiagnosticsNode_11(
           this,
           Invocation.method(
             #describeWidget,
@@ -945,7 +998,7 @@ class MockBuildContext extends _i1.Mock implements _i4.BuildContext {
           #describeOwnershipChain,
           [name],
         ),
-        returnValue: _FakeDiagnosticsNode_10(
+        returnValue: _FakeDiagnosticsNode_11(
           this,
           Invocation.method(
             #describeOwnershipChain,
@@ -953,4 +1006,27 @@ class MockBuildContext extends _i1.Mock implements _i4.BuildContext {
           ),
         ),
       ) as _i5.DiagnosticsNode);
+}
+
+/// A class which mocks [SignOutResult].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSignOutResult extends _i2.Mock implements _i1.SignOutResult {
+  MockSignOutResult() {
+    _i2.throwOnMissingStub(this);
+  }
+
+  @override
+  String get runtimeTypeName => (super.noSuchMethod(
+        Invocation.getter(#runtimeTypeName),
+        returnValue: '',
+      ) as String);
+  @override
+  Map<String, Object?> toJson() => (super.noSuchMethod(
+        Invocation.method(
+          #toJson,
+          [],
+        ),
+        returnValue: <String, Object?>{},
+      ) as Map<String, Object?>);
 }

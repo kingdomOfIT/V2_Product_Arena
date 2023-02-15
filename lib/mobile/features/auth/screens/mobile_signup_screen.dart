@@ -663,7 +663,8 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                       horizontal: deviceWidth * 0.05,
                                     ),
                                     suffixIcon: InkWell(
-                                      key: const Key('togglePasswordViewLogin'),
+                                      key:
+                                          const Key('togglePasswordViewSignUp'),
                                       onTap: togglePasswordView,
                                       child: Icon(
                                         isHiddenPassword

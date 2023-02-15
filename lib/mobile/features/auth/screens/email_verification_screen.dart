@@ -102,36 +102,42 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       TextFieldOTP(
+                        key: const Key('emailverificationField1'),
                         first: true,
                         last: false,
                         controller: firstController,
                         focusNode: firstFocusNode,
                       ),
                       TextFieldOTP(
+                        key: const Key('emailverificationField2'),
                         first: false,
                         last: false,
                         controller: secondController,
                         focusNode: secondFocusNode,
                       ),
                       TextFieldOTP(
+                        key: const Key('emailverificationField3'),
                         first: false,
                         last: false,
                         controller: thirdController,
                         focusNode: thirdFocusNode,
                       ),
                       TextFieldOTP(
+                        key: const Key('emailverificationField4'),
                         first: false,
                         last: false,
                         controller: fourthController,
                         focusNode: fourthFocusNode,
                       ),
                       TextFieldOTP(
+                        key: const Key('emailverificationField5'),
                         first: false,
                         last: false,
                         controller: fifthController,
                         focusNode: fifthFocusNode,
                       ),
                       TextFieldOTP(
+                        key: const Key('emailverificationField6'),
                         first: false,
                         last: true,
                         controller: sixthController,
@@ -158,6 +164,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                     height: deviceHeight * 0.05,
                   ),
                   CustomButton(
+                    key: const Key('emailVerifyButton'),
                     content: Text(
                       'Verify',
                       style: GoogleFonts.notoSans(
