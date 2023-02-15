@@ -32,7 +32,7 @@ void main() {
     expect(find.byKey(const Key('cityTextField')), findsOneWidget);
     expect(find.byKey(const Key('phoneTextField')), findsOneWidget);
     expect(find.byKey(const Key('emailTextField')), findsOneWidget);
-    expect(find.byKey(const Key('passwordTextField')), findsOneWidget);
+    expect(find.byKey(const Key('passwordSignUpTextField')), findsOneWidget);
   });
   testWidgets(
       'GIVEN signup screen, WHEN screen is loaded, THEN toggle visibility icon should be present and isHiddenPassword should be true',
@@ -40,7 +40,7 @@ void main() {
     await tester.pumpWidget(createMobileSignupScreen());
 
     final passwordTextField = find.descendant(
-      of: find.byKey(const Key('passwordTextField')),
+      of: find.byKey(const Key('passwordSignUpTextField')),
       matching: find.byType(EditableText),
     );
     final input = tester.widget<EditableText>(passwordTextField);
@@ -51,12 +51,13 @@ void main() {
       (tester) async {
     await tester.pumpWidget(createMobileSignupScreen());
     await tester.pumpAndSettle();
-    final togglePasswordViewIcon = find.byKey(const Key('togglePasswordView'));
+    final togglePasswordViewIcon =
+        find.byKey(const Key('togglePasswordViewLogin'));
     await tester.ensureVisible(togglePasswordViewIcon);
     await tester.tap(togglePasswordViewIcon);
     await tester.pump();
     final passwordTextField = find.descendant(
-      of: find.byKey(const Key('passwordTextField')),
+      of: find.byKey(const Key('passwordSignUpTextField')),
       matching: find.byType(EditableText),
     );
     await tester.pump();
@@ -68,7 +69,7 @@ void main() {
       (tester) async {
     await tester.pumpWidget(createMobileSignupScreen());
     await tester.pumpAndSettle();
-    final signupButtonFinder = find.byKey(const Key('signupButton'));
+    final signupButtonFinder = find.byKey(const Key('createYourAccount'));
     await tester.ensureVisible(signupButtonFinder);
     await tester.tap(signupButtonFinder);
     await tester.pump();
@@ -82,7 +83,7 @@ void main() {
     final nameFieldFinder = find.byKey(const Key('nameTextField'));
     await tester.enterText(nameFieldFinder, 'Ime');
     await tester.pumpAndSettle();
-    final signupButtonFinder = find.byKey(const Key('signupButton'));
+    final signupButtonFinder = find.byKey(const Key('createYourAccount'));
     await tester.ensureVisible(signupButtonFinder);
     await tester.tap(signupButtonFinder);
     await tester.pump();
@@ -97,7 +98,7 @@ void main() {
     final nameFieldFinder = find.byKey(const Key('surnameTextField'));
     await tester.enterText(nameFieldFinder, 'Abc');
     await tester.pumpAndSettle();
-    final signupButtonFinder = find.byKey(const Key('signupButton'));
+    final signupButtonFinder = find.byKey(const Key('createYourAccount'));
     await tester.ensureVisible(signupButtonFinder);
     await tester.tap(signupButtonFinder);
     await tester.pump();
@@ -110,7 +111,7 @@ void main() {
       (WidgetTester tester) async {
     await tester.pumpWidget(createMobileSignupScreen());
 
-    final dropdown = find.byKey(const ValueKey('dropdownButton'));
+    final dropdown = find.byKey(const ValueKey('dropDownButton'));
 
     await tester.tap(dropdown);
     await tester.pumpAndSettle();
@@ -128,7 +129,7 @@ void main() {
     final nameFieldFinder = find.byKey(const Key('phoneTextField'));
     await tester.enterText(nameFieldFinder, '1123');
     await tester.pumpAndSettle();
-    final signupButtonFinder = find.byKey(const Key('signupButton'));
+    final signupButtonFinder = find.byKey(const Key('createYourAccount'));
     await tester.ensureVisible(signupButtonFinder);
     await tester.tap(signupButtonFinder);
     await tester.pump();
@@ -143,7 +144,7 @@ void main() {
     final emailFieldFinder = find.byKey(const Key('emailTextField'));
     await tester.enterText(emailFieldFinder, 'testgmail.com');
     await tester.pumpAndSettle();
-    final signupButtonFinder = find.byKey(const Key('signupButton'));
+    final signupButtonFinder = find.byKey(const Key('createYourAccount'));
     await tester.ensureVisible(signupButtonFinder);
     await tester.tap(signupButtonFinder);
     await tester.pump();
@@ -162,14 +163,17 @@ void main() {
     expect(find.text('Invalid email format'), findsOneWidget);
   });
   testWidgets(
-      'GIVEN signup screen, WHEN user enter password in invalid format, THEN he should see alert message',
+      'GIVEN signup screen, WHEN user enter password without number and special character, THEN he should see alert message',
       (tester) async {
     await tester.pumpWidget(createMobileSignupScreen());
     await tester.pumpAndSettle();
-    final passwordFieldFinder = find.byKey(const Key('passwordTextField'));
+    final passwordFieldFinder =
+        find.byKey(const Key('passwordSignUpTextField'));
+    await tester.ensureVisible(passwordFieldFinder);
+    await tester.tap(passwordFieldFinder);
     await tester.enterText(passwordFieldFinder, 'Hello');
     await tester.pumpAndSettle();
-    final signupButtonFinder = find.byKey(const Key('signupButton'));
+    final signupButtonFinder = find.byKey(const Key('createYourAccount'));
     await tester.ensureVisible(signupButtonFinder);
     await tester.tap(signupButtonFinder);
     await tester.pump();
@@ -177,36 +181,84 @@ void main() {
         find.text(
             'Password must contain a minimum of 8 characters, uppercase, lower case, number and special character.'),
         findsOneWidget);
+  });
 
+  testWidgets(
+      'GIVEN signup screen, WHEN user enter password longer than 16 characters, THEN he should see alert message',
+      (tester) async {
+    await tester.pumpWidget(createMobileSignupScreen());
+    await tester.pumpAndSettle();
+    final passwordFieldFinder =
+        find.byKey(const Key('passwordSignUpTextField'));
+    await tester.ensureVisible(passwordFieldFinder);
+    await tester.tap(passwordFieldFinder);
     await tester.enterText(passwordFieldFinder, 'Helloworldinanawesomeway');
     await tester.pumpAndSettle();
+    final signupButtonFinder = find.byKey(const Key('createYourAccount'));
+    await tester.ensureVisible(signupButtonFinder);
     await tester.tap(signupButtonFinder);
     await tester.pump();
     expect(
         find.text(
             'Password must contain a minimum of 8 characters, uppercase, lower case, number and special character.'),
         findsOneWidget);
+  });
 
-    await tester.enterText(passwordFieldFinder, 'HelloWorld');
+  testWidgets(
+      'GIVEN signup screen, WHEN user enter password longer than 16 characters, THEN he should see alert message',
+      (tester) async {
+    await tester.pumpWidget(createMobileSignupScreen());
     await tester.pumpAndSettle();
+    final passwordFieldFinder =
+        find.byKey(const Key('passwordSignUpTextField'));
+    await tester.ensureVisible(passwordFieldFinder);
+    await tester.tap(passwordFieldFinder);
+    await tester.enterText(passwordFieldFinder, 'Helloworldinanawesomeway');
+    await tester.pumpAndSettle();
+    final signupButtonFinder = find.byKey(const Key('createYourAccount'));
+    await tester.ensureVisible(signupButtonFinder);
     await tester.tap(signupButtonFinder);
     await tester.pump();
     expect(
         find.text(
             'Password must contain a minimum of 8 characters, uppercase, lower case, number and special character.'),
         findsOneWidget);
+  });
 
+  testWidgets(
+      'GIVEN signup screen, WHEN user enter password without special character, THEN he should see alert message',
+      (tester) async {
+    await tester.pumpWidget(createMobileSignupScreen());
+    await tester.pumpAndSettle();
+    final passwordFieldFinder =
+        find.byKey(const Key('passwordSignUpTextField'));
+    await tester.ensureVisible(passwordFieldFinder);
+    await tester.tap(passwordFieldFinder);
     await tester.enterText(passwordFieldFinder, 'HelloWorld123');
     await tester.pumpAndSettle();
+    final signupButtonFinder = find.byKey(const Key('createYourAccount'));
+    await tester.ensureVisible(signupButtonFinder);
     await tester.tap(signupButtonFinder);
     await tester.pump();
     expect(
         find.text(
             'Password must contain a minimum of 8 characters, uppercase, lower case, number and special character.'),
         findsOneWidget);
+  });
 
-    await tester.enterText(passwordFieldFinder, 'HelloWorld1!');
+  testWidgets(
+      'GIVEN signup screen, WHEN user enter valid password, THEN he shouldn\'t see alert message',
+      (tester) async {
+    await tester.pumpWidget(createMobileSignupScreen());
     await tester.pumpAndSettle();
+    final passwordFieldFinder =
+        find.byKey(const Key('passwordSignUpTextField'));
+    await tester.ensureVisible(passwordFieldFinder);
+    await tester.tap(passwordFieldFinder);
+    await tester.enterText(passwordFieldFinder, 'HelloWorld123!');
+    await tester.pumpAndSettle();
+    final signupButtonFinder = find.byKey(const Key('createYourAccount'));
+    await tester.ensureVisible(signupButtonFinder);
     await tester.tap(signupButtonFinder);
     await tester.pump();
     expect(
