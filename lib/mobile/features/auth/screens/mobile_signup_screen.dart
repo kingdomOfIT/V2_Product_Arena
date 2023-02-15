@@ -67,8 +67,8 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
   RegExp email = RegExp(
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
 
-  RegExp password =
-      RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+  RegExp password = RegExp(
+      r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$%^&+=]).{8,16}$');
 
   bool isLoading = false;
   String dialCodeDigits = "+387";
@@ -172,23 +172,6 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                           SizedBox(
                             height: deviceHeight * 0.05,
                           ),
-                          // MobileSignupForm(
-                          //   nameController: nameController,
-                          //   surnameController: surnameController,
-                          //   birthDateController: birthDateController,
-                          //   cityController: cityController,
-                          //   emailController: emailController,
-                          //   passwordController: passwordController,
-                          //   phoneController: phoneController,
-                          //   surnameFocusNode: surnameFocusNode,
-                          //   birthDateFocusNode: birthDateFocusNode,
-                          //   cityFocusNode: cityFocusNode,
-                          //   phoneFocusNode: phoneFocusNode,
-                          //   emailFocusNode: emailFocusNode,
-                          //   passwordFocusNode: passwordFocusNode,
-                          //   formKey: formKey,
-                          //   selectedValue: selectedValue,
-                          // ),
                           Form(
                             key: formKey,
                             child: Column(
@@ -197,7 +180,9 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                   key: const Key('nameTextField'),
                                   controller: nameController,
                                   style: GoogleFonts.notoSans(
-                                    color: Colors.black,
+                                    color: mobileAuth.isNameError
+                                        ? Colors.red
+                                        : Colors.black,
                                     fontWeight: FontWeight.w700,
                                   ),
                                   keyboardType: TextInputType.name,
@@ -261,7 +246,9 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                   controller: surnameController,
                                   focusNode: surnameFocusNode,
                                   style: GoogleFonts.notoSans(
-                                    color: Colors.black,
+                                    color: mobileAuth.isSurnameError
+                                        ? Colors.red
+                                        : Colors.black,
                                     fontWeight: FontWeight.w700,
                                   ),
                                   keyboardType: TextInputType.name,
@@ -323,7 +310,9 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                   controller: birthDateController,
                                   focusNode: birthDateFocusNode,
                                   style: GoogleFonts.notoSans(
-                                    color: Colors.black,
+                                    color: mobileAuth.isBirthDateError
+                                        ? Colors.red
+                                        : Colors.black,
                                     fontWeight: FontWeight.w700,
                                   ),
                                   keyboardType: TextInputType.datetime,
@@ -393,7 +382,9 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                   controller: cityController,
                                   focusNode: cityFocusNode,
                                   style: GoogleFonts.notoSans(
-                                    color: Colors.black,
+                                    color: mobileAuth.isBirthDateError
+                                        ? Colors.red
+                                        : Colors.black,
                                     fontWeight: FontWeight.w700,
                                   ),
                                   keyboardType: TextInputType.name,
@@ -498,7 +489,9 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                   controller: phoneController,
                                   focusNode: phoneFocusNode,
                                   style: GoogleFonts.notoSans(
-                                    color: Colors.black,
+                                    color: mobileAuth.isPhoneNumError
+                                        ? Colors.red
+                                        : Colors.black,
                                     fontWeight: FontWeight.w700,
                                   ),
                                   keyboardType: TextInputType.phone,
@@ -560,6 +553,9 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                     if (value!.isEmpty) {
                                       mobileAuth.isPhoneNumError = true;
                                       return 'Please fill the required field.';
+                                    } else if (value.length < 9) {
+                                      mobileAuth.isPhoneNumError = true;
+                                      return 'Phone number must contain a minimum of 9 numbers.';
                                     } else {
                                       mobileAuth.isPhoneNumError = false;
                                     }
@@ -576,7 +572,9 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                   controller: emailController,
                                   focusNode: emailFocusNode,
                                   style: GoogleFonts.notoSans(
-                                    color: Colors.black,
+                                    color: mobileAuth.isEmailError
+                                        ? Colors.red
+                                        : Colors.black,
                                     fontWeight: FontWeight.w700,
                                   ),
                                   keyboardType: TextInputType.emailAddress,
@@ -633,82 +631,13 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                 SizedBox(
                                   height: deviceHeight * 0.032,
                                 ),
-                                // TextFormField(
-                                //   key: const Key('passwordTextField'),
-                                //   controller: passwordController,
-                                //   focusNode: passwordFocusNode,
-                                //   obscureText: isHiddenPassword,
-                                //   style: GoogleFonts.notoSans(
-                                //     color: Colors.black,
-                                //     fontWeight: FontWeight.w700,
-                                //   ),
-                                //   keyboardType: TextInputType.name,
-                                //   decoration: InputDecoration(
-                                //     suffixIcon: InkWell(
-                                //       key: const Key('tooglePasswordView'),
-                                //       onTap: togglePasswordView,
-                                //       child: Icon(
-                                //         isHiddenPassword
-                                //             ? Icons.visibility_off
-                                //             : Icons.visibility,
-                                //         size: deviceHeight * 0.03,
-                                //         color: mobileAuth.isPasswordError
-                                //             ? Colors.red
-                                //             : null,
-                                //       ),
-                                //     ),
-                                //     isDense: true,
-                                //     labelStyle: const TextStyle(fontSize: 20),
-                                //     border: OutlineInputBorder(
-                                //       borderRadius: BorderRadius.circular(10),
-                                //     ),
-                                //     focusedBorder: OutlineInputBorder(
-                                //         borderRadius: BorderRadius.circular(10),
-                                //         borderSide: const BorderSide(
-                                //           color:
-                                //               Color.fromRGBO(34, 233, 116, 1),
-                                //         )),
-                                //     enabledBorder: OutlineInputBorder(
-                                //         borderRadius: BorderRadius.circular(10),
-                                //         borderSide: const BorderSide(
-                                //           color: Colors.black,
-                                //         )),
-                                //     contentPadding: EdgeInsets.symmetric(
-                                //       vertical: deviceHeight * 0.02,
-                                //       horizontal: deviceWidth * 0.05,
-                                //     ),
-                                //     label: Text(
-                                //       'Password',
-                                //       style: GoogleFonts.notoSans(
-                                //         fontWeight: FontWeight.w700,
-                                //       ),
-                                //     ),
-                                //     errorMaxLines: 2,
-                                //   ),
-                                //   validator: (value) {
-                                //     if (value!.isEmpty) {
-                                //       mobileAuth.isPasswordError = true;
-                                //       return 'Please fill the required field.';
-                                //     } else if (value.length < 8 &&
-                                //         value.length > 16) {
-                                //       mobileAuth.isPasswordError = true;
-                                //       return 'Password must contain a minimum of 8 characters, uppercase, lower case, number and special character.';
-                                //     } else if (!password.hasMatch(value)) {
-                                //       mobileAuth.isPasswordError = true;
-                                //       return 'Password must contain a minimum of 8 characters, uppercase, lower case, number and special character.';
-                                //     } else {
-                                //       mobileAuth.isPasswordError = false;
-                                //     }
-                                //   },
-                                //   onEditingComplete: () =>
-                                //       FocusScope.of(context).unfocus(),
-                                // ),
                                 TextFormField(
                                   key: const Key('passwordSignUpTextField'),
                                   controller: passwordController,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: deviceHeight * 0.0187,
+                                  style: GoogleFonts.notoSans(
+                                    color: mobileAuth.isPasswordError
+                                        ? Colors.red
+                                        : Colors.black,
                                     fontWeight: FontWeight.w700,
                                   ),
                                   obscureText: isHiddenPassword,
@@ -748,8 +677,7 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                     ),
                                     label: Text(
                                       'Password',
-                                      style: TextStyle(
-                                        fontSize: deviceHeight * 0.0175,
+                                      style: GoogleFonts.notoSans(
                                         fontWeight: FontWeight.w700,
                                       ),
                                     ),
@@ -760,10 +688,10 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                   validator: (value) {
                                     if (value == null || value == '') {
                                       mobileAuth.isLoginPasswordError = true;
-                                      return 'Please enter password';
-                                    } else if (value.length < 8) {
+                                      return 'Please fill the required field.';
+                                    } else if (!password.hasMatch(value)) {
                                       mobileAuth.isLoginPasswordError = true;
-                                      return 'Password is too short';
+                                      return 'Password must contain a minimum of 8 characters, uppercase, lower case, number and special character.';
                                     } else {
                                       mobileAuth.isLoginPasswordError = false;
                                     }
