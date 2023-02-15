@@ -205,6 +205,9 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                               if (value!.isEmpty) {
                                                 webAuth.isNameError = true;
                                                 return 'Please fill the required field.';
+                                              } else if (value.length < 4) {
+                                                webAuth.isNameError = true;
+                                                return 'Name must contain a minimum of 4 characters.';
                                               } else {
                                                 webAuth.isNameError = false;
                                                 return null;
@@ -260,6 +263,9 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                               if (value!.isEmpty) {
                                                 webAuth.isSurnameError = true;
                                                 return 'Please fill the required field.';
+                                              } else if (value.length < 4) {
+                                                webAuth.isSurnameError = true;
+                                                return 'Surname must contain a minimum of 4 characters.';
                                               } else {
                                                 webAuth.isSurnameError = false;
                                                 return null;
@@ -641,9 +647,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.black,
                                   ),
-                                  onPressed: () {
-                                    if (webAuth.errorText.isNotEmpty) {}
-                                  },
+                                  onPressed: onSubmitSignUp,
                                   child: Text(
                                     'Create your Account',
                                     style: GoogleFonts.notoSans(

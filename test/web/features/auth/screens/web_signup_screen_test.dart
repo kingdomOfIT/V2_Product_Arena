@@ -22,22 +22,26 @@ Widget createWebSignupScreen() => ChangeNotifierProvider<WebAuth>(
 
 void main() {
   testWidgets(
-      'GIVEN signup screen, WHEN widget is built, THEN all input fields should be visible',
+      'GIVEN signup screen, WHEN widget is built, THEN all input fields and buttons should be visible',
       (tester) async {
     await tester.pumpWidget(createWebSignupScreen());
+    await tester.pumpAndSettle();
 
     expect(find.byKey(const Key('nameSignup')), findsOneWidget);
     expect(find.byKey(const Key('surnameSignup')), findsOneWidget);
     expect(find.byKey(const Key('birthdateSignup')), findsOneWidget);
     expect(find.byKey(const Key('citySignup')), findsOneWidget);
+    expect(find.byKey(const Key('dropdownButtonSignup')), findsOneWidget);
     expect(find.byKey(const Key('phoneSignup')), findsOneWidget);
     expect(find.byKey(const Key('emailSignup')), findsOneWidget);
     expect(find.byKey(const Key('passwordSignup')), findsOneWidget);
+    expect(find.byKey(const Key('togglePasswordView')), findsOneWidget);
   });
   testWidgets(
       'GIVEN signup screen, WHEN screen is loaded, THEN toggle visibility icon should be present and isHiddenPassword should be true',
       (tester) async {
     await tester.pumpWidget(createWebSignupScreen());
+    await tester.pumpAndSettle();
 
     final passwordTextField = find.descendant(
       of: find.byKey(const Key('passwordSignup')),
@@ -72,7 +76,7 @@ void main() {
     final signupButtonFinder = find.byKey(const Key('signupButton'));
     await tester.ensureVisible(signupButtonFinder);
     await tester.tap(signupButtonFinder);
-    await tester.pump();
+    await tester.pumpAndSettle();
     expect(find.text('Please fill the required field.'), findsNWidgets(7));
   });
   testWidgets(
@@ -109,6 +113,7 @@ void main() {
       'GIVEN signup screen, WHEN user tap on dropdown list, THEN he should see list items',
       (WidgetTester tester) async {
     await tester.pumpWidget(createWebSignupScreen());
+    await tester.pumpAndSettle();
 
     final dropdown = find.byKey(const ValueKey('dropdownButtonSignup'));
 
