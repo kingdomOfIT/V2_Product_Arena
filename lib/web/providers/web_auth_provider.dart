@@ -7,6 +7,7 @@ import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:v2_product_arena/amplifyconfiguration.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_verification_screen.dart';
 import '../features/auth/widgets/loading_spinner.dart';
+import '../features/onboarding/screens/web_onboarding_screen.dart';
 
 class WebAuth with ChangeNotifier {
   String errorTextOTP = '';
@@ -78,7 +79,6 @@ class WebAuth with ChangeNotifier {
       //     });
       // // //////////////
       Navigator.of(context).pushNamed(SignupConfirmation.routeName);
-      notifyListeners();
     } on AuthException catch (e) {
       safePrint(e.message);
       errorText = e.message;
@@ -97,7 +97,7 @@ class WebAuth with ChangeNotifier {
       final result = await Amplify.Auth.confirmSignUp(
           username: email, confirmationCode: confirmationCode);
 
-      Navigator.of(context).pushReplacementNamed('/web-onboarding');
+      Navigator.of(context).pushReplacementNamed(WebOnboardingView.routeName);
     } on AuthException catch (e) {
       safePrint(e.message);
       errorTextOTP = e.message;
