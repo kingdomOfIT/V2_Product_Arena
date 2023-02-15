@@ -3,13 +3,15 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_login_screen.dart';
+import 'package:v2_product_arena/web/features/onboarding/screens/web_onboarding_screen.dart';
 
+import '../../../../mobile/features/auth/screens/email_verified_screen.dart';
 import '../../../../mobile/features/onboarding/screens/mobile_onboarding_screen.dart';
 import '../../../reusable_web_widgets/web_appbar.dart';
 import '../../../reusable_web_widgets/web_footer.dart';
 
 class WebEmailVerified extends StatefulWidget {
-  static const routeName = '/email-verified';
+  static const routeName = '/web-email-verified';
   const WebEmailVerified({super.key});
 
   @override
@@ -30,18 +32,14 @@ class _WebEmailVerifiedState extends State<WebEmailVerified> {
 
   @override
   Widget build(BuildContext context) {
-    return _isLoading ? Verifed() : const MobileOnboardingScreen();
+    return _isLoading ? const Verifed() : const WebOnboardingView();
   }
 }
 
-class Verifed extends StatefulWidget {
+class Verifed extends StatelessWidget {
   static const routeName = '/verifed';
+  const Verifed({super.key});
 
-  @override
-  State<Verifed> createState() => _VerifedState();
-}
-
-class _VerifedState extends State<Verifed> {
   @override
   Widget build(BuildContext context) {
     double maxwidth = MediaQuery.of(context).size.width;
