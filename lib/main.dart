@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
           create: (context) => AnswerProvider(),
         ),
         ChangeNotifierProvider<Role>(
-          create: (context) => Role('', ''),
+          create: (context) => Role({}, ''),
         ),
         ChangeNotifierProvider<ErrorMessage>(
           create: (context) => ErrorMessage(),

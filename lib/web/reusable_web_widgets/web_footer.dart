@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:v2_product_arena/constants/global_variables.dart';
 
 class WebFooter extends StatelessWidget {
   const WebFooter({super.key});

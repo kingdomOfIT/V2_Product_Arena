@@ -22,11 +22,78 @@ var roleText = [
 ];
 
 List<Role> listRole = [
-  Role('QA Engineering', 'assets/images/rolevectorblack1.png'),
-  Role('Project Management', 'assets/images/rolevectorblack2.png'),
-  Role('Backend ', 'assets/images/rolevectorblack3.png'),
-  Role('UI/UX Design', 'assets/images/rolevectorblack4.png'),
-  Role('Full Stack Developer', 'assets/images/rolevectorblack5.png')
+  Role(
+    {
+      'forFrontend': 'QA Engineering',
+      'forBackend': 'qa',
+    },
+    'assets/images/rolevectorblack1.png',
+  ),
+  Role(
+    {
+      'forFrontend': 'Project Management',
+      'forBackend': 'productManager',
+    },
+    'assets/images/rolevectorblack2.png',
+  ),
+  Role(
+    {
+      'forFrontend': 'Backend',
+      'forBackend': 'backend',
+    },
+    'assets/images/rolevectorblack3.png',
+  ),
+  Role(
+    {
+      'forFrontend': 'UI/UX Design',
+      'forBackend': 'uiux',
+    },
+    'assets/images/rolevectorblack4.png',
+  ),
+  Role(
+    {
+      'forFrontend': 'Full Stack Developer',
+      'forBackend': 'fullstack',
+    },
+    'assets/images/rolevectorblack5.png',
+  )
+];
+List<Role> listRoleSel = [
+  Role(
+    {
+      'forFrontend': 'QA Engineering',
+      'forBackend': 'qa',
+    },
+    'assets/images/rolevectorwhite1.png',
+  ),
+  Role(
+    {
+      'forFrontend': 'Project Management',
+      'forBackend': 'productManager',
+    },
+    'assets/images/rolevectorwhite2.png',
+  ),
+  Role(
+    {
+      'forFrontend': 'Backend',
+      'forBackend': 'backend',
+    },
+    'assets/images/rolevectorwhite3.png',
+  ),
+  Role(
+    {
+      'forFrontend': 'UI/UX Design',
+      'forBackend': 'uiux',
+    },
+    'assets/images/rolevectorwhite4.png',
+  ),
+  Role(
+    {
+      'forFrontend': 'Full Stack Developer',
+      'forBackend': 'fullstack',
+    },
+    'assets/images/rolevectorwhite5.png',
+  )
 ];
 
 Widget CustomText(

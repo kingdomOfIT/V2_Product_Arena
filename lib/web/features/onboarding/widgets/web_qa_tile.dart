@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:v2_product_arena/web/providers/web_ob_answers.dart';
+import 'package:provider/provider.dart';
 import '../web_constansts_ob.dart';
 
 class QATile extends StatefulWidget {
   final double height;
   final String question;
   final TextEditingController controller;
+  final Key formKey;
   const QATile({
     super.key,
     required this.height,
     required this.question,
     required this.controller,
+    required this.formKey,
   });
 
   @override
@@ -56,25 +59,38 @@ class _QATileState extends State<QATile> {
               ),
             ),
             const SizedBox(height: 10),
-            TextFormField(
-              controller: widget.controller,
-              style: const TextStyle(
-                fontSize: 14,
-              ),
-              decoration: const InputDecoration(
-                isDense: true,
-                hintText: 'Vaš odgovor',
-                hintStyle: TextStyle(
-                    color: Color(0xFF4A4458),
-                    fontWeight: FontWeight.w400,
-                    fontSize: 14),
-                contentPadding: EdgeInsets.only(top: 10, bottom: 10),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    width: 1,
-                    color: Color(0xFF4A4458),
+            Form(
+              key: widget.formKey,
+              child: TextFormField(
+                controller: widget.controller,
+                onFieldSubmitted: (value) {
+                  context.read<AnswerProvider>().addItem(value);
+                },
+                style: const TextStyle(
+                  fontSize: 14,
+                ),
+                decoration: const InputDecoration(
+                  isDense: true,
+                  hintText: 'Vaš odgovor',
+                  hintStyle: TextStyle(
+                      color: Color(0xFF4A4458),
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14),
+                  contentPadding: EdgeInsets.only(top: 10, bottom: 10),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      width: 1,
+                      color: Color(0xFF4A4458),
+                    ),
                   ),
                 ),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Prazno';
+                  } else {
+                    return null;
+                  }
+                },
               ),
             ),
             Padding(
@@ -86,6 +102,9 @@ class _QATileState extends State<QATile> {
                   height: 19,
                   child: TextButton(
                     onPressed: () {
+                      context
+                          .read<AnswerProvider>()
+                          .removeItem(widget.controller.text);
                       widget.controller.clear();
                     },
                     child: CustomText('Clear section', 14, FontWeight.w700,
