@@ -78,7 +78,7 @@ class _RoleTileState extends State<RoleTile> {
                   ),
                   Center(
                     child: Text(
-                      widget.role.name,
+                      widget.role.name['forFrontend']!,
                       style: GoogleFonts.notoSans(
                           fontSize:
                               (20 / 690) * MediaQuery.of(context).size.width,

@@ -60,14 +60,14 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
   }
 
   Future<void> submitOnboarding(List<String> s1, List<String> s2) async {
-    await signInUser();
+    //await signInUser();
 
     try {
       final restOperation = Amplify.API.post(
         "/api/onboarding/submit",
         body: HttpPayload.json({
           "date": "Feb2023",
-          "roles": ["backend"],
+          "roles": s1,
           "answers": {
             // answers are in the same order as questions, null if not answered
             "0": s2[0],
@@ -84,6 +84,7 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
       final response = await restOperation.response;
       Map<String, dynamic> responseMap = jsonDecode(response.decodeBody());
       print('POST call succeeded');
+      Navigator.of(context).pushReplacementNamed(MobileHomeScreen.routeName);
       print(responseMap['lectures']);
     } on ApiException catch (e) {
       print('POST call failed: $e');
@@ -180,11 +181,11 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
                     context.read<ErrorMessage>().change();
                   } else {
                     submitOnboarding(finalRoles, finalAnswers);
-                    Navigator.of(context).pushNamed(MobileHomeScreen.routeName);
                   }
 
                   print(
                       Provider.of<AnswerProvider>(context, listen: false).answ);
+                  print(Provider.of<Role>(context, listen: false).selctRole);
                 },
                 color: Colors.black,
               )

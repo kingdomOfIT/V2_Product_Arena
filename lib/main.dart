@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
           create: (context) => AnswerProvider(),
         ),
         ChangeNotifierProvider<Role>(
-          create: (context) => Role('', ''),
+          create: (context) => Role({}, ''),
         ),
       ],
       child: MaterialApp(
@@ -70,7 +70,7 @@ class MyApp extends StatelessWidget {
         ),
         home: defaultTargetPlatform == TargetPlatform.android ||
                 defaultTargetPlatform == TargetPlatform.iOS
-            ? const MobileOnboardingScreen()
+            ? const MobileSignupScreen()
             : const WebLoginScreen(),
         routes: {
           MobileLoginScreen.routeName: (context) => const MobileLoginScreen(),

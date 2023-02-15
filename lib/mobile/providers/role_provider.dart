@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Role with ChangeNotifier {
-  String name;
+  Map<String, String> name;
   String image;
   Color backgroundColor = const Color(0xFFE9E9E9);
   Color textColor = const Color(0xFF322F37);
@@ -34,12 +34,12 @@ class Role with ChangeNotifier {
   }
 
   void addItem(Role role) {
-    selectedRoles.add(role.name.toLowerCase());
+    selectedRoles.add(role.name['forBackend']!);
     notifyListeners();
   }
 
   void removeItem(Role role) {
-    selectedRoles.remove(role.name);
+    selectedRoles.remove(role.name['forBackend']);
     notifyListeners();
   }
 
