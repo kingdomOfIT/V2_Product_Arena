@@ -32,7 +32,7 @@ class LoginForm extends StatelessWidget {
       child: Column(
         children: <Widget>[
           TextFormField(
-            key: const Key('emailTextField'),
+            key: const Key('emailLoginTextField'),
             controller: emailController,
             style: TextStyle(
               color: Colors.black,
@@ -90,7 +90,7 @@ class LoginForm extends StatelessWidget {
             height: deviceHeight * 0.028,
           ),
           TextFormField(
-            key: const Key('passwordTextField'),
+            key: const Key('passwordLoginTextField'),
             controller: passwordController,
             style: TextStyle(
               color: Colors.black,

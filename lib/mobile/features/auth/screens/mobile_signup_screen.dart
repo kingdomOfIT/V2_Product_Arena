@@ -76,7 +76,7 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
       r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$%^&+=]).{8,16}$');
 
   bool isLoading = false;
-  String dialCodeDigits = "+387";
+  String dialCodeDigits = '+387';
 
   DateTime date = DateTime(2022, 02, 02);
 
@@ -517,11 +517,9 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                         borderSide: const BorderSide(
                                           color: Colors.black,
                                         )),
-                                    contentPadding: EdgeInsets.only(
-                                      top: deviceHeight * 0.007,
-                                      bottom: deviceHeight * 0.007,
-                                      right: deviceWidth * 0.05,
-                                      left: deviceWidth * 0.05,
+                                    contentPadding: EdgeInsets.symmetric(
+                                      vertical: deviceHeight * 0.02,
+                                      horizontal: deviceWidth * 0.05,
                                     ),
                                     label: Text(
                                       'Phone',
@@ -529,26 +527,26 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                         fontWeight: FontWeight.w700,
                                       ),
                                     ),
-                                    prefix: Container(
-                                      child: SizedBox(
-                                        width: 120,
-                                        height: 50,
-                                        child: CountryCodePicker(
-                                          key: const Key('countryCodePicker'),
-                                          onChanged: (country) {
-                                            setState(() {
-                                              dialCodeDigits =
-                                                  country.dialCode!;
-                                            });
-                                          },
-                                          initialSelection: "BA",
-                                          showCountryOnly: false,
-                                          showOnlyCountryWhenClosed: false,
-                                          // flagWidth: 20,
-                                          favorite: const ["+387", "BA"],
-                                        ),
-                                      ),
-                                    ),
+                                    // prefix: Container(
+                                    //   child: SizedBox(
+                                    //     width: 120,
+                                    //     height: 50,
+                                    //     child: CountryCodePicker(
+                                    //       key: const Key('countryCodePicker'),
+                                    //       onChanged: (country) {
+                                    //         setState(() {
+                                    //           dialCodeDigits =
+                                    //               country.dialCode!;
+                                    //         });
+                                    //       },
+                                    //       initialSelection: "BA",
+                                    //       showCountryOnly: false,
+                                    //       showOnlyCountryWhenClosed: false,
+                                    //       // flagWidth: 20,
+                                    //       favorite: const ["+387", "BA"],
+                                    //     ),
+                                    //   ),
+                                    // ),
                                     suffixIcon: Icon(
                                       mobileAuth.isPhoneNumError
                                           ? Icons.error
@@ -561,7 +559,8 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                     if (value!.isEmpty) {
                                       mobileAuth.isPhoneNumError = true;
                                       return 'Please fill the required field.';
-                                    } else if (value.length < 9) {
+                                    } else if ((dialCodeDigits + value).length <
+                                        9) {
                                       mobileAuth.isPhoneNumError = true;
                                       return 'Phone number must contain a minimum of 9 numbers.';
                                     } else {
@@ -671,7 +670,8 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                       horizontal: deviceWidth * 0.05,
                                     ),
                                     suffixIcon: InkWell(
-                                      key: const Key('togglePasswordViewLogin'),
+                                      key:
+                                          const Key('togglePasswordViewSignup'),
                                       onTap: togglePasswordView,
                                       child: Icon(
                                         isHiddenPassword
