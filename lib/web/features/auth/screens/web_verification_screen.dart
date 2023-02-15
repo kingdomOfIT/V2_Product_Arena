@@ -33,9 +33,9 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
     double maxwidth = MediaQuery.of(context).size.width;
     double maxheight = MediaQuery.of(context).size.height;
 
-    if (MediaQuery.of(context).size.width < 980) {
-      return const Icon(Icons.favorite);
-    }
+    // if (MediaQuery.of(context).size.width < 980) {
+    //   return const Icon(Icons.favorite);
+    // }
 
     return Scaffold(
       appBar: PreferredSize(
@@ -78,7 +78,6 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                   const EdgeInsets.only(bottom: 23, top: 183),
                               child: SizedBox(
                                 width: 100,
-                                height: 100,
                                 child: Image.asset(
                                     'assets/images/PAlogowhite.png'),
                               ),
@@ -139,7 +138,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                                         ? Colors.red
                                                         : Colors.black),
                                                 borderRadius:
-                                                    BorderRadius.circular(12),
+                                                    BorderRadius.circular(8),
                                               ),
                                               focusedBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
@@ -148,7 +147,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                                         ? Colors.red
                                                         : Colors.black),
                                                 borderRadius:
-                                                    BorderRadius.circular(12),
+                                                    BorderRadius.circular(8),
                                               ),
                                             ),
                                             textAlign: TextAlign.center,
@@ -193,7 +192,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                                         ? Colors.red
                                                         : Colors.black),
                                                 borderRadius:
-                                                    BorderRadius.circular(12),
+                                                    BorderRadius.circular(8),
                                               ),
                                               focusedBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
@@ -202,7 +201,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                                         ? Colors.red
                                                         : Colors.black),
                                                 borderRadius:
-                                                    BorderRadius.circular(12),
+                                                    BorderRadius.circular(8),
                                               ),
                                             ),
                                             textAlign: TextAlign.center,
@@ -247,7 +246,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                                         ? Colors.red
                                                         : Colors.black),
                                                 borderRadius:
-                                                    BorderRadius.circular(12),
+                                                    BorderRadius.circular(8),
                                               ),
                                               focusedBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
@@ -256,7 +255,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                                         ? Colors.red
                                                         : Colors.black),
                                                 borderRadius:
-                                                    BorderRadius.circular(12),
+                                                    BorderRadius.circular(8),
                                               ),
                                             ),
                                             textAlign: TextAlign.center,
@@ -303,7 +302,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                                         ? Colors.red
                                                         : Colors.black),
                                                 borderRadius:
-                                                    BorderRadius.circular(12),
+                                                    BorderRadius.circular(8),
                                               ),
                                               focusedBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
@@ -312,7 +311,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                                         ? Colors.red
                                                         : Colors.black),
                                                 borderRadius:
-                                                    BorderRadius.circular(12),
+                                                    BorderRadius.circular(8),
                                               ),
                                             ),
                                             textAlign: TextAlign.center,
@@ -357,7 +356,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                                         ? Colors.red
                                                         : Colors.black),
                                                 borderRadius:
-                                                    BorderRadius.circular(12),
+                                                    BorderRadius.circular(8),
                                               ),
                                               focusedBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
@@ -366,7 +365,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                                         ? Colors.red
                                                         : Colors.black),
                                                 borderRadius:
-                                                    BorderRadius.circular(12),
+                                                    BorderRadius.circular(8),
                                               ),
                                             ),
                                             textAlign: TextAlign.center,
@@ -414,7 +413,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                                         ? Colors.red
                                                         : Colors.black),
                                                 borderRadius:
-                                                    BorderRadius.circular(12),
+                                                    BorderRadius.circular(8),
                                               ),
                                               focusedBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
@@ -423,7 +422,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                                         ? Colors.red
                                                         : Colors.black),
                                                 borderRadius:
-                                                    BorderRadius.circular(12),
+                                                    BorderRadius.circular(8),
                                               ),
                                             ),
                                             inputFormatters: [
@@ -451,7 +450,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                     ),
                                   )
                                 : const SizedBox(
-                                    height: 20,
+                                    height: 25,
                                   ),
                             //Verify Button
                             SizedBox(

@@ -19,6 +19,9 @@ import 'package:v2_product_arena/web/features/auth/screens/web_signup_screen.dar
 import 'package:v2_product_arena/web/features/home/screens/web_home_screen.dart';
 import 'package:v2_product_arena/web/features/onboarding/screens/web_onboarding_screen.dart';
 import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
+import 'package:v2_product_arena/web/providers/web_ob_answers.dart';
+import 'package:v2_product_arena/web/providers/web_ob_error.dart';
+import 'package:v2_product_arena/web/providers/web_ob_role.dart';
 
 import 'web/features/auth/screens/web_verification_screen.dart';
 
@@ -64,6 +67,15 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider<MobileOnboarding>(
           create: (context) => MobileOnboarding(),
         ),
+        ChangeNotifierProvider<AnswerProvider>(
+          create: (context) => AnswerProvider(),
+        ),
+        ChangeNotifierProvider<Role>(
+          create: (context) => Role('', ''),
+        ),
+        ChangeNotifierProvider<ErrorMessage>(
+          create: (context) => ErrorMessage(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -86,7 +98,7 @@ class _MyAppState extends State<MyApp> {
         home: defaultTargetPlatform == TargetPlatform.android ||
                 defaultTargetPlatform == TargetPlatform.iOS
             ? const MobileLoginScreen()
-            : const WebLoginScreen(),
+            : const WebOnboardingView(),
         routes: {
           MobileLoginScreen.routeName: (context) => const MobileLoginScreen(),
           MobileSignupScreen.routeName: (context) => const MobileSignupScreen(),
@@ -95,8 +107,7 @@ class _MyAppState extends State<MyApp> {
           MobileHomeScreen.routeName: (context) => const MobileHomeScreen(),
           WebLoginScreen.routeName: (context) => const WebLoginScreen(),
           WebSignUpScreen.routeName: (context) => WebSignUpScreen(),
-          WebOnboardingScreen.routeName: (context) =>
-              const WebOnboardingScreen(),
+          WebOnboardingView.routeName: (context) => const WebOnboardingView(),
           WebHomeScreen.routeName: (context) => const WebHomeScreen(),
           SignupConfirmation.routeName: (context) => SignupConfirmation(),
           Verifed.routeName: (context) => Verifed(),

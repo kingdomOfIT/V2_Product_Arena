@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors, avoid_print, prefer_typing_uninitialized_variables, depend_on_referenced_packages, unused_local_variable, use_build_context_synchronously
+// ignore_for_file: use_key_in_widget_constructors, avoid_print, prefer_typing_uninitialized_variables, depend_on_referenced_packages, unused_local_variable, use_build_context_synchronously, body_might_complete_normally_nullable
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -82,9 +82,9 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
     final maxheight = MediaQuery.of(context).size.height;
     final webAuth = Provider.of<WebAuth>(context, listen: false);
 
-    if (MediaQuery.of(context).size.width < 980) {
-      return const Icon(Icons.favorite);
-    }
+    // if (MediaQuery.of(context).size.width < 980) {
+    //   return const Icon(Icons.favorite);
+    // }
 
     return Scaffold(
       appBar: PreferredSize(
@@ -149,7 +149,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                             /////////FORM
                             ////////
                             SizedBox(
-                              width: 457,
+                              width: maxwidth * (452 / 1440),
                               child: Form(
                                 key: _formKey,
                                 child: Column(
@@ -161,6 +161,9 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                           child: TextFormField(
                                             key: const Key('nameSignup'),
                                             style: GoogleFonts.notoSans(
+                                              color: webAuth.isPhoneNumError
+                                                  ? const Color(0xFFB3261E)
+                                                  : Colors.black,
                                               fontSize: 14,
                                               fontWeight: FontWeight.w700,
                                             ),
@@ -215,6 +218,9 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                           child: TextFormField(
                                             key: const Key('surnameSignup'),
                                             style: GoogleFonts.notoSans(
+                                              color: webAuth.isPhoneNumError
+                                                  ? const Color(0xFFB3261E)
+                                                  : Colors.black,
                                               fontSize: 14,
                                               fontWeight: FontWeight.w700,
                                             ),
@@ -268,6 +274,9 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                     TextFormField(
                                       key: const Key('birthdateSignup'),
                                       style: GoogleFonts.notoSans(
+                                        color: webAuth.isPhoneNumError
+                                            ? const Color(0xFFB3261E)
+                                            : Colors.black,
                                         fontSize: 14,
                                         fontWeight: FontWeight.w700,
                                       ),
@@ -319,6 +328,9 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                     TextFormField(
                                       key: const Key('citySignup'),
                                       style: GoogleFonts.notoSans(
+                                        color: webAuth.isPhoneNumError
+                                            ? const Color(0xFFB3261E)
+                                            : Colors.black,
                                         fontSize: 14,
                                         fontWeight: FontWeight.w700,
                                       ),
@@ -412,55 +424,63 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                     const SizedBox(height: 30),
                                     //Phone
                                     TextFormField(
-                                      key: const Key('phoneSignup'),
-                                      style: GoogleFonts.notoSans(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                      cursorColor: const Color(0xFF22E974),
-                                      decoration: InputDecoration(
-                                        suffixIcon: Icon(
-                                          webAuth.isNameError
-                                              ? Icons.error
-                                              : null,
-                                          color: const Color(0xFFB3261E),
+                                        key: const Key('phoneSignup'),
+                                        style: GoogleFonts.notoSans(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w700,
+                                          color: webAuth.isPhoneNumError
+                                              ? const Color(0xFFB3261E)
+                                              : Colors.black,
                                         ),
-                                        focusedBorder: const OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: Color(0xFF22E974),
+                                        cursorColor: const Color(0xFF22E974),
+                                        decoration: InputDecoration(
+                                          suffixIcon: Icon(
+                                            webAuth.isNameError
+                                                ? Icons.error
+                                                : null,
+                                            color: const Color(0xFFB3261E),
+                                          ),
+                                          focusedBorder:
+                                              const OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0xFF22E974),
+                                            ),
+                                          ),
+                                          focusedErrorBorder:
+                                              const OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0xFFB3261E),
+                                            ),
+                                          ),
+                                          border: const OutlineInputBorder(),
+                                          label: Text(
+                                            'Phone',
+                                            style: GoogleFonts.notoSans(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w700,
+                                            ),
                                           ),
                                         ),
-                                        focusedErrorBorder:
-                                            const OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: Color(0xFFB3261E),
-                                          ),
-                                        ),
-                                        border: const OutlineInputBorder(),
-                                        label: Text(
-                                          'Phone',
-                                          style: GoogleFonts.notoSans(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                        ),
-                                      ),
-                                      controller: phoneController,
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          webAuth.isPhoneNumError = true;
-                                          return 'Please fill the required field.';
-                                        } else {
-                                          webAuth.isPhoneNumError = false;
-                                          return null;
-                                        }
-                                      },
-                                    ),
+                                        controller: phoneController,
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            webAuth.isPhoneNumError = true;
+                                            return 'Please fill the required field.';
+                                          } else if (value.length < 9) {
+                                            webAuth.isPhoneNumError = true;
+                                            return 'Phone number must contain a minimum of 9 numbers.';
+                                          } else {
+                                            webAuth.isPhoneNumError = false;
+                                          }
+                                        }),
                                     const SizedBox(height: 30),
                                     //email
                                     TextFormField(
                                       key: const Key('emailSignup'),
                                       style: GoogleFonts.notoSans(
+                                        color: webAuth.isPhoneNumError
+                                            ? const Color(0xFFB3261E)
+                                            : Colors.black,
                                         fontSize: 14,
                                         fontWeight: FontWeight.w700,
                                       ),
@@ -513,6 +533,9 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                       key: const Key('passwordSignup'),
                                       obscureText: isHiddenPassword,
                                       style: GoogleFonts.notoSans(
+                                        color: webAuth.isPhoneNumError
+                                            ? const Color(0xFFB3261E)
+                                            : Colors.black,
                                         fontSize: 14,
                                         fontWeight: FontWeight.w700,
                                       ),
@@ -618,7 +641,9 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.black,
                                   ),
-                                  onPressed: onSubmitSignUp,
+                                  onPressed: () {
+                                    if (webAuth.errorText.isNotEmpty) {}
+                                  },
                                   child: Text(
                                     'Create your Account',
                                     style: GoogleFonts.notoSans(

@@ -17,7 +17,7 @@ class EmailVerified extends StatefulWidget {
 }
 
 class _EmailVerifiedState extends State<EmailVerified> {
-  bool _isLoading = false;
+  bool _isLoading = true;
   @override
   void initState() {
     super.initState();
@@ -45,6 +45,10 @@ class _VerifedState extends State<Verifed> {
   @override
   Widget build(BuildContext context) {
     double maxwidth = MediaQuery.of(context).size.width;
+
+    if (MediaQuery.of(context).size.width < 980) {
+      return const Icon(Icons.favorite);
+    }
 
     return Scaffold(
       appBar: PreferredSize(

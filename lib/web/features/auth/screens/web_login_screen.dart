@@ -11,6 +11,10 @@ class WebLoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (MediaQuery.of(context).size.width < 980) {
+      return const Icon(Icons.favorite);
+    }
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize:
