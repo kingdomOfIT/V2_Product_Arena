@@ -82,7 +82,7 @@ class Verified extends StatelessWidget {
                       height: deviceHeight * 0.021,
                     ),
                     Text(
-                      'Your email is successfully virified',
+                      'Your email is successfully verified',
                       style: GoogleFonts.notoSans(
                         color: Colors.black45,
                         fontWeight: FontWeight.w400,
