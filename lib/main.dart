@@ -10,9 +10,13 @@ import 'package:v2_product_arena/mobile/features/auth/screens/mobile_login_scree
 import 'package:v2_product_arena/mobile/features/auth/screens/mobile_signup_screen.dart';
 import 'package:v2_product_arena/mobile/features/home/screens/mobile_home_screen.dart';
 import 'package:v2_product_arena/mobile/features/onboarding/screens/mobile_onboarding_screen.dart';
+import 'package:v2_product_arena/mobile/features/onboarding/screens/mobile_verified_onboarding_screen.dart';
+import 'package:v2_product_arena/mobile/providers/answer_provider.dart';
+import 'package:v2_product_arena/mobile/providers/error_message_provider.dart';
 import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
 import 'package:v2_product_arena/mobile/providers/mobile_onboarding_provider.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_email_verifed.dart';
+import 'package:v2_product_arena/mobile/providers/role_provider.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_login_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_signup_screen.dart';
@@ -67,14 +71,14 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider<MobileOnboarding>(
           create: (context) => MobileOnboarding(),
         ),
+        ChangeNotifierProvider<ErrorMessage>(
+          create: (context) => ErrorMessage(),
+        ),
         ChangeNotifierProvider<AnswerProvider>(
           create: (context) => AnswerProvider(),
         ),
         ChangeNotifierProvider<Role>(
           create: (context) => Role({}, ''),
-        ),
-        ChangeNotifierProvider<ErrorMessage>(
-          create: (context) => ErrorMessage(),
         ),
       ],
       child: MaterialApp(
@@ -112,8 +116,10 @@ class _MyAppState extends State<MyApp> {
           SignupConfirmation.routeName: (context) => SignupConfirmation(),
           Verifed.routeName: (context) => Verifed(),
           EmailVerificationScreen.routeName: (context) =>
-              const EmailVerificationScreen(),
+              EmailVerificationScreen(),
           EmailVerified.routeName: (context) => const EmailVerified(),
+          MobileVerifiedOnboardingScreen.routeName: (context) =>
+              const MobileVerifiedOnboardingScreen(),
         },
       ),
     );

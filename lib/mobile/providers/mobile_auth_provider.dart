@@ -10,6 +10,7 @@ class MobileAuth with ChangeNotifier {
   String errorTextOTP = '';
   bool isOTPerror = false;
   String userEmail = '';
+  String userPassword = '';
   bool isSignUpComplete = false;
   bool isSignInComplete = false;
 

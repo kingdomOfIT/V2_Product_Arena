@@ -27,7 +27,7 @@
         },
         "validationFunctionAlfa": {
           "deploymentBucketName": "amplify-alfapa-staging-141712-deployment",
-          "s3Key": "amplify-builds/validationFunctionAlfa-6f6c75556850364f6441-build.zip"
+          "s3Key": "amplify-builds/validationFunctionAlfa-45712b354544716d3534-build.zip"
         }
       }
     }
