@@ -49,7 +49,7 @@ Widget createWebSignUpScreen() => ChangeNotifierProvider<WebAuth>(
         routes: {
           '/confirmation': (context) => SignupConfirmation(),
           '/verified': (context) => Verifed(),
-          '/web-onboarding': (context) => const WebOnboardingScreen(),
+          '/web-onboarding': (context) => const WebOnboardingView(),
         },
         home: WebSignUpScreen(),
       ),
