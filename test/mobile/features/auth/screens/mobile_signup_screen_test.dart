@@ -227,9 +227,8 @@ void main() {
               'Password must contain a minimum of 8 characters, uppercase, lower case, number and special character.'),
           findsOneWidget);
     });
-
     testWidgets(
-        'GIVEN mobile signup screen, WHEN user enter password longer than 16 characters, THEN he should see alert message',
+        'GIVEN mobile signup screen, WHEN user enter password without capital letter, THEN he should see alert message',
         (tester) async {
       await tester.pumpWidget(createMobileSignupScreen());
       await tester.pumpAndSettle();
@@ -237,7 +236,7 @@ void main() {
           find.byKey(const Key('passwordSignUpTextField'));
       await tester.ensureVisible(passwordFieldFinder);
       await tester.tap(passwordFieldFinder);
-      await tester.enterText(passwordFieldFinder, 'Helloworldinanawesomeway');
+      await tester.enterText(passwordFieldFinder, 'hello123!');
       await tester.pumpAndSettle();
       final signupButtonFinder = find.byKey(const Key('createYourAccount'));
       await tester.ensureVisible(signupButtonFinder);
@@ -315,6 +314,7 @@ void main() {
         'GIVEN mobile signup screen, WHEN user that already have account click on login, THEN he should be redirected to login screen',
         (tester) async {
       await tester.pumpWidget(createMobileSignupScreen());
+      await tester.pumpAndSettle();
       expect(find.byKey(const Key('loginRedirection')), findsOneWidget);
       final loginButtonFinder = find.byKey(const Key('loginRedirection'));
       await tester.ensureVisible(loginButtonFinder);
