@@ -53,7 +53,7 @@ void main() {
       await tester.pumpWidget(createMobileSignupScreen());
       await tester.pumpAndSettle();
       final togglePasswordViewIcon =
-          find.byKey(const Key('togglePasswordViewSignUp'));
+          find.byKey(const Key('togglePasswordViewSignup'));
       await tester.ensureVisible(togglePasswordViewIcon);
       await tester.tap(togglePasswordViewIcon);
       await tester.pump();
