@@ -35,7 +35,7 @@ class LoginForm extends StatelessWidget {
             key: const Key('emailLoginTextField'),
             controller: emailController,
             style: TextStyle(
-              color: Colors.black,
+              color: mobileAuth.isLoginEmailError ? Colors.red : Colors.black,
               fontSize: deviceHeight * 0.0187,
               fontWeight: FontWeight.w700,
             ),
@@ -93,7 +93,8 @@ class LoginForm extends StatelessWidget {
             key: const Key('passwordLoginTextField'),
             controller: passwordController,
             style: TextStyle(
-              color: Colors.black,
+              color:
+                  mobileAuth.isLoginPasswordError ? Colors.red : Colors.black,
               fontSize: deviceHeight * 0.0187,
               fontWeight: FontWeight.w700,
             ),
