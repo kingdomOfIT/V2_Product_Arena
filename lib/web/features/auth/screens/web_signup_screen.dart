@@ -651,9 +651,9 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                   child: Text(
                                     'Create your Account',
                                     style: GoogleFonts.notoSans(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700,
-                                    ),
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700,
+                                        color: Colors.white),
                                   ),
                                 ),
                               ),
