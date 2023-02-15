@@ -4,67 +4,32 @@ PODS:
   - Amplify/Default (1.28.3)
   - amplify_api_ios (0.0.1):
     - Amplify (= 1.28.3)
-    - amplify_core
+    - amplify_flutter_ios
     - AmplifyPlugins/AWSAPIPlugin (= 1.28.3)
     - Flutter
-    - SwiftFormat/CLI
-    - SwiftLint (= 0.48.0)
   - amplify_auth_cognito_ios (0.0.1):
     - Amplify (= 1.28.3)
-    - amplify_core
-    - AmplifyPlugins/AWSCognitoAuthPlugin (= 1.28.3)
-    - Flutter
-    - ObjectMapper
-  - amplify_core (0.0.1):
-    - Flutter
-    - SwiftFormat/CLI
-    - SwiftLint (= 0.48.0)
-  - amplify_datastore (0.0.1):
-    - Amplify (= 1.28.3)
-    - amplify_core
-    - AmplifyPlugins/AWSDataStorePlugin (= 1.28.3)
+    - amplify_flutter_ios
     - Flutter
   - amplify_flutter_ios (0.0.1):
     - Amplify (= 1.28.3)
-    - amplify_core
-    - AmplifyPlugins/AWSCognitoAuthPlugin (= 1.28.3)
     - AWSPluginsCore (= 1.28.3)
     - Flutter
-    - SwiftFormat/CLI
-    - SwiftLint (= 0.48.0)
+  - amplify_secure_storage (0.0.1):
+    - Flutter
   - AmplifyPlugins/AWSAPIPlugin (1.28.3):
     - AppSyncRealTimeClient (~> 2.0)
     - AWSCore (~> 2.28.0)
     - AWSPluginsCore (= 1.28.3)
-  - AmplifyPlugins/AWSCognitoAuthPlugin (1.28.3):
-    - AWSAuthCore (~> 2.28.0)
-    - AWSCognitoIdentityProvider (~> 2.28.0)
-    - AWSCognitoIdentityProviderASF (~> 2.28.0)
-    - AWSCore (~> 2.28.0)
-    - AWSMobileClient (~> 2.28.0)
-    - AWSPluginsCore (= 1.28.3)
-  - AmplifyPlugins/AWSDataStorePlugin (1.28.3):
-    - AWSCore (~> 2.28.0)
-    - AWSPluginsCore (= 1.28.3)
-    - SQLite.swift (= 0.13.2)
   - AppSyncRealTimeClient (2.1.1):
     - Starscream (~> 4.0.4)
-  - AWSAuthCore (2.28.6):
-    - AWSCore (= 2.28.6)
-  - AWSCognitoIdentityProvider (2.28.6):
-    - AWSCognitoIdentityProviderASF (= 2.28.6)
-    - AWSCore (= 2.28.6)
-  - AWSCognitoIdentityProviderASF (2.28.6):
-    - AWSCore (= 2.28.6)
   - AWSCore (2.28.6)
-  - AWSMobileClient (2.28.6):
-    - AWSAuthCore (= 2.28.6)
-    - AWSCognitoIdentityProvider (= 2.28.6)
-    - AWSCognitoIdentityProviderASF (= 2.28.6)
-    - AWSCore (= 2.28.6)
   - AWSPluginsCore (1.28.3):
     - Amplify (= 1.28.3)
     - AWSCore (~> 2.28.0)
+  - connectivity_plus (0.0.1):
+    - Flutter
+    - ReachabilitySwift
   - Flutter (1.0.0)
   - flutter_inappwebview (0.0.1):
     - Flutter
@@ -73,69 +38,48 @@ PODS:
   - flutter_inappwebview/Core (0.0.1):
     - Flutter
     - OrderedSet (~> 5.0)
-  - ObjectMapper (4.2.0)
   - OrderedSet (5.0.0)
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
-  - SQLite.swift (0.13.2):
-    - SQLite.swift/standard (= 0.13.2)
-  - SQLite.swift/standard (0.13.2)
+  - ReachabilitySwift (5.0.0)
   - Starscream (4.0.4)
-  - SwiftFormat/CLI (0.50.8)
-  - SwiftLint (0.48.0)
   - url_launcher_ios (0.0.1):
-    - Flutter
-  - video_player_avfoundation (0.0.1):
-    - Flutter
-  - wakelock (0.0.1):
-    - Flutter
-  - webview_flutter_wkwebview (0.0.1):
     - Flutter
 
 DEPENDENCIES:
   - amplify_api_ios (from `.symlinks/plugins/amplify_api_ios/ios`)
   - amplify_auth_cognito_ios (from `.symlinks/plugins/amplify_auth_cognito_ios/ios`)
-  - amplify_core (from `.symlinks/plugins/amplify_core/ios`)
-  - amplify_datastore (from `.symlinks/plugins/amplify_datastore/ios`)
   - amplify_flutter_ios (from `.symlinks/plugins/amplify_flutter_ios/ios`)
+  - amplify_secure_storage (from `.symlinks/plugins/amplify_secure_storage/ios`)
+  - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
   - Flutter (from `Flutter`)
   - flutter_inappwebview (from `.symlinks/plugins/flutter_inappwebview/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
-  - video_player_avfoundation (from `.symlinks/plugins/video_player_avfoundation/ios`)
-  - wakelock (from `.symlinks/plugins/wakelock/ios`)
-  - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/ios`)
 
 SPEC REPOS:
   trunk:
     - Amplify
     - AmplifyPlugins
     - AppSyncRealTimeClient
-    - AWSAuthCore
-    - AWSCognitoIdentityProvider
-    - AWSCognitoIdentityProviderASF
     - AWSCore
-    - AWSMobileClient
     - AWSPluginsCore
-    - ObjectMapper
     - OrderedSet
-    - SQLite.swift
+    - ReachabilitySwift
     - Starscream
-    - SwiftFormat
-    - SwiftLint
 
 EXTERNAL SOURCES:
   amplify_api_ios:
     :path: ".symlinks/plugins/amplify_api_ios/ios"
   amplify_auth_cognito_ios:
     :path: ".symlinks/plugins/amplify_auth_cognito_ios/ios"
-  amplify_core:
-    :path: ".symlinks/plugins/amplify_core/ios"
-  amplify_datastore:
-    :path: ".symlinks/plugins/amplify_datastore/ios"
   amplify_flutter_ios:
     :path: ".symlinks/plugins/amplify_flutter_ios/ios"
+  amplify_secure_storage:
+    :path: ".symlinks/plugins/amplify_secure_storage/ios"
+  connectivity_plus:
+    :path: ".symlinks/plugins/connectivity_plus/ios"
   Flutter:
     :path: Flutter
   flutter_inappwebview:
@@ -144,41 +88,25 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/path_provider_foundation/ios"
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
-  video_player_avfoundation:
-    :path: ".symlinks/plugins/video_player_avfoundation/ios"
-  wakelock:
-    :path: ".symlinks/plugins/wakelock/ios"
-  webview_flutter_wkwebview:
-    :path: ".symlinks/plugins/webview_flutter_wkwebview/ios"
 
 SPEC CHECKSUMS:
   Amplify: e89b493fc2fe840ac044bd4ddf71ad9828f8c364
-  amplify_api_ios: bbeacce5a151958bfedbd2e95fe6ab12599fd25d
-  amplify_auth_cognito_ios: e532d70387aa0fe6f456855afe78ea275d58fe4b
-  amplify_core: 0876b2fbbcec7619f5b58b20c59ecc0118f65a47
-  amplify_datastore: 4aa847727e99901625642db923deb86ee4c33817
-  amplify_flutter_ios: 8943b5e5fb995a7aa3eb5c5238a6822756703584
+  amplify_api_ios: 50a96b86c3c5a9e0fad2b973fca24a2d30a01fc7
+  amplify_auth_cognito_ios: 5ed0815d1d09fd36ab989a35ce5af965b504fe3b
+  amplify_flutter_ios: 91f8932c449fa93e09638035ffc955ee216eaca9
+  amplify_secure_storage: 501cbdac671a050090d48dfcc002d5637d3f4a55
   AmplifyPlugins: 98bcd23f2c13179f75c733b887e80dd06243be5e
   AppSyncRealTimeClient: 937360221f2b664c4c33ae142a60643e64f480cd
-  AWSAuthCore: 2a63f8afd6e9d9fe80389c21532c116194e6673e
-  AWSCognitoIdentityProvider: 59dc9418fdcd70c086f4bd63e5c7d97a52637bd2
-  AWSCognitoIdentityProviderASF: ee4ccaa9ed0e444613e709e496f71937bc110e22
   AWSCore: d1194a634f406c1f93d8b6d78bf7ddbda3b5f663
-  AWSMobileClient: c2ba524757751afd82dbf53ca2ddb050ba772069
   AWSPluginsCore: 93f813579479fa4c5bfff58817df89e0e10f9f3b
+  connectivity_plus: 413a8857dd5d9f1c399a39130850d02fe0feaf7e
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_inappwebview: bfd58618f49dc62f2676de690fc6dcda1d6c3721
-  ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
   OrderedSet: aaeb196f7fef5a9edf55d89760da9176ad40b93c
   path_provider_foundation: 37748e03f12783f9de2cb2c4eadfaa25fe6d4852
-  SQLite.swift: 4fc2be46c36392e3b87afe6fe7f1801c1daa07ef
+  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
-  SwiftFormat: 16f04fcde066f40004f51e26bc95bc14dc377d6f
-  SwiftLint: 284cea64b6187c5d6bd83e9a548a64104d546447
   url_launcher_ios: ae1517e5e344f5544fb090b079e11f399dfbe4d2
-  video_player_avfoundation: e489aac24ef5cf7af82702979ed16f2a5ef84cff
-  wakelock: d0fc7c864128eac40eba1617cb5264d9c940b46f
-  webview_flutter_wkwebview: b7e70ef1ddded7e69c796c7390ee74180182971f
 
 PODFILE CHECKSUM: 30517025a2fecca2d72dac25f08abb5b9a8f1a56
 
