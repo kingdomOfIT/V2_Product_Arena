@@ -10,12 +10,14 @@ import 'package:v2_product_arena/mobile/features/onboarding/widgets/form_button.
 import 'package:v2_product_arena/mobile/features/onboarding/widgets/role_tile.dart';
 import 'package:v2_product_arena/mobile/providers/answer_provider.dart';
 import 'package:v2_product_arena/mobile/providers/error_message_provider.dart';
+import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
 import 'package:v2_product_arena/mobile/providers/role_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/custom_button.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
+import 'package:provider/provider.dart';
 
 class SelectRoleScreen extends StatefulWidget {
   final PageController pageController;
@@ -49,8 +51,9 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
     await _configureAmplify();
     try {
       final result = await Amplify.Auth.signIn(
-        username: "mirza.karic595@gmail.com", // email of user
-        password: "Pass123!",
+        username: Provider.of<MobileAuth>(context, listen: false)
+            .userEmail, // email of user
+        password: Provider.of<MobileAuth>(context, listen: false).userPassword,
       );
 
       print('LOGINOVO SE');
@@ -60,7 +63,7 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
   }
 
   Future<void> submitOnboarding(List<String> s1, List<String> s2) async {
-    //await signInUser();
+    await signInUser();
 
     try {
       final restOperation = Amplify.API.post(

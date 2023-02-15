@@ -120,6 +120,8 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
       );
       Provider.of<MobileAuth>(context, listen: false).userEmail =
           emailController.text;
+      Provider.of<MobileAuth>(context, listen: false).userPassword =
+          passwordController.text;
     }
   }
 
