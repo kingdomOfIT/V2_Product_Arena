@@ -35,10 +35,11 @@ class _RoleTileState extends State<RoleTile> {
     int i = widget.index + 1;
     return Column(
       children: [
-        InkWell(
+        GestureDetector(
           onTap: () {
             if (context.read<Role>().hasRole(widget.role)) {
               context.read<Role>().removeItem(widget.role);
+              print(context.read<Role>().selctRole);
               setState(() {
                 context
                     .read<Role>()
@@ -46,6 +47,7 @@ class _RoleTileState extends State<RoleTile> {
               });
             } else {
               context.read<Role>().addItem(widget.role);
+              print(context.read<Role>().selctRole);
               setState(() {
                 context
                     .read<Role>()

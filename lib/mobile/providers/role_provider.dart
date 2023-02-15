@@ -44,6 +44,8 @@ class Role with ChangeNotifier {
   }
 
   bool hasRole(Role role) {
-    return selectedRoles.where((element) => element == role.name).isNotEmpty;
+    return selectedRoles
+        .where((element) => element == role.name['forBackend']!)
+        .isNotEmpty;
   }
 }
