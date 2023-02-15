@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_signup_screen.dart';
+import 'package:v2_product_arena/web/features/auth/widgets/web_login_form.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_appbar.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_footer.dart';
 
@@ -11,10 +12,6 @@ class WebLoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (MediaQuery.of(context).size.width < 980) {
-      return const Icon(Icons.favorite);
-    }
-
     return Scaffold(
       appBar: PreferredSize(
         preferredSize:
@@ -66,7 +63,7 @@ class WebLoginScreen extends StatelessWidget {
               const SizedBox(
                 height: 50,
               ),
-              // const WebLoginForm(),
+              const WebLoginForm(),
             ],
           ),
           const WebFooter(),
