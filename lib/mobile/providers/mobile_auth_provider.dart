@@ -26,19 +26,19 @@ class MobileAuth with ChangeNotifier {
   bool isLoginEmailError = false;
   bool isLoginPasswordError = false;
 
-  Future<void> _configureAmplify() async {
-    try {
-      // amplify plugins
+  // Future<void> _configureAmplify() async {
+  //   try {
+  //     // amplify plugins
 
-      final apiPlugin = AmplifyAPI();
-      final authPlugin = AmplifyAuthCognito();
+  //     final apiPlugin = AmplifyAPI();
+  //     final authPlugin = AmplifyAuthCognito();
 
-      // add Amplify plugins
-      await Amplify.addPlugins([apiPlugin, authPlugin]);
+  //     // add Amplify plugins
+  //     await Amplify.addPlugins([apiPlugin, authPlugin]);
 
-      await Amplify.configure(amplifyconfig);
-    } catch (e) {}
-  }
+  //     await Amplify.configure(amplifyconfig);
+  //   } catch (e) {}
+  // }
 
   Future<void> signUpUser(
     String name,
@@ -52,7 +52,7 @@ class MobileAuth with ChangeNotifier {
     BuildContext context,
     String routeName,
   ) async {
-    await _configureAmplify();
+    // await _configureAmplify();
 
     try {
       final userAttributes = <CognitoUserAttributeKey, String>{
@@ -104,7 +104,7 @@ class MobileAuth with ChangeNotifier {
 
   Future<void> signInUser(String username, String password,
       BuildContext context, String routeName) async {
-    await _configureAmplify();
+    // await _configureAmplify();
     try {
       final result = await Amplify.Auth.signIn(
         username: username,

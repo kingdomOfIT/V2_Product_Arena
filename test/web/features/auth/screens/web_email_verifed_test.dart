@@ -7,7 +7,7 @@ void main() {
     testWidgets(
         'GIVEN web email verified screen, WHEN screen loads, THEN web background image should be visible',
         (tester) async {
-      await tester.pumpWidget(const MaterialApp(home: EmailVerified()));
+      await tester.pumpWidget(const MaterialApp(home: WebEmailVerified()));
       await tester.pumpAndSettle(const Duration(seconds: 5));
 
       final imageWidget = find.byType(Image).evaluate().first.widget as Image;
@@ -18,7 +18,7 @@ void main() {
     testWidgets(
         'GIVEN web email verified screen, WHEN screen loads, THEN all required text should be visible',
         (tester) async {
-      await tester.pumpWidget(const MaterialApp(home: EmailVerified()));
+      await tester.pumpWidget(const MaterialApp(home: WebEmailVerified()));
       await tester.pumpAndSettle(const Duration(seconds: 5));
 
       expect(find.text('Email verified'), findsOneWidget);
@@ -27,7 +27,7 @@ void main() {
     testWidgets(
         'GIVEN web email verified screen, WHEN screen loads, THEN check circle image should be visible',
         (tester) async {
-      await tester.pumpWidget(const MaterialApp(home: EmailVerified()));
+      await tester.pumpWidget(const MaterialApp(home: WebEmailVerified()));
       await tester.pumpAndSettle(const Duration(seconds: 5));
 
       final imageWidget = find.byType(Image).evaluate().last.widget as Image;

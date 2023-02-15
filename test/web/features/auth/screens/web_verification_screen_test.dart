@@ -16,7 +16,7 @@ Widget createWebEmailVerificationScreen() => ChangeNotifierProvider<WebAuth>(
       child: MaterialApp(
         routes: {
           '/web-login': (context) => const WebLoginScreen(),
-          '/email-verified': (context) => const EmailVerified(),
+          '/email-verified': (context) => const WebEmailVerified(),
         },
         home: SignupConfirmation(),
       ),

@@ -4,7 +4,7 @@ import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import '../web_constansts_ob.dart';
 
 class VideoTile extends StatelessWidget {
-  VideoTile();
+  VideoTile({super.key});
 
   final _controller = YoutubePlayerController.fromVideoId(
     videoId: '2_uX7GxPzDI',

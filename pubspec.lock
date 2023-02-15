@@ -15,21 +15,12 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0-next.4"
-    version: "1.0.0-next.4"
   amplify_api_android:
     dependency: transitive
     description:
       name: amplify_api_android
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0-next.4"
-  amplify_api_dart:
-    dependency: transitive
-    description:
-      name: amplify_api_dart
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.0+1"
     version: "1.0.0-next.4"
   amplify_api_dart:
     dependency: transitive
@@ -45,14 +36,12 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0-next.4"
-    version: "1.0.0-next.4"
   amplify_auth_cognito:
     dependency: "direct main"
     description:
       name: amplify_auth_cognito
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0-next.4"
     version: "1.0.0-next.4"
   amplify_auth_cognito_android:
     dependency: transitive
@@ -62,35 +51,25 @@ packages:
     source: hosted
     version: "1.0.0-next.4"
   amplify_auth_cognito_dart:
-    version: "1.0.0-next.4"
-  amplify_auth_cognito_dart:
     dependency: transitive
     description:
-      name: amplify_auth_cognito_dart
       name: amplify_auth_cognito_dart
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.5.0"
   amplify_auth_cognito_ios:
     dependency: transitive
-    version: "0.5.0"
-  amplify_auth_cognito_ios:
-    dependency: transitive
     description:
-      name: amplify_auth_cognito_ios
       name: amplify_auth_cognito_ios
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0-next.4"
     version: "1.0.0-next.4"
   amplify_core:
-    dependency: transitive
     dependency: transitive
     description:
       name: amplify_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0-next.4"
     version: "1.0.0-next.4"
   amplify_datastore_plugin_interface:
     dependency: transitive
@@ -99,14 +78,12 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0-next.4"
-    version: "1.0.0-next.4"
   amplify_flutter:
     dependency: "direct main"
     description:
       name: amplify_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0-next.4"
     version: "1.0.0-next.4"
   amplify_flutter_android:
     dependency: transitive
@@ -115,28 +92,12 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0-next.4"
-    version: "1.0.0-next.4"
   amplify_flutter_ios:
     dependency: transitive
     description:
       name: amplify_flutter_ios
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0-next.4"
-  amplify_secure_storage:
-    dependency: transitive
-    description:
-      name: amplify_secure_storage
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.4+1"
-  amplify_secure_storage_dart:
-    dependency: transitive
-    description:
-      name: amplify_secure_storage_dart
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.4+2"
     version: "1.0.0-next.4"
   amplify_secure_storage:
     dependency: transitive
@@ -186,14 +147,6 @@ packages:
       name: aws_common
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.0"
-  aws_signature_v4:
-    dependency: transitive
-    description:
-      name: aws_signature_v4
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.3.1+2"
     version: "0.4.0"
   aws_signature_v4:
     dependency: transitive
@@ -313,14 +266,14 @@ packages:
       name: connectivity_plus
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.3"
+    version: "3.0.2"
   connectivity_plus_platform_interface:
     dependency: transitive
     description:
       name: connectivity_plus_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.4"
+    version: "1.2.3"
   convert:
     dependency: transitive
     description:
@@ -341,7 +294,7 @@ packages:
       name: coverage
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.6.3"
+    version: "1.5.0"
   crclib:
     dependency: transitive
     description:
@@ -377,13 +330,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.4"
-  dbus:
-    dependency: transitive
-    description:
-      name: dbus
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.7.8"
   dbus:
     dependency: transitive
     description:
@@ -507,13 +453,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.13.5"
-  http2:
-    dependency: transitive
-    description:
-      name: http2
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.1"
   http2:
     dependency: transitive
     description:
@@ -652,13 +591,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.5.0"
-  nm:
-    dependency: transitive
-    description:
-      name: nm
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.5.0"
   node_preamble:
     dependency: transitive
     description:
@@ -667,21 +599,11 @@ packages:
     source: hosted
     version: "2.0.1"
   oauth2:
-  oauth2:
     dependency: transitive
     description:
       name: oauth2
-      name: oauth2
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.1"
-  os_detect:
-    dependency: transitive
-    description:
-      name: os_detect
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.1"
     version: "2.0.1"
   os_detect:
     dependency: transitive
@@ -803,14 +725,11 @@ packages:
     source: hosted
     version: "1.2.1"
   retry:
-  retry:
     dependency: transitive
     description:
       name: retry
-      name: retry
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.1.0"
     version: "3.1.0"
   shelf:
     dependency: transitive
@@ -845,20 +764,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
-  smithy:
-    dependency: transitive
-    description:
-      name: smithy
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.4.0+1"
-  smithy_aws:
-    dependency: transitive
-    description:
-      name: smithy_aws
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.4.1"
   smithy:
     dependency: transitive
     description:
@@ -1007,7 +912,7 @@ packages:
     source: hosted
     version: "1.0.0+1"
   url_launcher:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: url_launcher
       url: "https://pub.dartlang.org"
@@ -1082,7 +987,7 @@ packages:
       name: vm_service
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "9.4.0"
+    version: "9.0.0"
   watcher:
     dependency: transitive
     description:
@@ -1111,17 +1016,17 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
-  win32:
+  webview_flutter:
     dependency: transitive
     description:
-      name: win32
+      name: webview_flutter
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.2"
   webview_flutter_android:
     dependency: transitive
     description:
-      name: worker_bee
+      name: webview_flutter_android
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.3.0"
@@ -1167,7 +1072,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.0"
-    version: "6.1.0"
   yaml:
     dependency: transitive
     description:
@@ -1176,7 +1080,7 @@ packages:
     source: hosted
     version: "3.1.1"
   youtube_player_flutter:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: youtube_player_flutter
       url: "https://pub.dartlang.org"

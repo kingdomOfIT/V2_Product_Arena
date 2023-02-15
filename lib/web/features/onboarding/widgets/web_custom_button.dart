@@ -22,7 +22,7 @@ class CustomButton extends StatelessWidget {
         onPressed: onPressed,
         child: Text(
           'Pošalji',
-          style: GoogleFonts.notoSans(color: Color(0xFFFFFFFF)),
+          style: GoogleFonts.notoSans(color: const Color(0xFFFFFFFF)),
         ),
       ),
     );

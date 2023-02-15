@@ -8,15 +8,15 @@ import '../../../../mobile/features/onboarding/screens/mobile_onboarding_screen.
 import '../../../reusable_web_widgets/web_appbar.dart';
 import '../../../reusable_web_widgets/web_footer.dart';
 
-class EmailVerified extends StatefulWidget {
+class WebEmailVerified extends StatefulWidget {
   static const routeName = '/email-verified';
-  const EmailVerified({super.key});
+  const WebEmailVerified({super.key});
 
   @override
-  State<EmailVerified> createState() => _EmailVerifiedState();
+  State<WebEmailVerified> createState() => _WebEmailVerifiedState();
 }
 
-class _EmailVerifiedState extends State<EmailVerified> {
+class _WebEmailVerifiedState extends State<WebEmailVerified> {
   bool _isLoading = true;
   @override
   void initState() {

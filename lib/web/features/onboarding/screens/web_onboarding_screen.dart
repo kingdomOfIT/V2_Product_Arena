@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:v2_product_arena/main.dart';
 import 'package:v2_product_arena/web/providers/web_ob_answers.dart';
 import 'package:v2_product_arena/web/providers/web_ob_role.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_ob_appbar.dart';

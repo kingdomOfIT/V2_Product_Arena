@@ -6,7 +6,7 @@ import '../web_constansts_ob.dart';
 class LinkTile extends StatelessWidget {
   final TextEditingController controller;
 
-  LinkTile({super.key, required this.controller});
+  const LinkTile({super.key, required this.controller});
   @override
   Widget build(BuildContext context) {
     return Container(

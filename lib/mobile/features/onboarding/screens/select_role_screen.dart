@@ -32,24 +32,24 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
   @override
   void initState() {
     super.initState();
-    _configureAmplify();
+    // _configureAmplify();
   }
 
-  Future<void> _configureAmplify() async {
-    // Add any Amplify plugins you want to use
-    final authPlugin = AmplifyAuthCognito();
-    final api = AmplifyAPI();
-    await Amplify.addPlugins([authPlugin, api]);
-    try {
-      await Amplify.configure(amplifyconfig);
-    } on AmplifyAlreadyConfiguredException {
-      safePrint(
-          'Tried to reconfigure Amplify; this can occur when your app restarts on Android.');
-    }
-  }
+  // Future<void> _configureAmplify() async {
+  //   // Add any Amplify plugins you want to use
+  //   final authPlugin = AmplifyAuthCognito();
+  //   final api = AmplifyAPI();
+  //   await Amplify.addPlugins([authPlugin, api]);
+  //   try {
+  //     await Amplify.configure(amplifyconfig);
+  //   } on AmplifyAlreadyConfiguredException {
+  //     safePrint(
+  //         'Tried to reconfigure Amplify; this can occur when your app restarts on Android.');
+  //   }
+  // }
 
   Future<void> signInUser() async {
-    await _configureAmplify();
+    // await _configureAmplify();
     try {
       final result = await Amplify.Auth.signIn(
         username: Provider.of<MobileAuth>(context, listen: false)

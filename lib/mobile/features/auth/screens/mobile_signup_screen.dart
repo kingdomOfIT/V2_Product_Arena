@@ -10,7 +10,6 @@ import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/mobile_appbar.da
 import 'package:google_fonts/google_fonts.dart';
 import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/mobile_footer.dart';
 import 'package:provider/provider.dart';
-import 'package:country_code_picker/country_code_picker.dart';
 import 'package:intl/intl.dart';
 
 class MobileSignupScreen extends StatefulWidget {

@@ -4,7 +4,9 @@ import '../web_constansts_ob.dart';
 import 'package:provider/provider.dart';
 
 enum Opcija {
+  // ignore: constant_identifier_names
   Da,
+  // ignore: constant_identifier_names
   Ne,
 }
 

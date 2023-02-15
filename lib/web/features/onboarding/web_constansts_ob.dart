@@ -96,6 +96,7 @@ List<Role> listRoleSel = [
   )
 ];
 
+// ignore: non_constant_identifier_names
 Widget CustomText(
   String text,
   double size, [
