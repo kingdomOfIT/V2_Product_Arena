@@ -473,13 +473,18 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                     webAuth.userEmail,
                                     otp,
                                     context,
-                                    Verifed.routeName,
+                                    WebEmailVerified.routeName,
                                   );
                                   print(webAuth.userEmail);
                                   print(isError);
                                 },
-                                child: const Text(
+                                child: Text(
                                   'Verify',
+                                  style: GoogleFonts.notoSans(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ),

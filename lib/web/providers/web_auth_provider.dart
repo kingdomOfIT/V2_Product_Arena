@@ -78,7 +78,7 @@ class WebAuth with ChangeNotifier {
       //       );
       //     });
       // // //////////////
-      Navigator.of(context).pushNamed(SignupConfirmation.routeName);
+      Navigator.of(context).pushNamed(routeName);
     } on AuthException catch (e) {
       safePrint(e.message);
       errorText = e.message;
@@ -97,7 +97,7 @@ class WebAuth with ChangeNotifier {
       final result = await Amplify.Auth.confirmSignUp(
           username: email, confirmationCode: confirmationCode);
 
-      Navigator.of(context).pushReplacementNamed(WebOnboardingView.routeName);
+      Navigator.of(context).pushReplacementNamed(routeName);
     } on AuthException catch (e) {
       safePrint(e.message);
       errorTextOTP = e.message;

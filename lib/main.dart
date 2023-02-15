@@ -110,10 +110,10 @@ class _MyAppState extends State<MyApp> {
           WebOnboardingView.routeName: (context) => const WebOnboardingView(),
           WebHomeScreen.routeName: (context) => const WebHomeScreen(),
           SignupConfirmation.routeName: (context) => SignupConfirmation(),
-          Verifed.routeName: (context) => Verifed(),
+          Verifed.routeName: (context) => const Verifed(),
           EmailVerificationScreen.routeName: (context) =>
               const EmailVerificationScreen(),
-          EmailVerified.routeName: (context) => const EmailVerified(),
+          WebEmailVerified.routeName: (context) => const WebEmailVerified(),
         },
       ),
     );
