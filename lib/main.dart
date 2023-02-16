@@ -123,6 +123,7 @@ class _MyAppState extends State<MyApp> {
           EmailVerified.routeName: (context) => const EmailVerified(),
           MobileVerifiedOnboardingScreen.routeName: (context) =>
               const MobileVerifiedOnboardingScreen(),
+          WebEmailVerified.routeName: (context) => const WebEmailVerified()
         },
       ),
     );

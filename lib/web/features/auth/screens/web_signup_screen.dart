@@ -29,7 +29,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
 
   var dropdownValue;
 
-  final _text = '';
+  String _text = '';
   bool isHiddenPassword = true;
 
   void navigateToEmailVerificationScreen(BuildContext context) {
@@ -221,7 +221,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                           child: TextFormField(
                                             key: const Key('surnameSignup'),
                                             style: GoogleFonts.notoSans(
-                                              color: webAuth.isPhoneNumError
+                                              color: webAuth.isSurnameError
                                                   ? const Color(0xFFB3261E)
                                                   : Colors.black,
                                               fontSize: 14,
@@ -231,7 +231,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                                 const Color(0xFF22E974),
                                             decoration: InputDecoration(
                                               suffixIcon: Icon(
-                                                webAuth.isNameError
+                                                webAuth.isSurnameError
                                                     ? Icons.error
                                                     : null,
                                                 color: const Color(0xFFB3261E),
@@ -280,7 +280,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                     TextFormField(
                                       key: const Key('birthdateSignup'),
                                       style: GoogleFonts.notoSans(
-                                        color: webAuth.isPhoneNumError
+                                        color: webAuth.isBirthDateError
                                             ? const Color(0xFFB3261E)
                                             : Colors.black,
                                         fontSize: 14,
@@ -289,7 +289,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                       cursorColor: const Color(0xFF22E974),
                                       decoration: InputDecoration(
                                         suffixIcon: Icon(
-                                          webAuth.isNameError
+                                          webAuth.isBirthDateError
                                               ? Icons.error
                                               : null,
                                           color: const Color(0xFFB3261E),
@@ -334,7 +334,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                     TextFormField(
                                       key: const Key('citySignup'),
                                       style: GoogleFonts.notoSans(
-                                        color: webAuth.isPhoneNumError
+                                        color: webAuth.isCityError
                                             ? const Color(0xFFB3261E)
                                             : Colors.black,
                                         fontSize: 14,
@@ -343,7 +343,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                       cursorColor: const Color(0xFF22E974),
                                       decoration: InputDecoration(
                                         suffixIcon: Icon(
-                                          webAuth.isNameError
+                                          webAuth.isCityError
                                               ? Icons.error
                                               : null,
                                           color: const Color(0xFFB3261E),
@@ -441,7 +441,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                         cursorColor: const Color(0xFF22E974),
                                         decoration: InputDecoration(
                                           suffixIcon: Icon(
-                                            webAuth.isNameError
+                                            webAuth.isPhoneNumError
                                                 ? Icons.error
                                                 : null,
                                             color: const Color(0xFFB3261E),
@@ -493,7 +493,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                       cursorColor: const Color(0xFF22E974),
                                       decoration: InputDecoration(
                                         suffixIcon: Icon(
-                                          webAuth.isNameError
+                                          webAuth.isEmailError
                                               ? Icons.error
                                               : null,
                                           color: const Color(0xFFB3261E),
@@ -521,7 +521,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                       controller: emailController,
                                       validator: (value) {
                                         if (value!.isEmpty) {
-                                          webAuth.isNameError = true;
+                                          webAuth.isEmailError = true;
                                           return 'Please fill the required field.';
                                         }
                                         if (!email.hasMatch(value)) {
@@ -547,22 +547,25 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                       ),
                                       cursorColor: const Color(0xFF22E974),
                                       decoration: InputDecoration(
-                                        suffixIcon: InkWell(
-                                          key: const Key('togglePasswordView'),
-                                          onTap: togglePasswordView,
-                                          child: Icon(
-                                            isHiddenPassword
-                                                ? Icons.visibility_off
-                                                : Icons.visibility,
-                                            color: webAuth.isPasswordError
-                                                ? const Color(0xFFB3261E)
-                                                : Colors.black,
-                                            size: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.027,
-                                          ),
-                                        ),
+                                        suffixIcon: _text.isNotEmpty
+                                            ? InkWell(
+                                                key: const Key(
+                                                    'togglePasswordView'),
+                                                onTap: togglePasswordView,
+                                                child: Icon(
+                                                  isHiddenPassword
+                                                      ? Icons.visibility_off
+                                                      : Icons.visibility,
+                                                  color: webAuth.isPasswordError
+                                                      ? const Color(0xFFB3261E)
+                                                      : null,
+                                                  size: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.027,
+                                                ),
+                                              )
+                                            : null,
                                         focusedBorder: const OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFF22E974),
@@ -597,6 +600,11 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                           webAuth.isPasswordError = false;
                                           return null;
                                         }
+                                      },
+                                      onChanged: (value) {
+                                        setState(() {
+                                          _text = value;
+                                        });
                                       },
                                       onEditingComplete: () =>
                                           FocusScope.of(context).unfocus(),
