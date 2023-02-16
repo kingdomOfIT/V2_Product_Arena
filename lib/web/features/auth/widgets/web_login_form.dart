@@ -22,6 +22,7 @@ class _WebLoginFormState extends State<WebLoginForm> {
   bool passwordErrored = false;
   bool viewPassword = false;
 
+  // ignore: avoid_init_to_null
   var _backErrorMsg = null;
 
   var emailColor = const Color(0xFF605D66);
