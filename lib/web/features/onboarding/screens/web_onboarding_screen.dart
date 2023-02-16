@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:v2_product_arena/web/providers/web_ob_answers.dart';
 import 'package:v2_product_arena/web/providers/web_ob_role.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_ob_appbar.dart';
+import '../../../providers/web_auth_provider.dart';
 import '../../../providers/web_ob_error.dart';
 import '../../../reusable_web_widgets/web_footer.dart';
 import '../web_constansts_ob.dart';
@@ -56,8 +57,9 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
     await _configureAmplify();
     try {
       final result = await Amplify.Auth.signIn(
-        username: "80365@xilinous.xyz", // email of user
-        password: "Pass123!!!",
+        username: Provider.of<WebAuth>(context, listen: false)
+            .userEmail, // email of user
+        password: Provider.of<WebAuth>(context, listen: false).userPassword,
       );
 
       print('LOGINOVO SE');

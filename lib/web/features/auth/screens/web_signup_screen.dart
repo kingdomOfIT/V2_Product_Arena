@@ -61,6 +61,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
       //     context)); //dodana navigacija do screena
       provider.userEmail = emailController
           .text; //prebacen Provider.of<MobileAuth>(context, listen: false); u funkciju onSubmitSignUp jer i on koristi context tako da mora biti u asinhronoj funkciji
+      provider.userPassword = passwordController.text;
     }
   }
 
