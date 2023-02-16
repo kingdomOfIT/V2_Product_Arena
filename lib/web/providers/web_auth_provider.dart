@@ -14,6 +14,7 @@ class WebAuth with ChangeNotifier {
   bool isOTPerror = false;
   String errorText = '';
   String userEmail = '';
+  String userPassword = '';
   bool isSignUpComplete = false;
   bool isLoading = false;
 

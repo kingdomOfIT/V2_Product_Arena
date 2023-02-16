@@ -44,6 +44,7 @@ class Verifed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double maxwidth = MediaQuery.of(context).size.width;
+    double maxheight = MediaQuery.of(context).size.height;
 
     if (MediaQuery.of(context).size.width < 600 ||
         MediaQuery.of(context).size.height < 600) {
@@ -82,13 +83,13 @@ class Verifed extends StatelessWidget {
                           ),
                         ),
                         width: MediaQuery.of(context).size.width * 0.51,
-                        height: 465,
+                        height: 530,
                         child: Column(
                           children: [
                             const SizedBox(height: 116),
                             SizedBox(
-                              width: 102,
-                              height: 102,
+                              width: maxwidth * (102 / 1440),
+                              height: maxheight * (102 / 800),
                               child:
                                   Image.asset('assets/images/checkcircle.png'),
                             ),
