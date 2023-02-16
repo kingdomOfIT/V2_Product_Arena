@@ -8,6 +8,7 @@ import 'package:v2_product_arena/mobile/features/auth/screens/mobile_login_scree
 class MobileAuth with ChangeNotifier {
   String errorText = '';
   String errorTextOTP = '';
+  String loginErrorText = '';
   bool isOTPerror = false;
   String userEmail = '';
   String userPassword = '';
@@ -116,7 +117,7 @@ class MobileAuth with ChangeNotifier {
       Navigator.of(context).pushReplacementNamed(routeName);
     } on AuthException catch (e) {
       safePrint(e.message);
-      errorText = e.message;
+      loginErrorText = e.message;
     }
     notifyListeners();
   }

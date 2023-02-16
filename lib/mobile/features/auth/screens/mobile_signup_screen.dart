@@ -1,6 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages, body_might_complete_normally_nullable, sort_child_properties_last, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:v2_product_arena/constants/global_variables.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/email_verification_screen.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/mobile_login_screen.dart';
@@ -102,6 +103,9 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
     FocusScope.of(context).unfocus();
     if (isValid) {
       formKey.currentState!.save();
+      setState(() {
+        isLoading = true;
+      });
       await Provider.of<MobileAuth>(context, listen: false).signUpUser(
         nameController.text,
         surnameController.text,
@@ -119,6 +123,9 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
       Provider.of<MobileAuth>(context, listen: false).userPassword =
           passwordController.text;
     }
+    setState(() {
+      isLoading = false;
+    });
   }
 
   void togglePasswordView() {
@@ -139,9 +146,13 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
             Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
         child: const MobileAppBar(),
       ),
-      body: Provider.of<MobileAuth>(context, listen: false).isLoading
+      body: isLoading
           ? const Center(
-              child: CircularProgressIndicator(),
+              child: SpinKitRing(
+                color: Color.fromRGBO(34, 233, 116, 1),
+                size: 90.0,
+                lineWidth: 10.0,
+              ),
             )
           : Center(
               child: SingleChildScrollView(
