@@ -87,11 +87,6 @@
       ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
-    },
-    "validationFunctionAlfa": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
     }
   },
   "parameters": {
@@ -124,22 +119,6 @@
         {
           "category": "function",
           "resourceName": "onboardnigformGetterAlfa"
-        }
-      ]
-    },
-    "AMPLIFY_function_validationFunctionAlfa_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "validationFunctionAlfa"
-        }
-      ]
-    },
-    "AMPLIFY_function_validationFunctionAlfa_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "validationFunctionAlfa"
         }
       ]
     }

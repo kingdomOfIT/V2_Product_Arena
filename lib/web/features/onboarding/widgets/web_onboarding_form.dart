@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class MobileOnboardingForm extends StatelessWidget {
-  const MobileOnboardingForm({super.key});
+class WebOnboardingForm extends StatelessWidget {
+  const WebOnboardingForm({super.key});
 
   @override
   Widget build(BuildContext context) {

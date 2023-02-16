@@ -1,7 +1,8 @@
-// ignore_for_file: depend_on_referenced_packages, sized_box_for_whitespace, deprecated_member_use
+// ignore_for_file: depend_on_referenced_packages, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:v2_product_arena/constants/global_variables.dart';
 
 class WebFooter extends StatelessWidget {
   const WebFooter({super.key});
@@ -96,44 +97,20 @@ class WebFooter extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Flexible(
-                              child: GestureDetector(
-                                child: Image.asset(
-                                  'assets/images/facebook.png',
-                                ),
-                                onTap: () =>
-                                    launch('https://www.facebook.com/tech387'),
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: GlobalVariables.socialMedia
+                            .map(
+                              (e) => InkWell(
+                                onTap: () async {
+                                  await launchUrl(
+                                    Uri.parse(e['url'] as String),
+                                  );
+                                },
+                                child: Image.asset(e['image'] as String),
                               ),
-                            ),
-                            Flexible(
-                              child: GestureDetector(
-                                child: Image.asset(
-                                  'assets/images/instagram.png',
-                                ),
-                                onTap: () => launch(
-                                    'https://www.instagram.com/tech387/?hl=en'),
-                              ),
-                            ),
-                            Flexible(
-                              child: GestureDetector(
-                                child: Image.asset(
-                                  'assets/images/linked.png',
-                                ),
-                                onTap: () => launch(
-                                    'https://www.linkedin.com/company/tech-387/mycompany/'),
-                              ),
-                            ),
-                            Flexible(
-                              child: GestureDetector(
-                                child: Image.asset(
-                                  'assets/images/tech.png',
-                                ),
-                                onTap: () => launch('https://www.tech387.com/'),
-                              ),
-                            ),
-                          ]),
+                            )
+                            .toList(),
+                      ),
                       SizedBox(
                         height: deviceHeight * 0.014,
                       ),

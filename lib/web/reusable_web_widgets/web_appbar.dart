@@ -1,7 +1,6 @@
 // ignore_for_file: unused_import, prefer_const_constructors_in_immutables
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_login_screen.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_signup_screen.dart';
 
@@ -59,21 +58,19 @@ class _WebAppBarState extends State<WebAppBar> {
                   ),
                 ),
                 child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(3),
-                    ),
-                  ),
+                  style:
+                      ElevatedButton.styleFrom(backgroundColor: Colors.black),
                   onPressed: () {
                     Navigator.of(context)
                         .pushReplacementNamed(widget.routeName);
                   },
-                  child: Text(widget.text,
-                      style: GoogleFonts.notoSans(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 14,
-                          color: Colors.white)),
+                  child: Text(
+                    widget.text,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                 ),
               ),
             ],
