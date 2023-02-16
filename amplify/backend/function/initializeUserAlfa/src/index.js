@@ -2,6 +2,7 @@
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
  */
 
+const util = require("util");
 const AWS = require("aws-sdk");
 const dynamoDb = new AWS.DynamoDB.DocumentClient({
   region: "us-east-1",
@@ -9,6 +10,7 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient({
 
 exports.handler = async (event) => {
   console.log(`EVENT: ${JSON.stringify(event)}`);
+  console.log('EVENT: ', util.inspect(event, { showHidden: false, depth: null }));
 
   let body = JSON.parse(event.body);
   console.log(body);
@@ -49,7 +51,7 @@ exports.handler = async (event) => {
   try {
     let data = await dynamoDb
       .query({
-        TableName: "onboardingT",
+        TableName: "onboardnigT",
         KeyConditionExpression: "startdate = :date",
         ExpressionAttributeValues: {
           ":date": body.date,

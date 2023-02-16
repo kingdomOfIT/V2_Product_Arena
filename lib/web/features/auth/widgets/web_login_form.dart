@@ -1,4 +1,6 @@
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_home_screen.dart';
@@ -15,9 +17,13 @@ class _WebLoginFormState extends State<WebLoginForm> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
+  bool _backError = false;
   bool emailErrored = false;
   bool passwordErrored = false;
   bool viewPassword = false;
+
+  // ignore: avoid_init_to_null
+  var _backErrorMsg = null;
 
   var emailColor = const Color(0xFF605D66);
   var passwordColor = const Color(0xFF605D66);
@@ -71,6 +77,8 @@ class _WebLoginFormState extends State<WebLoginForm> {
               },
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(
+                errorText: _backError ? '' : null,
+                helperText: '',
                 suffixIcon: Visibility(
                   visible: emailErrored,
                   child: const Icon(
@@ -117,7 +125,7 @@ class _WebLoginFormState extends State<WebLoginForm> {
               ),
             ),
             const SizedBox(
-              height: 20,
+              height: 10,
             ),
             TextFormField(
               key: const Key('passwordField'),
@@ -157,10 +165,13 @@ class _WebLoginFormState extends State<WebLoginForm> {
               },
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(
+                helperText: '',
+                errorText: _backErrorMsg,
                 errorStyle: GoogleFonts.notoSans(
                   color: const Color(0xFFB3261E),
                 ),
                 suffixIcon: InkWell(
+                  key: const Key('togglePasswordView'),
                   onTap: () {
                     setState(() {
                       viewPassword = !viewPassword;
@@ -208,9 +219,10 @@ class _WebLoginFormState extends State<WebLoginForm> {
               ),
             ),
             const SizedBox(
-              height: 20,
+              height: 10,
             ),
             ElevatedButton(
+              key: const Key('loginButton'),
               onPressed: () async {
                 if (_loginFormKey.currentState!.validate()) {
                   try {
@@ -218,39 +230,55 @@ class _WebLoginFormState extends State<WebLoginForm> {
                       username: emailController.text,
                       password: passwordController.text,
                     );
+                    safePrint(result);
                     if (result.isSignedIn && mounted) {
+                      setState(() {
+                        _backError = false;
+                        _backErrorMsg = null;
+                      });
                       Navigator.of(context)
                           .pushReplacementNamed(WebHomeScreen.routeName);
-                    } else if (result.nextStep?.signInStep ==
-                        "CONFIRM_SIGN_UP_STEP") {
-                      safePrint("User didn't verify account");
-                      await Amplify.Auth.resendSignUpCode(
-                        username: emailController.text,
-                      );
+                    } else if (result.nextStep.signInStep ==
+                        'CONFIRM_SIGN_IN_WITH_NEW_PASSWORD') {
+                      setState(() {
+                        _backError = false;
+                        _backErrorMsg = null;
+                      });
+                      Navigator.of(context)
+                          .pushReplacementNamed(WebHomeScreen.routeName);
+                      safePrint('Please create an account through app');
                     }
+                  } on InvalidCredentialsException {
+                    safePrint('Incorrect email or password.');
+                    setState(() {
+                      _backError = true;
+                      _backErrorMsg = 'Incorrect email or password.';
+                      emailColor = const Color(0xFFB3261E);
+                      passwordColor = const Color(0xFFB3261E);
+                    });
                   } on UserNotFoundException {
-                    safePrint('The user is not found. Please register');
-                  } on UserNotConfirmedException {
-                    // TODO
-                  } on NotAuthorizedException {
-                    safePrint(
-                        'Username or password is wrong. Please try again');
-                  } on Exception catch (error) {
+                    safePrint('User does not exist.');
+                    setState(() {
+                      _backError = true;
+                      _backErrorMsg = 'Incorrect email or password.';
+                      emailColor = const Color(0xFFB3261E);
+                      passwordColor = const Color(0xFFB3261E);
+                    });
+                  } on Exception catch (e) {
                     safePrint(
                         'An unexpected error has happened. Check the logs for detail');
-                    safePrint(error.toString());
+                    safePrint(e.toString());
                   }
-                  emailController.clear();
-                  passwordController.clear();
-                  // Navigator.of(context)
-                  //     .pushReplacementNamed(WebHomeScreen.routeName);
                 }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,
                 minimumSize: const Size(double.infinity, 56),
               ),
-              child: const Text('Login'),
+              child: const Text(
+                'Login',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
             const SizedBox(
               height: 20,
