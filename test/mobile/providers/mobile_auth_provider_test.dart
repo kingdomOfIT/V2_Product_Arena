@@ -38,8 +38,14 @@ class MockAuth extends Mock implements AuthCategory {
   }
 }
 
-@GenerateMocks(
-    [SignInResult, SignUpResult, AmplifyClass, BuildContext, SignOutResult])
+@GenerateMocks([
+  SignInResult,
+  SignUpResult,
+  AmplifyClass,
+  BuildContext,
+  SignOutResult,
+  RestOperation
+])
 void main() {
   test('mobile auth provider ...', () async {
     MobileAuth mobileAuth = MockMobileAuth();

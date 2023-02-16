@@ -50,6 +50,7 @@ class _Question1State extends State<Question1> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: RadioListTile(
+                    key: const Key('onboardingQYes'),
                     activeColor: Colors.black,
                     tileColor: Color(0xFFE9E9E9),
                     contentPadding: EdgeInsets.zero,
@@ -68,6 +69,7 @@ class _Question1State extends State<Question1> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: RadioListTile(
+                    key: const Key('onboardingQNo'),
                     contentPadding: EdgeInsets.zero,
                     activeColor: Colors.black,
                     tileColor: const Color(0xFFE9E9E9),
@@ -107,6 +109,7 @@ class _Question1State extends State<Question1> {
                       left: (238 / 360) * MediaQuery.of(context).size.width,
                       bottom: (65 / 775) * MediaQuery.of(context).size.height),
                   child: FormButton(
+                      key: const Key('nextButtonFQ'),
                       buttonWidth:
                           (90 / 360) * MediaQuery.of(context).size.width,
                       buttonHeight: 40,

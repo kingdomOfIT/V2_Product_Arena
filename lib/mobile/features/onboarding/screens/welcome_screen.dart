@@ -79,6 +79,7 @@ class FirstPage extends StatelessWidget {
                         ),
                       ),
                       IconButton(
+                        key: const Key('onboardingFormRed'),
                         onPressed: () {
                           Navigator.of(context)
                               .pushNamed(MobileOnboardingScreen.routeName);

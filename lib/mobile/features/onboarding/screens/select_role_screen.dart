@@ -86,11 +86,11 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
         apiName: "userDataInitAlfa",
       );
       final response = await restOperation.response;
-      Map<String, dynamic> responseMap = jsonDecode(response.decodeBody());
+      // Map<String, dynamic> responseMap = jsonDecode(response.decodeBody());
       print('POST call succeeded');
       Navigator.of(context)
           .pushReplacementNamed(MobileVerifiedOnboardingScreen.routeName);
-      print(responseMap['lectures']);
+      // print(responseMap['lectures']);
     } on ApiException catch (e) {
       print('POST call failed: $e');
     }
@@ -173,6 +173,7 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
                 },
               ),
               CustomButton(
+                key: const Key('submitOnboarding'),
                 content: Text(
                   'Submit',
                   style: GoogleFonts.notoSans(

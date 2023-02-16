@@ -377,6 +377,38 @@ class _FakeDiagnosticsNode_11 extends _i2.SmartFake
       super.toString();
 }
 
+class _FakeAWSHttpResponse_12 extends _i2.SmartFake
+    implements _i1.AWSHttpResponse {
+  _FakeAWSHttpResponse_12(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeCancelableOperation_13<T> extends _i2.SmartFake
+    implements _i1.CancelableOperation<T> {
+  _FakeCancelableOperation_13(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeAWSLogger_14 extends _i2.SmartFake implements _i1.AWSLogger {
+  _FakeAWSLogger_14(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [SignInResult].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -1029,4 +1061,78 @@ class MockSignOutResult extends _i2.Mock implements _i1.SignOutResult {
         ),
         returnValue: <String, Object?>{},
       ) as Map<String, Object?>);
+}
+
+/// A class which mocks [RestOperation].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockRestOperation extends _i2.Mock implements _i1.RestOperation {
+  MockRestOperation() {
+    _i2.throwOnMissingStub(this);
+  }
+
+  @override
+  _i6.Stream<int> get requestProgress => (super.noSuchMethod(
+        Invocation.getter(#requestProgress),
+        returnValue: _i6.Stream<int>.empty(),
+      ) as _i6.Stream<int>);
+  @override
+  _i6.Stream<int> get responseProgress => (super.noSuchMethod(
+        Invocation.getter(#responseProgress),
+        returnValue: _i6.Stream<int>.empty(),
+      ) as _i6.Stream<int>);
+  @override
+  _i6.Future<_i1.AWSHttpResponse> get response => (super.noSuchMethod(
+        Invocation.getter(#response),
+        returnValue:
+            _i6.Future<_i1.AWSHttpResponse>.value(_FakeAWSHttpResponse_12(
+          this,
+          Invocation.getter(#response),
+        )),
+      ) as _i6.Future<_i1.AWSHttpResponse>);
+  @override
+  String get runtimeTypeName => (super.noSuchMethod(
+        Invocation.getter(#runtimeTypeName),
+        returnValue: '',
+      ) as String);
+  @override
+  String get id => (super.noSuchMethod(
+        Invocation.getter(#id),
+        returnValue: '',
+      ) as String);
+  @override
+  _i1.CancelableOperation<_i1.AWSHttpResponse> get operation =>
+      (super.noSuchMethod(
+        Invocation.getter(#operation),
+        returnValue: _FakeCancelableOperation_13<_i1.AWSHttpResponse>(
+          this,
+          Invocation.getter(#operation),
+        ),
+      ) as _i1.CancelableOperation<_i1.AWSHttpResponse>);
+  @override
+  _i1.AWSLogger get logger => (super.noSuchMethod(
+        Invocation.getter(#logger),
+        returnValue: _FakeAWSLogger_14(
+          this,
+          Invocation.getter(#logger),
+        ),
+      ) as _i1.AWSLogger);
+  @override
+  _i6.Future<void> cancel() => (super.noSuchMethod(
+        Invocation.method(
+          #cancel,
+          [],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+  @override
+  _i6.Future<void> close() => (super.noSuchMethod(
+        Invocation.method(
+          #close,
+          [],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 }

@@ -18,7 +18,6 @@ class MobileOnboardingForm extends StatefulWidget {
     required this.text,
     required this.pageController,
   });
-  static const routeName = '/mobile-onboarding-form';
   @override
   State<MobileOnboardingForm> createState() => _MobileOnboardingFormState();
 }
@@ -33,6 +32,7 @@ class _MobileOnboardingFormState extends State<MobileOnboardingForm> {
       appBar: MyHeader(),
       body: SafeArea(
         child: SingleChildScrollView(
+          key: const Key('scroll'),
           child: Padding(
             padding: EdgeInsets.only(
                 left: (32 / 360) * MediaQuery.of(context).size.width,
@@ -59,6 +59,7 @@ class _MobileOnboardingFormState extends State<MobileOnboardingForm> {
                 Form(
                   key: _formKey,
                   child: TextFormField(
+                    key: const Key('onboardingQAnsw'),
                     controller: widget.controller,
                     keyboardType: TextInputType.multiline,
                     minLines: 1,
@@ -163,6 +164,7 @@ class _MobileOnboardingFormState extends State<MobileOnboardingForm> {
                         width: (116 / 360) * MediaQuery.of(context).size.width,
                       ),
                       FormButton(
+                          key: const Key('nextButtonForm'),
                           backgroundColor: Colors.black,
                           text: 'Next',
                           buttonWidth:

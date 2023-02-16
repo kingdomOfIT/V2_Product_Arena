@@ -115,7 +115,7 @@ void main() {
     await tester.pumpWidget(createWebSignupScreen());
     await tester.pumpAndSettle();
 
-    final dropdown = find.byKey(const ValueKey('dropdownButtonSignup'));
+    final dropdown = find.byKey(const Key('dropdownButtonSignup'));
 
     await tester.tap(dropdown);
     await tester.pumpAndSettle();

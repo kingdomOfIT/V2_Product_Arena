@@ -228,6 +228,7 @@ class _LinkVideoScreenState extends State<LinkVideoScreen> {
                                   MediaQuery.of(context).size.width,
                             ),
                             FormButton(
+                                key: const Key('nextButtonVideo'),
                                 backgroundColor: Colors.black,
                                 text: 'Next',
                                 buttonWidth: (90 / 360) *

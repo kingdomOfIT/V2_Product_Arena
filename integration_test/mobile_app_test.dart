@@ -1,19 +1,25 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:provider/provider.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
-import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
-import 'package:v2_product_arena/amplifyconfiguration.dart';
+import 'package:v2_product_arena/constants/global_variables.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/email_verification_screen.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/email_verified_screen.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/mobile_login_screen.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/mobile_signup_screen.dart';
 import 'package:v2_product_arena/mobile/features/home/screens/mobile_home_screen.dart';
 import 'package:v2_product_arena/mobile/features/onboarding/screens/mobile_onboarding_screen.dart';
+import 'package:v2_product_arena/mobile/features/onboarding/screens/mobile_verified_onboarding_screen.dart';
+import 'package:v2_product_arena/mobile/features/onboarding/widgets/role_tile.dart';
+import 'package:v2_product_arena/mobile/providers/answer_provider.dart';
+import 'package:v2_product_arena/mobile/providers/error_message_provider.dart';
 import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
+import 'package:v2_product_arena/mobile/providers/role_provider.dart';
 import 'mobile_auth_provider_test.mocks.dart';
 
 class MockMobileAuth extends MobileAuth {}
@@ -59,13 +65,55 @@ class MockAuth extends Mock implements AuthCategory {
   }
 }
 
-late MobileAuth mobileAuthent;
+class MockAPI extends Mock implements APICategory {
+  @override
+  RestOperation post(String path,
+      {Map<String, String>? headers,
+      HttpPayload? body,
+      Map<String, String>? queryParameters,
+      String? apiName}) {
+    var result = MockRestOperation();
+    when(result.response).thenAnswer((_) async {
+      return AWSHttpResponse(
+        statusCode: 200,
+        headers: const {},
+        body: Uint8List.fromList([]),
+      );
+    });
+    return result;
+  }
+}
 
-Widget createMobileLoginScreen() => ChangeNotifierProvider<MobileAuth>(
-      create: (context) {
-        mobileAuthent = MobileAuth();
-        return mobileAuthent;
-      },
+late MobileAuth mobileAuthent;
+late ErrorMessage errorAuth;
+late AnswerProvider answerAuth;
+late Role roleAuth;
+
+Widget createMobileLoginScreen() => MultiProvider(
+      providers: [
+        ChangeNotifierProvider<MobileAuth>(
+          create: (context) {
+            mobileAuthent = MobileAuth();
+            return mobileAuthent;
+          },
+        ),
+        ChangeNotifierProvider<ErrorMessage>(
+          create: (context) {
+            errorAuth = ErrorMessage();
+            return errorAuth;
+          },
+        ),
+        ChangeNotifierProvider<AnswerProvider>(
+          create: (context) {
+            answerAuth = AnswerProvider();
+            return answerAuth;
+          },
+        ),
+        ChangeNotifierProvider<Role>(create: (context) {
+          roleAuth = Role({}, '');
+          return roleAuth;
+        }),
+      ],
       child: MaterialApp(
         routes: {
           '/mobile-login': (context) => const MobileLoginScreen(),
@@ -74,6 +122,8 @@ Widget createMobileLoginScreen() => ChangeNotifierProvider<MobileAuth>(
           '/email-verification': (context) => const EmailVerificationScreen(),
           '/email-verified': (context) => const EmailVerified(),
           '/mobile-onboarding': (context) => const MobileOnboardingScreen(),
+          '/mobile-verified-onboarding': (context) =>
+              const MobileVerifiedOnboardingScreen(),
         },
         home: const MobileLoginScreen(),
       ),
@@ -81,23 +131,13 @@ Widget createMobileLoginScreen() => ChangeNotifierProvider<MobileAuth>(
 
 @GenerateMocks([SignInResult, SignUpResult, AmplifyClass])
 void main() {
+  // _currentPage = 0;
   group('Testing App Performance Tests', () {
     IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-
-    test('can configure Amplify', () async {
-      AmplifyAuthCognito authPlugin = AmplifyAuthCognito();
-      await Amplify.addPlugin(authPlugin);
-
-      try {
-        await Amplify.configure(amplifyconfig);
-      } on AmplifyAlreadyConfiguredException {
-        safePrint(
-            "Tried to reconfigure Amplify: This can occur when your app restarts on Android.");
-      }
-    });
     testWidgets('Mobile signup', (tester) async {
       MockAmplifyClass test = MockAmplifyClass();
       when(test.Auth).thenReturn(MockAuth());
+      when(test.API).thenReturn(MockAPI());
       AmplifyClass.instance = test;
       await tester.pumpWidget(createMobileLoginScreen());
       await tester.pumpAndSettle();
@@ -211,6 +251,72 @@ void main() {
       await tester.tap(find.byKey(const Key('emailVerifyButton')));
       await tester.pumpAndSettle();
 
+      await tester.pumpAndSettle(const Duration(seconds: 5));
+
+      await tester.tap(find.byKey(const Key('onboardingFormRed')));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key('onboardingQYes')));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key('nextButtonFQ')));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key('onboardingQAnsw')));
+      await tester.enterText(
+          find.byKey(const Key('onboardingQAnsw')), 'anything');
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const Key('nextButtonForm')));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key('onboardingQAnsw')));
+      await tester.enterText(
+          find.byKey(const Key('onboardingQAnsw')), 'anything');
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const Key('nextButtonForm')));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key('onboardingQAnsw')));
+      await tester.enterText(
+          find.byKey(const Key('onboardingQAnsw')), 'anything');
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const Key('nextButtonForm')));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key('onboardingQAnsw')));
+      await tester.enterText(
+          find.byKey(const Key('onboardingQAnsw')), 'anything');
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const Key('nextButtonForm')));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key('onboardingQAnsw')));
+      await tester.enterText(
+          find.byKey(const Key('onboardingQAnsw')), 'anything');
+      await tester.pumpAndSettle();
+
+      await tester.fling(
+          find.byKey(const Key('scroll')), const Offset(0, -200), 1000);
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key('nextButtonForm')));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key('vasOdgovorTextField')));
+      await tester.enterText(find.byKey(const Key('vasOdgovorTextField')),
+          'https://www.youtube.com/watch?v=75i5VmTI6A0');
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const Key('nextButtonVideo')));
+      await tester.pumpAndSettle();
+
+      final roleTileFinder = find.byWidgetPredicate(
+          (widget) => widget is RoleTile && widget.role == listRole[0]);
+
+      await tester.tap(roleTileFinder);
+
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key('submitOnboarding')));
       await tester.pumpAndSettle();
     });
   });
