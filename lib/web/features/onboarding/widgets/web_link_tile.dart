@@ -70,7 +70,11 @@ class LinkTile extends StatelessWidget {
                 ),
                 validator: (value) {
                   context.read<WebAnswerProvider>().addItem(controller.text);
-                  if (value!.isEmpty || value.isNotEmpty) return null;
+                  if (value!.isEmpty) {
+                    return '';
+                  } else {
+                    return null;
+                  }
                 },
               ),
             ),

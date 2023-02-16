@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:v2_product_arena/web/providers/web_ob_answers.dart';
 import 'package:v2_product_arena/web/providers/web_ob_error.dart';
+import '../../../../mobile/providers/error_message_provider.dart';
 import '../web_constansts_ob.dart';
 import 'package:provider/provider.dart';
 
@@ -44,7 +45,7 @@ class _OptionsTileState extends State<OptionsTile> {
   Widget build(BuildContext context) {
     return Container(
       width: (935 / 1440) * MediaQuery.of(context).size.width,
-      height: 200,
+      height: 300,
       decoration: BoxDecoration(
         color: const Color(0xFFFFFFFF),
         border: Border.all(
@@ -96,23 +97,22 @@ class _OptionsTileState extends State<OptionsTile> {
                 })),
           ),
         ),
-        SizedBox(
-          height: errorHeight,
-          child: Row(
-            children: <Widget>[
-              Icon(errorIcon, size: 20.0, color: Colors.red[700]),
-              Padding(
-                padding: const EdgeInsets.only(left: 5.0),
-                child: Text(
-                  errorText,
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    color: Colors.red[700],
-                  ),
-                ),
-              )
-            ],
-          ),
+        Consumer<WebErrorMessage>(
+          builder: (context, error, child) {
+            return SizedBox(
+              height: error.errorHeight,
+              child: Row(
+                children: <Widget>[
+                  Icon(error.errorIcon, size: 20.0, color: Colors.red[700]),
+                  Padding(
+                      padding: const EdgeInsets.only(left: 5.0),
+                      child: Text(error.errorText,
+                          style: TextStyle(
+                              fontSize: 16.0, color: Colors.red[700])))
+                ],
+              ),
+            );
+          },
         ),
       ]),
     );
