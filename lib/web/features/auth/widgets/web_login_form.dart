@@ -171,6 +171,7 @@ class _WebLoginFormState extends State<WebLoginForm> {
                   color: const Color(0xFFB3261E),
                 ),
                 suffixIcon: InkWell(
+                  key: const Key('togglePasswordView'),
                   onTap: () {
                     setState(() {
                       viewPassword = !viewPassword;
@@ -221,6 +222,7 @@ class _WebLoginFormState extends State<WebLoginForm> {
               height: 10,
             ),
             ElevatedButton(
+              key: const Key('loginButton'),
               onPressed: () async {
                 if (_loginFormKey.currentState!.validate()) {
                   try {
@@ -236,22 +238,7 @@ class _WebLoginFormState extends State<WebLoginForm> {
                       });
                       Navigator.of(context)
                           .pushReplacementNamed(WebHomeScreen.routeName);
-                    }
-                    //TODO Add redirection to Verification screen
-                    // else if (result.nextStep?.signInStep ==
-                    //     "CONFIRM_SIGN_UP_STEP") {
-                    //   safePrint("User didn't verify account");
-                    //   await Amplify.Auth.resendSignUpCode(
-                    //     username: emailController.text,
-                    //   );
-                    // setState(() {
-                    //     _backError = false;
-                    //     _backErrorMsg = null;
-                    //   });
-                    // Navigator.of(context)
-                    //      .pushReplacementNamed(SignupConfirmation.routeName);
-                    //}
-                    else if (result.nextStep?.signInStep ==
+                    } else if (result.nextStep.signInStep ==
                         'CONFIRM_SIGN_IN_WITH_NEW_PASSWORD') {
                       setState(() {
                         _backError = false;
@@ -261,7 +248,7 @@ class _WebLoginFormState extends State<WebLoginForm> {
                           .pushReplacementNamed(WebHomeScreen.routeName);
                       safePrint('Please create an account through app');
                     }
-                  } on NotAuthorizedException {
+                  } on InvalidCredentialsException {
                     safePrint('Incorrect email or password.');
                     setState(() {
                       _backError = true;
@@ -288,7 +275,10 @@ class _WebLoginFormState extends State<WebLoginForm> {
                 backgroundColor: Colors.black,
                 minimumSize: const Size(double.infinity, 56),
               ),
-              child: const Text('Login'),
+              child: const Text(
+                'Login',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
             const SizedBox(
               height: 20,
