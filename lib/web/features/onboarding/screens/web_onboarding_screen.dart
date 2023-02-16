@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -5,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:v2_product_arena/web/providers/web_ob_answers.dart';
 import 'package:v2_product_arena/web/providers/web_ob_role.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_ob_appbar.dart';
+import '../../../providers/web_ob_error.dart';
 import '../../../reusable_web_widgets/web_footer.dart';
 import '../web_constansts_ob.dart';
 import '../widgets/video_tile.dart';
@@ -53,8 +56,8 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
     await _configureAmplify();
     try {
       final result = await Amplify.Auth.signIn(
-        username: "mkaric@pa.tech387.com", // email of user
-        password: "Pass123!",
+        username: "80365@xilinous.xyz", // email of user
+        password: "Pass123!!!",
       );
 
       print('LOGINOVO SE');
@@ -102,7 +105,6 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
     }
   }
 
-  late AnimationController _controller;
   TextEditingController linkController = TextEditingController();
   List<TextEditingController> controllers =
       List.generate(6, (i) => TextEditingController());
@@ -132,6 +134,7 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
   Widget build(BuildContext context) {
     List<String> s1 = context.read<WebRole>().selctRole;
     List<String> s2 = context.read<WebAnswerProvider>().answ;
+
     double maxWidth = MediaQuery.of(context).size.width;
     double maxHeight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -264,15 +267,20 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
                                   .formKeys[i]
                                   .currentState!
                                   .validate()) {
-                                count++;
+                                if (i != 5) {
+                                  count++;
+                                }
                               }
                             }
                             print(s1);
+
                             print(s2);
-                            // print(count);
-                            // print(context.read<Role>().length);
-                            // print(context.read<WebAnswerProvider>().da);
-                            // print(context.read<WebAnswerProvider>().ne);
+                            print(s2.length);
+                            print(count);
+                            print(context.read<WebRole>().length);
+                            print(context.read<WebAnswerProvider>().da);
+                            print(context.read<WebAnswerProvider>().ne);
+
                             if (count == 5 &&
                                 (context.read<WebRole>().length == 2 ||
                                     context.read<WebRole>().length == 1) &&
@@ -280,6 +288,14 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
                                     context.read<WebAnswerProvider>().ne ==
                                         true)) {
                               submitOnboarding(s1, s2);
+                              print('hljeb');
+                            }
+                            if (!(context.read<WebAnswerProvider>().da ==
+                                    true ||
+                                context.read<WebAnswerProvider>().ne == true)) {
+                              context.read<WebErrorMessage>().change();
+                            } else {
+                              context.read<WebErrorMessage>().reset();
                             }
                           }),
                         ],
