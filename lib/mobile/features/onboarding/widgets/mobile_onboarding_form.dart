@@ -38,6 +38,7 @@ class _MobileOnboardingFormState extends State<MobileOnboardingForm> {
                 left: (32 / 360) * MediaQuery.of(context).size.width,
                 right: (32 / 360) * MediaQuery.of(context).size.width),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 const SizedBox(
                   height: 60,
@@ -121,10 +122,10 @@ class _MobileOnboardingFormState extends State<MobileOnboardingForm> {
                     );
                   },
                 ),
-                Padding(
-                  padding: EdgeInsets.only(
-                      top: 16,
-                      left: (217 / 360) * MediaQuery.of(context).size.width),
+                Container(
+                  // padding: EdgeInsets.only(
+                  //     top: 16,
+                  //     left: (217 / 360) * MediaQuery.of(context).size.width),
                   child: TextButton(
                     onPressed: () {
                       widget.controller.clear();

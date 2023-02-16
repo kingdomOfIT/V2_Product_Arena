@@ -1,6 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages, body_might_complete_normally_nullable, sort_child_properties_last, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:v2_product_arena/constants/global_variables.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/email_verification_screen.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/mobile_login_screen.dart';
@@ -37,6 +38,8 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
   final phoneFocusNode = FocusNode();
   final emailFocusNode = FocusNode();
   final passwordFocusNode = FocusNode();
+
+  String text = '';
 
   @override
   void dispose() {
@@ -100,13 +103,16 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
     FocusScope.of(context).unfocus();
     if (isValid) {
       formKey.currentState!.save();
+      setState(() {
+        isLoading = true;
+      });
       await Provider.of<MobileAuth>(context, listen: false).signUpUser(
         nameController.text,
         surnameController.text,
         birthDateController.text,
         cityController.text,
         selectedValue!,
-        dialCodeDigits + phoneController.text,
+        phoneController.text,
         emailController.text,
         passwordController.text,
         context,
@@ -117,6 +123,9 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
       Provider.of<MobileAuth>(context, listen: false).userPassword =
           passwordController.text;
     }
+    setState(() {
+      isLoading = false;
+    });
   }
 
   void togglePasswordView() {
@@ -137,9 +146,13 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
             Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
         child: const MobileAppBar(),
       ),
-      body: Provider.of<MobileAuth>(context, listen: false).isLoading
+      body: isLoading
           ? const Center(
-              child: CircularProgressIndicator(),
+              child: SpinKitRing(
+                color: Color.fromRGBO(34, 233, 116, 1),
+                size: 90.0,
+                lineWidth: 10.0,
+              ),
             )
           : Center(
               child: SingleChildScrollView(
@@ -555,10 +568,11 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                     if (value!.isEmpty) {
                                       mobileAuth.isPhoneNumError = true;
                                       return 'Please fill the required field.';
-                                    } else if ((dialCodeDigits + value).length <
-                                        9) {
+                                    } else if (value.length < 9) {
                                       mobileAuth.isPhoneNumError = true;
                                       return 'Phone number must contain a minimum of 9 numbers.';
+                                    } else if (!value.startsWith('+')) {
+                                      return 'Invalid format. Valid format: +066405798';
                                     } else {
                                       mobileAuth.isPhoneNumError = false;
                                     }
@@ -665,20 +679,23 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                       vertical: deviceHeight * 0.018,
                                       horizontal: deviceWidth * 0.05,
                                     ),
-                                    suffixIcon: InkWell(
-                                      key:
-                                          const Key('togglePasswordViewSignup'),
-                                      onTap: togglePasswordView,
-                                      child: Icon(
-                                        isHiddenPassword
-                                            ? Icons.visibility
-                                            : Icons.visibility_off,
-                                        color: mobileAuth.isLoginPasswordError
-                                            ? Colors.red
-                                            : null,
-                                        size: deviceHeight * 0.03,
-                                      ),
-                                    ),
+                                    suffixIcon: text.isNotEmpty
+                                        ? InkWell(
+                                            key: const Key(
+                                                'togglePasswordViewSignup'),
+                                            onTap: togglePasswordView,
+                                            child: Icon(
+                                              isHiddenPassword
+                                                  ? Icons.visibility
+                                                  : Icons.visibility_off,
+                                              color: mobileAuth
+                                                      .isLoginPasswordError
+                                                  ? Colors.red
+                                                  : null,
+                                              size: deviceHeight * 0.03,
+                                            ),
+                                          )
+                                        : null,
                                     label: Text(
                                       'Password',
                                       style: GoogleFonts.notoSans(
@@ -687,6 +704,11 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                     ),
                                   ),
                                   focusNode: passwordFocusNode,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      text = value;
+                                    });
+                                  },
                                   onEditingComplete: () =>
                                       FocusScope.of(context).unfocus(),
                                   validator: (value) {
@@ -768,6 +790,13 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                 onTap: () {
                                   Navigator.of(context).pushReplacementNamed(
                                       MobileLoginScreen.routeName);
+                                  mobileAuth.isEmailError = false;
+                                  mobileAuth.isNameError = false;
+                                  mobileAuth.isSurnameError = false;
+                                  mobileAuth.isBirthDateError = false;
+                                  mobileAuth.isCityError = false;
+                                  mobileAuth.isPhoneNumError = false;
+                                  mobileAuth.isPasswordError = false;
                                 },
                                 child: Text(
                                   'Log in',
