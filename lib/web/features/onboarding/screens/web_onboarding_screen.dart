@@ -80,16 +80,16 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
       final restOperation = Amplify.API.post("/api/onboarding/submit",
           body: HttpPayload.json({
             "date": "Feb2023",
-            "roles": ['fullstack', 'backend'],
+            "roles": s1,
             "answers": {
               // answers are in the same order as questions, null if not answered
-              "0": "True",
-              "1": "apple",
-              "2": "orange",
-              "3": "banana",
-              "4": null,
-              "5": "sample",
-              "6": "answer",
+              "0": s2[0],
+              "1": s2[1],
+              "2": s2[2],
+              "3": s2[3],
+              "4": s2[4],
+              "5": s2[5],
+              "6": s2[6],
             },
           }),
           apiName: "userDataInitAlfa");
@@ -130,8 +130,8 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
 */
   @override
   Widget build(BuildContext context) {
-    List<String> s1 = context.read<Role>().selctRole;
-    List<String> s2 = context.read<AnswerProvider>().answ;
+    List<String> s1 = context.read<WebRole>().selctRole;
+    List<String> s2 = context.read<WebAnswerProvider>().answ;
     double maxWidth = MediaQuery.of(context).size.width;
     double maxHeight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -218,6 +218,7 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
                                 question: tileQuestions[index],
                                 controller: controllers[index],
                                 formKey: globalKey[index],
+                                i: index,
                               );
                             },
                             separatorBuilder:
@@ -254,39 +255,33 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           CustomButton(onPressed: () {
-                            // print(s1);
-                            // int i;
-                            // for (i = 1; i < 7; i++) {
-                            //   if (context
-                            //       .read<AnswerProvider>()
-                            //       .answ[i]
-                            //       .isEmpty) {
-                            //     consumer[i] = true;
-                            //   }
-                            // }
-                            // submitOnboarding(s1, s2);
+                            int i, j;
+                            int count = 0;
+
+                            for (i = 0; i < 6; i++) {
+                              if (context
+                                  .read<WebAnswerProvider>()
+                                  .formKeys[i]
+                                  .currentState!
+                                  .validate()) {
+                                count++;
+                              }
+                            }
+                            print(s1);
+                            print(s2);
+                            // print(count);
+                            // print(context.read<Role>().length);
+                            // print(context.read<WebAnswerProvider>().da);
+                            // print(context.read<WebAnswerProvider>().ne);
+                            if (count == 5 &&
+                                (context.read<WebRole>().length == 2 ||
+                                    context.read<WebRole>().length == 1) &&
+                                (context.read<WebAnswerProvider>().da == true ||
+                                    context.read<WebAnswerProvider>().ne ==
+                                        true)) {
+                              submitOnboarding(s1, s2);
+                            }
                           }),
-                          SizedBox(
-                            height: 60,
-                            width: (190 / 1440) * maxWidth - 1,
-                            child: TextButton(
-                              onPressed: () {
-                                int i;
-                                for (i = 0; i < controllers.length; i++) {
-                                  controllers[i].clear();
-                                }
-                              },
-                              child: Center(
-                                child: Text(
-                                  'Clear selection',
-                                  style: GoogleFonts.notoSans(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700,
-                                      color: const Color(0xFF000000)),
-                                ),
-                              ),
-                            ),
-                          ),
                         ],
                       ),
                     ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Role with ChangeNotifier {
+class WebRole with ChangeNotifier {
   Map<String, String> name;
   String image;
   Color backgroundColor = const Color(0xFFE9E9E9);
@@ -14,7 +14,7 @@ class Role with ChangeNotifier {
   Color get txt => textColor;
   List<String> get selctRole => selectedRoles;
 
-  Role(this.name, this.image);
+  WebRole(this.name, this.image);
 
   void initialize(String s) {
     image = s;
@@ -32,17 +32,17 @@ class Role with ChangeNotifier {
     notifyListeners();
   }
 
-  void addItem(Role role) {
+  void addItem(WebRole role) {
     selectedRoles.add(role.name['forBackend']!);
     notifyListeners();
   }
 
-  void removeItem(Role role) {
+  void removeItem(WebRole role) {
     selectedRoles.remove(role.name['forBackend']!);
     notifyListeners();
   }
 
-  bool hasRole(Role role) {
+  bool hasRole(WebRole role) {
     return selectedRoles
         .where((element) => element == role.name['forBackend']!)
         .isNotEmpty;

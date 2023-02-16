@@ -7,8 +7,11 @@ class LinkTile extends StatelessWidget {
   final TextEditingController controller;
 
   const LinkTile({super.key, required this.controller});
+
   @override
   Widget build(BuildContext context) {
+    RegExp videohttp = RegExp(
+        r'(?:http:\/\/|https:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be|vimeo\.com)\/(?:watch\?v=)?([a-zA-Z0-9_-]{11}|[0-9]+)|(?:http:\/\/|https:\/\/)?(?:www\.)?file\.io\/[a-zA-Z0-9]+');
     return Container(
       width: 452,
       height: 214,
@@ -40,29 +43,35 @@ class LinkTile extends StatelessWidget {
           SizedBox(
             width: 404,
             height: 34,
-            child: TextFormField(
-              controller: controller,
-              onFieldSubmitted: (value) {
-                context.read<AnswerProvider>().addItem(value);
-              },
-              style: const TextStyle(
-                fontSize: 14,
-              ),
-              decoration: const InputDecoration(
-                hintText: 'https://',
-                hintStyle: TextStyle(color: Color(0xFF4A4458)),
-                contentPadding: EdgeInsets.only(top: 12, bottom: 5, left: 11),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(4.0)),
+            child: Form(
+              key: context.read<WebAnswerProvider>().formKeys[5],
+              child: TextFormField(
+                controller: controller,
+                style: const TextStyle(
+                  fontSize: 14,
                 ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFF79747E), width: 1.0),
-                  borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                decoration: const InputDecoration(
+                  hintText: 'https://',
+                  hintStyle: TextStyle(color: Color(0xFF4A4458)),
+                  contentPadding: EdgeInsets.only(top: 12, bottom: 5, left: 11),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Color(0xFF79747E), width: 1.0),
+                    borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Color(0xFF79747E), width: 2.0),
+                    borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                  ),
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFF79747E), width: 2.0),
-                  borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                ),
+                validator: (value) {
+                  context.read<WebAnswerProvider>().addItem(controller.text);
+                  if (value!.isEmpty || value.isNotEmpty) return null;
+                },
               ),
             ),
           ),

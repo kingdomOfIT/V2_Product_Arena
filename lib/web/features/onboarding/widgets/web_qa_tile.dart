@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:v2_product_arena/web/providers/web_ob_answers.dart';
 import 'package:provider/provider.dart';
+import '../../../../mobile/providers/error_message_provider.dart';
 import '../web_constansts_ob.dart';
 
 class QATile extends StatefulWidget {
@@ -9,8 +10,10 @@ class QATile extends StatefulWidget {
   final String question;
   final TextEditingController controller;
   final Key formKey;
+  final int i;
   const QATile({
     super.key,
+    required this.i,
     required this.height,
     required this.question,
     required this.controller,
@@ -22,6 +25,24 @@ class QATile extends StatefulWidget {
 }
 
 class _QATileState extends State<QATile> {
+  String errorText = '';
+  IconData? errorIcon;
+  double errorHeight = 0;
+  @override
+  void initState() {
+    setState(() {
+      // context.read<ErrorMessage>().reset();
+    });
+
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(QATile oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // context.read<ErrorMessage>().reset();
+  }
+
   @override
   void dispose() {
     // Clean up the controller when the widget is removed from the widget tree.
@@ -60,11 +81,11 @@ class _QATileState extends State<QATile> {
             ),
             const SizedBox(height: 10),
             Form(
-              key: widget.formKey,
+              key: context.read<WebAnswerProvider>().formKeys[widget.i],
               child: TextFormField(
                 controller: widget.controller,
                 onFieldSubmitted: (value) {
-                  context.read<AnswerProvider>().addItem(value);
+                  context.read<WebAnswerProvider>().addItem(value);
                 },
                 style: const TextStyle(
                   fontSize: 14,
@@ -85,12 +106,43 @@ class _QATileState extends State<QATile> {
                   ),
                 ),
                 validator: (value) {
+                  context
+                      .read<WebAnswerProvider>()
+                      .addItem(widget.controller.text);
                   if (value!.isEmpty) {
-                    return 'Prazno';
+                    setState(() {
+                      errorHeight = 30;
+                      errorIcon = Icons.error_rounded;
+                      errorText = 'Molimo unesite odgovor!';
+                    });
+                    return '';
                   } else {
+                    setState(() {
+                      errorHeight = 0;
+                      errorIcon = null;
+                      errorText = '';
+                    });
                     return null;
                   }
                 },
+              ),
+            ),
+            SizedBox(
+              height: errorHeight,
+              child: Row(
+                children: <Widget>[
+                  Icon(errorIcon, size: 20.0, color: Colors.red[700]),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5.0),
+                    child: Text(
+                      errorText,
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        color: Colors.red[700],
+                      ),
+                    ),
+                  )
+                ],
               ),
             ),
             Padding(
@@ -103,7 +155,7 @@ class _QATileState extends State<QATile> {
                   child: TextButton(
                     onPressed: () {
                       context
-                          .read<AnswerProvider>()
+                          .read<WebAnswerProvider>()
                           .removeItem(widget.controller.text);
                       widget.controller.clear();
                     },

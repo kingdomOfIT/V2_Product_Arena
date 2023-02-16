@@ -155,6 +155,12 @@ class _WebLoginFormState extends State<WebLoginForm> {
                     passwordColor = const Color(0xFFB3261E);
                   });
                   return 'Invalid password format';
+                } else if (value.length < 8) {
+                  setState(() {
+                    passwordErrored = true;
+                    passwordColor = const Color(0xFFB3261E);
+                  });
+                  return 'Invalid password format';
                 }
                 setState(() {
                   passwordErrored = false;

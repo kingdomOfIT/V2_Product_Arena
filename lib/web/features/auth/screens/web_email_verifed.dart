@@ -2,6 +2,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:v2_product_arena/mobile/features/onboarding/screens/mobile_verified_onboarding_screen.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_login_screen.dart';
 import 'package:v2_product_arena/web/features/onboarding/screens/web_onboarding_screen.dart';
 
@@ -44,8 +45,9 @@ class Verifed extends StatelessWidget {
   Widget build(BuildContext context) {
     double maxwidth = MediaQuery.of(context).size.width;
 
-    if (MediaQuery.of(context).size.width < 980) {
-      return const Icon(Icons.favorite);
+    if (MediaQuery.of(context).size.width < 600 ||
+        MediaQuery.of(context).size.height < 600) {
+      return const EmailVerified();
     }
 
     return Scaffold(

@@ -35,7 +35,6 @@ void main() {
     expect(find.byKey(const Key('phoneSignup')), findsOneWidget);
     expect(find.byKey(const Key('emailSignup')), findsOneWidget);
     expect(find.byKey(const Key('passwordSignup')), findsOneWidget);
-    expect(find.byKey(const Key('togglePasswordView')), findsOneWidget);
   });
   testWidgets(
       'GIVEN signup screen, WHEN screen is loaded, THEN toggle visibility icon should be present and isHiddenPassword should be true',
@@ -55,6 +54,10 @@ void main() {
       'GIVEN signup screen, WHEN user tap on toggle password icon, THEN password should be visible',
       (tester) async {
     await tester.pumpWidget(createWebSignupScreen());
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.byKey(const Key('passwordSignup')));
+    await tester.tap(find.byKey(const Key('passwordSignup')));
+    await tester.enterText(find.byKey(const Key('passwordSignup')), 'test');
     await tester.pumpAndSettle();
     final togglePasswordViewIcon = find.byKey(const Key('togglePasswordView'));
     await tester.ensureVisible(togglePasswordViewIcon);
