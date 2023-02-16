@@ -21,6 +21,7 @@ import 'package:v2_product_arena/web/features/auth/screens/web_login_screen.dart
 import 'package:provider/provider.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_signup_screen.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_home_screen.dart';
+import 'package:v2_product_arena/web/features/onboarding/screens/web_congratulation_screen.dart';
 import 'package:v2_product_arena/web/features/onboarding/screens/web_onboarding_screen.dart';
 import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
 import 'package:v2_product_arena/web/providers/web_ob_answers.dart';
@@ -132,7 +133,9 @@ class _MyAppState extends State<MyApp> {
           EmailVerified.routeName: (context) => const EmailVerified(),
           MobileVerifiedOnboardingScreen.routeName: (context) =>
               const MobileVerifiedOnboardingScreen(),
-          WebEmailVerified.routeName: (context) => const WebEmailVerified()
+          WebEmailVerified.routeName: (context) => const WebEmailVerified(),
+          WebCongratulationObScreen.routeName: (context) =>
+              const WebCongratulationObScreen(),
         },
       ),
     );

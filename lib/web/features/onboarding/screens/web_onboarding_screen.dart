@@ -4,12 +4,14 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:v2_product_arena/web/features/onboarding/screens/web_congratulation_screen.dart';
 import 'package:v2_product_arena/web/providers/web_ob_answers.dart';
 import 'package:v2_product_arena/web/providers/web_ob_role.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_ob_appbar.dart';
 import '../../../providers/web_auth_provider.dart';
 import '../../../providers/web_ob_error.dart';
 import '../../../reusable_web_widgets/web_footer.dart';
+import '../../auth/widgets/loading_spinner.dart';
 import '../web_constansts_ob.dart';
 import '../widgets/video_tile.dart';
 import '../widgets/web_custom_button.dart';
@@ -56,6 +58,15 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
   Future<void> signInUser() async {
     await _configureAmplify();
     try {
+      // // //Loading icon
+      showDialog(
+          context: context,
+          builder: (context) {
+            return Center(
+              child: Loader(),
+            );
+          });
+      // // //////////////
       final result = await Amplify.Auth.signIn(
         username: Provider.of<WebAuth>(context, listen: false)
             .userEmail, // email of user
@@ -100,6 +111,9 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
           apiName: "userDataInitAlfa");
       final response = await restOperation.response;
       Map<String, dynamic> responseMap = jsonDecode(response.decodeBody());
+
+      Navigator.of(context)
+          .pushReplacementNamed(WebCongratulationObScreen.routeName);
       print('POST call succeeded');
       print(responseMap['lectures']);
     } on ApiException catch (e) {

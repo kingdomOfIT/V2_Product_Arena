@@ -83,7 +83,7 @@ class Verifed extends StatelessWidget {
                           ),
                         ),
                         width: MediaQuery.of(context).size.width * 0.51,
-                        height: 530,
+                        height: 519,
                         child: Column(
                           children: [
                             const SizedBox(height: 116),
