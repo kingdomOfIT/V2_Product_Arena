@@ -47,9 +47,6 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
   Future<void> signInUser() async {
     // await _configureAmplify();
     try {
-      setState(() {
-        isLoading = true;
-      });
       final result = await Amplify.Auth.signIn(
         username: Provider.of<MobileAuth>(context, listen: false)
             .userEmail, // email of user
@@ -64,7 +61,9 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
 
   Future<void> submitOnboarding(List<String> s1, List<String> s2) async {
     await signInUser();
-
+    setState(() {
+      isLoading = true;
+    });
     try {
       final restOperation = Amplify.API.post(
         "/api/onboarding/submit",
@@ -103,6 +102,7 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
   @override
   Widget build(BuildContext context) {
     List<String> finalRoles = context.read<Role>().selctRole;
+
     List<String> finalAnswers = context.read<AnswerProvider>().answ;
 
     return Scaffold(
