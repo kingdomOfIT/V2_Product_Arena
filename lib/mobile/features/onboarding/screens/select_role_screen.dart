@@ -182,7 +182,8 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
                   ),
                 ),
                 buttonFunction: () {
-                  if (context.read<Role>().length > 2) {
+                  if (context.read<Role>().length > 2 ||
+                      context.read<Role>().length == 0) {
                     context.read<ErrorMessage>().change();
                   } else {
                     submitOnboarding(finalRoles, finalAnswers);

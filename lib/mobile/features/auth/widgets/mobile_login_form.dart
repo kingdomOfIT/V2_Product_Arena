@@ -1,8 +1,10 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
 
-class LoginForm extends StatelessWidget {
+class LoginForm extends StatefulWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;
   final FocusNode passwordFocusNode;
@@ -19,8 +21,15 @@ class LoginForm extends StatelessWidget {
     required this.togglePasswordView,
   });
 
+  @override
+  State<LoginForm> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
   final RegExp email = RegExp(
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
+
+  String _text = '';
 
   @override
   Widget build(BuildContext context) {
@@ -28,12 +37,12 @@ class LoginForm extends StatelessWidget {
     final deviceWidth = MediaQuery.of(context).size.width;
     final mobileAuth = Provider.of<MobileAuth>(context, listen: false);
     return Form(
-      key: formKey,
+      key: widget.formKey,
       child: Column(
         children: <Widget>[
           TextFormField(
             key: const Key('emailLoginTextField'),
-            controller: emailController,
+            controller: widget.emailController,
             style: TextStyle(
               color: mobileAuth.isLoginEmailError ? Colors.red : Colors.black,
               fontSize: deviceHeight * 0.0187,
@@ -85,21 +94,21 @@ class LoginForm extends StatelessWidget {
               }
             },
             onEditingComplete: () =>
-                FocusScope.of(context).requestFocus(passwordFocusNode),
+                FocusScope.of(context).requestFocus(widget.passwordFocusNode),
           ),
           SizedBox(
             height: deviceHeight * 0.028,
           ),
           TextFormField(
             key: const Key('passwordLoginTextField'),
-            controller: passwordController,
+            controller: widget.passwordController,
             style: TextStyle(
               color:
                   mobileAuth.isLoginPasswordError ? Colors.red : Colors.black,
               fontSize: deviceHeight * 0.0187,
               fontWeight: FontWeight.w700,
             ),
-            obscureText: isHiddenPassword,
+            obscureText: widget.isHiddenPassword,
             decoration: InputDecoration(
               isDense: true,
               labelStyle: const TextStyle(fontSize: 20),
@@ -120,15 +129,20 @@ class LoginForm extends StatelessWidget {
                 vertical: deviceHeight * 0.018,
                 horizontal: deviceWidth * 0.05,
               ),
-              suffixIcon: InkWell(
-                key: const Key('togglePasswordViewLogin'),
-                onTap: togglePasswordView,
-                child: Icon(
-                  isHiddenPassword ? Icons.visibility : Icons.visibility_off,
-                  color: mobileAuth.isLoginPasswordError ? Colors.red : null,
-                  size: deviceHeight * 0.03,
-                ),
-              ),
+              suffixIcon: _text.isNotEmpty
+                  ? InkWell(
+                      key: const Key('togglePasswordViewLogin'),
+                      onTap: widget.togglePasswordView,
+                      child: Icon(
+                        widget.isHiddenPassword
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        color:
+                            mobileAuth.isLoginPasswordError ? Colors.red : null,
+                        size: deviceHeight * 0.03,
+                      ),
+                    )
+                  : null,
               label: Text(
                 'Password',
                 style: TextStyle(
@@ -137,7 +151,12 @@ class LoginForm extends StatelessWidget {
                 ),
               ),
             ),
-            focusNode: passwordFocusNode,
+            focusNode: widget.passwordFocusNode,
+            onChanged: (value) {
+              setState(() {
+                _text = value;
+              });
+            },
             onEditingComplete: () => FocusScope.of(context).unfocus(),
             validator: (value) {
               if (value == null || value == '') {

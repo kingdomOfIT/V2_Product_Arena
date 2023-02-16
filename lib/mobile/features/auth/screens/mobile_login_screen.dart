@@ -61,6 +61,7 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
+    final mobileAuth = Provider.of<MobileAuth>(context, listen: false);
     return Scaffold(
       backgroundColor: const Color.fromRGBO(233, 233, 233, 1),
       appBar: PreferredSize(
@@ -149,6 +150,8 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
                           onTap: () {
                             Navigator.of(context).pushReplacementNamed(
                                 MobileSignupScreen.routeName);
+                            mobileAuth.isLoginEmailError = false;
+                            mobileAuth.isLoginPasswordError = false;
                           },
                           child: Text(
                             'Sign Up',
