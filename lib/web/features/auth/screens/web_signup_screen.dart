@@ -9,6 +9,8 @@ import 'package:v2_product_arena/web/reusable_web_widgets/web_appbar.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_footer.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../mobile/features/auth/screens/mobile_signup_screen.dart';
+
 class WebSignUpScreen extends StatefulWidget {
   static const routeName = '/web-signup';
 
@@ -82,9 +84,10 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
     final maxheight = MediaQuery.of(context).size.height;
     final webAuth = Provider.of<WebAuth>(context, listen: false);
 
-    // if (MediaQuery.of(context).size.width < 980) {
-    //   return const Icon(Icons.favorite);
-    // }
+    if (MediaQuery.of(context).size.width < 600 ||
+        MediaQuery.of(context).size.height < 600) {
+      return const MobileSignupScreen();
+    }
 
     return Scaffold(
       appBar: PreferredSize(
@@ -383,47 +386,51 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                     //Status
                                     SizedBox(
                                       height: 56,
-                                      child: DropdownButtonFormField<String>(
-                                        key: const Key('dropdownButtonSignup'),
-                                        value: dropdownValue,
-                                        decoration: InputDecoration(
-                                          border: const OutlineInputBorder(),
-                                          focusedBorder:
-                                              const OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color: Color(0xFF22E974),
-                                              width: 1,
-                                            ),
-                                          ),
-                                          hintText: 'Status',
-                                          hintStyle: GoogleFonts.notoSans(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                        ),
-                                        dropdownColor: const Color(0xFFF3F3F9),
-                                        items: [
-                                          'Student',
-                                          'Employed',
-                                          'Unemployed'
-                                        ].map<DropdownMenuItem<String>>(
-                                            (String value) {
-                                          return DropdownMenuItem<String>(
-                                            value: value,
-                                            child: Text(
-                                              value,
-                                              style: GoogleFonts.notoSans(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w700,
+                                      child: SingleChildScrollView(
+                                        child: DropdownButtonFormField<String>(
+                                          key:
+                                              const Key('dropdownButtonSignup'),
+                                          value: dropdownValue,
+                                          decoration: InputDecoration(
+                                            border: const OutlineInputBorder(),
+                                            focusedBorder:
+                                                const OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: Color(0xFF22E974),
+                                                width: 1,
                                               ),
                                             ),
-                                          );
-                                        }).toList(),
-                                        onChanged: (String? newValue) {
-                                          setState(() {
-                                            dropdownValue = newValue!;
-                                          });
-                                        },
+                                            hintText: 'Status',
+                                            hintStyle: GoogleFonts.notoSans(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w700,
+                                            ),
+                                          ),
+                                          dropdownColor:
+                                              const Color(0xFFF3F3F9),
+                                          items: [
+                                            'Student',
+                                            'Employed',
+                                            'Unemployed'
+                                          ].map<DropdownMenuItem<String>>(
+                                              (String value) {
+                                            return DropdownMenuItem<String>(
+                                              value: value,
+                                              child: Text(
+                                                value,
+                                                style: GoogleFonts.notoSans(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w700,
+                                                ),
+                                              ),
+                                            );
+                                          }).toList(),
+                                          onChanged: (String? newValue) {
+                                            setState(() {
+                                              dropdownValue = newValue!;
+                                            });
+                                          },
+                                        ),
                                       ),
                                     ),
 

@@ -151,9 +151,9 @@ void main() {
       await tester.pumpAndSettle();
 
       await tester.tap(find.byKey(const Key('passwordField')));
-      await tester.enterText(find.byKey(const Key('passwordField')), 'Tes');
+      await tester.enterText(find.byKey(const Key('passwordField')), 'Test');
 
-      await tester.pump();
+      await tester.pumpAndSettle();
 
       await tester.tap(find.byKey(const Key('loginButton')));
       await tester.pumpAndSettle();

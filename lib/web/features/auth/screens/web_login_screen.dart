@@ -5,6 +5,8 @@ import 'package:v2_product_arena/web/features/auth/widgets/web_login_form.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_appbar.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_footer.dart';
 
+import '../../../../mobile/features/auth/screens/mobile_login_screen.dart';
+
 class WebLoginScreen extends StatelessWidget {
   static const routeName = '/web-login';
 
@@ -12,6 +14,10 @@ class WebLoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (MediaQuery.of(context).size.width < 600 ||
+        MediaQuery.of(context).size.height < 600) {
+      return const MobileLoginScreen();
+    }
     return Scaffold(
       appBar: PreferredSize(
         preferredSize:
