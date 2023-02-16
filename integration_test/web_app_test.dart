@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -6,15 +8,18 @@ import 'package:provider/provider.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:mockito/mockito.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_email_verifed.dart';
+import 'package:v2_product_arena/web/features/auth/screens/web_login_screen.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_signup_screen.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_verification_screen.dart';
+import 'package:v2_product_arena/web/features/home/screens/web_home_screen.dart';
 import 'package:v2_product_arena/web/features/onboarding/screens/web_onboarding_screen.dart';
 import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
+import 'package:v2_product_arena/web/providers/web_ob_answers.dart';
+import 'package:v2_product_arena/web/providers/web_ob_error.dart';
+import 'package:v2_product_arena/web/providers/web_ob_role.dart';
 import 'mobile_auth_provider_test.mocks.dart';
 
 class MockWebAuth extends WebAuth {}
-
-class MockBuildContext extends Mock implements BuildContext {}
 
 class MockAuth extends Mock implements AuthCategory {
   @override
@@ -36,34 +41,122 @@ class MockAuth extends Mock implements AuthCategory {
     when(result.isSignUpComplete).thenReturn(true);
     return result;
   }
+
+  @override
+  Future<SignInResult<AuthUserAttributeKey>> signIn(
+      {required String username,
+      String? password,
+      SignInOptions? options}) async {
+    var result = MockSignInResult();
+    when(result.isSignedIn).thenReturn(true);
+    return result;
+  }
+
+  @override
+  Future<SignOutResult> signOut({SignOutOptions? options}) async {
+    var result = MockSignOutResult();
+    when(result.runtimeTypeName).thenReturn('');
+    return result;
+  }
+}
+
+class MockAPI extends Mock implements APICategory {
+  @override
+  RestOperation post(String path,
+      {Map<String, String>? headers,
+      HttpPayload? body,
+      Map<String, String>? queryParameters,
+      String? apiName}) {
+    var result = MockRestOperation();
+    when(result.response).thenAnswer((_) async {
+      return AWSHttpResponse(
+        statusCode: 200,
+        headers: const {},
+        body: Uint8List.fromList([]),
+      );
+    });
+    return result;
+  }
 }
 
 late WebAuth webAuthent;
+late WebErrorMessage errorAuth;
+late WebAnswerProvider answerAuth;
+late WebRole roleAuth;
 
-Widget createWebSignUpScreen() => ChangeNotifierProvider<WebAuth>(
-      create: (context) {
-        webAuthent = WebAuth();
-        return webAuthent;
-      },
+Widget createWebLoginScreen() => MultiProvider(
+      providers: [
+        ChangeNotifierProvider<WebAuth>(
+          create: (context) {
+            webAuthent = WebAuth();
+            return webAuthent;
+          },
+        ),
+        ChangeNotifierProvider<WebErrorMessage>(
+          create: (context) {
+            errorAuth = WebErrorMessage();
+            return errorAuth;
+          },
+        ),
+        ChangeNotifierProvider<WebAnswerProvider>(
+          create: (context) {
+            answerAuth = WebAnswerProvider();
+            return answerAuth;
+          },
+        ),
+        ChangeNotifierProvider<WebRole>(
+          create: (context) {
+            roleAuth = WebRole({}, '');
+            return roleAuth;
+          },
+        ),
+      ],
       child: MaterialApp(
         routes: {
+          '/web-login': (context) => const WebLoginScreen(),
+          '/web-signup': (context) => WebSignUpScreen(),
+          '/web-home': (context) => const WebHomeScreen(),
           '/confirmation': (context) => SignupConfirmation(),
-          '/verified': (context) => Verifed(),
-          '/web-onboarding': (context) => const WebOnboardingView(),
+          '/web-email-verified': (context) => const WebEmailVerified(),
+          '/verified': (context) => const Verifed(),
+          '/web-onboarding-view': (context) => const WebOnboardingView(),
         },
-        home: WebSignUpScreen(),
+        home: const WebLoginScreen(),
       ),
     );
 
 @GenerateMocks([SignUpResult, AmplifyClass])
 void main() {
-  group('Testing App Performance Tests', () {
+  group('Web flow test (login, signup, onboarding)', () {
     IntegrationTestWidgetsFlutterBinding.ensureInitialized();
     testWidgets('Web signup', (tester) async {
       MockAmplifyClass test = MockAmplifyClass();
       when(test.Auth).thenReturn(MockAuth());
+      when(test.API).thenReturn(MockAPI());
       AmplifyClass.instance = test;
-      await tester.pumpWidget(createWebSignUpScreen());
+      await tester.pumpWidget(createWebLoginScreen());
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key('emailField')));
+      await tester.enterText(
+          find.byKey(const Key('emailField')), 'bkaric@pa.tech387.com');
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key('passwordField')));
+      await tester.enterText(
+          find.byKey(const Key('passwordField')), 'Testing1!');
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key('togglePasswordView')));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key('loginButton')));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key('logOutButton')));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key('signUpRedirection')));
       await tester.pumpAndSettle();
 
       await tester.tap(find.byKey(const Key('nameSignup')));
@@ -86,12 +179,12 @@ void main() {
       await tester.enterText(find.byKey(const Key('citySignup')), 'Sarajevo');
 
       await tester.pumpAndSettle();
-
+      await tester.ensureVisible(find.byKey(const Key('dropdownButtonSignup')));
       await tester.tap(find.byKey(const Key('dropdownButtonSignup')));
       await tester.pumpAndSettle();
 
       final dropdownItem = find.text('Student').last;
-
+      await tester.ensureVisible(dropdownItem);
       await tester.tap(dropdownItem);
       await tester.pumpAndSettle();
 
@@ -150,6 +243,34 @@ void main() {
       await tester.pumpAndSettle();
 
       await tester.tap(find.byKey(const Key('verifyButton')));
+      await tester.pumpAndSettle();
+
+      await tester.pumpAndSettle(const Duration(seconds: 5));
+
+      await tester.tap(find.byKey(const Key('onboardingWebQYes')));
+
+      await tester.tap(find.byKey(const Key('prvi')));
+      await tester.enterText(find.byKey(const Key('prvi')), 'anything');
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key('drugi')));
+      await tester.enterText(find.byKey(const Key('drugi')), 'anything');
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key('treci')));
+      await tester.enterText(find.byKey(const Key('treci')), 'anything');
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key('cetvrti')));
+      await tester.enterText(find.byKey(const Key('cetvrti')), 'anything');
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key('peti')));
+      await tester.enterText(find.byKey(const Key('peti')), 'anything');
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key('sesti')));
+      await tester.enterText(find.byKey(const Key('sesti')), 'anything');
       await tester.pumpAndSettle();
     });
   });

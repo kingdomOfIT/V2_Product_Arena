@@ -15,6 +15,7 @@ class WebHomeScreen extends StatelessWidget {
       ),
       body: Center(
         child: ElevatedButton(
+          key: const Key('logOutButton'),
           onPressed: () async {
             try {
               final res = await Amplify.Auth.signOut();

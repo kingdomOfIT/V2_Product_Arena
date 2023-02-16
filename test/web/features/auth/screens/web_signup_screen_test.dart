@@ -119,12 +119,12 @@ void main() {
     await tester.pumpAndSettle();
 
     final dropdown = find.byKey(const Key('dropdownButtonSignup'));
-
+    await tester.ensureVisible(dropdown);
     await tester.tap(dropdown);
     await tester.pumpAndSettle();
 
     final dropdownItem = find.text('Student').last;
-
+    await tester.ensureVisible(dropdownItem);
     await tester.tap(dropdownItem);
     await tester.pumpAndSettle();
   });

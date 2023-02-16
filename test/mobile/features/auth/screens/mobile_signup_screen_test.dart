@@ -133,12 +133,12 @@ void main() {
       await tester.pumpWidget(createMobileSignupScreen());
 
       final dropdown = find.byKey(const ValueKey('dropDownButton'));
-
+      await tester.ensureVisible(dropdown);
       await tester.tap(dropdown);
       await tester.pumpAndSettle();
 
       final dropdownItem = find.text('Student').last;
-
+      await tester.ensureVisible(dropdownItem);
       await tester.tap(dropdownItem);
       await tester.pumpAndSettle();
     });

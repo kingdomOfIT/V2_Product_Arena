@@ -66,6 +66,7 @@ class _OptionsTileState extends State<OptionsTile> {
         Padding(
           padding: const EdgeInsets.only(top: 11, bottom: 8, left: 14),
           child: RadioListTile(
+            key: const Key('onboardingWebQYes'),
             contentPadding: EdgeInsets.zero,
             activeColor: Colors.black,
             tileColor: const Color(0xFFE9E9E9),

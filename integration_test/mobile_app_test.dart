@@ -24,8 +24,6 @@ import 'mobile_auth_provider_test.mocks.dart';
 
 class MockMobileAuth extends MobileAuth {}
 
-class MockBuildContext extends Mock implements BuildContext {}
-
 class MockAuth extends Mock implements AuthCategory {
   @override
   Future<SignUpResult> signUp(
@@ -183,8 +181,10 @@ void main() {
       await tester.pumpAndSettle();
 
       await tester.tap(find.byKey(const Key('dropDownButton')));
+      await tester.ensureVisible(find.byKey(const Key('dropDownButton')));
       await tester.pump(const Duration(seconds: 1));
       final dropdownItem = find.text('Student').last;
+      await tester.ensureVisible(dropdownItem);
       await tester.tap(dropdownItem);
       await tester.pumpAndSettle();
 

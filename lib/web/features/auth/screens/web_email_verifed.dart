@@ -38,7 +38,6 @@ class _WebEmailVerifiedState extends State<WebEmailVerified> {
 }
 
 class Verifed extends StatelessWidget {
-  static const routeName = '/verifed';
   const Verifed({super.key});
 
   @override
@@ -82,13 +81,12 @@ class Verifed extends StatelessWidget {
                           ),
                         ),
                         width: MediaQuery.of(context).size.width * 0.51,
-                        height: 465,
+                        height: 519,
                         child: Column(
                           children: [
                             const SizedBox(height: 116),
                             SizedBox(
-                              width: 102,
-                              height: 102,
+                              width: maxwidth * (102 / 1440),
                               child:
                                   Image.asset('assets/images/checkcircle.png'),
                             ),

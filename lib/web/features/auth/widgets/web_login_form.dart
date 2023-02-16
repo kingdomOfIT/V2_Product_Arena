@@ -162,6 +162,7 @@ class _WebLoginFormState extends State<WebLoginForm> {
                   color: const Color(0xFFB3261E),
                 ),
                 suffixIcon: InkWell(
+                  key: const Key('togglePasswordView'),
                   onTap: () {
                     setState(() {
                       viewPassword = !viewPassword;
@@ -212,6 +213,7 @@ class _WebLoginFormState extends State<WebLoginForm> {
               height: 20,
             ),
             ElevatedButton(
+              key: const Key('loginButton'),
               onPressed: () async {
                 if (_loginFormKey.currentState!.validate()) {
                   try {

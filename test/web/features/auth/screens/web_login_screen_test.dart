@@ -45,6 +45,9 @@ void main() {
         (tester) async {
       await tester.pumpWidget(const MaterialApp(home: WebLoginScreen()));
       await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const Key('passwordField')));
+      await tester.enterText(find.byKey(const Key('passwordField')), 'Tes');
+      await tester.pumpAndSettle();
       final togglePasswordViewIcon =
           find.byKey(const Key('togglePasswordView'));
       await tester.ensureVisible(togglePasswordViewIcon);
