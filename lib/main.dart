@@ -23,9 +23,9 @@ import 'package:v2_product_arena/web/features/auth/screens/web_signup_screen.dar
 import 'package:v2_product_arena/web/features/home/screens/web_home_screen.dart';
 import 'package:v2_product_arena/web/features/onboarding/screens/web_onboarding_screen.dart';
 import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
-// import 'package:v2_product_arena/web/providers/web_ob_answers.dart';
-// import 'package:v2_product_arena/web/providers/web_ob_error.dart';
-// import 'package:v2_product_arena/web/providers/web_ob_role.dart';
+import 'package:v2_product_arena/web/providers/web_ob_answers.dart';
+import 'package:v2_product_arena/web/providers/web_ob_error.dart';
+import 'package:v2_product_arena/web/providers/web_ob_role.dart';
 
 import 'mobile/features/auth/screens/email_verified_screen.dart';
 import 'mobile/providers/role_provider.dart';
@@ -83,6 +83,15 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider<Role>(
           create: (context) => Role({}, ''),
         ),
+        ChangeNotifierProvider<WebErrorMessage>(
+          create: (context) => WebErrorMessage(),
+        ),
+        ChangeNotifierProvider<WebAnswerProvider>(
+          create: (context) => WebAnswerProvider(),
+        ),
+        ChangeNotifierProvider<WebRole>(
+          create: (context) => WebRole({}, ''),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -105,7 +114,7 @@ class _MyAppState extends State<MyApp> {
         home: defaultTargetPlatform == TargetPlatform.android ||
                 defaultTargetPlatform == TargetPlatform.iOS
             ? const MobileLoginScreen()
-            : const WebLoginScreen(),
+            : const WebOnboardingView(),
         routes: {
           MobileLoginScreen.routeName: (context) => const MobileLoginScreen(),
           MobileSignupScreen.routeName: (context) => const MobileSignupScreen(),

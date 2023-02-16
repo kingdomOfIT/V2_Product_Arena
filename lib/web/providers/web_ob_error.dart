@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ErrorMessage with ChangeNotifier {
+class WebErrorMessage with ChangeNotifier {
   String errorText = '';
   IconData? errorIcon;
   double errorHeight = 0;

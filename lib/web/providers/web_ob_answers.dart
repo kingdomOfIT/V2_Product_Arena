@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-class AnswerProvider with ChangeNotifier {
+class WebAnswerProvider with ChangeNotifier {
   final List<String> _answers = ['False'];
+  final formKeys = List.generate(6, (i) => GlobalKey<FormState>());
 
+  bool da = false, ne = false;
   String firstAnswer = '';
   int get length => _answers.length;
   List<String> get answ => _answers;
@@ -13,12 +15,13 @@ class AnswerProvider with ChangeNotifier {
   }
 
   void removeItem(String item) {
-    _answers.add(item);
+    _answers.remove(item);
     notifyListeners();
   }
 
-  void changeFirst(String a) {
-    firstAnswer = a;
+  void changeFirst(bool a) {
+    da = a;
+    ne = !da;
     notifyListeners();
   }
 }

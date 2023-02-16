@@ -21,36 +21,36 @@ var roleText = [
   "Full Stack Developer"
 ];
 
-List<Role> listRole = [
-  Role(
+List<WebRole> listRole = [
+  WebRole(
     {
       'forFrontend': 'QA Engineering',
       'forBackend': 'qa',
     },
     'assets/images/rolevectorblack1.png',
   ),
-  Role(
+  WebRole(
     {
       'forFrontend': 'Project Management',
       'forBackend': 'productManager',
     },
     'assets/images/rolevectorblack2.png',
   ),
-  Role(
+  WebRole(
     {
       'forFrontend': 'Backend',
       'forBackend': 'backend',
     },
     'assets/images/rolevectorblack3.png',
   ),
-  Role(
+  WebRole(
     {
       'forFrontend': 'UI/UX Design',
       'forBackend': 'uiux',
     },
     'assets/images/rolevectorblack4.png',
   ),
-  Role(
+  WebRole(
     {
       'forFrontend': 'Full Stack Developer',
       'forBackend': 'fullstack',
@@ -58,36 +58,36 @@ List<Role> listRole = [
     'assets/images/rolevectorblack5.png',
   )
 ];
-List<Role> listRoleSel = [
-  Role(
+List<WebRole> listRoleSel = [
+  WebRole(
     {
       'forFrontend': 'QA Engineering',
       'forBackend': 'qa',
     },
     'assets/images/rolevectorwhite1.png',
   ),
-  Role(
+  WebRole(
     {
       'forFrontend': 'Project Management',
       'forBackend': 'productManager',
     },
     'assets/images/rolevectorwhite2.png',
   ),
-  Role(
+  WebRole(
     {
       'forFrontend': 'Backend',
       'forBackend': 'backend',
     },
     'assets/images/rolevectorwhite3.png',
   ),
-  Role(
+  WebRole(
     {
       'forFrontend': 'UI/UX Design',
       'forBackend': 'uiux',
     },
     'assets/images/rolevectorwhite4.png',
   ),
-  Role(
+  WebRole(
     {
       'forFrontend': 'Full Stack Developer',
       'forBackend': 'fullstack',

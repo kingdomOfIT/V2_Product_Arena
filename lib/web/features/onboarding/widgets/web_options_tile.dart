@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:v2_product_arena/web/providers/web_ob_answers.dart';
+import 'package:v2_product_arena/web/providers/web_ob_error.dart';
 import '../web_constansts_ob.dart';
 import 'package:provider/provider.dart';
 
 enum Opcija {
-  // ignore: constant_identifier_names
   Da,
-  // ignore: constant_identifier_names
   Ne,
 }
 
@@ -18,103 +17,104 @@ class OptionsTile extends StatefulWidget {
 }
 
 class _OptionsTileState extends State<OptionsTile> {
-  bool da = true;
+  String errorText = '';
+  IconData? errorIcon;
+  double errorHeight = 0;
+  bool da = false;
   bool ne = false;
-  Opcija _daNe = Opcija.Da;
+  Opcija? _daNe;
+
+  @override
+  void initState() {
+    setState(() {
+      //context.read<WebErrorMessage>().reset();
+    });
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is removed from the widget tree.
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 12),
-      child: Container(
-        decoration: BoxDecoration(
-          color: const Color(0xFFFFFFFF),
-          border: Border.all(
-            width: 1,
-            color: const Color(
-              0xFF79747E,
-            ),
+    return Container(
+      width: (935 / 1440) * MediaQuery.of(context).size.width,
+      height: 200,
+      decoration: BoxDecoration(
+        color: const Color(0xFFFFFFFF),
+        border: Border.all(
+          width: 1,
+          color: const Color(
+            0xFF79747E,
           ),
-          borderRadius: BorderRadius.circular(8),
         ),
-        padding: const EdgeInsets.only(left: 24, top: 17, right: 56),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          CustomText(
-            'Product Arena je full-time tromjesečna praksa, da li spreman/a učenju i radu posvetiti 8 sati svakog radnog dana?',
-            14,
-            FontWeight.w400,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 11, bottom: 8, left: 14),
-            child: Row(
-              children: [
-                SizedBox(
-                  height: 20,
-                  width: 20,
-                  child: Radio(
-                    fillColor: MaterialStateProperty.resolveWith<Color>(
-                        (Set<MaterialState> states) {
-                      if (states.contains(MaterialState.disabled)) {
-                        return const Color(0xFF000000);
-                      }
-                      return const Color(0xFF000000);
-                    }),
-                    value: Opcija.Da,
-                    groupValue: _daNe,
-                    onChanged: ((Opcija? value) => setState(() {
-                          da = !ne;
-                          context.read<AnswerProvider>().removeItem('False');
-                          context.read<AnswerProvider>().addItem('True');
-
-                          _daNe = value!;
-                        })),
-                  ),
-                ),
-                const SizedBox(
-                  width: 7,
-                ),
-                CustomText(
-                  'Da',
-                  14,
-                )
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 8, bottom: 16, left: 14),
-            child: Row(
-              children: [
-                SizedBox(
-                  height: 20,
-                  width: 20,
-                  child: Radio(
-                    fillColor: MaterialStateProperty.resolveWith<Color>(
-                        (Set<MaterialState> states) {
-                      if (states.contains(MaterialState.disabled)) {
-                        return const Color(0xFF000000);
-                      }
-                      return const Color(0xFF000000);
-                    }),
-                    value: Opcija.Ne,
-                    groupValue: _daNe,
-                    onChanged: ((Opcija? value) => setState(() {
-                          ne = !da;
-
-                          _daNe = value!;
-                        })),
-                  ),
-                ),
-                const SizedBox(
-                  width: 7,
-                ),
-                CustomText(
-                  'Ne',
-                  14,
-                )
-              ],
-            ),
-          ),
-        ]),
+        borderRadius: BorderRadius.circular(8),
       ),
+      padding: const EdgeInsets.only(left: 24, top: 17, right: 56),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        CustomText(
+          'Product Arena je full-time tromjesečna praksa, da li spreman/a učenju i radu posvetiti 8 sati svakog radnog dana?',
+          14,
+          FontWeight.w400,
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 11, bottom: 8, left: 14),
+          child: RadioListTile(
+            contentPadding: EdgeInsets.zero,
+            activeColor: Colors.black,
+            tileColor: const Color(0xFFE9E9E9),
+            title: const Text('Da'),
+            value: Opcija.Da,
+            groupValue: _daNe,
+            onChanged: ((Opcija? value) => setState(() {
+                  da = !ne;
+                  context.read<WebAnswerProvider>().removeItem('False');
+                  context.read<WebAnswerProvider>().addItem('True');
+                  context.read<WebAnswerProvider>().changeFirst(da);
+                  _daNe = value!;
+                })),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 8, bottom: 16, left: 14),
+          child: RadioListTile(
+            contentPadding: EdgeInsets.zero,
+            activeColor: Colors.black,
+            tileColor: const Color(0xFFE9E9E9),
+            title: const Text('Ne'),
+            value: Opcija.Ne,
+            groupValue: _daNe,
+            onChanged: ((Opcija? value) => setState(() {
+                  ne = !da;
+                  context.read<WebAnswerProvider>().changeFirst(ne);
+                  _daNe = value!;
+                })),
+          ),
+        ),
+        SizedBox(
+          height: errorHeight,
+          child: Row(
+            children: <Widget>[
+              Icon(errorIcon, size: 20.0, color: Colors.red[700]),
+              Padding(
+                padding: const EdgeInsets.only(left: 5.0),
+                child: Text(
+                  errorText,
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    color: Colors.red[700],
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      ]),
     );
   }
 }
