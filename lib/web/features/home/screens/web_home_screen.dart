@@ -19,6 +19,7 @@ class WebHomeScreen extends StatelessWidget {
             try {
               final res = await Amplify.Auth.signOut();
               safePrint(res);
+              // ignore: use_build_context_synchronously
               Navigator.of(context)
                   .pushReplacementNamed(WebLoginScreen.routeName);
             } on AuthException catch (e) {
