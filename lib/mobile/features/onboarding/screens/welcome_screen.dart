@@ -8,7 +8,6 @@ class FirstPage extends StatelessWidget {
   Widget build(BuildContext context) {
     double maxWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(title: const Text('pocetna')),
       backgroundColor: Colors.black,
       body: SafeArea(
         child: SingleChildScrollView(

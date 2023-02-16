@@ -17,7 +17,6 @@ import 'package:v2_product_arena/mobile/providers/error_message_provider.dart';
 import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
 import 'package:v2_product_arena/mobile/providers/mobile_onboarding_provider.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_email_verifed.dart';
-import 'package:v2_product_arena/web/features/auth/screens/web_email_verifed.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_login_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_signup_screen.dart';

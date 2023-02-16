@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:v2_product_arena/mobile/features/onboarding/screens/mobile_onboarding_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:v2_product_arena/mobile/features/onboarding/screens/welcome_screen.dart';
 import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/mobile_appbar.dart';
 import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/mobile_footer.dart';
 
@@ -29,7 +30,7 @@ class _EmailVerifiedState extends State<EmailVerified> {
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
-    return _isLoading ? const Verified() : const MobileOnboardingScreen();
+    return _isLoading ? const Verified() : const FirstPage();
   }
 }
 

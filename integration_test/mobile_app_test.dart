@@ -166,7 +166,7 @@ void main() {
           find.byKey(const Key('passwordSignUpTextField')), 'Testing1!');
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(const Key('togglePasswordViewSignUp')));
+      await tester.tap(find.byKey(const Key('togglePasswordViewSignup')));
       await tester.pumpAndSettle();
 
       await tester.tap(find.byKey(const Key('createYourAccount')));
