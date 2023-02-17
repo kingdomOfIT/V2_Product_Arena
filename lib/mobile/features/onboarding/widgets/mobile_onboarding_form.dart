@@ -140,8 +140,8 @@ class _MobileOnboardingFormState extends State<MobileOnboardingForm> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 355,
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.43,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 65),

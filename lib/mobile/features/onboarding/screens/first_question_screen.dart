@@ -102,7 +102,7 @@ class _Question1State extends State<Question1> {
                   },
                 ),
                 SizedBox(
-                  height: (317 / 690) * MediaQuery.of(context).size.height,
+                  height: (268 / 690) * MediaQuery.of(context).size.height,
                 ),
                 Padding(
                   padding: EdgeInsets.only(
