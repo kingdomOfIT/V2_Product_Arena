@@ -3,7 +3,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:v2_product_arena/web/providers/web_ob_answers.dart';
 import 'package:v2_product_arena/web/providers/web_ob_role.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_ob_appbar.dart';
@@ -185,7 +184,7 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
                         ),
                       ),
                       const SizedBox(
-                        height: 11,
+                        height: 12,
                       ),
                       Align(
                         alignment: Alignment.centerLeft,
@@ -197,7 +196,7 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
                               FontWeight.w700),
                         ),
                       ),
-                      const SizedBox(height: 4),
+                      const SizedBox(height: 12),
                       Align(
                         alignment: Alignment.centerLeft,
                         child: SizedBox(
@@ -208,13 +207,17 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
                               FontWeight.w400),
                         ),
                       ),
+                      const SizedBox(
+                        height: 12,
+                      ),
                       const OptionsTile(),
                       const SizedBox(
                         height: 37,
                       ),
                       SizedBox(
                         width: maxWidth * 0.6486,
-                        height: 859,
+                        // height:
+                        //     (859 / 1080) * MediaQuery.of(context).size.width,
                         child: ListView.separated(
                             shrinkWrap: true,
                             itemBuilder: (BuildContext context, int index) {
@@ -233,8 +236,12 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
                                     ),
                             itemCount: tileHeights.length),
                       ),
+                      const SizedBox(
+                        height: 34,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Flexible(
                             flex: 1,
@@ -295,8 +302,14 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
                             if (!(context.read<WebAnswerProvider>().da ==
                                     true ||
                                 context.read<WebAnswerProvider>().ne == true)) {
+                              context
+                                  .read<WebErrorMessage>()
+                                  .changeFirstErrorHeight();
                               context.read<WebErrorMessage>().change();
                             } else {
+                              context
+                                  .read<WebErrorMessage>()
+                                  .resetFirstErrorHeight();
                               context.read<WebErrorMessage>().reset();
                             }
                           }),
