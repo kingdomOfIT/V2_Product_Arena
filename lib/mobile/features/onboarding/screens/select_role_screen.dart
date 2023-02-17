@@ -178,6 +178,7 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
                       },
                     ),
                     CustomButton(
+                      key: const Key('submitOnboarding'),
                       content: Text(
                         'Submit',
                         style: GoogleFonts.notoSans(

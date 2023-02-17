@@ -95,10 +95,8 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
           apiName: "userDataInitAlfa");
       final response = await restOperation.response;
       Map<String, dynamic> responseMap = jsonDecode(response.decodeBody());
-      print('POST call succeeded');
-      print(responseMap['lectures']);
     } on ApiException catch (e) {
-      print('POST call failed: $e');
+      safePrint('POST call failed: $e');
     }
   }
 
