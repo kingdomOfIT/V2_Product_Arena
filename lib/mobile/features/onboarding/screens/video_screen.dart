@@ -39,7 +39,7 @@ class _LinkVideoScreenState extends State<LinkVideoScreen> {
   }
 
   RegExp videohttp = RegExp(
-      r'(?:http:\/\/|https:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be|vimeo\.com)\/(?:watch\?v=)?([a-zA-Z0-9_-]{11}|[0-9]+)|(?:http:\/\/|https:\/\/)?(?:www\.)?file\.io\/[a-zA-Z0-9]+');
+      r'^(?:(?:http:\/\/|https:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be|vimeo\.com)\/(?:watch\?v=)?([a-zA-Z0-9_-]{11}|[0-9]+)|(?:http:\/\/|https:\/\/)?(?:www\.)?file\.io\/[a-zA-Z0-9]+)?$');
 
   @override
   Widget build(BuildContext context) {

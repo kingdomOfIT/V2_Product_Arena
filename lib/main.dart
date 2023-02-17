@@ -104,7 +104,7 @@ class _MyAppState extends State<MyApp> {
         ),
         home: defaultTargetPlatform == TargetPlatform.android ||
                 defaultTargetPlatform == TargetPlatform.iOS
-            ? const MobileLoginScreen()
+            ? const MobileOnboardingScreen()
             : const WebLoginScreen(),
         routes: {
           MobileLoginScreen.routeName: (context) => const MobileLoginScreen(),
