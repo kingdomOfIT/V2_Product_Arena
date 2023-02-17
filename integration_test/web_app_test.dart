@@ -12,6 +12,7 @@ import 'package:v2_product_arena/web/features/auth/screens/web_login_screen.dart
 import 'package:v2_product_arena/web/features/auth/screens/web_signup_screen.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_verification_screen.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_home_screen.dart';
+import 'package:v2_product_arena/web/features/onboarding/screens/web_congratulations_screen.dart';
 import 'package:v2_product_arena/web/features/onboarding/screens/web_onboarding_screen.dart';
 import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
 import 'package:v2_product_arena/web/providers/web_ob_answers.dart';
@@ -120,6 +121,7 @@ Widget createWebLoginScreen() => MultiProvider(
           '/web-email-verified': (context) => const WebEmailVerified(),
           '/verified': (context) => const Verifed(),
           '/web-onboarding-view': (context) => const WebOnboardingView(),
+          '/web-congratulations': (context) => const WebCongratulationsScreen(),
         },
         home: const WebLoginScreen(),
       ),

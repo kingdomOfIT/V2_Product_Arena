@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:v2_product_arena/web/features/onboarding/screens/web_congratulations_screen.dart';
 import 'package:v2_product_arena/web/providers/web_ob_answers.dart';
 import 'package:v2_product_arena/web/providers/web_ob_role.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_ob_appbar.dart';
@@ -276,14 +277,14 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
                                 }
                               }
                             }
-                            print(s1);
+                            // print(s1);
 
-                            print(s2);
-                            print(s2.length);
-                            print(count);
-                            print(context.read<WebRole>().length);
-                            print(context.read<WebAnswerProvider>().da);
-                            print(context.read<WebAnswerProvider>().ne);
+                            // print(s2);
+                            // print(s2.length);
+                            // print(count);
+                            // print(context.read<WebRole>().length);
+                            // print(context.read<WebAnswerProvider>().da);
+                            // print(context.read<WebAnswerProvider>().ne);
 
                             if (count == 5 &&
                                 (context.read<WebRole>().length == 2 ||
@@ -292,7 +293,8 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
                                     context.read<WebAnswerProvider>().ne ==
                                         true)) {
                               submitOnboarding(s1, s2);
-                              print('hljeb');
+                              Navigator.of(context).pushNamed(
+                                  WebCongratulationsScreen.routeName);
                             }
                             if (!(context.read<WebAnswerProvider>().da ==
                                     true ||
