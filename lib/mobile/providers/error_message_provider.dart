@@ -14,6 +14,13 @@ class ErrorMessage with ChangeNotifier {
     notifyListeners();
   }
 
+  void change2() {
+    errorHeight = 30;
+    errorText = 'Molimo odaberite jednu ili dvije pozicije';
+    errorIcon = Icons.error_rounded;
+    notifyListeners();
+  }
+
   void reset() {
     errorHeight = 0;
     errorText = '';
