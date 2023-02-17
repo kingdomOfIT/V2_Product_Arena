@@ -16,10 +16,7 @@ import '../widgets/web_link_tile.dart';
 import '../widgets/web_options_tile.dart';
 import '../widgets/web_qa_tile.dart';
 import '../widgets/web_role_bar.dart';
-import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
-import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
-import 'package:v2_product_arena/amplifyconfiguration.dart';
 import 'package:provider/provider.dart';
 
 class WebOnboardingView extends StatefulWidget {
@@ -36,32 +33,30 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
   @override
   void initState() {
     super.initState();
-    _configureAmplify();
+    // _configureAmplify();
   }
 
-  Future<void> _configureAmplify() async {
-    // Add any Amplify plugins you want to use
-    final authPlugin = AmplifyAuthCognito();
-    final api = AmplifyAPI();
-    await Amplify.addPlugins([authPlugin, api]);
-    try {
-      await Amplify.configure(amplifyconfig);
-    } on AmplifyAlreadyConfiguredException {
-      safePrint(
-          'Tried to reconfigure Amplify; this can occur when your app restarts on Android.');
-    }
-  }
+  // Future<void> _configureAmplify() async {
+  //   // Add any Amplify plugins you want to use
+  //   final authPlugin = AmplifyAuthCognito();
+  //   final api = AmplifyAPI();
+  //   await Amplify.addPlugins([authPlugin, api]);
+  //   try {
+  //     await Amplify.configure(amplifyconfig);
+  //   } on AmplifyAlreadyConfiguredException {
+  //     safePrint(
+  //         'Tried to reconfigure Amplify; this can occur when your app restarts on Android.');
+  //   }
+  // }
 
   Future<void> signInUser() async {
-    await _configureAmplify();
+    // await _configureAmplify();
     try {
       final result = await Amplify.Auth.signIn(
         username: Provider.of<WebAuth>(context, listen: false)
             .userEmail, // email of user
         password: Provider.of<WebAuth>(context, listen: false).userPassword,
       );
-
-      print('LOGINOVO SE');
     } on AuthException catch (e) {
       safePrint(e.message);
     }

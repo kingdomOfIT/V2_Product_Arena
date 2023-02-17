@@ -48,7 +48,7 @@ class _MobileOnboardingFormState extends State<MobileOnboardingForm> {
                   child: Text(
                     widget.text,
                     style: GoogleFonts.notoSans(
-                        color: Color(0xFF000000),
+                        color: const Color(0xFF000000),
                         fontWeight: FontWeight.w700,
                         fontSize:
                             (16 / 360) * MediaQuery.of(context).size.width),
@@ -69,7 +69,7 @@ class _MobileOnboardingFormState extends State<MobileOnboardingForm> {
                         isDense: true,
                         hintText: 'Vaš odgovor',
                         hintStyle: TextStyle(
-                            color: Color(0xFF4A4458),
+                            color: const Color(0xFF4A4458),
                             fontWeight: FontWeight.w400,
                             fontSize:
                                 (14 / 360) * MediaQuery.of(context).size.width),
@@ -100,7 +100,7 @@ class _MobileOnboardingFormState extends State<MobileOnboardingForm> {
                 ),
                 Consumer<ErrorMessage>(
                   builder: (context, error, child) {
-                    return Container(
+                    return SizedBox(
                       // padding: EdgeInsets.only(left: 20.0, top: 5.0),
                       height: error.errorHeight,
                       child: Row(
@@ -108,7 +108,7 @@ class _MobileOnboardingFormState extends State<MobileOnboardingForm> {
                           Icon(error.errorIcon,
                               size: 20.0, color: Colors.red[700]),
                           Padding(
-                            padding: EdgeInsets.only(left: 5.0),
+                            padding: const EdgeInsets.only(left: 5.0),
                             child: Text(
                               error.errorText,
                               style: TextStyle(
@@ -122,22 +122,17 @@ class _MobileOnboardingFormState extends State<MobileOnboardingForm> {
                     );
                   },
                 ),
-                Container(
-                  // padding: EdgeInsets.only(
-                  //     top: 16,
-                  //     left: (217 / 360) * MediaQuery.of(context).size.width),
-                  child: TextButton(
-                    onPressed: () {
-                      widget.controller.clear();
-                    },
-                    child: Text(
-                      'Clear section',
-                      style: GoogleFonts.notoSans(
-                          color: const Color(0xFF4A4458),
-                          fontWeight: FontWeight.w700,
-                          fontSize:
-                              (10 / 360) * MediaQuery.of(context).size.width),
-                    ),
+                TextButton(
+                  onPressed: () {
+                    widget.controller.clear();
+                  },
+                  child: Text(
+                    'Clear section',
+                    style: GoogleFonts.notoSans(
+                        color: const Color(0xFF4A4458),
+                        fontWeight: FontWeight.w700,
+                        fontSize:
+                            (10 / 360) * MediaQuery.of(context).size.width),
                   ),
                 ),
                 SizedBox(

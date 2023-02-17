@@ -1,13 +1,9 @@
 // ignore_for_file: use_key_in_widget_constructors, depend_on_referenced_packages, avoid_print, unused_field
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:v2_product_arena/mobile/features/onboarding/screens/mobile_verified_onboarding_screen.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_login_screen.dart';
 import 'package:v2_product_arena/web/features/onboarding/screens/web_onboarding_screen.dart';
-
 import '../../../../mobile/features/auth/screens/email_verified_screen.dart';
-import '../../../../mobile/features/onboarding/screens/mobile_onboarding_screen.dart';
 import '../../../reusable_web_widgets/web_appbar.dart';
 import '../../../reusable_web_widgets/web_footer.dart';
 
@@ -83,33 +79,35 @@ class Verifed extends StatelessWidget {
                         ),
                         width: MediaQuery.of(context).size.width * 0.51,
                         height: 530,
-                        child: Column(
-                          children: [
-                            const SizedBox(height: 116),
-                            SizedBox(
-                              width: maxwidth * (102 / 1440),
-                              height: maxheight * (102 / 800),
-                              child:
-                                  Image.asset('assets/images/checkcircle.png'),
-                            ),
-                            const SizedBox(height: 15),
-                            const Text(
-                              'Email verified',
-                              style: TextStyle(
-                                fontSize: 60,
-                                fontWeight: FontWeight.w400,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              const SizedBox(height: 116),
+                              SizedBox(
+                                width: maxwidth * (102 / 1440),
+                                height: maxheight * (102 / 800),
+                                child: Image.asset(
+                                    'assets/images/checkcircle.png'),
                               ),
-                            ),
-                            const Text(
-                              'Your email is successfully verified',
-                              style: TextStyle(
-                                color: Color(0xFF605D66),
-                                fontSize: 32,
-                                fontWeight: FontWeight.w400,
+                              const SizedBox(height: 15),
+                              const Text(
+                                'Email verified',
+                                style: TextStyle(
+                                  fontSize: 60,
+                                  fontWeight: FontWeight.w400,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 23),
-                          ],
+                              const Text(
+                                'Your email is successfully verified',
+                                style: TextStyle(
+                                  color: Color(0xFF605D66),
+                                  fontSize: 32,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              const SizedBox(height: 23),
+                            ],
+                          ),
                         ),
                       ),
                     ),

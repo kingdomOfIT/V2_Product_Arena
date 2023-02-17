@@ -12,7 +12,7 @@ import 'package:url_launcher/url_launcher.dart';
 class LinkVideoScreen extends StatefulWidget {
   final TextEditingController controller;
   final PageController pageController;
-  LinkVideoScreen(
+  const LinkVideoScreen(
       {super.key, required this.controller, required this.pageController});
 
   @override
@@ -26,12 +26,11 @@ class _LinkVideoScreenState extends State<LinkVideoScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _controller = YoutubePlayerController(
       initialVideoId:
           '2_uX7GxPzDI', // https://www.youtube.com/watch?v=Tb9k9_Bo-G4
-      flags: YoutubePlayerFlags(
+      flags: const YoutubePlayerFlags(
         autoPlay: false,
         isLive: false,
       ),
@@ -74,7 +73,7 @@ class _LinkVideoScreenState extends State<LinkVideoScreen> {
                         Text(
                           'Pogledajte video snimak Amera i poslušajte njegovu poruku.',
                           style: GoogleFonts.notoSans(
-                            color: Color(0xFF000000),
+                            color: const Color(0xFF000000),
                             fontWeight: FontWeight.w700,
                             fontSize:
                                 (16 / 360) * MediaQuery.of(context).size.width,
@@ -90,7 +89,7 @@ class _LinkVideoScreenState extends State<LinkVideoScreen> {
                         Text(
                           'Snimi video i predstavi se! Recite nam nešto zanimljivo o sebi ili o nečemu što vas zanima.',
                           style: GoogleFonts.notoSans(
-                              color: Color(0xFF000000),
+                              color: const Color(0xFF000000),
                               fontWeight: FontWeight.w700,
                               fontSize: (16 / 360) *
                                   MediaQuery.of(context).size.width),
@@ -183,14 +182,15 @@ class _LinkVideoScreenState extends State<LinkVideoScreen> {
                         Consumer<ErrorMessage>(
                           builder: (context, error, child) {
                             return Container(
-                              padding: EdgeInsets.only(left: 20.0, top: 5.0),
+                              padding:
+                                  const EdgeInsets.only(left: 20.0, top: 5.0),
                               height: error.errorHeight,
                               child: Row(
                                 children: <Widget>[
                                   Icon(error.errorIcon,
                                       size: 20.0, color: Colors.red[700]),
                                   Padding(
-                                    padding: EdgeInsets.only(left: 5.0),
+                                    padding: const EdgeInsets.only(left: 5.0),
                                     child: Text(
                                       error.errorText,
                                       style: TextStyle(

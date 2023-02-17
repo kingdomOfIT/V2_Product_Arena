@@ -11,7 +11,7 @@ class LoginForm extends StatefulWidget {
   final GlobalKey formKey;
   final bool isHiddenPassword;
   final VoidCallback togglePasswordView;
-  LoginForm({
+  const LoginForm({
     super.key,
     required this.emailController,
     required this.passwordController,

@@ -8,7 +8,9 @@ import 'package:v2_product_arena/mobile/providers/answer_provider.dart';
 import 'package:v2_product_arena/mobile/providers/error_message_provider.dart';
 
 enum Opcija {
+  // ignore: constant_identifier_names
   Da,
+  // ignore: constant_identifier_names
   Ne,
 }
 
@@ -52,7 +54,7 @@ class _Question1State extends State<Question1> {
                   child: RadioListTile(
                     key: const Key('onboardingQYes'),
                     activeColor: Colors.black,
-                    tileColor: Color(0xFFE9E9E9),
+                    tileColor: const Color(0xFFE9E9E9),
                     contentPadding: EdgeInsets.zero,
                     toggleable: true,
                     title: const Text('Da'),
@@ -92,7 +94,7 @@ class _Question1State extends State<Question1> {
                           Icon(error.errorIcon,
                               size: 20.0, color: Colors.red[700]),
                           Padding(
-                              padding: EdgeInsets.only(left: 5.0),
+                              padding: const EdgeInsets.only(left: 5.0),
                               child: Text(error.errorText,
                                   style: TextStyle(
                                       fontSize: 16.0, color: Colors.red[700])))

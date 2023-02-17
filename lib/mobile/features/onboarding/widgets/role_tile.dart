@@ -1,7 +1,4 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:v2_product_arena/mobile/providers/role_provider.dart';
@@ -39,7 +36,6 @@ class _RoleTileState extends State<RoleTile> {
           onTap: () {
             if (context.read<Role>().hasRole(widget.role)) {
               context.read<Role>().removeItem(widget.role);
-              print(context.read<Role>().selctRole);
               setState(() {
                 context
                     .read<Role>()
@@ -47,7 +43,6 @@ class _RoleTileState extends State<RoleTile> {
               });
             } else {
               context.read<Role>().addItem(widget.role);
-              print(context.read<Role>().selctRole);
               setState(() {
                 context
                     .read<Role>()
@@ -56,7 +51,7 @@ class _RoleTileState extends State<RoleTile> {
             }
           },
           child: Container(
-            margin: EdgeInsets.only(bottom: 15),
+            margin: const EdgeInsets.only(bottom: 15),
             width: (296 / 360) * MediaQuery.of(context).size.width,
             height: 56,
             decoration: BoxDecoration(

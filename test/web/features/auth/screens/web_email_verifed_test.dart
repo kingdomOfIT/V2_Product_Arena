@@ -41,7 +41,8 @@ void main() {
       final imageWidget = find.byType(Image).evaluate().last.widget as Image;
       expect(imageWidget.image, isA<AssetImage>());
       final assetImage = imageWidget.image as AssetImage;
-      expect(assetImage.assetName, equals('assets/images/PAlogowhite.png'));
+      expect(assetImage.assetName,
+          equals('assets/images/LogoPAwhitebackground.png'));
     });
   });
 }

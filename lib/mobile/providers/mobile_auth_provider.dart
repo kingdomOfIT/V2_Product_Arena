@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
-import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
-import 'package:v2_product_arena/amplifyconfiguration.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/mobile_login_screen.dart';
 
 class MobileAuth with ChangeNotifier {
@@ -87,7 +85,7 @@ class MobileAuth with ChangeNotifier {
     String routeName,
   ) async {
     try {
-      final result = await Amplify.Auth.confirmSignUp(
+      await Amplify.Auth.confirmSignUp(
           username: email, confirmationCode: confirmationCode);
       Navigator.of(context).pushReplacementNamed(routeName);
 

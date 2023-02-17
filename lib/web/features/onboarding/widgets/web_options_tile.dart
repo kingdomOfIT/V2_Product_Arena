@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:v2_product_arena/web/providers/web_ob_answers.dart';
 import 'package:v2_product_arena/web/providers/web_ob_error.dart';
-import '../../../../mobile/providers/error_message_provider.dart';
 import '../web_constansts_ob.dart';
 import 'package:provider/provider.dart';
 
 enum Opcija {
+  // ignore: constant_identifier_names
   Da,
+  // ignore: constant_identifier_names
   Ne,
 }
 
@@ -70,6 +71,7 @@ class _OptionsTileState extends State<OptionsTile> {
           Padding(
             padding: const EdgeInsets.only(top: 12),
             child: Row(
+              key: const Key('onboardingWebQYes'),
               children: [
                 SizedBox(
                   height: 20,

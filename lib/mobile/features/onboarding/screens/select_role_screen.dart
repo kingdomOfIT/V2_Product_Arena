@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -14,7 +12,6 @@ import 'package:v2_product_arena/mobile/providers/role_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/custom_button.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
-import 'package:provider/provider.dart';
 
 class SelectRoleScreen extends StatefulWidget {
   final PageController pageController;
@@ -47,13 +44,11 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
   Future<void> signInUser() async {
     // await _configureAmplify();
     try {
-      final result = await Amplify.Auth.signIn(
+      await Amplify.Auth.signIn(
         username: Provider.of<MobileAuth>(context, listen: false)
             .userEmail, // email of user
         password: Provider.of<MobileAuth>(context, listen: false).userPassword,
       );
-
-      print('LOGINOVO SE');
     } on AuthException catch (e) {
       safePrint(e.message);
     }
@@ -83,15 +78,12 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
         }),
         apiName: "userDataInitAlfa",
       );
-      final response = await restOperation.response;
+      await restOperation.response;
       // Map<String, dynamic> responseMap = jsonDecode(response.decodeBody());
-      print('POST call succeeded');
       Navigator.of(context)
           .pushReplacementNamed(MobileVerifiedOnboardingScreen.routeName);
       // print(responseMap['lectures']);
-    } on ApiException catch (e) {
-      print('POST call failed: $e');
-    }
+    } on ApiException catch (e) {}
     setState(() {
       isLoading = false;
     });
@@ -130,7 +122,7 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
                     Text(
                       'Za koju poziciju se prijavljuješ?',
                       style: GoogleFonts.notoSans(
-                          color: Color(0xFF000000),
+                          color: const Color(0xFF000000),
                           fontWeight: FontWeight.w700,
                           fontSize:
                               (16 / 360) * MediaQuery.of(context).size.width),
@@ -138,13 +130,13 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
                     Text(
                       'Možeš odabrati jednu ili dvije pozicije!',
                       style: GoogleFonts.notoSans(
-                          color: Color(0xFF000000),
+                          color: const Color(0xFF000000),
                           fontWeight: FontWeight.w400,
                           fontSize:
                               (14 / 360) * MediaQuery.of(context).size.width),
                     ),
                     Container(
-                      padding: EdgeInsets.only(top: 20),
+                      padding: const EdgeInsets.only(top: 20),
                       height: 500,
                       child: ListView.separated(
                         itemBuilder: (BuildContext context, int index) {
@@ -163,7 +155,7 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
                     ),
                     Consumer<ErrorMessage>(
                       builder: (context, error, child) {
-                        return Container(
+                        return SizedBox(
                           //padding: EdgeInsets.only(left: 20.0, top: 5.0),
                           height: error.errorHeight,
                           child: Row(
@@ -171,7 +163,7 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
                               Icon(error.errorIcon,
                                   size: 20.0, color: Colors.red[700]),
                               Padding(
-                                padding: EdgeInsets.only(left: 5.0),
+                                padding: const EdgeInsets.only(left: 5.0),
                                 child: Text(
                                   error.errorText,
                                   style: TextStyle(
@@ -203,10 +195,10 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
                           submitOnboarding(finalRoles, finalAnswers);
                         }
 
-                        print(
+                        safePrint(
                             Provider.of<AnswerProvider>(context, listen: false)
                                 .answ);
-                        print(Provider.of<Role>(context, listen: false)
+                        safePrint(Provider.of<Role>(context, listen: false)
                             .selctRole);
                       },
                       color: Colors.black,

@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:v2_product_arena/mobile/features/onboarding/screens/mobile_onboarding_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:v2_product_arena/mobile/features/onboarding/screens/welcome_screen.dart';
 import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/mobile_appbar.dart';
@@ -61,7 +60,7 @@ class Verified extends StatelessWidget {
                 children: <Widget>[
                   Column(
                     children: <Widget>[
-                      Container(
+                      SizedBox(
                         height: 72,
                         width: 72,
                         child: Image.asset(
@@ -94,7 +93,7 @@ class Verified extends StatelessWidget {
                       SizedBox(
                         height: deviceHeight * 0.3,
                       ),
-                      Container(
+                      SizedBox(
                         height: deviceHeight * 0.07,
                         width: deviceHeight * 0.07,
                         child: Image.asset(
