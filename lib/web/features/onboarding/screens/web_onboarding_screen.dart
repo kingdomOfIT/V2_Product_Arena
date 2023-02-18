@@ -93,8 +93,9 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
             },
           }),
           apiName: "userDataInitAlfa");
-      final response = await restOperation.response;
-      Map<String, dynamic> responseMap = jsonDecode(response.decodeBody());
+      await restOperation.response;
+      // Map<String, dynamic> responseMap = jsonDecode(response.decodeBody());
+      Navigator.of(context).pushNamed(WebCongratulationsScreen.routeName);
     } on ApiException catch (e) {
       safePrint('POST call failed: $e');
     }
@@ -141,6 +142,7 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
           child: WebOBAppBar(text: 'Tech387')),
       body: SafeArea(
         child: SingleChildScrollView(
+          key: const Key('scrollWebOnboarding'),
           child: Column(
             children: [
               Container(
@@ -260,54 +262,56 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          CustomButton(onPressed: () {
-                            int i, j;
-                            int count = 0;
+                          CustomButton(
+                              key: const Key('onboardingSubmitWeb'),
+                              onPressed: () {
+                                int i, j;
+                                int count = 0;
 
-                            for (i = 0; i < 6; i++) {
-                              if (context
-                                  .read<WebAnswerProvider>()
-                                  .formKeys[i]
-                                  .currentState!
-                                  .validate()) {
-                                if (i != 5) {
-                                  count++;
+                                for (i = 0; i < 6; i++) {
+                                  if (context
+                                      .read<WebAnswerProvider>()
+                                      .formKeys[i]
+                                      .currentState!
+                                      .validate()) {
+                                    if (i != 5) {
+                                      count++;
+                                    }
+                                  }
                                 }
-                              }
-                            }
-                            // print(s1);
+                                // print(s1);
 
-                            // print(s2);
-                            // print(s2.length);
-                            // print(count);
-                            // print(context.read<WebRole>().length);
-                            // print(context.read<WebAnswerProvider>().da);
-                            // print(context.read<WebAnswerProvider>().ne);
+                                // print(s2);
+                                // print(s2.length);
+                                // print(count);
+                                // print(context.read<WebRole>().length);
+                                // print(context.read<WebAnswerProvider>().da);
+                                // print(context.read<WebAnswerProvider>().ne);
 
-                            if (count == 5 &&
-                                (context.read<WebRole>().length == 2 ||
-                                    context.read<WebRole>().length == 1) &&
-                                (context.read<WebAnswerProvider>().da == true ||
+                                if (count == 5 &&
+                                    (context.read<WebRole>().length == 2 ||
+                                        context.read<WebRole>().length == 1) &&
+                                    (context.read<WebAnswerProvider>().da ==
+                                            true ||
+                                        context.read<WebAnswerProvider>().ne ==
+                                            true)) {
+                                  submitOnboarding(s1, s2);
+                                }
+                                if (!(context.read<WebAnswerProvider>().da ==
+                                        true ||
                                     context.read<WebAnswerProvider>().ne ==
                                         true)) {
-                              submitOnboarding(s1, s2);
-                              Navigator.of(context).pushNamed(
-                                  WebCongratulationsScreen.routeName);
-                            }
-                            if (!(context.read<WebAnswerProvider>().da ==
-                                    true ||
-                                context.read<WebAnswerProvider>().ne == true)) {
-                              context
-                                  .read<WebErrorMessage>()
-                                  .changeFirstErrorHeight();
-                              context.read<WebErrorMessage>().change();
-                            } else {
-                              context
-                                  .read<WebErrorMessage>()
-                                  .resetFirstErrorHeight();
-                              context.read<WebErrorMessage>().reset();
-                            }
-                          }),
+                                  context
+                                      .read<WebErrorMessage>()
+                                      .changeFirstErrorHeight();
+                                  context.read<WebErrorMessage>().change();
+                                } else {
+                                  context
+                                      .read<WebErrorMessage>()
+                                      .resetFirstErrorHeight();
+                                  context.read<WebErrorMessage>().reset();
+                                }
+                              }),
                         ],
                       ),
                     ],

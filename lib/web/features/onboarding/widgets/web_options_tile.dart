@@ -71,12 +71,12 @@ class _OptionsTileState extends State<OptionsTile> {
           Padding(
             padding: const EdgeInsets.only(top: 12),
             child: Row(
-              key: const Key('onboardingWebQYes'),
               children: [
                 SizedBox(
                   height: 20,
                   width: 20,
                   child: Radio(
+                    key: const Key('onboardingWebQYes'),
                     fillColor: MaterialStateProperty.resolveWith<Color>(
                         (Set<MaterialState> states) {
                       if (states.contains(MaterialState.disabled)) {

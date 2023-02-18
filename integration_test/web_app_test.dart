@@ -14,6 +14,9 @@ import 'package:v2_product_arena/web/features/auth/screens/web_verification_scre
 import 'package:v2_product_arena/web/features/home/screens/web_home_screen.dart';
 import 'package:v2_product_arena/web/features/onboarding/screens/web_congratulations_screen.dart';
 import 'package:v2_product_arena/web/features/onboarding/screens/web_onboarding_screen.dart';
+import 'package:v2_product_arena/web/features/onboarding/web_constansts_ob.dart';
+import 'package:v2_product_arena/web/features/onboarding/widgets/web_qa_tile.dart';
+import 'package:v2_product_arena/web/features/onboarding/widgets/web_vector_tile.dart';
 import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
 import 'package:v2_product_arena/web/providers/web_ob_answers.dart';
 import 'package:v2_product_arena/web/providers/web_ob_error.dart';
@@ -127,6 +130,41 @@ Widget createWebLoginScreen() => MultiProvider(
       ),
     );
 
+final emailLoginField = find.byKey(const Key('emailField'));
+final passwordLoginField = find.byKey(const Key('passwordField'));
+final togglePasswordViewLogin = find.byKey(const Key('togglePasswordView'));
+final loginButton = find.byKey(const Key('loginButton'));
+final logOutButton = find.byKey(const Key('logOutButton'));
+final signupRedirectionButton = find.byKey(const Key('signUpRedirection'));
+final nameSignupTextField = find.byKey(const Key('nameSignup'));
+final surnnameSignupTextField = find.byKey(const Key('surnameSignup'));
+final birthdateSignupTextField = find.byKey(const Key('birthdateSignup'));
+final citySignupTextField = find.byKey(const Key('citySignup'));
+final dropdownButtonSignup = find.byKey(const Key('dropdownButtonSignup'));
+final dropdownItem = find.text('Student').last;
+final phoneSignupTextField = find.byKey(const Key('phoneSignup'));
+final emailSignupTextField = find.byKey(const Key('emailSignup'));
+final passwordSignupTextField = find.byKey(const Key('passwordSignup'));
+final signupButton = find.byKey(const Key('signupButton'));
+final emailVerificationTextField1 = find.byKey(const Key('verificationField1'));
+final emailVerificationTextField2 = find.byKey(const Key('verificationField2'));
+final emailVerificationTextField3 = find.byKey(const Key('verificationField3'));
+final emailVerificationTextField4 = find.byKey(const Key('verificationField4'));
+final emailVerificationTextField5 = find.byKey(const Key('verificationField5'));
+final emailVerificationTextField6 = find.byKey(const Key('verificationField6'));
+final emailVerifyButton = find.byKey(const Key('verifyButton'));
+final onboardingAnswerYes = find.byKey(const Key('onboardingWebQYes'));
+final onboardingAnswerQ1 = find.byKey(const Key('prvi'));
+final onboardingAnswerQ2 = find.byKey(const Key('drugi'));
+final onboardingAnswerQ3 = find.byKey(const Key('treci'));
+final onboardingAnswerQ4 = find.byKey(const Key('cetvrti'));
+final onboardingAnswerQ5 = find.byKey(const Key('peti'));
+final onboardingAnswerQ6 = find.byKey(const Key('sesti'));
+final onboardingVideoTextField =
+    find.byKey(const Key('onboardingVideoTextField'));
+final onboardingSubmitButton = find.byKey(const Key('onboardingSubmitWeb'));
+final onboardingScrollableScreen = find.byKey(const Key('scrollWebOnboarding'));
+
 @GenerateMocks([SignUpResult, AmplifyClass])
 void main() {
   group('Web flow test (login, signup, onboarding)', () {
@@ -136,143 +174,202 @@ void main() {
       when(test.Auth).thenReturn(MockAuth());
       when(test.API).thenReturn(MockAPI());
       AmplifyClass.instance = test;
+
       await tester.pumpWidget(createWebLoginScreen());
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(const Key('emailField')));
-      await tester.enterText(
-          find.byKey(const Key('emailField')), 'bkaric@pa.tech387.com');
+      await tester.tap(emailLoginField);
+      await tester.enterText(emailLoginField, 'bkaric@pa.tech387.com');
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(const Key('passwordField')));
-      await tester.enterText(
-          find.byKey(const Key('passwordField')), 'Testing1!');
+      await tester.tap(passwordLoginField);
+      await tester.enterText(passwordLoginField, 'Testing1!');
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(const Key('togglePasswordView')));
+      await tester.tap(togglePasswordViewLogin);
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(const Key('loginButton')));
+      await tester.tap(loginButton);
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(const Key('logOutButton')));
+      await tester.tap(logOutButton);
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(const Key('signUpRedirection')));
+      await tester.tap(signupRedirectionButton);
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(const Key('nameSignup')));
-      await tester.enterText(find.byKey(const Key('nameSignup')), 'Test');
-
-      await tester.pumpAndSettle();
-
-      await tester.tap(find.byKey(const Key('surnameSignup')));
-      await tester.enterText(find.byKey(const Key('surnameSignup')), 'Test');
+      await tester.tap(nameSignupTextField);
+      await tester.enterText(nameSignupTextField, 'Test');
 
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(const Key('birthdateSignup')));
-      await tester.enterText(
-          find.byKey(const Key('birthdateSignup')), '01-01-1997');
+      await tester.tap(surnnameSignupTextField);
+      await tester.enterText(surnnameSignupTextField, 'Test');
 
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(const Key('citySignup')));
-      await tester.enterText(find.byKey(const Key('citySignup')), 'Sarajevo');
+      await tester.tap(birthdateSignupTextField);
+      await tester.enterText(birthdateSignupTextField, '01-01-1997');
 
       await tester.pumpAndSettle();
-      await tester.ensureVisible(find.byKey(const Key('dropdownButtonSignup')));
-      await tester.tap(find.byKey(const Key('dropdownButtonSignup')));
+
+      await tester.tap(citySignupTextField);
+      await tester.enterText(citySignupTextField, 'Sarajevo');
+
+      await tester.pumpAndSettle();
+      await tester.ensureVisible(dropdownButtonSignup);
+      await tester.tap(dropdownButtonSignup);
       await tester.pumpAndSettle();
 
-      final dropdownItem = find.text('Student').last;
       await tester.ensureVisible(dropdownItem);
       await tester.tap(dropdownItem);
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(const Key('phoneSignup')));
-      await tester.enterText(
-          find.byKey(const Key('phoneSignup')), '+387123456789');
+      await tester.tap(phoneSignupTextField);
+      await tester.enterText(phoneSignupTextField, '+387123456789');
 
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(const Key('emailSignup')));
-      await tester.enterText(
-          find.byKey(const Key('emailSignup')), 'testing@gmail.com');
+      await tester.tap(emailSignupTextField);
+      await tester.enterText(emailSignupTextField, 'testing@gmail.com');
 
       await tester.pumpAndSettle();
 
-      await tester.ensureVisible(find.byKey(const Key('passwordSignup')));
+      await tester.ensureVisible(passwordSignupTextField);
 
-      await tester.tap(find.byKey(const Key('passwordSignup')));
-      await tester.enterText(
-          find.byKey(const Key('passwordSignup')), 'Testing1!');
-
-      await tester.pumpAndSettle();
-
-      await tester.ensureVisible(find.byKey(const Key('signupButton')));
-      await tester.tap(find.byKey(const Key('signupButton')));
-      await tester.pumpAndSettle();
-
-      await tester.tap(find.byKey(const Key('verificationField1')));
-      await tester.enterText(find.byKey(const Key('verificationField1')), '1');
+      await tester.tap(passwordSignupTextField);
+      await tester.enterText(passwordSignupTextField, 'Testing1!');
 
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(const Key('verificationField2')));
-      await tester.enterText(find.byKey(const Key('verificationField2')), '1');
+      await tester.ensureVisible(signupButton);
+      await tester.tap(signupButton);
+      await tester.pumpAndSettle();
+
+      await tester.tap(emailVerificationTextField1);
+      await tester.enterText(emailVerificationTextField1, '1');
 
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(const Key('verificationField3')));
-      await tester.enterText(find.byKey(const Key('verificationField3')), '1');
+      await tester.tap(emailVerificationTextField2);
+      await tester.enterText(emailVerificationTextField2, '1');
 
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(const Key('verificationField4')));
-      await tester.enterText(find.byKey(const Key('verificationField4')), '1');
+      await tester.tap(emailVerificationTextField3);
+      await tester.enterText(emailVerificationTextField3, '1');
 
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(const Key('verificationField5')));
-      await tester.enterText(find.byKey(const Key('verificationField5')), '1');
+      await tester.tap(emailVerificationTextField4);
+      await tester.enterText(emailVerificationTextField4, '1');
 
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(const Key('verificationField6')));
-      await tester.enterText(find.byKey(const Key('verificationField6')), '1');
+      await tester.tap(emailVerificationTextField5);
+      await tester.enterText(emailVerificationTextField5, '1');
 
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(const Key('verifyButton')));
+      await tester.tap(emailVerificationTextField6);
+      await tester.enterText(emailVerificationTextField6, '1');
+
+      await tester.pumpAndSettle();
+
+      await tester.tap(emailVerifyButton);
       await tester.pumpAndSettle();
 
       await tester.pumpAndSettle(const Duration(seconds: 5));
 
-      await tester.tap(find.byKey(const Key('onboardingWebQYes')));
-
-      await tester.tap(find.byKey(const Key('prvi')));
-      await tester.enterText(find.byKey(const Key('prvi')), 'anything');
+      await tester.tap(onboardingAnswerYes);
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(const Key('drugi')));
-      await tester.enterText(find.byKey(const Key('drugi')), 'anything');
+      // final List<Widget> qatiles =
+      //     tester.widgetList(find.byType(QATile)).toList();
+      // for (int i = 0; i < qatiles.length; i++) {
+      //   final qatileFinder = find.byWidget(qatiles[i]);
+      //   final RenderBox qatileBox = tester.renderObject(qatileFinder);
+      //   final Offset qatileCenter =
+      //       qatileBox.localToGlobal(qatileBox.size.center(Offset.zero));
+      //   final Rect screen = Offset.zero &
+      //       tester.binding.window.physicalSize /
+      //           tester.binding.window.devicePixelRatio;
+
+      //   if (screen.contains(qatileCenter)) {
+      //     await tester.tap(qatileFinder);
+      //   } else {
+      //     await Future.delayed(const Duration(seconds: 1));
+      //     await tester.ensureVisible(qatileFinder);
+      //     await tester.tap(qatileFinder);
+      //   }
+      //   await tester.pump();
+
+      //   final textFormField = find.descendant(
+      //     of: qatileFinder,
+      //     matching: find.byType(TextFormField),
+      //   );
+      //   await tester.enterText(textFormField, 'Some text for QATile $i');
+      // }
+      // await tester.pumpAndSettle();
+
+      final List<Widget> qatiles =
+          tester.widgetList(find.byType(QATile)).toList();
+      for (int i = 0; i < qatiles.length; i++) {
+        // Tap on QATile
+        // await tester.tap(find.byWidget(qatiles[i]));
+        // await tester.pump();
+
+        final textFormField = find.descendant(
+            of: find.byWidget(qatiles[i]),
+            matching: find.byType(TextFormField));
+        await tester.enterText(textFormField, 'Some text for QATile $i');
+        await tester.pumpAndSettle();
+      }
+      // await tester.pumpAndSettle();
+      // await tester.tap(onboardingAnswerQ1);
+      // await tester.enterText(onboardingAnswerQ1, 'anything');
+      // await tester.pumpAndSettle();
+
+      // await tester.tap(onboardingAnswerQ2);
+      // await tester.enterText(onboardingAnswerQ2, 'anything');
+      // await tester.pumpAndSettle();
+
+      // await tester.tap(onboardingAnswerQ3);
+      // await tester.enterText(onboardingAnswerQ3, 'anything');
+      // await tester.pumpAndSettle();
+
+      // await tester.tap(onboardingAnswerQ4);
+      // await tester.enterText(onboardingAnswerQ4, 'anything');
+      // await tester.pumpAndSettle();
+
+      // await tester.tap(onboardingAnswerQ5);
+      // await tester.enterText(onboardingAnswerQ5, 'anything');
+      // await tester.pumpAndSettle();
+
+      // await tester.tap(onboardingAnswerQ6);
+      // await tester.enterText(onboardingAnswerQ6, 'anything');
+      // await tester.pumpAndSettle();
+
+      await tester.tap(onboardingVideoTextField);
+      await tester.enterText(onboardingVideoTextField,
+          'https://www.youtube.com/watch?v=75i5VmTI6A0');
+      await tester.pumpAndSettle();
+      await tester.fling(
+          onboardingScrollableScreen, const Offset(0, -200), 1000);
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(const Key('treci')));
-      await tester.enterText(find.byKey(const Key('treci')), 'anything');
+      final roleTileFinder = find.byWidgetPredicate(
+          (widget) => widget is RoleTile && widget.role == listRole[0]);
+
+      await tester.tap(roleTileFinder);
+
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(const Key('cetvrti')));
-      await tester.enterText(find.byKey(const Key('cetvrti')), 'anything');
-      await tester.pumpAndSettle();
+      await tester.tap(onboardingSubmitButton);
 
-      await tester.tap(find.byKey(const Key('peti')));
-      await tester.enterText(find.byKey(const Key('peti')), 'anything');
-      await tester.pumpAndSettle();
+      await tester.pumpAndSettle(const Duration(seconds: 4));
 
-      await tester.tap(find.byKey(const Key('sesti')));
-      await tester.enterText(find.byKey(const Key('sesti')), 'anything');
+      await tester.tap(logOutButton);
       await tester.pumpAndSettle();
     });
   });

@@ -44,6 +44,7 @@ class LinkTile extends StatelessWidget {
             child: Form(
               key: context.read<WebAnswerProvider>().formKeys[5],
               child: TextFormField(
+                key: const Key('onboardingVideoTextField'),
                 controller: controller,
                 style: const TextStyle(
                   fontSize: 14,
