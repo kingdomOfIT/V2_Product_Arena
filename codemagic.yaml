@@ -1,0 +1,35 @@
+workflows:
+  qa-workflow---for-ios-tests:
+    name: QA workflow - for iOs tests
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: qa
+          include: true
+          source: true
+      tag_patterns:
+        - pattern: '*'
+          include: true
+    scripts:
+      - flutter test # run all tests, including widget tests, on all available devices
+      - flutter emulators --launch emulator # launch an Android emulator
+      - flutter drive --driver=test_driver/integration_test.dart --target=integration_test/mobile_app_test.dart -d emulator-5554 # run mobile_app_test.dart using the driver script mobile_app.dart on an Android emulator with ID emulator-5554. This is the command to run tests on Android.
+      - flutter drive --driver=test_driver/integration_test.dart --target=integration_test/web_app_test.dart -d web # run web_app_test.dart using the driver script web_app.dart on a Chrome browser. This is the command to run tests on the web.
+      - flutter build apk --release # build the APK in release mode
+    artifacts:
+      - build/**/outputs/apk/**/*.apk # include APK artifacts
+      - build/**/outputs/bundle/**/*.aab # include AAB artifacts
+      - build/**/outputs/**/mapping.txt # include mapping file artifacts
+      - '*.snap' # include snapshot artifacts
+      - build/windows/**/*.msix # include Windows MSIX artifacts
+      - flutter_drive.log # include the Flutter Drive log as an artifact
+    publishing:
+      email:
+        recipients:
+          - bkaric@pa.tech387.com
