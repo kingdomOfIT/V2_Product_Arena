@@ -21,6 +21,8 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+def lifecycle_version = "2.4.0"
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
@@ -68,4 +70,8 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version") {
+    exclude group: 'androidx.lifecycle', module: 'lifecycle-viewmodel'
+}
 }
