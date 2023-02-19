@@ -177,6 +177,7 @@ void main() {
       await tester.pumpWidget(createMobileLoginScreen());
       await tester.pumpAndSettle();
 
+      await tester.ensureVisible(emailLoginField);
       await tester.tap(emailLoginField);
       await tester.enterText(emailLoginField, 'bkaric@pa.tech387.com');
       await tester.pumpAndSettle();
@@ -191,12 +192,15 @@ void main() {
       await tester.tap(loginButton);
       await tester.pumpAndSettle();
 
+      await tester.ensureVisible(logOutButton);
       await tester.tap(logOutButton);
       await tester.pumpAndSettle();
 
+      await tester.ensureVisible(signupRedirectionButton);
       await tester.tap(signupRedirectionButton);
       await tester.pumpAndSettle();
 
+      await tester.ensureVisible(nameTextField);
       await tester.tap(nameTextField);
       await tester.enterText(nameTextField, 'Test');
       await tester.pumpAndSettle();
@@ -209,10 +213,12 @@ void main() {
       await tester.enterText(birthDateTextField, '01-01-1997');
       await tester.pumpAndSettle();
 
+      await tester.ensureVisible(cityTextField);
       await tester.tap(cityTextField);
       await tester.enterText(cityTextField, 'Sarajevo');
       await tester.pumpAndSettle();
 
+      await tester.ensureVisible(dropDownButton);
       await tester.tap(dropDownButton);
       await tester.ensureVisible(dropDownButton);
       await tester.pump(const Duration(seconds: 1));
@@ -220,11 +226,13 @@ void main() {
       await tester.tap(dropdownItem);
       await tester.pumpAndSettle();
 
+      await tester.ensureVisible(phoneTextField);
       await tester.tap(phoneTextField);
       await tester.pumpAndSettle();
       await tester.enterText(phoneTextField, '+123456789');
       await tester.pumpAndSettle();
 
+      await tester.ensureVisible(emailSignupTextField);
       await tester.tap(emailSignupTextField);
       await tester.enterText(emailSignupTextField, 'testing@gmail.com');
       await tester.pumpAndSettle();
@@ -237,9 +245,11 @@ void main() {
       await tester.tap(togglePasswordSignup);
       await tester.pumpAndSettle();
 
+      await tester.ensureVisible(signupButton);
       await tester.tap(signupButton);
       await tester.pumpAndSettle();
 
+      await tester.ensureVisible(verifyField1);
       await tester.tap(verifyField1);
       await tester.enterText(verifyField1, '1');
 
@@ -270,44 +280,53 @@ void main() {
 
       await tester.pumpAndSettle();
 
+      await tester.ensureVisible(emailVerifyButton);
       await tester.tap(emailVerifyButton);
       await tester.pumpAndSettle();
 
       await tester.pumpAndSettle(const Duration(seconds: 5));
 
+      await tester.ensureVisible(onboardingWelcomeRedButton);
       await tester.tap(onboardingWelcomeRedButton);
       await tester.pumpAndSettle();
 
+      await tester.ensureVisible(onboardingAnswerYes);
       await tester.tap(onboardingAnswerYes);
       await tester.pumpAndSettle();
 
+      await tester.ensureVisible(onboardingFirstQuestionNextButton);
       await tester.tap(onboardingFirstQuestionNextButton);
       await tester.pumpAndSettle();
 
+      await tester.ensureVisible(onboardingAnswerTextField);
       await tester.tap(onboardingAnswerTextField);
       await tester.enterText(onboardingAnswerTextField, 'anything');
       await tester.pumpAndSettle();
       await tester.tap(onboardingNextButton);
       await tester.pumpAndSettle();
 
+      await tester.ensureVisible(onboardingAnswerTextField);
       await tester.tap(onboardingAnswerTextField);
       await tester.enterText(onboardingAnswerTextField, 'anything');
       await tester.pumpAndSettle();
       await tester.tap(onboardingNextButton);
       await tester.pumpAndSettle();
 
+      await tester.ensureVisible(onboardingAnswerTextField);
       await tester.tap(onboardingAnswerTextField);
       await tester.enterText(onboardingAnswerTextField, 'anything');
       await tester.pumpAndSettle();
       await tester.tap(onboardingNextButton);
       await tester.pumpAndSettle();
 
+      await tester.ensureVisible(onboardingAnswerTextField);
       await tester.tap(onboardingAnswerTextField);
       await tester.enterText(onboardingAnswerTextField, 'anything');
       await tester.pumpAndSettle();
       await tester.tap(onboardingNextButton);
       await tester.pumpAndSettle();
 
+      await tester.ensureVisible(onboardingAnswerTextField);
       await tester.tap(onboardingAnswerTextField);
       await tester.enterText(onboardingAnswerTextField, 'anything');
       await tester.pumpAndSettle();
@@ -316,13 +335,16 @@ void main() {
           onboardingScrollableLastQScreen, const Offset(0, -200), 1000);
       await tester.pumpAndSettle();
 
+      await tester.ensureVisible(onboardingNextButton);
       await tester.tap(onboardingNextButton);
       await tester.pumpAndSettle();
 
+      await tester.ensureVisible(onboardingVideoTextField);
       await tester.tap(onboardingVideoTextField);
       await tester.enterText(onboardingVideoTextField,
           'https://www.youtube.com/watch?v=75i5VmTI6A0');
       await tester.pumpAndSettle();
+      await tester.ensureVisible(onboardingVideoNextButton);
       await tester.tap(onboardingVideoNextButton);
       await tester.pumpAndSettle();
 
@@ -333,10 +355,12 @@ void main() {
 
       await tester.pumpAndSettle();
 
+      await tester.ensureVisible(onboardingSubmitButton);
       await tester.tap(onboardingSubmitButton);
 
       await tester.pumpAndSettle(const Duration(seconds: 5));
 
+      await tester.ensureVisible(logOutButton);
       await tester.tap(logOutButton);
       await tester.pumpAndSettle();
     });
