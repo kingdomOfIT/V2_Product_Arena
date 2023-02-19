@@ -169,6 +169,7 @@ class _MobileOnboardingFormState extends State<MobileOnboardingForm> {
                           textColor: Colors.white,
                           borderColor: Colors.black,
                           onPressed: () {
+                            FocusScope.of(context).unfocus();
                             if (_formKey.currentState!.validate() == true) {
                               context
                                   .read<AnswerProvider>()
