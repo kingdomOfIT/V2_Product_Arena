@@ -412,6 +412,7 @@ class _FakeAWSLogger_14 extends _i2.SmartFake implements _i1.AWSLogger {
 /// A class which mocks [SignInResult].
 ///
 /// See the documentation for Mockito's code generation for more information.
+// ignore: must_be_immutable
 class MockSignInResult<Key extends _i1.AuthUserAttributeKey> extends _i2.Mock
     implements _i1.SignInResult<Key> {
   MockSignInResult() {
@@ -454,6 +455,7 @@ class MockSignInResult<Key extends _i1.AuthUserAttributeKey> extends _i2.Mock
 /// A class which mocks [SignUpResult].
 ///
 /// See the documentation for Mockito's code generation for more information.
+// ignore: must_be_immutable
 class MockSignUpResult extends _i2.Mock implements _i1.SignUpResult {
   MockSignUpResult() {
     _i2.throwOnMissingStub(this);
