@@ -1,6 +1,7 @@
 // ignore_for_file: unused_local_variable, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/mobile_signup_screen.dart';
 import 'package:v2_product_arena/mobile/features/auth/widgets/mobile_login_form.dart';
 import 'package:v2_product_arena/mobile/features/home/screens/mobile_home_screen.dart';
@@ -28,6 +29,7 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
   late final InputBorder? focusedBorder;
 
   bool isHiddenPassword = true;
+  bool isLoading = false;
 
   RegExp email = RegExp(
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
@@ -46,7 +48,10 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
     FocusScope.of(context).unfocus();
     if (isValid) {
       formKey.currentState!.save();
-      Provider.of<MobileAuth>(context, listen: false).isLoading = true;
+      setState(() {
+        isLoading = true;
+      });
+
       await Provider.of<MobileAuth>(context, listen: false).signInUser(
         emailController.text,
         passwordController.text,
@@ -54,135 +59,162 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
         MobileHomeScreen.routeName,
       );
     }
-    Provider.of<MobileAuth>(context, listen: false).isLoading = false;
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
+    final mobileAuth = Provider.of<MobileAuth>(context, listen: false);
     return Scaffold(
-      backgroundColor: Color.fromRGBO(233, 233, 233, 1),
+      backgroundColor: const Color.fromRGBO(233, 233, 233, 1),
       appBar: PreferredSize(
         preferredSize:
             Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
         child: const MobileAppBar(),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: EdgeInsets.only(
-                left: deviceWidth * 0.089,
-                right: deviceWidth * 0.089,
-                top: deviceHeight * 0.033,
+      body: isLoading
+          ? const Center(
+              child: SpinKitRing(
+                color: Color.fromRGBO(34, 233, 116, 1),
+                size: 90.0,
+                lineWidth: 10.0,
               ),
-              child: Center(
-                child: Column(
-                  children: <Widget>[
-                    Column(
-                      children: <Widget>[],
+            )
+          : SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: deviceWidth * 0.089,
+                      right: deviceWidth * 0.089,
+                      top: deviceHeight * 0.033,
                     ),
-                    Text(
-                      'Welcome to',
-                      style: GoogleFonts.notoSans(
-                        fontSize: deviceHeight * 0.04,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    Text(
-                      'Product Arena',
-                      style: GoogleFonts.notoSans(
-                        fontSize: deviceHeight * 0.04,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ),
-                    SizedBox(
-                      height: deviceHeight * 0.15,
-                    ),
-                    LoginForm(
-                      emailController: emailController,
-                      passwordController: passwordController,
-                      passwordFocusNode: passwordFocusNode,
-                      formKey: formKey,
-                      isHiddenPassword: isHiddenPassword,
-                      togglePasswordView: togglePasswordView,
-                    ),
-                    SizedBox(
-                      height: deviceHeight * 0.042,
-                    ),
-                    CustomButton(
-                      key: const Key('loginButton'),
-                      content: Text(
-                        'Login',
-                        style: GoogleFonts.notoSans(
-                          fontSize: deviceHeight * 0.019,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      buttonFunction: onSubmitLogin,
-                      color: Colors.black,
-                    ),
-                    SizedBox(
-                      height: deviceHeight * 0.013,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          'Don’t you have an account?',
-                          style: GoogleFonts.notoSans(
-                            fontSize: deviceHeight * 0.013,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w400,
+                    child: Center(
+                      child: Column(
+                        children: <Widget>[
+                          Column(
+                            children: const <Widget>[],
                           ),
-                        ),
-                        const SizedBox(
-                          width: 3,
-                        ),
-                        InkWell(
-                          key: const Key('signUpRedirection'),
-                          onTap: () {
-                            Navigator.of(context).pushReplacementNamed(
-                                MobileSignupScreen.routeName);
-                          },
-                          child: Text(
-                            'Sign Up',
+                          Text(
+                            'Welcome to',
                             style: GoogleFonts.notoSans(
-                              fontSize: deviceHeight * 0.013,
+                              fontSize: deviceHeight * 0.04,
                               color: Colors.black,
-                              fontWeight: FontWeight.w700,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: deviceHeight * 0.13,
-                    ),
-                    Container(
-                      height: deviceHeight * 0.07,
-                      width: deviceHeight * 0.07,
-                      child: Image.asset(
-                        'assets/images/tech.png',
-                        fit: BoxFit.cover,
+                          Text(
+                            'Product Arena',
+                            style: GoogleFonts.notoSans(
+                              fontSize: deviceHeight * 0.04,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                          SizedBox(
+                            height: deviceHeight * 0.15,
+                          ),
+                          LoginForm(
+                            emailController: emailController,
+                            passwordController: passwordController,
+                            passwordFocusNode: passwordFocusNode,
+                            formKey: formKey,
+                            isHiddenPassword: isHiddenPassword,
+                            togglePasswordView: togglePasswordView,
+                          ),
+                          mobileAuth.loginErrorText.isNotEmpty
+                              ? Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 10),
+                                  child: Text(
+                                    mobileAuth.loginErrorText,
+                                    style: const TextStyle(
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                )
+                              : SizedBox(
+                                  height: deviceHeight * 0.00,
+                                ),
+                          SizedBox(
+                            height: deviceHeight * 0.042,
+                          ),
+                          CustomButton(
+                            key: const Key('loginButton'),
+                            content: Text(
+                              'Login',
+                              style: GoogleFonts.notoSans(
+                                fontSize: deviceHeight * 0.019,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            buttonFunction: onSubmitLogin,
+                            color: Colors.black,
+                          ),
+                          SizedBox(
+                            height: deviceHeight * 0.013,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                'Don’t you have an account?',
+                                style: GoogleFonts.notoSans(
+                                  fontSize: deviceHeight * 0.013,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 3,
+                              ),
+                              InkWell(
+                                key: const Key('signUpRedirection'),
+                                onTap: () {
+                                  Navigator.of(context).pushReplacementNamed(
+                                      MobileSignupScreen.routeName);
+                                  mobileAuth.isLoginEmailError = false;
+                                  mobileAuth.isLoginPasswordError = false;
+                                },
+                                child: Text(
+                                  'Sign Up',
+                                  style: GoogleFonts.notoSans(
+                                    fontSize: deviceHeight * 0.013,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: deviceHeight * 0.13,
+                          ),
+                          SizedBox(
+                            height: deviceHeight * 0.07,
+                            width: deviceHeight * 0.07,
+                            child: Image.asset(
+                              'assets/images/tech.png',
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          SizedBox(
+                            height: deviceHeight * 0.012,
+                          ),
+                        ],
                       ),
                     ),
-                    SizedBox(
-                      height: deviceHeight * 0.012,
-                    ),
-                  ],
-                ),
+                  ),
+                  const MobileFooter(),
+                ],
               ),
             ),
-            const MobileFooter(),
-          ],
-        ),
-      ),
     );
   }
 }

@@ -16,6 +16,7 @@ class MobileHomeScreen extends StatelessWidget {
       ),
       body: Center(
         child: CustomButton(
+            key: const Key('logOutButton'),
             content: const Text(
               'Log Out',
               style: TextStyle(color: Colors.white),

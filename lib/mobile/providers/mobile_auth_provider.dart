@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
-import 'package:amplify_core/amplify_core.dart';
-import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
-import 'package:v2_product_arena/amplifyconfiguration.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/mobile_login_screen.dart';
 
 class MobileAuth with ChangeNotifier {
   String errorText = '';
   String errorTextOTP = '';
+  String loginErrorText = '';
   bool isOTPerror = false;
   String userEmail = '';
+  String userPassword = '';
   bool isSignUpComplete = false;
   bool isSignInComplete = false;
 
@@ -26,19 +25,19 @@ class MobileAuth with ChangeNotifier {
   bool isLoginEmailError = false;
   bool isLoginPasswordError = false;
 
-  Future<void> _configureAmplify() async {
-    try {
-      // amplify plugins
+  // Future<void> _configureAmplify() async {
+  //   try {
+  //     // amplify plugins
 
-      final apiPlugin = AmplifyAPI();
-      final authPlugin = AmplifyAuthCognito();
+  //     final apiPlugin = AmplifyAPI();
+  //     final authPlugin = AmplifyAuthCognito();
 
-      // add Amplify plugins
-      await Amplify.addPlugins([apiPlugin, authPlugin]);
+  //     // add Amplify plugins
+  //     await Amplify.addPlugins([apiPlugin, authPlugin]);
 
-      await Amplify.configure(amplifyconfig);
-    } catch (e) {}
-  }
+  //     await Amplify.configure(amplifyconfig);
+  //   } catch (e) {}
+  // }
 
   Future<void> signUpUser(
     String name,
@@ -52,7 +51,7 @@ class MobileAuth with ChangeNotifier {
     BuildContext context,
     String routeName,
   ) async {
-    await _configureAmplify();
+    // await _configureAmplify();
 
     try {
       final userAttributes = <CognitoUserAttributeKey, String>{
@@ -62,7 +61,7 @@ class MobileAuth with ChangeNotifier {
         CognitoUserAttributeKey.familyName: surname,
         CognitoUserAttributeKey.address: city,
         CognitoUserAttributeKey.birthdate: birthDate,
-        CognitoUserAttributeKey.custom("status"): status,
+        const CognitoUserAttributeKey.custom("status"): status,
       };
       final result = await Amplify.Auth.signUp(
         username: email,
@@ -70,7 +69,6 @@ class MobileAuth with ChangeNotifier {
         options: CognitoSignUpOptions(userAttributes: userAttributes),
       );
       isSignUpComplete = result.isSignUpComplete;
-      print(userAttributes);
       Navigator.of(context).pushReplacementNamed(routeName);
       notifyListeners();
     } on AuthException catch (e) {
@@ -87,7 +85,7 @@ class MobileAuth with ChangeNotifier {
     String routeName,
   ) async {
     try {
-      final result = await Amplify.Auth.confirmSignUp(
+      await Amplify.Auth.confirmSignUp(
           username: email, confirmationCode: confirmationCode);
       Navigator.of(context).pushReplacementNamed(routeName);
 
@@ -105,7 +103,7 @@ class MobileAuth with ChangeNotifier {
 
   Future<void> signInUser(String username, String password,
       BuildContext context, String routeName) async {
-    await _configureAmplify();
+    // await _configureAmplify();
     try {
       final result = await Amplify.Auth.signIn(
         username: username,
@@ -117,7 +115,7 @@ class MobileAuth with ChangeNotifier {
       Navigator.of(context).pushReplacementNamed(routeName);
     } on AuthException catch (e) {
       safePrint(e.message);
-      errorText = e.message;
+      loginErrorText = e.message;
     }
     notifyListeners();
   }
@@ -126,9 +124,7 @@ class MobileAuth with ChangeNotifier {
     try {
       await Amplify.Auth.signOut();
       Navigator.of(context).pushReplacementNamed(MobileLoginScreen.routeName);
-    } on AuthException catch (e) {
-      print(e.message);
-    }
+    } on AuthException catch (e) {}
     notifyListeners();
   }
 }

@@ -32,6 +32,9 @@ migrate_working_dir/
 .pub/
 /build/
 
+#Test coverage
+/coverage/
+
 # Symbolication related
 app.*.symbols
 
@@ -64,3 +67,4 @@ amplifytools.xcconfig
 .secret-*
 **.sample
 #amplify-do-not-edit-end
+untitled.sh
