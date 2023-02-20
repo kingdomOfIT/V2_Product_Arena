@@ -33,6 +33,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
 
   String _text = '';
   bool isHiddenPassword = true;
+  bool isLoading = false;
 
   void navigateToEmailVerificationScreen(BuildContext context) {
     Navigator.of(context).pushReplacementNamed(SignupConfirmation.routeName);
@@ -43,6 +44,9 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
     FocusScope.of(context).unfocus();
     if (isValid) {
       _formKey.currentState!.save();
+      setState(() {
+        isLoading = true;
+      });
       final provider = Provider.of<WebAuth>(context, listen: false);
       await provider.signUpUser(
         nameController.text,
@@ -60,6 +64,9 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
       provider.userEmail = emailController.text;
       provider.userPassword = passwordController.text;
     }
+    setState(() {
+      isLoading = false;
+    });
   }
 
   RegExp birthDate =
