@@ -40,7 +40,7 @@ workflows:
       - flutter packages pub get
       - 'flutter scripts:   - name: Integration tests     script: |        flutter
         config --enable-web       chromedriver --port=4444 &       flutter -d chrome
-        drive --driver=test_driver/integration_driver.dart --target=integration_test/web_app_test.dart'
+        drive --driver=test_driver/integration_test.dart --target=integration_test/web_app_test.dart'
       - 'flutter scripts:   - name: Widget tests     script: |        mkdir -p test-results       flutter
         test --machine > test-results/flutter.json     test_report: test-results/flutter.json'
       - flutter build apk --release
