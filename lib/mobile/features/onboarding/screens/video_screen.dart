@@ -60,6 +60,7 @@ class _LinkVideoScreenState extends State<LinkVideoScreen> {
               appBar: MyHeader(),
               body: SafeArea(
                 child: SingleChildScrollView(
+                  key: const Key('videoScroll'),
                   child: Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal:

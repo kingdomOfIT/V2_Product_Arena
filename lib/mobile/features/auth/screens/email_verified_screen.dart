@@ -55,56 +55,58 @@ class Verified extends StatelessWidget {
                 right: deviceWidth * 0.089,
                 left: deviceWidth * 0.089,
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 72,
-                        width: 72,
-                        child: Image.asset(
-                          'assets/images/checkcircle.png',
-                          fit: BoxFit.cover,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Column(
+                      children: <Widget>[
+                        SizedBox(
+                          height: 72,
+                          width: 72,
+                          child: Image.asset(
+                            'assets/images/checkcircle.png',
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: deviceHeight * 0.021,
-                      ),
-                      Text(
-                        'Email verified',
-                        style: GoogleFonts.notoSans(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w400,
-                          fontSize: deviceHeight * 0.043,
+                        SizedBox(
+                          height: deviceHeight * 0.021,
                         ),
-                      ),
-                      SizedBox(
-                        height: deviceHeight * 0.021,
-                      ),
-                      Text(
-                        'Your email is successfully verified',
-                        style: GoogleFonts.notoSans(
-                          color: Colors.black45,
-                          fontWeight: FontWeight.w400,
-                          fontSize: deviceHeight * 0.021,
+                        Text(
+                          'Email verified',
+                          style: GoogleFonts.notoSans(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400,
+                            fontSize: deviceHeight * 0.043,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: deviceHeight * 0.3,
-                      ),
-                      SizedBox(
-                        height: deviceHeight * 0.07,
-                        width: deviceHeight * 0.07,
-                        child: Image.asset(
-                          'assets/images/tech.png',
-                          fit: BoxFit.cover,
+                        SizedBox(
+                          height: deviceHeight * 0.021,
                         ),
-                      ),
-                    ],
-                  ),
-                  const MobileFooter(),
-                ],
+                        Text(
+                          'Your email is successfully verified',
+                          style: GoogleFonts.notoSans(
+                            color: Colors.black45,
+                            fontWeight: FontWeight.w400,
+                            fontSize: deviceHeight * 0.021,
+                          ),
+                        ),
+                        SizedBox(
+                          height: deviceHeight * 0.3,
+                        ),
+                        SizedBox(
+                          height: deviceHeight * 0.07,
+                          width: deviceHeight * 0.07,
+                          child: Image.asset(
+                            'assets/images/tech.png',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const MobileFooter(),
+                  ],
+                ),
               ),
             ),
           )),

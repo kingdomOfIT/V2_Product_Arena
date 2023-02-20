@@ -108,11 +108,12 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
                 lineWidth: 10.0,
               ),
             )
-          : SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.only(
-                    left: (32 / 360) * MediaQuery.of(context).size.width,
-                    right: (32 / 360) * MediaQuery.of(context).size.width),
+          : Padding(
+              padding: EdgeInsets.only(
+                  left: (32 / 360) * MediaQuery.of(context).size.width,
+                  right: (32 / 360) * MediaQuery.of(context).size.width),
+              child: SingleChildScrollView(
+                key: const Key('testScroll'),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -137,8 +138,8 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
                     ),
                     Container(
                       padding: const EdgeInsets.only(top: 20),
-                      height: 500,
                       child: ListView.separated(
+                        shrinkWrap: true,
                         itemBuilder: (BuildContext context, int index) {
                           return RoleTile(
                             index: index,

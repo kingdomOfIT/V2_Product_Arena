@@ -199,7 +199,18 @@ void main() {
       await tester.ensureVisible(signupRedirectionButton);
       await tester.tap(signupRedirectionButton);
       await tester.pumpAndSettle();
+    });
 
+    testWidgets('Mobile signup', (tester) async {
+      MockAmplifyClass test = MockAmplifyClass();
+      when(test.Auth).thenReturn(MockAuth());
+      when(test.API).thenReturn(MockAPI());
+      AmplifyClass.instance = test;
+      await tester.pumpWidget(createMobileLoginScreen());
+      await tester.pumpAndSettle();
+      await tester.ensureVisible(signupRedirectionButton);
+      await tester.tap(signupRedirectionButton);
+      await tester.pumpAndSettle();
       await tester.ensureVisible(nameTextField);
       await tester.tap(nameTextField);
       await tester.enterText(nameTextField, 'Test');
@@ -302,6 +313,8 @@ void main() {
       await tester.tap(onboardingAnswerTextField);
       await tester.enterText(onboardingAnswerTextField, 'anything');
       await tester.pumpAndSettle();
+      await tester.ensureVisible(onboardingNextButton);
+
       await tester.tap(onboardingNextButton);
       await tester.pumpAndSettle();
 
@@ -309,6 +322,7 @@ void main() {
       await tester.tap(onboardingAnswerTextField);
       await tester.enterText(onboardingAnswerTextField, 'anything');
       await tester.pumpAndSettle();
+      await tester.ensureVisible(onboardingNextButton);
       await tester.tap(onboardingNextButton);
       await tester.pumpAndSettle();
 
@@ -316,6 +330,7 @@ void main() {
       await tester.tap(onboardingAnswerTextField);
       await tester.enterText(onboardingAnswerTextField, 'anything');
       await tester.pumpAndSettle();
+      await tester.ensureVisible(onboardingNextButton);
       await tester.tap(onboardingNextButton);
       await tester.pumpAndSettle();
 
@@ -323,6 +338,10 @@ void main() {
       await tester.tap(onboardingAnswerTextField);
       await tester.enterText(onboardingAnswerTextField, 'anything');
       await tester.pumpAndSettle();
+      if (FocusManager.instance.primaryFocus?.hasFocus == true) {
+        FocusManager.instance.primaryFocus?.unfocus();
+      }
+      await tester.ensureVisible(onboardingNextButton);
       await tester.tap(onboardingNextButton);
       await tester.pumpAndSettle();
 
@@ -335,6 +354,9 @@ void main() {
           onboardingScrollableLastQScreen, const Offset(0, -200), 1000);
       await tester.pumpAndSettle();
 
+      if (FocusManager.instance.primaryFocus?.hasFocus == true) {
+        FocusManager.instance.primaryFocus?.unfocus();
+      }
       await tester.ensureVisible(onboardingNextButton);
       await tester.tap(onboardingNextButton);
       await tester.pumpAndSettle();
@@ -343,6 +365,12 @@ void main() {
       await tester.tap(onboardingVideoTextField);
       await tester.enterText(onboardingVideoTextField,
           'https://www.youtube.com/watch?v=75i5VmTI6A0');
+      await tester.pumpAndSettle();
+      if (FocusManager.instance.primaryFocus?.hasFocus == true) {
+        FocusManager.instance.primaryFocus?.unfocus();
+      }
+      await tester.fling(
+          find.byKey(const Key('videoScroll')), const Offset(0, -200), 1000);
       await tester.pumpAndSettle();
       await tester.ensureVisible(onboardingVideoNextButton);
       await tester.tap(onboardingVideoNextButton);
@@ -354,7 +382,6 @@ void main() {
       await tester.tap(roleTileFinder);
 
       await tester.pumpAndSettle();
-
       await tester.ensureVisible(onboardingSubmitButton);
       await tester.tap(onboardingSubmitButton);
 
