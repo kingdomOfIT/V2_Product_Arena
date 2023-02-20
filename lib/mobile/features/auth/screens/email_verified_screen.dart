@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:v2_product_arena/mobile/features/onboarding/screens/mobile_onboarding_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:v2_product_arena/mobile/features/onboarding/screens/welcome_screen.dart';
 import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/mobile_appbar.dart';
@@ -56,56 +55,58 @@ class Verified extends StatelessWidget {
                 right: deviceWidth * 0.089,
                 left: deviceWidth * 0.089,
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Column(
-                    children: <Widget>[
-                      Container(
-                        height: 72,
-                        width: 72,
-                        child: Image.asset(
-                          'assets/images/checkcircle.png',
-                          fit: BoxFit.cover,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Column(
+                      children: <Widget>[
+                        SizedBox(
+                          height: 72,
+                          width: 72,
+                          child: Image.asset(
+                            'assets/images/checkcircle.png',
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: deviceHeight * 0.021,
-                      ),
-                      Text(
-                        'Email verified',
-                        style: GoogleFonts.notoSans(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w400,
-                          fontSize: deviceHeight * 0.043,
+                        SizedBox(
+                          height: deviceHeight * 0.021,
                         ),
-                      ),
-                      SizedBox(
-                        height: deviceHeight * 0.021,
-                      ),
-                      Text(
-                        'Your email is successfully verified',
-                        style: GoogleFonts.notoSans(
-                          color: Colors.black45,
-                          fontWeight: FontWeight.w400,
-                          fontSize: deviceHeight * 0.021,
+                        Text(
+                          'Email verified',
+                          style: GoogleFonts.notoSans(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400,
+                            fontSize: deviceHeight * 0.043,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: deviceHeight * 0.3,
-                      ),
-                      Container(
-                        height: deviceHeight * 0.07,
-                        width: deviceHeight * 0.07,
-                        child: Image.asset(
-                          'assets/images/tech.png',
-                          fit: BoxFit.cover,
+                        SizedBox(
+                          height: deviceHeight * 0.021,
                         ),
-                      ),
-                    ],
-                  ),
-                  const MobileFooter(),
-                ],
+                        Text(
+                          'Your email is successfully verified',
+                          style: GoogleFonts.notoSans(
+                            color: Colors.black45,
+                            fontWeight: FontWeight.w400,
+                            fontSize: deviceHeight * 0.021,
+                          ),
+                        ),
+                        SizedBox(
+                          height: deviceHeight * 0.3,
+                        ),
+                        SizedBox(
+                          height: deviceHeight * 0.07,
+                          width: deviceHeight * 0.07,
+                          child: Image.asset(
+                            'assets/images/tech.png',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const MobileFooter(),
+                  ],
+                ),
               ),
             ),
           )),

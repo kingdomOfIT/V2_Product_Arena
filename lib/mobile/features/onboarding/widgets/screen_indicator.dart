@@ -16,7 +16,7 @@ class PageIndicator extends StatelessWidget {
       width: double.infinity,
       //padding: const EdgeInsets.symmetric(horizontal: 10.0),
       decoration: const BoxDecoration(
-        color: const Color(0xFFE9E9E9),
+        color: Color(0xFFE9E9E9),
         borderRadius: BorderRadius.all(Radius.zero),
       ),
       child: Column(

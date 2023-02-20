@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:v2_product_arena/constants/global_variables.dart';
-import 'package:v2_product_arena/mobile/features/home/screens/mobile_home_screen.dart';
 import 'package:v2_product_arena/mobile/features/onboarding/screens/first_question_screen.dart';
 import 'package:v2_product_arena/mobile/features/onboarding/screens/select_role_screen.dart';
 import 'package:v2_product_arena/mobile/features/onboarding/screens/video_screen.dart';
@@ -97,7 +94,7 @@ class _MobileOnboardingScreenState extends State<MobileOnboardingScreen> {
               totalPages: 8,
             ),
           ),
-          Positioned(bottom: 0, right: 0, left: 0, child: MobileFooter())
+          const Positioned(bottom: 0, right: 0, left: 0, child: MobileFooter())
         ],
       ),
     );

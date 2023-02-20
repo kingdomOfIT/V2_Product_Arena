@@ -29,7 +29,6 @@ void main() {
 
       expect(find.byKey(const Key('emailLoginTextField')), findsOneWidget);
       expect(find.byKey(const Key('passwordLoginTextField')), findsOneWidget);
-      expect(find.byKey(const Key('togglePasswordViewLogin')), findsOneWidget);
       expect(find.byKey(const Key('loginButton')), findsOneWidget);
       expect(find.byKey(const Key('signUpRedirection')), findsOneWidget);
     });
@@ -61,6 +60,10 @@ void main() {
         'GIVEN mobile login screen, WHEN user tap on toggle password icon, THEN password should be visible',
         (tester) async {
       await tester.pumpWidget(createMobileLoginScreen());
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const Key('passwordLoginTextField')));
+      await tester.enterText(
+          find.byKey(const Key('passwordLoginTextField')), 'Tes');
       await tester.pumpAndSettle();
       final togglePasswordViewIcon =
           find.byKey(const Key('togglePasswordViewLogin'));

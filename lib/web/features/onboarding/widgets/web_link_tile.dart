@@ -10,10 +10,8 @@ class LinkTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    RegExp videohttp = RegExp(
-        r'(?:http:\/\/|https:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be|vimeo\.com)\/(?:watch\?v=)?([a-zA-Z0-9_-]{11}|[0-9]+)|(?:http:\/\/|https:\/\/)?(?:www\.)?file\.io\/[a-zA-Z0-9]+');
     return Container(
-      width: 452,
+      width: (452 / 1440) * MediaQuery.of(context).size.width,
       height: 214,
       decoration: BoxDecoration(
         color: const Color(0xFFFFFFFF),
@@ -33,7 +31,7 @@ class LinkTile extends StatelessWidget {
               14,
               FontWeight.w700),
           Padding(
-            padding: const EdgeInsets.only(top: 25, bottom: 7),
+            padding: const EdgeInsets.only(top: 29),
             child: Align(
               alignment: Alignment.centerLeft,
               child: CustomText(
@@ -41,11 +39,12 @@ class LinkTile extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: 404,
+            width: (404 / 1440) * MediaQuery.of(context).size.width,
             height: 34,
             child: Form(
               key: context.read<WebAnswerProvider>().formKeys[5],
               child: TextFormField(
+                key: const Key('onboardingVideoTextField'),
                 controller: controller,
                 style: const TextStyle(
                   fontSize: 14,
@@ -71,7 +70,7 @@ class LinkTile extends StatelessWidget {
                 validator: (value) {
                   context.read<WebAnswerProvider>().addItem(controller.text);
                   if (value!.isEmpty) {
-                    return '';
+                    return null;
                   } else {
                     return null;
                   }
@@ -79,12 +78,9 @@ class LinkTile extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 4),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: CustomText('Za učitavanje videa koristi file.io', 10),
-            ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: CustomText('Za učitavanje videa koristi file.io', 10),
           ),
         ]),
       ),

@@ -3,8 +3,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:v2_product_arena/web/features/onboarding/screens/web_congratulation_screen.dart';
+import 'package:v2_product_arena/web/features/onboarding/screens/web_congratulations_screen.dart';
 import 'package:v2_product_arena/web/providers/web_ob_answers.dart';
 import 'package:v2_product_arena/web/providers/web_ob_role.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_ob_appbar.dart';
@@ -19,15 +18,12 @@ import '../widgets/web_link_tile.dart';
 import '../widgets/web_options_tile.dart';
 import '../widgets/web_qa_tile.dart';
 import '../widgets/web_role_bar.dart';
-import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
-import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
-import 'package:v2_product_arena/amplifyconfiguration.dart';
 import 'package:provider/provider.dart';
 
 class WebOnboardingView extends StatefulWidget {
   const WebOnboardingView({super.key});
-  static const routeName = '/web_onboarding_view';
+  static const routeName = '/web-onboarding-view';
 
   @override
   State<WebOnboardingView> createState() => _WebOnboardingViewState();
@@ -39,24 +35,24 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
   @override
   void initState() {
     super.initState();
-    _configureAmplify();
+    // _configureAmplify();
   }
 
-  Future<void> _configureAmplify() async {
-    // Add any Amplify plugins you want to use
-    final authPlugin = AmplifyAuthCognito();
-    final api = AmplifyAPI();
-    await Amplify.addPlugins([authPlugin, api]);
-    try {
-      await Amplify.configure(amplifyconfig);
-    } on AmplifyAlreadyConfiguredException {
-      safePrint(
-          'Tried to reconfigure Amplify; this can occur when your app restarts on Android.');
-    }
-  }
+  // Future<void> _configureAmplify() async {
+  //   // Add any Amplify plugins you want to use
+  //   final authPlugin = AmplifyAuthCognito();
+  //   final api = AmplifyAPI();
+  //   await Amplify.addPlugins([authPlugin, api]);
+  //   try {
+  //     await Amplify.configure(amplifyconfig);
+  //   } on AmplifyAlreadyConfiguredException {
+  //     safePrint(
+  //         'Tried to reconfigure Amplify; this can occur when your app restarts on Android.');
+  //   }
+  // }
 
   Future<void> signInUser() async {
-    await _configureAmplify();
+    // await _configureAmplify();
     try {
       // // //Loading icon
       showDialog(
@@ -72,8 +68,6 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
             .userEmail, // email of user
         password: Provider.of<WebAuth>(context, listen: false).userPassword,
       );
-
-      print('LOGINOVO SE');
     } on AuthException catch (e) {
       safePrint(e.message);
     }
@@ -109,15 +103,11 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
             },
           }),
           apiName: "userDataInitAlfa");
-      final response = await restOperation.response;
-      Map<String, dynamic> responseMap = jsonDecode(response.decodeBody());
-
-      Navigator.of(context)
-          .pushReplacementNamed(WebCongratulationObScreen.routeName);
-      print('POST call succeeded');
-      print(responseMap['lectures']);
+      await restOperation.response;
+      // Map<String, dynamic> responseMap = jsonDecode(response.decodeBody());
+      Navigator.of(context).pushNamed(WebCongratulationsScreen.routeName);
     } on ApiException catch (e) {
-      print('POST call failed: $e');
+      safePrint('POST call failed: $e');
     }
   }
 
@@ -162,6 +152,7 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
           child: WebOBAppBar(text: 'Tech387')),
       body: SafeArea(
         child: SingleChildScrollView(
+          key: const Key('scrollWebOnboarding'),
           child: Column(
             children: [
               Container(
@@ -199,7 +190,7 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
                         ),
                       ),
                       const SizedBox(
-                        height: 11,
+                        height: 12,
                       ),
                       Align(
                         alignment: Alignment.centerLeft,
@@ -211,7 +202,7 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
                               FontWeight.w700),
                         ),
                       ),
-                      const SizedBox(height: 4),
+                      const SizedBox(height: 12),
                       Align(
                         alignment: Alignment.centerLeft,
                         child: SizedBox(
@@ -222,13 +213,17 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
                               FontWeight.w400),
                         ),
                       ),
+                      const SizedBox(
+                        height: 12,
+                      ),
                       const OptionsTile(),
                       const SizedBox(
                         height: 37,
                       ),
                       SizedBox(
                         width: maxWidth * 0.6486,
-                        height: 859,
+                        // height:
+                        //     (859 / 1080) * MediaQuery.of(context).size.width,
                         child: ListView.separated(
                             shrinkWrap: true,
                             itemBuilder: (BuildContext context, int index) {
@@ -247,8 +242,12 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
                                     ),
                             itemCount: tileHeights.length),
                       ),
+                      const SizedBox(
+                        height: 34,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Flexible(
                             flex: 1,
@@ -273,47 +272,56 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          CustomButton(onPressed: () {
-                            int i, j;
-                            int count = 0;
+                          CustomButton(
+                              key: const Key('onboardingSubmitWeb'),
+                              onPressed: () {
+                                int i, j;
+                                int count = 0;
 
-                            for (i = 0; i < 6; i++) {
-                              if (context
-                                  .read<WebAnswerProvider>()
-                                  .formKeys[i]
-                                  .currentState!
-                                  .validate()) {
-                                if (i != 5) {
-                                  count++;
+                                for (i = 0; i < 6; i++) {
+                                  if (context
+                                      .read<WebAnswerProvider>()
+                                      .formKeys[i]
+                                      .currentState!
+                                      .validate()) {
+                                    if (i != 5) {
+                                      count++;
+                                    }
+                                  }
                                 }
-                              }
-                            }
-                            print(s1);
+                                // print(s1);
 
-                            print(s2);
-                            print(s2.length);
-                            print(count);
-                            print(context.read<WebRole>().length);
-                            print(context.read<WebAnswerProvider>().da);
-                            print(context.read<WebAnswerProvider>().ne);
+                                // print(s2);
+                                // print(s2.length);
+                                // print(count);
+                                // print(context.read<WebRole>().length);
+                                // print(context.read<WebAnswerProvider>().da);
+                                // print(context.read<WebAnswerProvider>().ne);
 
-                            if (count == 5 &&
-                                (context.read<WebRole>().length == 2 ||
-                                    context.read<WebRole>().length == 1) &&
-                                (context.read<WebAnswerProvider>().da == true ||
+                                if (count == 5 &&
+                                    (context.read<WebRole>().length == 2 ||
+                                        context.read<WebRole>().length == 1) &&
+                                    (context.read<WebAnswerProvider>().da ==
+                                            true ||
+                                        context.read<WebAnswerProvider>().ne ==
+                                            true)) {
+                                  submitOnboarding(s1, s2);
+                                }
+                                if (!(context.read<WebAnswerProvider>().da ==
+                                        true ||
                                     context.read<WebAnswerProvider>().ne ==
                                         true)) {
-                              submitOnboarding(s1, s2);
-                              print('hljeb');
-                            }
-                            if (!(context.read<WebAnswerProvider>().da ==
-                                    true ||
-                                context.read<WebAnswerProvider>().ne == true)) {
-                              context.read<WebErrorMessage>().change();
-                            } else {
-                              context.read<WebErrorMessage>().reset();
-                            }
-                          }),
+                                  context
+                                      .read<WebErrorMessage>()
+                                      .changeFirstErrorHeight();
+                                  context.read<WebErrorMessage>().change();
+                                } else {
+                                  context
+                                      .read<WebErrorMessage>()
+                                      .resetFirstErrorHeight();
+                                  context.read<WebErrorMessage>().reset();
+                                }
+                              }),
                         ],
                       ),
                     ],

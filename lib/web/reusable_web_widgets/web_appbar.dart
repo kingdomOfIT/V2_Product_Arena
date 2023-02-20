@@ -64,6 +64,7 @@ class _WebAppBarState extends State<WebAppBar> {
                   ),
                 ),
                 child: ElevatedButton(
+                  key: const Key('signUpRedirection'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
                     shape: RoundedRectangleBorder(

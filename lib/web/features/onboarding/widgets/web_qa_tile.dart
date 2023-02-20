@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:v2_product_arena/web/providers/web_ob_answers.dart';
 import 'package:provider/provider.dart';
-import '../../../../mobile/providers/error_message_provider.dart';
 import '../web_constansts_ob.dart';
 
 class QATile extends StatefulWidget {

@@ -52,6 +52,12 @@ void main() {
         (tester) async {
       await tester.pumpWidget(createMobileSignupScreen());
       await tester.pumpAndSettle();
+      final passwordFieldFinder =
+          find.byKey(const Key('passwordSignUpTextField'));
+      await tester.ensureVisible(passwordFieldFinder);
+      await tester.tap(passwordFieldFinder);
+      await tester.enterText(passwordFieldFinder, 'Hello');
+      await tester.pumpAndSettle();
       final togglePasswordViewIcon =
           find.byKey(const Key('togglePasswordViewSignup'));
       await tester.ensureVisible(togglePasswordViewIcon);
@@ -127,12 +133,12 @@ void main() {
       await tester.pumpWidget(createMobileSignupScreen());
 
       final dropdown = find.byKey(const ValueKey('dropDownButton'));
-
+      await tester.ensureVisible(dropdown);
       await tester.tap(dropdown);
       await tester.pumpAndSettle();
 
       final dropdownItem = find.text('Student').last;
-
+      await tester.ensureVisible(dropdownItem);
       await tester.tap(dropdownItem);
       await tester.pumpAndSettle();
     });

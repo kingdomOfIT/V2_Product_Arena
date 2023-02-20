@@ -1,13 +1,9 @@
 // ignore_for_file: use_key_in_widget_constructors, depend_on_referenced_packages, avoid_print, unused_field
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:v2_product_arena/mobile/features/onboarding/screens/mobile_verified_onboarding_screen.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_login_screen.dart';
 import 'package:v2_product_arena/web/features/onboarding/screens/web_onboarding_screen.dart';
-
 import '../../../../mobile/features/auth/screens/email_verified_screen.dart';
-import '../../../../mobile/features/onboarding/screens/mobile_onboarding_screen.dart';
 import '../../../reusable_web_widgets/web_appbar.dart';
 import '../../../reusable_web_widgets/web_footer.dart';
 
@@ -38,7 +34,6 @@ class _WebEmailVerifiedState extends State<WebEmailVerified> {
 }
 
 class Verifed extends StatelessWidget {
-  static const routeName = '/verifed';
   const Verifed({super.key});
 
   @override

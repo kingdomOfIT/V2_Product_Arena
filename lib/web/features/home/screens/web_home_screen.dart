@@ -15,10 +15,12 @@ class WebHomeScreen extends StatelessWidget {
       ),
       body: Center(
         child: ElevatedButton(
+          key: const Key('logOutButton'),
           onPressed: () async {
             try {
               final res = await Amplify.Auth.signOut();
               safePrint(res);
+              // ignore: use_build_context_synchronously
               Navigator.of(context)
                   .pushReplacementNamed(WebLoginScreen.routeName);
             } on AuthException catch (e) {

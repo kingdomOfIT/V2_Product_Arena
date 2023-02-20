@@ -18,7 +18,6 @@ class MobileOnboardingForm extends StatefulWidget {
     required this.text,
     required this.pageController,
   });
-  static const routeName = '/mobile-onboarding-form';
   @override
   State<MobileOnboardingForm> createState() => _MobileOnboardingFormState();
 }
@@ -33,11 +32,13 @@ class _MobileOnboardingFormState extends State<MobileOnboardingForm> {
       appBar: MyHeader(),
       body: SafeArea(
         child: SingleChildScrollView(
+          key: const Key('scroll'),
           child: Padding(
             padding: EdgeInsets.only(
                 left: (32 / 360) * MediaQuery.of(context).size.width,
                 right: (32 / 360) * MediaQuery.of(context).size.width),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 const SizedBox(
                   height: 60,
@@ -47,7 +48,7 @@ class _MobileOnboardingFormState extends State<MobileOnboardingForm> {
                   child: Text(
                     widget.text,
                     style: GoogleFonts.notoSans(
-                        color: Color(0xFF000000),
+                        color: const Color(0xFF000000),
                         fontWeight: FontWeight.w700,
                         fontSize:
                             (16 / 360) * MediaQuery.of(context).size.width),
@@ -59,6 +60,7 @@ class _MobileOnboardingFormState extends State<MobileOnboardingForm> {
                 Form(
                   key: _formKey,
                   child: TextFormField(
+                    key: const Key('onboardingQAnsw'),
                     controller: widget.controller,
                     keyboardType: TextInputType.multiline,
                     minLines: 1,
@@ -67,7 +69,7 @@ class _MobileOnboardingFormState extends State<MobileOnboardingForm> {
                         isDense: true,
                         hintText: 'Vaš odgovor',
                         hintStyle: TextStyle(
-                            color: Color(0xFF4A4458),
+                            color: const Color(0xFF4A4458),
                             fontWeight: FontWeight.w400,
                             fontSize:
                                 (14 / 360) * MediaQuery.of(context).size.width),
@@ -98,7 +100,7 @@ class _MobileOnboardingFormState extends State<MobileOnboardingForm> {
                 ),
                 Consumer<ErrorMessage>(
                   builder: (context, error, child) {
-                    return Container(
+                    return SizedBox(
                       // padding: EdgeInsets.only(left: 20.0, top: 5.0),
                       height: error.errorHeight,
                       child: Row(
@@ -106,7 +108,7 @@ class _MobileOnboardingFormState extends State<MobileOnboardingForm> {
                           Icon(error.errorIcon,
                               size: 20.0, color: Colors.red[700]),
                           Padding(
-                            padding: EdgeInsets.only(left: 5.0),
+                            padding: const EdgeInsets.only(left: 5.0),
                             child: Text(
                               error.errorText,
                               style: TextStyle(
@@ -120,26 +122,21 @@ class _MobileOnboardingFormState extends State<MobileOnboardingForm> {
                     );
                   },
                 ),
-                Padding(
-                  padding: EdgeInsets.only(
-                      top: 16,
-                      left: (217 / 360) * MediaQuery.of(context).size.width),
-                  child: TextButton(
-                    onPressed: () {
-                      widget.controller.clear();
-                    },
-                    child: Text(
-                      'Clear section',
-                      style: GoogleFonts.notoSans(
-                          color: const Color(0xFF4A4458),
-                          fontWeight: FontWeight.w700,
-                          fontSize:
-                              (10 / 360) * MediaQuery.of(context).size.width),
-                    ),
+                TextButton(
+                  onPressed: () {
+                    widget.controller.clear();
+                  },
+                  child: Text(
+                    'Clear section',
+                    style: GoogleFonts.notoSans(
+                        color: const Color(0xFF4A4458),
+                        fontWeight: FontWeight.w700,
+                        fontSize:
+                            (10 / 360) * MediaQuery.of(context).size.width),
                   ),
                 ),
-                const SizedBox(
-                  height: 355,
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.43,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 65),
@@ -163,6 +160,7 @@ class _MobileOnboardingFormState extends State<MobileOnboardingForm> {
                         width: (116 / 360) * MediaQuery.of(context).size.width,
                       ),
                       FormButton(
+                          key: const Key('nextButtonForm'),
                           backgroundColor: Colors.black,
                           text: 'Next',
                           buttonWidth:
@@ -171,6 +169,7 @@ class _MobileOnboardingFormState extends State<MobileOnboardingForm> {
                           textColor: Colors.white,
                           borderColor: Colors.black,
                           onPressed: () {
+                            FocusScope.of(context).unfocus();
                             if (_formKey.currentState!.validate() == true) {
                               context
                                   .read<AnswerProvider>()
