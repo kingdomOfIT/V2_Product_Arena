@@ -19,6 +19,7 @@ class SignupConfirmation extends StatefulWidget {
 
 class _SignupConfirmationState extends State<SignupConfirmation> {
   final _formKey = GlobalKey();
+  bool isLoadingEr = false;
 
   final _otpController1 = TextEditingController();
   final _otpController2 = TextEditingController();
@@ -517,6 +518,7 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
                                       context,
                                       WebEmailVerified.routeName,
                                     );
+
                                     print(webAuth.userEmail);
                                     print(isError);
                                   },

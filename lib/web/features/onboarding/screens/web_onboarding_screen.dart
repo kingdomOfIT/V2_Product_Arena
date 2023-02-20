@@ -10,6 +10,7 @@ import 'package:v2_product_arena/web/reusable_web_widgets/web_ob_appbar.dart';
 import '../../../providers/web_auth_provider.dart';
 import '../../../providers/web_ob_error.dart';
 import '../../../reusable_web_widgets/web_footer.dart';
+import '../../auth/widgets/loading_spinner.dart';
 import '../web_constansts_ob.dart';
 import '../widgets/video_tile.dart';
 import '../widgets/web_custom_button.dart';
@@ -53,6 +54,15 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
   Future<void> signInUser() async {
     // await _configureAmplify();
     try {
+      // // //Loading icon
+      showDialog(
+          context: context,
+          builder: (context) {
+            return Center(
+              child: Loader(),
+            );
+          });
+      // // //////////////
       final result = await Amplify.Auth.signIn(
         username: Provider.of<WebAuth>(context, listen: false)
             .userEmail, // email of user
