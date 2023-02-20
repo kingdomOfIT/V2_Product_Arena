@@ -233,7 +233,6 @@ class _WebLoginFormState extends State<WebLoginForm> {
                     }
                   } on UserNotFoundException {
                     safePrint('The user is not found. Please register');
-                  } on UserNotConfirmedException {
                   } on AuthNotAuthorizedException {
                     safePrint(
                         'Username or password is wrong. Please try again');
