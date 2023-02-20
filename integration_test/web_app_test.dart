@@ -177,6 +177,7 @@ void main() {
 
       await tester.pumpWidget(createWebLoginScreen());
       await tester.pumpAndSettle();
+      await tester.ensureVisible(emailLoginField);
 
       await tester.tap(emailLoginField);
       await tester.enterText(emailLoginField, 'bkaric@pa.tech387.com');
@@ -192,12 +193,15 @@ void main() {
       await tester.tap(loginButton);
       await tester.pumpAndSettle();
 
+      await tester.ensureVisible(logOutButton);
       await tester.tap(logOutButton);
       await tester.pumpAndSettle();
 
+      await tester.ensureVisible(signupRedirectionButton);
       await tester.tap(signupRedirectionButton);
       await tester.pumpAndSettle();
 
+      await tester.ensureVisible(nameSignupTextField);
       await tester.tap(nameSignupTextField);
       await tester.enterText(nameSignupTextField, 'Test');
 
@@ -213,6 +217,7 @@ void main() {
 
       await tester.pumpAndSettle();
 
+      await tester.ensureVisible(citySignupTextField);
       await tester.tap(citySignupTextField);
       await tester.enterText(citySignupTextField, 'Sarajevo');
 
@@ -225,11 +230,13 @@ void main() {
       await tester.tap(dropdownItem);
       await tester.pumpAndSettle();
 
+      await tester.ensureVisible(phoneSignupTextField);
       await tester.tap(phoneSignupTextField);
       await tester.enterText(phoneSignupTextField, '+387123456789');
 
       await tester.pumpAndSettle();
 
+      await tester.ensureVisible(emailSignupTextField);
       await tester.tap(emailSignupTextField);
       await tester.enterText(emailSignupTextField, 'testing@gmail.com');
 
@@ -354,17 +361,18 @@ void main() {
       await tester.enterText(onboardingVideoTextField,
           'https://www.youtube.com/watch?v=75i5VmTI6A0');
       await tester.pumpAndSettle();
-      await tester.fling(
-          onboardingScrollableScreen, const Offset(0, -200), 1000);
-      await tester.pumpAndSettle();
+      // await tester.fling(
+      //     onboardingScrollableScreen, const Offset(0, -200), 1000);
+      // await tester.pumpAndSettle();
 
       final roleTileFinder = find.byWidgetPredicate(
           (widget) => widget is RoleTile && widget.role == listRole[0]);
+      await tester.ensureVisible(roleTileFinder);
 
       await tester.tap(roleTileFinder);
 
       await tester.pumpAndSettle();
-
+      await tester.ensureVisible(onboardingSubmitButton);
       await tester.tap(onboardingSubmitButton);
 
       await tester.pumpAndSettle(const Duration(seconds: 4));

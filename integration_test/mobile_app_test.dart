@@ -164,7 +164,6 @@ final onboardingSubmitButton = find.byKey(const Key('submitOnboarding'));
 
 @GenerateMocks([SignInResult, SignUpResult, AmplifyClass])
 void main() {
-  // _currentPage = 0;
   group('Testing App Performance Tests', () {
     setUpAll(() async {
       IntegrationTestWidgetsFlutterBinding.ensureInitialized();
