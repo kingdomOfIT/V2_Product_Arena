@@ -21,30 +21,85 @@ class _WebLecturesPageState extends State<WebLecturesPage> {
   Widget build(BuildContext context) {
     double maxwidth = MediaQuery.of(context).size.width;
     double maxheight = MediaQuery.of(context).size.height;
-    return Row(
-      children: [
-////////////////////////////////////// SIDEBAR ////////////////////////////////////////
+    return Scaffold(
+      body: Row(
+        children: [
+          ////////////////////////////////////// SIDEBAR ////////////////////////////////////////
 
-        const WebSideBar(),
+          const WebSideBar(),
 
-////////////////////////////////////// LECTURES PART OF SCREEN ////////////////////////////////////////
+          ////////////////////////////////////// LECTURES PART OF SCREEN ////////////////////////////////////////
 
-        Container(
+          Container(
             color: Colors.white,
             width: maxwidth * (1130 / 1440),
             child: Column(
               children: [
-                Positioned(
-                  top: 0,
-                  right: 0,
-                  child: Container(
-                    color: Colors.cyan,
-                    height: maxheight * (70 / 1510),
+                ////////////////////////////////////// PROFILE GREEN ICON////////////////////////////////////////
+
+                Align(
+                  alignment: Alignment.topRight,
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.only(top: 10, bottom: 10, right: 50),
+                    child: SizedBox(
+                      width: maxwidth * (50 / 1440),
+                      height: 50,
+                      child: Image.asset('assets/images/Profileicon.png'),
+                    ),
                   ),
-                )
+                ),
+
+                ////////////////////////////////////// LECTURES CARDS  ////////////////////////////////////////
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: lectures.length,
+                    itemBuilder: (BuildContext ctx, int index) {
+                      return Container(
+                        padding: const EdgeInsets.all(20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  lectures[index].name,
+                                  style: GoogleFonts.outfit(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: maxheight * (32 / 1510),
+                                  ),
+                                ),
+                                Text(
+                                  lectures[index].description,
+                                  style: GoogleFonts.notoSans(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: maxheight * (18 / 1510),
+                                  ),
+                                ),
+                              ],
+                            ),
+///////////////////////////////////////////////// LECTURE IMAGE ///////////////////////////////////////////////////////////////
+                            Flexible(
+                              child: SizedBox(
+                                width: maxwidth * (370 / 1440),
+                                height: maxheight * (270 / 1510),
+                                child: Image.network(
+                                  lectures[index].imageSrc,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ),
               ],
-            )),
-      ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

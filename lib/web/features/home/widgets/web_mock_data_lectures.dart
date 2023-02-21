@@ -4,41 +4,41 @@ class Utils {
   static List<Lecture> getMockedLecture() {
     return [
       Lecture(
-          title: '1. Tools: Figma Basics',
+          name: '1. Tools: Figma Basics',
           description:
               'In this video you will learn the basics of Figma. A tool with the help of which you will realize your ideas and create prototypes.',
-          totalTime: '23:17',
+          durationInSeconds: 22232,
           remainingTime: '12:14',
           status: 'Ongoing',
-          imageLecture:
-              'https://www.shutterstock.com/image-vector/under-construction-road-sign-260nw-136198667.jpg'),
+          imageSrc:
+              'https://t3.ftcdn.net/jpg/03/53/83/92/360_F_353839266_8yqhN0548cGxrl4VOxngsiJzDgrDHxjG.jpg'),
       Lecture(
-          title: '2. Tools: FigJam Basics',
+          name: '2. Tools: FigJam Basics',
           description:
               'In this video you will learn the basics of Figma. A tool with the help of which you will realize your ideas and create prototypes.',
-          totalTime: '23:17',
+          durationInSeconds: 22321,
           remainingTime: '12:14',
           status: 'Ongoing',
-          imageLecture:
-              'https://www.shutterstock.com/image-vector/under-construction-road-sign-260nw-136198667.jpg'),
+          imageSrc:
+              'https://t3.ftcdn.net/jpg/03/53/83/92/360_F_353839266_8yqhN0548cGxrl4VOxngsiJzDgrDHxjG.jpg'),
       Lecture(
-          title: '3. Tools: Photoshop Basics',
+          name: '3. Tools: Photoshop Basics',
           description:
               'In this video you will learn the basics of Figma. A tool with the help of which you will realize your ideas and create prototypes.',
-          totalTime: '23:17',
+          durationInSeconds: 22321,
           remainingTime: '12:14',
           status: 'Ongoing',
-          imageLecture:
-              'https://www.shutterstock.com/image-vector/under-construction-road-sign-260nw-136198667.jpg'),
+          imageSrc:
+              'https://t3.ftcdn.net/jpg/03/53/83/92/360_F_353839266_8yqhN0548cGxrl4VOxngsiJzDgrDHxjG.jpg'),
       Lecture(
-          title: '4. Tools: Illustrator Basics',
+          name: '4. Tools: Illustrator Basics',
           description:
               'In this video you will learn the basics of Figma. A tool with the help of which you will realize your ideas and create prototypes.',
-          totalTime: '23:17',
+          durationInSeconds: 22321,
           remainingTime: '12:14',
           status: 'Ongoing',
-          imageLecture:
-              'https://www.shutterstock.com/image-vector/under-construction-road-sign-260nw-136198667.jpg'),
+          imageSrc:
+              'https://t3.ftcdn.net/jpg/03/53/83/92/360_F_353839266_8yqhN0548cGxrl4VOxngsiJzDgrDHxjG.jpg'),
     ];
   }
 }
