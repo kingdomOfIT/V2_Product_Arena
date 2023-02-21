@@ -5,6 +5,7 @@ import 'package:v2_product_arena/web/features/auth/screens/web_login_screen.dart
 import 'package:v2_product_arena/web/features/auth/screens/web_signup_screen.dart';
 import 'package:v2_product_arena/web/features/onboarding/web_constansts_ob.dart';
 
+// ignore: must_be_immutable
 class WebOBAppBar extends StatelessWidget {
   final String text;
 

@@ -31,7 +31,10 @@ class WebHomeScreen extends StatelessWidget {
             backgroundColor: Colors.black,
             minimumSize: const Size(200, 200),
           ),
-          child: const Text('LogOut'),
+          child: const Text(
+            'LogOut',
+            style: TextStyle(color: Colors.white),
+          ),
         ),
       ),
     );

@@ -27,8 +27,8 @@ class _EmailVerifiedState extends State<EmailVerified> {
 
   @override
   Widget build(BuildContext context) {
-    final deviceWidth = MediaQuery.of(context).size.width;
-    final deviceHeight = MediaQuery.of(context).size.height;
+    // final deviceWidth = MediaQuery.of(context).size.width;
+    // final deviceHeight = MediaQuery.of(context).size.height;
     return _isLoading ? const Verified() : const FirstPage();
   }
 }
@@ -40,6 +40,7 @@ class Verified extends StatelessWidget {
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
+    // ignore: avoid_unnecessary_containers
     return Container(
       child: Scaffold(
           appBar: PreferredSize(

@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:v2_product_arena/mobile/providers/role_provider.dart';
 
+// ignore: must_be_immutable
 class RoleTile extends StatefulWidget {
   Role role;
 

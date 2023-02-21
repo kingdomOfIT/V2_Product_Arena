@@ -80,10 +80,13 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
       );
       await restOperation.response;
       // Map<String, dynamic> responseMap = jsonDecode(response.decodeBody());
+      // ignore: use_build_context_synchronously
       Navigator.of(context)
           .pushReplacementNamed(MobileVerifiedOnboardingScreen.routeName);
       // print(responseMap['lectures']);
-    } on ApiException catch (e) {}
+    } on ApiException catch (e) {
+      safePrint(e);
+    }
     setState(() {
       isLoading = false;
     });
