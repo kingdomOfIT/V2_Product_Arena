@@ -78,36 +78,34 @@ class Verifed extends StatelessWidget {
                           ),
                         ),
                         width: MediaQuery.of(context).size.width * 0.51,
-                        height: 530,
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              const SizedBox(height: 116),
-                              SizedBox(
-                                width: maxwidth * (102 / 1440),
-                                height: maxheight * (102 / 800),
-                                child: Image.asset(
-                                    'assets/images/checkcircle.png'),
+                        height: 519,
+                        child: Column(
+                          children: [
+                            const SizedBox(height: 116),
+                            SizedBox(
+                              width: maxwidth * (102 / 1440),
+                              height: maxheight * (102 / 800),
+                              child:
+                                  Image.asset('assets/images/checkcircle.png'),
+                            ),
+                            const SizedBox(height: 15),
+                            const Text(
+                              'Email verified',
+                              style: TextStyle(
+                                fontSize: 60,
+                                fontWeight: FontWeight.w400,
                               ),
-                              const SizedBox(height: 15),
-                              const Text(
-                                'Email verified',
-                                style: TextStyle(
-                                  fontSize: 60,
-                                  fontWeight: FontWeight.w400,
-                                ),
+                            ),
+                            const Text(
+                              'Your email is successfully verified',
+                              style: TextStyle(
+                                color: Color(0xFF605D66),
+                                fontSize: 32,
+                                fontWeight: FontWeight.w400,
                               ),
-                              const Text(
-                                'Your email is successfully verified',
-                                style: TextStyle(
-                                  color: Color(0xFF605D66),
-                                  fontSize: 32,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              const SizedBox(height: 23),
-                            ],
-                          ),
+                            ),
+                            const SizedBox(height: 23),
+                          ],
                         ),
                       ),
                     ),

@@ -33,6 +33,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
 
   String _text = '';
   bool isHiddenPassword = true;
+  bool isLoading = false;
 
   void navigateToEmailVerificationScreen(BuildContext context) {
     Navigator.of(context).pushReplacementNamed(SignupConfirmation.routeName);
@@ -43,6 +44,9 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
     FocusScope.of(context).unfocus();
     if (isValid) {
       _formKey.currentState!.save();
+      setState(() {
+        isLoading = true;
+      });
       final provider = Provider.of<WebAuth>(context, listen: false);
       await provider.signUpUser(
         nameController.text,
@@ -52,17 +56,17 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
         dropdownValue!,
         phoneController.text,
         emailController.text,
-        passwordController.text, //ovdje je obrisan context
+        passwordController.text,
         context,
-        SignupConfirmation
-            .routeName, //dodana linija da se proslijedjuje ruta od ovog screena
+        SignupConfirmation.routeName,
       );
-      // .then((_) => navigateToEmailVerificationScreen(
-      //     context)); //dodana navigacija do screena
-      provider.userEmail = emailController
-          .text; //prebacen Provider.of<MobileAuth>(context, listen: false); u funkciju onSubmitSignUp jer i on koristi context tako da mora biti u asinhronoj funkciji
+
+      provider.userEmail = emailController.text;
       provider.userPassword = passwordController.text;
     }
+    setState(() {
+      isLoading = false;
+    });
   }
 
   RegExp birthDate =

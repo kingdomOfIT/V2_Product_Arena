@@ -226,6 +226,7 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                     label: Text(
                                       'Name',
                                       style: GoogleFonts.notoSans(
+                                        fontSize: 14,
                                         fontWeight: FontWeight.w700,
                                       ),
                                     ),
@@ -292,6 +293,7 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                     label: Text(
                                       'Surname',
                                       style: GoogleFonts.notoSans(
+                                        fontSize: 14,
                                         fontWeight: FontWeight.w700,
                                       ),
                                     ),
@@ -356,6 +358,7 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                     label: Text(
                                       'Birth Date',
                                       style: GoogleFonts.notoSans(
+                                        fontSize: 14,
                                         fontWeight: FontWeight.w700,
                                       ),
                                     ),
@@ -428,6 +431,7 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                     label: Text(
                                       'City',
                                       style: GoogleFonts.notoSans(
+                                        fontSize: 14,
                                         fontWeight: FontWeight.w700,
                                       ),
                                     ),
@@ -486,14 +490,14 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                       style: GoogleFonts.notoSans(
                                         color: Colors.black54,
                                         fontWeight: FontWeight.w700,
-                                        fontSize: deviceHeight * 0.02,
+                                        fontSize: 14,
                                       ),
                                     ),
                                     isExpanded: true,
                                     style: GoogleFonts.notoSans(
                                       color: Colors.black54,
                                       fontWeight: FontWeight.w700,
-                                      fontSize: deviceHeight * 0.02,
+                                      fontSize: 14,
                                     ),
                                   ),
                                 ),
@@ -535,6 +539,7 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                     label: Text(
                                       'Phone',
                                       style: GoogleFonts.notoSans(
+                                        fontSize: 14,
                                         fontWeight: FontWeight.w700,
                                       ),
                                     ),
@@ -621,6 +626,7 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                     label: Text(
                                       'Email',
                                       style: GoogleFonts.notoSans(
+                                        fontSize: 14,
                                         fontWeight: FontWeight.w700,
                                       ),
                                     ),
@@ -701,6 +707,7 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                     label: Text(
                                       'Password',
                                       style: GoogleFonts.notoSans(
+                                        fontSize: 14,
                                         fontWeight: FontWeight.w700,
                                       ),
                                     ),

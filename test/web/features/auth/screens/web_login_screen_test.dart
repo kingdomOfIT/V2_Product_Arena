@@ -1,24 +1,40 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_login_screen.dart';
+import 'package:v2_product_arena/web/features/auth/screens/web_signup_screen.dart';
+import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
 
+late WebAuth auth;
+
+Widget createWebLoginScreen() => ChangeNotifierProvider<WebAuth>(
+      create: (context) {
+        auth = WebAuth();
+        return auth;
+      },
+      child: MaterialApp(
+        routes: {
+          '/web-signup': (context) => WebSignUpScreen(),
+        },
+        home: const WebLoginScreen(),
+      ),
+    );
 void main() {
   group('Web login screen tests', () {
     testWidgets(
         'GIVEN web login screen, WHEN widget is built, THEN all input fields and buttons should be visible',
         (tester) async {
-      await tester.pumpWidget(const MaterialApp(home: WebLoginScreen()));
+      await tester.pumpWidget(createWebLoginScreen());
       await tester.pumpAndSettle();
 
       expect(find.byKey(const Key('emailField')), findsOneWidget);
       expect(find.byKey(const Key('passwordField')), findsOneWidget);
       expect(find.byKey(const Key('loginButton')), findsOneWidget);
-      expect(find.byKey(const Key('togglePasswordView')), findsOneWidget);
     });
     testWidgets(
         'GIVEN web login screen, WHEN widget is built, THEN all required text is visible on screen',
         (tester) async {
-      await tester.pumpWidget(const MaterialApp(home: WebLoginScreen()));
+      await tester.pumpWidget(createWebLoginScreen());
       await tester.pumpAndSettle();
 
       expect(find.text('Welcome to'), findsOneWidget);
@@ -30,7 +46,7 @@ void main() {
     testWidgets(
         'GIVEN web login screen, WHEN screen is loaded, THEN toggle visibility icon should be present and isHiddenPassword should be true',
         (tester) async {
-      await tester.pumpWidget(const MaterialApp(home: WebLoginScreen()));
+      await tester.pumpWidget(createWebLoginScreen());
       await tester.pumpAndSettle();
 
       final passwordTextField = find.descendant(
@@ -43,7 +59,7 @@ void main() {
     testWidgets(
         'GIVEN web login screen, WHEN user tap on toggle password icon, THEN password should be visible',
         (tester) async {
-      await tester.pumpWidget(const MaterialApp(home: WebLoginScreen()));
+      await tester.pumpWidget(createWebLoginScreen());
       await tester.pumpAndSettle();
       await tester.tap(find.byKey(const Key('passwordField')));
       await tester.enterText(find.byKey(const Key('passwordField')), 'Tes');
@@ -64,7 +80,7 @@ void main() {
     testWidgets(
         'GIVEN web login screen, WHEN widget is built, THEN Tech387 logo should be visible on screen',
         (tester) async {
-      await tester.pumpWidget(const MaterialApp(home: WebLoginScreen()));
+      await tester.pumpWidget(createWebLoginScreen());
       await tester.pumpAndSettle();
 
       final imageWidget = find.byType(Image).evaluate().first.widget as Image;
@@ -75,7 +91,7 @@ void main() {
     testWidgets(
         'GIVEN web login screen, WHEN user leave empty input fields and press on login button, THEN he should he alert messages',
         (tester) async {
-      await tester.pumpWidget(const MaterialApp(home: WebLoginScreen()));
+      await tester.pumpWidget(createWebLoginScreen());
       await tester.pumpAndSettle();
 
       await tester.tap(find.byKey(const Key('loginButton')));
@@ -85,7 +101,7 @@ void main() {
     testWidgets(
         'GIVEN web login screen, WHEN user enter email without @ and dot, THEN he should see alert message',
         (tester) async {
-      await tester.pumpWidget(const MaterialApp(home: WebLoginScreen()));
+      await tester.pumpWidget(createWebLoginScreen());
       await tester.pumpAndSettle();
 
       await tester.tap(find.byKey(const Key('emailField')));
@@ -101,7 +117,7 @@ void main() {
     testWidgets(
         'GIVEN web login screen, WHEN user enter email without dot, THEN he should see alert message',
         (tester) async {
-      await tester.pumpWidget(const MaterialApp(home: WebLoginScreen()));
+      await tester.pumpWidget(createWebLoginScreen());
       await tester.pumpAndSettle();
 
       await tester.tap(find.byKey(const Key('emailField')));
@@ -117,7 +133,7 @@ void main() {
     testWidgets(
         'GIVEN web login screen, WHEN user enter email without string before @, THEN he should see alert message',
         (tester) async {
-      await tester.pumpWidget(const MaterialApp(home: WebLoginScreen()));
+      await tester.pumpWidget(createWebLoginScreen());
       await tester.pumpAndSettle();
 
       await tester.tap(find.byKey(const Key('emailField')));
@@ -133,7 +149,7 @@ void main() {
     testWidgets(
         'GIVEN web login screen, WHEN user enter valid email, THEN he shouldn\'t see alert message',
         (tester) async {
-      await tester.pumpWidget(const MaterialApp(home: WebLoginScreen()));
+      await tester.pumpWidget(createWebLoginScreen());
       await tester.pumpAndSettle();
 
       await tester.tap(find.byKey(const Key('emailField')));
@@ -150,7 +166,7 @@ void main() {
     testWidgets(
         'GIVEN web login screen, WHEN user enter password shorter than 8 characters, THEN he should see alert message',
         (tester) async {
-      await tester.pumpWidget(const MaterialApp(home: WebLoginScreen()));
+      await tester.pumpWidget(createWebLoginScreen());
       await tester.pumpAndSettle();
 
       await tester.tap(find.byKey(const Key('passwordField')));
@@ -166,7 +182,7 @@ void main() {
     testWidgets(
         'GIVEN web login screen, WHEN user enter password longer than 8 characters, THEN he shouldn\'t see alert message',
         (tester) async {
-      await tester.pumpWidget(const MaterialApp(home: WebLoginScreen()));
+      await tester.pumpWidget(createWebLoginScreen());
       await tester.pumpAndSettle();
 
       await tester.tap(find.byKey(const Key('passwordField')));

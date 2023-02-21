@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_login_screen.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_signup_screen.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/web_auth_provider.dart';
 
 class WebAppBar extends StatefulWidget {
   final String text;
@@ -24,6 +27,8 @@ class _WebAppBarState extends State<WebAppBar> {
 
   @override
   Widget build(BuildContext context) {
+    final webAuth = Provider.of<WebAuth>(context, listen: false);
+
     return AppBar(
       elevation: 0,
       backgroundColor: Colors.white,
@@ -69,6 +74,13 @@ class _WebAppBarState extends State<WebAppBar> {
                   onPressed: () {
                     Navigator.of(context)
                         .pushReplacementNamed(widget.routeName);
+                    webAuth.isEmailError = false;
+                    webAuth.isNameError = false;
+                    webAuth.isSurnameError = false;
+                    webAuth.isBirthDateError = false;
+                    webAuth.isCityError = false;
+                    webAuth.isPhoneNumError = false;
+                    webAuth.isPasswordError = false;
                   },
                   child: Text(widget.text,
                       style: GoogleFonts.notoSans(
