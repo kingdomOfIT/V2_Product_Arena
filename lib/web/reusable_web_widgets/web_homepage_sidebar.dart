@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:v2_product_arena/constants/global_variables.dart';
 
 class WebSideBar extends StatelessWidget {
   const WebSideBar({super.key});
@@ -47,28 +48,48 @@ class WebSideBar extends StatelessWidget {
           ),
 
           ///////////////////ROLE SCREEN/////////////////////
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextButton.icon(
-              onPressed: () {},
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.resolveWith<Color>(
-                    (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.hovered)) {
-                    return Colors.green;
-                  }
-                  return Colors.white;
-                }),
-              ),
-              icon: const Icon(Icons.home),
-              label: Text(
-                'XY ROLE SCREEN',
-                style: GoogleFonts.notoSans(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 16,
-                    color: Colors.white),
-              ),
-            ),
+          Column(
+            children: usersRole
+                .map(
+                  (e) => Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextButton(
+                      onPressed: () {},
+                      style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.resolveWith<Color>(
+                                (Set<MaterialState> states) {
+                          if (states.contains(MaterialState.hovered)) {
+                            return Colors.green;
+                          }
+                          return Colors.white;
+                        }),
+                      ),
+                      //  icon: const Icon(Icons.home),
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            e.icon,
+                            height: 20,
+                            width: 20,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            e.name,
+                            style: GoogleFonts.notoSans(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 16,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                )
+                .toList(),
           ),
 
           ///////////////////RECENT LECTURES/////////////////////
