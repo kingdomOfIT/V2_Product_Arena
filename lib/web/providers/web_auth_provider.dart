@@ -5,7 +5,6 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:v2_product_arena/amplifyconfiguration.dart';
-import '../features/auth/widgets/loading_spinner.dart';
 
 class WebAuth with ChangeNotifier {
   String errorTextOTP = '';

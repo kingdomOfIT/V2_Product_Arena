@@ -8,7 +8,6 @@ import 'package:v2_product_arena/web/reusable_web_widgets/web_ob_appbar.dart';
 import '../../../providers/web_auth_provider.dart';
 import '../../../providers/web_ob_error.dart';
 import '../../../reusable_web_widgets/web_footer.dart';
-import '../../auth/widgets/loading_spinner.dart';
 import '../web_constansts_ob.dart';
 import '../widgets/video_tile.dart';
 import '../widgets/web_custom_button.dart';

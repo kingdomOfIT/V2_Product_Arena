@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
 
@@ -69,10 +70,11 @@ class _LoginFormState extends State<LoginForm> {
                 horizontal: deviceWidth * 0.05,
               ),
               label: Text(
-                'Email',
-                style: TextStyle(
-                  fontSize: deviceHeight * 0.0187,
-                  fontWeight: FontWeight.w700,
+                "Email",
+                style: GoogleFonts.notoSans(
+                  // ignore: prefer_const_constructors
+                  textStyle: const TextStyle(
+                      fontSize: 14, fontWeight: FontWeight.w700),
                 ),
               ),
               suffixIcon: Icon(
@@ -144,10 +146,10 @@ class _LoginFormState extends State<LoginForm> {
                     )
                   : null,
               label: Text(
-                'Password',
-                style: TextStyle(
-                  fontSize: deviceHeight * 0.0175,
-                  fontWeight: FontWeight.w700,
+                "Password",
+                style: GoogleFonts.notoSans(
+                  textStyle: const TextStyle(
+                      fontSize: 14, fontWeight: FontWeight.w700),
                 ),
               ),
             ),

@@ -21,6 +21,7 @@ class _WebLoginFormState extends State<WebLoginForm> {
   bool emailErrored = false;
   bool passwordErrored = false;
   bool viewPassword = false;
+  final String _text = '';
 
   // ignore: avoid_init_to_null
   var _backErrorMsg = null;
@@ -170,20 +171,25 @@ class _WebLoginFormState extends State<WebLoginForm> {
                 errorStyle: GoogleFonts.notoSans(
                   color: const Color(0xFFB3261E),
                 ),
-                suffixIcon: InkWell(
-                  key: const Key('togglePasswordView'),
-                  onTap: () {
-                    setState(() {
-                      viewPassword = !viewPassword;
-                    });
-                  },
-                  child: Icon(
-                    viewPassword ? Icons.visibility : Icons.visibility_off,
-                    color:
-                        viewPassword ? Colors.black : const Color(0xFF605D66),
-                    size: 30,
-                  ),
-                ),
+                suffixIcon: _text.isNotEmpty
+                    ? InkWell(
+                        key: const Key('togglePasswordView'),
+                        onTap: () {
+                          setState(() {
+                            viewPassword = !viewPassword;
+                          });
+                        },
+                        child: Icon(
+                          viewPassword
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: viewPassword
+                              ? Colors.black
+                              : const Color(0xFF605D66),
+                          size: MediaQuery.of(context).size.height * 0.027,
+                        ),
+                      )
+                    : null,
                 label: Text(
                   'Password',
                   style: GoogleFonts.notoSans(
