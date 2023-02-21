@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:v2_product_arena/constants/global_variables.dart';
 
+// ignore: must_be_immutable
 class MobileSignupForm extends StatefulWidget {
   final TextEditingController nameController;
   final TextEditingController surnameController;
