@@ -1,18 +1,16 @@
-import 'package:flutter/material.dart';
-
 class Lecture {
-  String title;
+  String name;
   String description;
-  String totalTime;
+  int durationInSeconds;
   String remainingTime;
   String status;
-  String imageLecture;
+  String imageSrc;
 
   Lecture(
-      {required this.title,
+      {required this.name,
       required this.description,
-      required this.totalTime,
+      required this.durationInSeconds,
       required this.remainingTime,
       required this.status,
-      required this.imageLecture});
+      required this.imageSrc});
 }

@@ -24,7 +24,7 @@ class _WebContactScreenState extends State<WebContactScreen> {
         children: [
           const Expanded(
             flex: 2,
-            child: WebHomeSideBar(),
+            child: WebSideBar(),
           ),
           Expanded(
             flex: 8,
