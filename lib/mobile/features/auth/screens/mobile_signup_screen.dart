@@ -118,8 +118,10 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
         context,
         EmailVerificationScreen.routeName,
       );
+      // ignore: use_build_context_synchronously
       Provider.of<MobileAuth>(context, listen: false).userEmail =
           emailController.text;
+      // ignore: use_build_context_synchronously
       Provider.of<MobileAuth>(context, listen: false).userPassword =
           passwordController.text;
     }

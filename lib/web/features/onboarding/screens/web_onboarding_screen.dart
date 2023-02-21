@@ -1,7 +1,5 @@
 // ignore_for_file: avoid_print
 
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:v2_product_arena/web/features/onboarding/screens/web_congratulations_screen.dart';
 import 'package:v2_product_arena/web/providers/web_ob_answers.dart';
@@ -31,7 +29,7 @@ class WebOnboardingView extends StatefulWidget {
 
 class _WebOnboardingViewState extends State<WebOnboardingView>
     with SingleTickerProviderStateMixin {
-  final _formKey = GlobalKey<FormState>();
+  // final _formKey = GlobalKey<FormState>();
   @override
   void initState() {
     super.initState();
@@ -54,15 +52,7 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
   Future<void> signInUser() async {
     // await _configureAmplify();
     try {
-      // // //Loading icon
-      showDialog(
-          context: context,
-          builder: (context) {
-            return Center(
-              child: Loader(),
-            );
-          });
-      // // //////////////
+      // ignore: unused_local_variable
       final result = await Amplify.Auth.signIn(
         username: Provider.of<WebAuth>(context, listen: false)
             .userEmail, // email of user
@@ -105,6 +95,7 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
           apiName: "userDataInitAlfa");
       await restOperation.response;
       // Map<String, dynamic> responseMap = jsonDecode(response.decodeBody());
+      // ignore: use_build_context_synchronously
       Navigator.of(context).pushNamed(WebCongratulationsScreen.routeName);
     } on ApiException catch (e) {
       safePrint('POST call failed: $e');
@@ -142,6 +133,7 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
     List<String> s2 = context.read<WebAnswerProvider>().answ;
 
     double maxWidth = MediaQuery.of(context).size.width;
+    // ignore: unused_local_variable
     double maxHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       // List<String> finalRoles=context.read<Role>().selctdRoles;
@@ -275,6 +267,7 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
                           CustomButton(
                               key: const Key('onboardingSubmitWeb'),
                               onPressed: () {
+                                // ignore: unused_local_variable
                                 int i, j;
                                 int count = 0;
 

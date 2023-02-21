@@ -5,6 +5,7 @@ import 'package:v2_product_arena/web/features/onboarding/web_constansts_ob.dart'
 
 import '../../../providers/web_ob_role.dart';
 
+// ignore: must_be_immutable
 class RoleTile extends StatefulWidget {
   WebRole role;
 

@@ -69,6 +69,7 @@ class MobileAuth with ChangeNotifier {
         options: CognitoSignUpOptions(userAttributes: userAttributes),
       );
       isSignUpComplete = result.isSignUpComplete;
+      // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacementNamed(routeName);
       notifyListeners();
     } on AuthException catch (e) {
@@ -87,6 +88,7 @@ class MobileAuth with ChangeNotifier {
     try {
       await Amplify.Auth.confirmSignUp(
           username: email, confirmationCode: confirmationCode);
+      // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacementNamed(routeName);
 
       // print(result);
@@ -112,6 +114,7 @@ class MobileAuth with ChangeNotifier {
 
       isSignInComplete = result.isSignedIn;
       notifyListeners();
+      // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacementNamed(routeName);
     } on AuthException catch (e) {
       safePrint(e.message);
@@ -123,8 +126,11 @@ class MobileAuth with ChangeNotifier {
   Future<void> signOutCurrentUser(BuildContext context) async {
     try {
       await Amplify.Auth.signOut();
+      // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacementNamed(MobileLoginScreen.routeName);
-    } on AuthException catch (e) {}
+    } on AuthException catch (e) {
+      safePrint(e);
+    }
     notifyListeners();
   }
 }
