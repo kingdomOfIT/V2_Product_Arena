@@ -28,7 +28,7 @@ class _WebLecturesPageState extends State<WebLecturesPage> {
 
           const WebSideBar(),
 
-          ////////////////////////////////////// LECTURES PART OF SCREEN ////////////////////////////////////////
+          ////////////////////////////////////// LECTURES ////////////////////////////////////////
 
           Container(
             color: Colors.white,
@@ -55,41 +55,82 @@ class _WebLecturesPageState extends State<WebLecturesPage> {
                   child: ListView.builder(
                     itemCount: lectures.length,
                     itemBuilder: (BuildContext ctx, int index) {
-                      return Container(
-                        padding: const EdgeInsets.all(20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  lectures[index].name,
-                                  style: GoogleFonts.outfit(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: maxheight * (32 / 1510),
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: maxwidth * (50 / 1440)),
+                        child: Container(
+                          padding: EdgeInsets.all(maxwidth * (30 / 1440)),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+///////////////////////////////////////////////// LECTURE INFORMATIONS ///////////////////////////////////////////////////////////////
+
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        lectures[index].name,
+                                        style: GoogleFonts.outfit(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: maxheight * (32 / 1510),
+                                        ),
+                                      ),
+                                      Text(
+                                        lectures[index].description,
+                                        style: GoogleFonts.notoSans(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: maxheight * (18 / 1510),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: maxheight * (160 / 1510),
+                                      ),
+                                      Text(
+                                        'Total time: ${lectures[index].durationInSeconds}',
+                                        style: GoogleFonts.notoSans(
+                                            fontSize: maxheight * (16 / 1510),
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                      Text(
+                                        'Remaning time: ${lectures[index].remainingTime}',
+                                        style: GoogleFonts.notoSans(
+                                            fontSize: maxheight * (16 / 1510),
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                      Text(
+                                        'Status: ${lectures[index].status}',
+                                        style: GoogleFonts.notoSans(
+                                            fontSize: maxheight * (16 / 1510),
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    ],
                                   ),
-                                ),
-                                Text(
-                                  lectures[index].description,
-                                  style: GoogleFonts.notoSans(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: maxheight * (18 / 1510),
-                                  ),
-                                ),
-                              ],
-                            ),
 ///////////////////////////////////////////////// LECTURE IMAGE ///////////////////////////////////////////////////////////////
-                            Flexible(
-                              child: SizedBox(
-                                width: maxwidth * (370 / 1440),
-                                height: maxheight * (270 / 1510),
-                                child: Image.network(
-                                  lectures[index].imageSrc,
-                                ),
+                                  SizedBox(
+                                    width: maxwidth * (30 / 1440),
+                                  ),
+                                  Flexible(
+                                    child: SizedBox(
+                                      width: maxwidth * (370 / 1440),
+                                      height: maxheight * (270 / 1510),
+                                      child: Image.network(
+                                        lectures[index].imageSrc,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                          ],
+                              Divider(
+                                height: maxheight * (14 / 1510),
+                                thickness: 1,
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     },
