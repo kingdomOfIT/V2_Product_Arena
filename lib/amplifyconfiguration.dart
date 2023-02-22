@@ -33,6 +33,12 @@ const amplifyconfig = ''' {
                     "endpoint": "https://q8i8fevvt2.execute-api.us-east-1.amazonaws.com/staging",
                     "region": "us-east-1",
                     "authorizationType": "AWS_IAM"
+                },
+                "getLecturesAlfa": {
+                    "endpointType": "REST",
+                    "endpoint": "https://t6u3urwy88.execute-api.us-east-1.amazonaws.com/staging",
+                    "region": "us-east-1",
+                    "authorizationType": "AWS_IAM"
                 }
             }
         }
