@@ -1,4 +1,6 @@
-// ignore_for_file: depend_on_referenced_packages, use_build_context_synchronously, prefer_const_constructors, unused_local_variable, empty_catches
+// ignore_for_file: depend_on_referenced_packages, use_build_context_synchronously, prefer_const_constructors, unused_local_variable, empty_catches, avoid_print
+
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
@@ -104,6 +106,33 @@ class WebAuth with ChangeNotifier {
         isOTPerror = true;
         notifyListeners();
       }
+    }
+  }
+
+///////////////////////////////GETTING LECTURES/////////////////////////////////////
+
+  Future<void> getUserLectures() async {
+    try {
+      final restOperation = Amplify.API.get('/getLectures',
+          apiName: 'getUserLecturesAlfa',
+          queryParameters: {
+            'paDate': 'Feb2023'
+            // , 'name': 'Flutter widgets'
+          });
+      final response = await restOperation.response;
+      Map<String, dynamic> responseMap = jsonDecode(response.decodeBody());
+
+      List temp = [];
+      responseMap['lectures'].forEach((lecture) {
+        temp.addAll(lecture['roles']);
+      });
+      Set<String> set = Set<String>.from(temp);
+      List<String> roles = set.toList();
+      print(roles);
+
+      print('GET call succeeded: ${responseMap['lectures']}');
+    } on ApiException catch (e) {
+      print('GET call failed: $e');
     }
   }
 }

@@ -1,6 +1,6 @@
-import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:v2_product_arena/web/features/auth/screens/web_login_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:v2_product_arena/web/reusable_web_widgets/web_homepage_sidebar.dart';
 
 class WebHomeScreen extends StatelessWidget {
   static const routeName = '/web-home';
@@ -10,32 +10,126 @@ class WebHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Web home screen'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          key: const Key('logOutButton'),
-          onPressed: () async {
-            try {
-              final res = await Amplify.Auth.signOut();
-              safePrint(res);
-              // ignore: use_build_context_synchronously
-              Navigator.of(context)
-                  .pushReplacementNamed(WebLoginScreen.routeName);
-            } on AuthException catch (e) {
-              safePrint(e.message);
-            }
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.black,
-            minimumSize: const Size(200, 200),
+      body: Row(
+        children: [
+          const Expanded(
+            flex: 2,
+            child: WebSideBar(),
           ),
-          child: const Text(
-            'LogOut',
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
+          Expanded(
+            flex: 8,
+            child: Column(
+              children: [
+                Container(
+                  height: 70,
+                  alignment: Alignment.topRight,
+                  child: const Text(
+                    'TopBar',
+                    style: TextStyle(
+                      color: Colors.black,
+                      backgroundColor: Colors.green,
+                    ),
+                  ),
+                ),
+                Column(
+                  children: [
+                    Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            (MediaQuery.of(context).size.width > 920)
+                                ? Image.asset(
+                                    'assets/images/TopUI.png',
+                                    //height: 200,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.15,
+                                  )
+                                : const SizedBox(),
+                            (MediaQuery.of(context).size.width > 920)
+                                ? const SizedBox(
+                                    width: 50,
+                                  )
+                                : const SizedBox(),
+                            (MediaQuery.of(context).size.width > 920)
+                                ? RichText(
+                                    text: TextSpan(
+                                      text: 'Welcome to\n',
+                                      style: GoogleFonts.notoSans(
+                                        fontSize: 40,
+                                      ),
+                                      children: [
+                                        TextSpan(
+                                          text: 'Product Arena',
+                                          style: GoogleFonts.notoSans(
+                                            fontSize: 40,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                : Column(
+                                    children: [
+                                      Text(
+                                        'Welcome to',
+                                        style: GoogleFonts.notoSans(
+                                          fontSize: 40,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Product Arena',
+                                        style: GoogleFonts.notoSans(
+                                          fontSize: 40,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.45,
+                          child: Text(
+                            'Our goal is to recognise persistence, motivation and adaptability, that’s why we encourage you to dive into these materials and wish you the best of luck in your studies.',
+                            style: GoogleFonts.outfit(
+                              fontSize: 26,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 50,
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.45,
+                          child: Text(
+                            "Once you have gone through all the lessons you'll be able to take a test to show us what you have learned!",
+                            style: GoogleFonts.outfit(
+                              fontSize: 26,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
+                    ),
+                    (MediaQuery.of(context).size.width > 920)
+                        ? Image.asset(
+                            'assets/images/BottomQA.png',
+                            height: 200,
+                            width: MediaQuery.of(context).size.width * 0.5,
+                            alignment: Alignment.centerRight,
+                          )
+                        : const SizedBox(),
+                  ],
+                ),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
