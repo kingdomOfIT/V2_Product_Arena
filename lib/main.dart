@@ -22,6 +22,7 @@ import 'package:provider/provider.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_signup_screen.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_home_screen.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_lectures_page.dart';
+import 'package:v2_product_arena/web/features/home/screens/web_recent_lectures.dart';
 import 'package:v2_product_arena/web/features/onboarding/screens/web_congratulations_screen.dart';
 import 'package:v2_product_arena/web/features/onboarding/screens/web_onboarding_screen.dart';
 import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
@@ -136,7 +137,9 @@ class _MyAppState extends State<MyApp> {
           WebCongratulationsScreen.routeName: (context) =>
               const WebCongratulationsScreen(),
           WebEmailVerified.routeName: (context) => const WebEmailVerified(),
-          WebLecturesPage.routeName: (context) => const WebLecturesPage()
+          WebLecturesPage.routeName: (context) => const WebLecturesPage(),
+          WebRecentLecturesPage.routeName: (context) =>
+              const WebRecentLecturesPage()
         },
       ),
     );
