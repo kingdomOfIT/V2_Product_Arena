@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:v2_product_arena/constants/global_variables.dart';
+import 'package:v2_product_arena/web/features/home/screens/web_lectures_page.dart';
+import 'package:v2_product_arena/web/features/home/screens/web_recent_lectures.dart';
 
 class WebSideBar extends StatelessWidget {
   const WebSideBar({super.key});
@@ -27,15 +29,6 @@ class WebSideBar extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: TextButton.icon(
               onPressed: () {},
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.resolveWith<Color>(
-                    (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.hovered)) {
-                    return Colors.green;
-                  }
-                  return Colors.white;
-                }),
-              ),
               icon: const Icon(Icons.home),
               label: Text(
                 'Homescreen',
@@ -54,7 +47,10 @@ class WebSideBar extends StatelessWidget {
                   (e) => Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context)
+                            .pushNamed(WebLecturesPage.routeName);
+                      },
                       style: ButtonStyle(
                         foregroundColor:
                             MaterialStateProperty.resolveWith<Color>(
@@ -73,9 +69,7 @@ class WebSideBar extends StatelessWidget {
                             height: 20,
                             width: 20,
                           ),
-                          const SizedBox(
-                            width: 10,
-                          ),
+                          const SizedBox(width: 10),
                           Text(
                             e.name,
                             style: GoogleFonts.notoSans(
@@ -96,16 +90,10 @@ class WebSideBar extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextButton.icon(
-              onPressed: () {},
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.resolveWith<Color>(
-                    (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.hovered)) {
-                    return Colors.green;
-                  }
-                  return Colors.white;
-                }),
-              ),
+              onPressed: () {
+                Navigator.of(context)
+                    .pushNamed(WebRecentLecturesPage.routeName);
+              },
               icon: const Icon(Icons.home),
               label: Text(
                 'Recent Lectures',
@@ -122,15 +110,6 @@ class WebSideBar extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: TextButton.icon(
               onPressed: () {},
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.resolveWith<Color>(
-                    (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.hovered)) {
-                    return Colors.green;
-                  }
-                  return Colors.white;
-                }),
-              ),
               icon: const Icon(Icons.home),
               label: Text(
                 'Contact us!',

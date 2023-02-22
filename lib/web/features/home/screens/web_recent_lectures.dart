@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:v2_product_arena/web/features/home/models/lecture.dart';
+import 'package:v2_product_arena/web/features/home/widgets/web_mock_data_recent_lectures.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_lecture_card.dart';
-
 import '../../../reusable_web_widgets/web_homepage_sidebar.dart';
-import '../widgets/web_mock_data_lectures.dart';
 
-class WebLecturesPage extends StatefulWidget {
-  static const routeName = '/web-lectures';
+class WebRecentLecturesPage extends StatefulWidget {
+  static const routeName = '/web-recent';
 
-  const WebLecturesPage({super.key});
+  const WebRecentLecturesPage({super.key});
 
   @override
-  State<WebLecturesPage> createState() => _WebLecturesPageState();
+  State<WebRecentLecturesPage> createState() => _WebRecentLecturesPageState();
 }
 
-class _WebLecturesPageState extends State<WebLecturesPage> {
-  List<Lecture> lectures = Utils.getMockedLecture();
+class _WebRecentLecturesPageState extends State<WebRecentLecturesPage> {
+  List<Lecture> lectures = UtilsRecent.getMockedRecentLecture();
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +57,7 @@ class _WebLecturesPageState extends State<WebLecturesPage> {
                         padding: EdgeInsets.symmetric(
                             horizontal: maxwidth * (50 / 1440)),
                         child: WebLectureCard(
+                            // name: lectures[index].name,
                             name: lectures[index].name,
                             description: lectures[index].description,
                             durationInSeconds:
