@@ -109,12 +109,26 @@ class WebAuth with ChangeNotifier {
     }
   }
 
+  Future<void> signInUser() async {
+    try {
+      final result = await Amplify.Auth.signIn(
+        username: 'akahriman@pa.tech387.com',
+        password: 'Testing1!',
+      );
+      print('Loginovan');
+    } on AuthException catch (e) {
+      safePrint(e.message);
+    }
+    notifyListeners();
+  }
+
 ///////////////////////////////GETTING LECTURES/////////////////////////////////////
 
   Future<void> getUserLectures() async {
+    await signInUser();
     try {
-      final restOperation = Amplify.API.get('/getLectures',
-          apiName: 'getUserLecturesAlfa',
+      final restOperation = Amplify.API.get('/api/user/lectures',
+          apiName: 'getLecturesAlfa',
           queryParameters: {
             'paDate': 'Feb2023'
             // , 'name': 'Flutter widgets'
@@ -133,6 +147,26 @@ class WebAuth with ChangeNotifier {
       print('GET call succeeded: ${responseMap['lectures']}');
     } on ApiException catch (e) {
       print('GET call failed: $e');
+    }
+  }
+
+///////////////////////////////GETTING LECTURES ORDER/////////////////////////////////////
+  Future<void> getLectureOrder() async {
+    await signInUser();
+    try {
+      final restOperation = Amplify.API.get('/api/lectures/order',
+          apiName: 'getLecturesOrder',
+          queryParameters: {
+            'paDate': 'Feb2023'
+            // , 'name': 'Flutter widgets'
+          });
+      final response = await restOperation.response;
+      Map<String, dynamic> responseMap = jsonDecode(response.decodeBody());
+      print(
+          'GET call succeeded: ${responseMap['lectureOrders']['productManager']}');
+      print(jsonEncode(responseMap));
+    } on ApiException catch (e) {
+      print('GET call failed: ${e.message}');
     }
   }
 }
