@@ -133,6 +133,26 @@ List<Role> listRoleSel = [
   )
 ];
 
+class UsersRole {
+  final String name;
+  final String icon;
+
+  UsersRole({
+    required this.name,
+    required this.icon,
+  });
+}
+
+List<UsersRole> usersRole = [
+  UsersRole(
+    name: 'Fullstack',
+    icon: 'assets/images/rolevectorwhite5.png',
+  ),
+  UsersRole(
+    name: 'Backend',
+    icon: 'assets/images/rolevectorwhite3.png',
+  ),
+];
 // ignore: non_constant_identifier_names
 PreferredSizeWidget? MyHeader() {
   return AppBar(
