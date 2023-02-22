@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:v2_product_arena/constants/global_variables.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_home_screen.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_lectures_page.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_recent_lectures.dart';
+
+import '../providers/web_auth_provider.dart';
 
 class WebSideBar extends StatelessWidget {
   const WebSideBar({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final webAuth = Provider.of<WebAuth>(context, listen: false);
     double maxwidth = MediaQuery.of(context).size.width;
     return Container(
       color: Colors.black,
@@ -32,6 +36,7 @@ class WebSideBar extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: TextButton(
                   onPressed: () {
+                    webAuth.getLectureOrder();
                     Navigator.of(context).pushNamed(WebHomeScreen.routeName);
                   },
                   style: ButtonStyle(

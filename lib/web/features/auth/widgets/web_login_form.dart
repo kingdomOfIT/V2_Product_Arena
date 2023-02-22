@@ -3,7 +3,10 @@ import 'package:amplify_flutter/amplify_flutter.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_home_screen.dart';
+
+import '../../../providers/web_auth_provider.dart';
 
 class WebLoginForm extends StatefulWidget {
   const WebLoginForm({super.key});
@@ -36,6 +39,8 @@ class _WebLoginFormState extends State<WebLoginForm> {
 
   @override
   Widget build(BuildContext context) {
+    final webAuth = Provider.of<WebAuth>(context, listen: false);
+
     return Form(
       key: _loginFormKey,
       child: SizedBox(
@@ -276,6 +281,7 @@ class _WebLoginFormState extends State<WebLoginForm> {
                     safePrint(e.toString());
                   }
                 }
+                webAuth.getUserLectures();
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,
