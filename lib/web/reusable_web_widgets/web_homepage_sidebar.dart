@@ -1,161 +1,145 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:v2_product_arena/web/features/home/screens/web_contact_screen.dart';
-import 'package:v2_product_arena/web/features/home/screens/web_home_screen.dart';
+import 'package:v2_product_arena/constants/global_variables.dart';
 
-enum _CurrentPage {
-  home,
-  design,
-  recent,
-  contact,
-}
+class WebSideBar extends StatelessWidget {
+  const WebSideBar({super.key});
 
-var currentPage = _CurrentPage.home;
-
-class WebHomeSideBar extends StatefulWidget {
-  static const routeName = '/web-home';
-
-  const WebHomeSideBar({super.key});
-
-  @override
-  State<WebHomeSideBar> createState() => _WebHomeSideBarState();
-}
-
-class _WebHomeSideBarState extends State<WebHomeSideBar> {
   @override
   Widget build(BuildContext context) {
+    double maxwidth = MediaQuery.of(context).size.width;
     return Container(
-      //width: 310,
       color: Colors.black,
-      child: ListView(
-        padding: EdgeInsets.zero,
+      width: maxwidth * (310 / 1440),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          DrawerHeader(
-            child: Image.asset("assets/images/LogoPAblackbackground.png"),
+          Padding(
+            padding: const EdgeInsets.all(70),
+            child: SizedBox(
+              width: maxwidth * (170 / 1440),
+              child: Image.asset('assets/images/LogoPAblackbackground.png'),
+            ),
           ),
-          ListTile(
-            title: Row(
-              children: [
-                Icon(
-                  Icons.home,
-                  color: currentPage == _CurrentPage.home
-                      ? const Color(0xFF22E974)
-                      : Colors.white,
-                ),
-                const SizedBox(
-                  width: 5,
-                ),
-                Text(
-                  'Homescreen',
-                  style: GoogleFonts.notoSans(
-                    color: currentPage == _CurrentPage.home
-                        ? const Color(0xFF22E974)
-                        : Colors.white,
+
+          ///////////////////HOME BUTTON/////////////////////
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextButton.icon(
+              onPressed: () {},
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.resolveWith<Color>(
+                    (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.hovered)) {
+                    return Colors.green;
+                  }
+                  return Colors.white;
+                }),
+              ),
+              icon: const Icon(Icons.home),
+              label: Text(
+                'Homescreen',
+                style: GoogleFonts.notoSans(
                     fontWeight: FontWeight.w700,
                     fontSize: 16,
-                  ),
-                ),
-              ],
+                    color: Colors.white),
+              ),
             ),
-            onTap: () {
-              setState(() {
-                currentPage = _CurrentPage.home;
-              });
-              Navigator.of(context)
-                  .pushReplacementNamed(WebHomeScreen.routeName);
-            },
           ),
-          ListTile(
-            title: Row(
-              children: [
-                Icon(
-                  Icons.auto_fix_high,
-                  color: currentPage == _CurrentPage.design
-                      ? const Color(0xFF22E974)
-                      : Colors.white,
-                ),
-                const SizedBox(
-                  width: 5,
-                ),
-                Text(
-                  'UI/UX Design',
-                  style: GoogleFonts.notoSans(
-                    color: currentPage == _CurrentPage.design
-                        ? const Color(0xFF22E974)
-                        : Colors.white,
+
+          ///////////////////ROLE SCREEN/////////////////////
+          Column(
+            children: usersRole
+                .map(
+                  (e) => Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextButton(
+                      onPressed: () {},
+                      style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.resolveWith<Color>(
+                                (Set<MaterialState> states) {
+                          if (states.contains(MaterialState.hovered)) {
+                            return Colors.green;
+                          }
+                          return Colors.white;
+                        }),
+                      ),
+                      //  icon: const Icon(Icons.home),
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            e.icon,
+                            height: 20,
+                            width: 20,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            e.name,
+                            style: GoogleFonts.notoSans(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 16,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                )
+                .toList(),
+          ),
+
+          ///////////////////RECENT LECTURES/////////////////////
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextButton.icon(
+              onPressed: () {},
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.resolveWith<Color>(
+                    (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.hovered)) {
+                    return Colors.green;
+                  }
+                  return Colors.white;
+                }),
+              ),
+              icon: const Icon(Icons.home),
+              label: Text(
+                'Recent Lectures',
+                style: GoogleFonts.notoSans(
                     fontWeight: FontWeight.w700,
                     fontSize: 16,
-                  ),
-                ),
-              ],
+                    color: Colors.white),
+              ),
             ),
-            onTap: () {
-              setState(() {
-                currentPage = _CurrentPage.design;
-              });
-            },
           ),
-          ListTile(
-            title: Row(
-              children: [
-                Icon(
-                  Icons.bookmark,
-                  color: currentPage == _CurrentPage.recent
-                      ? const Color(0xFF22E974)
-                      : Colors.white,
-                ),
-                const SizedBox(
-                  width: 5,
-                ),
-                Text(
-                  'Recent lectures',
-                  style: GoogleFonts.notoSans(
-                    color: currentPage == _CurrentPage.recent
-                        ? const Color(0xFF22E974)
-                        : Colors.white,
+
+          ///////////////////CONTACT US/////////////////////
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextButton.icon(
+              onPressed: () {},
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.resolveWith<Color>(
+                    (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.hovered)) {
+                    return Colors.green;
+                  }
+                  return Colors.white;
+                }),
+              ),
+              icon: const Icon(Icons.home),
+              label: Text(
+                'Contact us!',
+                style: GoogleFonts.notoSans(
                     fontWeight: FontWeight.w700,
                     fontSize: 16,
-                  ),
-                ),
-              ],
+                    color: Colors.white),
+              ),
             ),
-            onTap: () {
-              setState(() {
-                currentPage = _CurrentPage.recent;
-              });
-            },
-          ),
-          ListTile(
-            title: Row(
-              children: [
-                Icon(
-                  Icons.contact_page,
-                  color: currentPage == _CurrentPage.contact
-                      ? const Color(0xFF22E974)
-                      : Colors.white,
-                ),
-                const SizedBox(
-                  width: 5,
-                ),
-                Text(
-                  'Contact us!',
-                  style: GoogleFonts.notoSans(
-                    color: currentPage == _CurrentPage.contact
-                        ? const Color(0xFF22E974)
-                        : Colors.white,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 16,
-                  ),
-                ),
-              ],
-            ),
-            onTap: () {
-              setState(() {
-                currentPage = _CurrentPage.contact;
-              });
-              Navigator.of(context)
-                  .pushReplacementNamed(WebContactScreen.routeName);
-            },
           ),
         ],
       ),
