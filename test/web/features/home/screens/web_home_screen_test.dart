@@ -34,6 +34,7 @@ void main() {
       'GIVEN web home screen, WHEN home screen is loaded, THEN user should see welcoming text',
       (tester) async {
     await tester.pumpWidget(createWebHomeScreen());
+    await tester.pumpAndSettle();
     expect(find.text('Welcome to'), findsOneWidget);
     expect(find.text('Product Arena'), findsOneWidget);
     expect(
@@ -49,7 +50,9 @@ void main() {
       'GIVEN web home screen, WHEN user tap on homescreen button, THEN user should be redirected to the homescreen',
       (tester) async {
     await tester.pumpWidget(createWebHomeScreen());
+    await tester.pumpAndSettle();
     await tester.tap(webHomeScreenButton);
+    await tester.pumpAndSettle();
     expect(
         find.text(
             "Once you have gone through all the lessons you'll be able to take a test to show us what you have learned!"),
@@ -59,24 +62,30 @@ void main() {
       'GIVEN web home screen, WHEN user tap on role lectures page button, THEN user should be redirected to the lectures page',
       (tester) async {
     await tester.pumpWidget(createWebHomeScreen());
+    await tester.pumpAndSettle();
     await tester.tap(webRoleLecturesScreenButton);
+    await tester.pumpAndSettle();
     expect(find.byType(WebLecturesPage), findsOneWidget);
   });
   testWidgets(
       'GIVEN web home screen, WHEN user tap on recent lectures page button, THEN user should be redirected to the recent lectures page',
       (tester) async {
     await tester.pumpWidget(createWebHomeScreen());
+    await tester.pumpAndSettle();
     await tester.tap(webRecentLecturesButton);
+    await tester.pumpAndSettle();
     expect(find.byType(WebRecentLecturesPage), findsOneWidget);
   });
   testWidgets(
       'GIVEN web home screen, WHEN user tap on contact us button, THEN user should be redirected to the contact us screen',
       (tester) async {
     await tester.pumpWidget(createWebHomeScreen());
+    await tester.pumpAndSettle();
     await tester.tap(webContactFormButton);
+    await tester.pumpAndSettle();
     expect(
         find.text(
-            'You are more than welcome to leave your message and we will be in touch shortly.'),
+            'You are more than welcome to leave your\nmessage and we will be in touch shortly.'),
         findsOneWidget);
   });
 }
