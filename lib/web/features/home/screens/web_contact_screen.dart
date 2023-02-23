@@ -30,13 +30,15 @@ class _WebContactScreenState extends State<WebContactScreen> {
             flex: 8,
             child: Column(
               children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.only(top: 10, bottom: 10, right: 50),
-                  child: Container(
-                    height: 70,
-                    alignment: Alignment.topRight,
-                    child: Image.asset('assets/images/Profileicon.png'),
+                Container(
+                  height: 70,
+                  alignment: Alignment.topRight,
+                  child: const Text(
+                    'TopBar',
+                    style: TextStyle(
+                      color: Colors.black,
+                      backgroundColor: Colors.green,
+                    ),
                   ),
                 ),
                 MediaQuery.of(context).size.height > 610
@@ -54,16 +56,12 @@ class _WebContactScreenState extends State<WebContactScreen> {
                               text: TextSpan(
                                 text: 'CONTACT US\n',
                                 style: GoogleFonts.notoSans(
-                                  fontSize: 32,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.black,
-                                ),
+                                    fontSize: 32, fontWeight: FontWeight.w700),
                                 children: [
                                   TextSpan(
                                     text:
                                         'You are more than welcome to leave your\nmessage and we will be in touch shortly.',
                                     style: GoogleFonts.notoSans(
-                                      color: Colors.black,
                                       fontSize: 16,
                                       fontWeight: FontWeight.w400,
                                     ),
@@ -86,18 +84,13 @@ class _WebContactScreenState extends State<WebContactScreen> {
                             },
                             maxLines: 8,
                             decoration: InputDecoration(
-                              hintText: 'Your Message',
-                              hintStyle: GoogleFonts.notoSans(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w700,
+                              label: Text(
+                                'Your Message',
+                                style: GoogleFonts.notoSans(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w700,
+                                ),
                               ),
-                              // label: Text(
-                              //   'Your Message',
-                              //   style: GoogleFonts.notoSans(
-                              //     fontSize: 14,
-                              //     fontWeight: FontWeight.w700,
-                              //   ),
-                              // ),
                               focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: Color(0xFF22E974),
@@ -146,7 +139,7 @@ class _WebContactScreenState extends State<WebContactScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Flexible(
-                          child: InkWell(
+                          child: GestureDetector(
                             child: Image.asset(
                               'assets/images/facebook.png',
                             ),
@@ -158,7 +151,7 @@ class _WebContactScreenState extends State<WebContactScreen> {
                           width: 10,
                         ),
                         Flexible(
-                          child: InkWell(
+                          child: GestureDetector(
                             child: Image.asset(
                               'assets/images/instagram.png',
                             ),
@@ -170,7 +163,7 @@ class _WebContactScreenState extends State<WebContactScreen> {
                           width: 10,
                         ),
                         Flexible(
-                          child: InkWell(
+                          child: GestureDetector(
                             child: Image.asset(
                               'assets/images/linked.png',
                             ),
@@ -182,7 +175,7 @@ class _WebContactScreenState extends State<WebContactScreen> {
                           width: 10,
                         ),
                         Flexible(
-                          child: InkWell(
+                          child: GestureDetector(
                             child: Image.asset(
                               'assets/images/tech.png',
                             ),
@@ -220,9 +213,6 @@ class _WebContactScreenState extends State<WebContactScreen> {
                                     ),
                                   ],
                                 ),
-                              ),
-                              const SizedBox(
-                                height: 10,
                               ),
                               Row(
                                 children: <Widget>[

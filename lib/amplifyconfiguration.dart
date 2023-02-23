@@ -15,6 +15,30 @@ const amplifyconfig = ''' {
                     "endpoint": "https://pgd16vksdi.execute-api.us-east-1.amazonaws.com/staging",
                     "region": "us-east-1",
                     "authorizationType": "AWS_IAM"
+                },
+                "alfaUpdateLastStopped": {
+                    "endpointType": "REST",
+                    "endpoint": "https://rgplgrwgj9.execute-api.us-east-1.amazonaws.com/staging",
+                    "region": "us-east-1",
+                    "authorizationType": "AWS_IAM"
+                },
+                "getLecturesOrder": {
+                    "endpointType": "REST",
+                    "endpoint": "https://y886xbf9g1.execute-api.us-east-1.amazonaws.com/staging",
+                    "region": "us-east-1",
+                    "authorizationType": "AWS_IAM"
+                },
+                "getUserLecturesAlfa": {
+                    "endpointType": "REST",
+                    "endpoint": "https://q8i8fevvt2.execute-api.us-east-1.amazonaws.com/staging",
+                    "region": "us-east-1",
+                    "authorizationType": "AWS_IAM"
+                },
+                "getLecturesAlfa": {
+                    "endpointType": "REST",
+                    "endpoint": "https://t6u3urwy88.execute-api.us-east-1.amazonaws.com/staging",
+                    "region": "us-east-1",
+                    "authorizationType": "AWS_IAM"
                 }
             }
         }

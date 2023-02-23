@@ -1,10 +1,13 @@
-// ignore_for_file: depend_on_referenced_packages, use_build_context_synchronously, prefer_const_constructors, unused_local_variable, empty_catches
+// ignore_for_file: depend_on_referenced_packages, use_build_context_synchronously, prefer_const_constructors, unused_local_variable, empty_catches, avoid_print
+
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:v2_product_arena/amplifyconfiguration.dart';
+import 'package:v2_product_arena/web/features/home/models/lecture.dart';
 
 class WebAuth with ChangeNotifier {
   String errorTextOTP = '';
@@ -22,6 +25,12 @@ class WebAuth with ChangeNotifier {
   bool isPhoneNumError = false;
   bool isEmailError = false;
   bool isPasswordError = false;
+
+  List _lectures = [];
+
+  List get lectures {
+    return [..._lectures];
+  }
 
   Future<void> _configureAmplify() async {
     try {
@@ -104,6 +113,75 @@ class WebAuth with ChangeNotifier {
         isOTPerror = true;
         notifyListeners();
       }
+    }
+  }
+
+  Future<void> signInUser() async {
+    try {
+      final result = await Amplify.Auth.signIn(
+        username: 'akahriman@pa.tech387.com',
+        password: 'Testing1!',
+      );
+      print('Loginovan');
+    } on AuthException catch (e) {
+      safePrint(e.message);
+    }
+    notifyListeners();
+  }
+
+///////////////////////////////GETTING LECTURES/////////////////////////////////////
+
+  Future<void> getUserLectures() async {
+    await signInUser();
+    try {
+      final restOperation = Amplify.API.get('/api/user/lectures',
+          apiName: 'getLecturesAlfa',
+          queryParameters: {
+            'paDate': 'Feb2023'
+            // , 'name': 'Flutter widgets'
+          });
+      final response = await restOperation.response;
+      Map<String, dynamic> responseMap = jsonDecode(response.decodeBody());
+
+      List temp = [];
+      responseMap['lectures'].forEach((lecture) {
+        temp.addAll(lecture['roles']);
+      });
+      Set<String> set = Set<String>.from(temp);
+      List<String> roles = set.toList();
+      print(roles);
+      var oneLecture;
+      responseMap['lectures'].forEach((lecture) {
+        oneLecture = lecture;
+
+        _lectures.add(oneLecture);
+      });
+
+      print(_lectures[0]['name']);
+      // print('GET call succeeded: ${responseMap['lectures'][1]['name']}');
+      notifyListeners();
+    } on ApiException catch (e) {
+      print('GET call failed: $e');
+    }
+  }
+
+///////////////////////////////GETTING LECTURES ORDER/////////////////////////////////////
+  Future<void> getLectureOrder() async {
+    await signInUser();
+    try {
+      final restOperation = Amplify.API.get('/api/lectures/order',
+          apiName: 'getLecturesOrder',
+          queryParameters: {
+            'paDate': 'Feb2023'
+            // , 'name': 'Flutter widgets'
+          });
+      final response = await restOperation.response;
+      Map<String, dynamic> responseMap = jsonDecode(response.decodeBody());
+      print(
+          'GET call succeeded: ${responseMap['lectureOrders']['productManager']}');
+      print(jsonEncode(responseMap));
+    } on ApiException catch (e) {
+      print('GET call failed: ${e.message}');
     }
   }
 }

@@ -20,13 +20,15 @@ class WebHomeScreen extends StatelessWidget {
             flex: 8,
             child: Column(
               children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.only(top: 10, bottom: 10, right: 50),
-                  child: Container(
-                    height: 70,
-                    alignment: Alignment.topRight,
-                    child: Image.asset('assets/images/Profileicon.png'),
+                Container(
+                  height: 70,
+                  alignment: Alignment.topRight,
+                  child: const Text(
+                    'TopBar',
+                    style: TextStyle(
+                      color: Colors.black,
+                      backgroundColor: Colors.green,
+                    ),
                   ),
                 ),
                 Column(
@@ -55,7 +57,6 @@ class WebHomeScreen extends StatelessWidget {
                                       text: 'Welcome to\n',
                                       style: GoogleFonts.notoSans(
                                         fontSize: 40,
-                                        color: Colors.black,
                                       ),
                                       children: [
                                         TextSpan(
@@ -63,7 +64,6 @@ class WebHomeScreen extends StatelessWidget {
                                           style: GoogleFonts.notoSans(
                                             fontSize: 40,
                                             fontWeight: FontWeight.w700,
-                                            color: Colors.black,
                                           ),
                                         ),
                                       ],
