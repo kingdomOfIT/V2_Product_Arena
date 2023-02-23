@@ -26,9 +26,14 @@ class WebAuth with ChangeNotifier {
   bool isPasswordError = false;
 
   List _lectures = [];
+  List _roles = [];
 
   List get lectures {
     return [..._lectures];
+  }
+
+  List get roles {
+    return [..._roles];
   }
 
   Future<void> _configureAmplify() async {
@@ -109,14 +114,24 @@ class WebAuth with ChangeNotifier {
   Future<void> signInUser() async {
     try {
       final result = await Amplify.Auth.signIn(
-        username: 'bkaric@pa.tech387.com',
-        password: 'Testing1!',
+        username: 'mirza.karic575@gmail.com',
+        password: 'Pass123!',
       );
       print('Loginovan');
     } on AuthException catch (e) {
       safePrint(e.message);
     }
     notifyListeners();
+  }
+
+  Future<bool> isUserLoggedIn() async {
+    try {
+      final session = await Amplify.Auth.fetchAuthSession();
+      return session.isSignedIn;
+    } catch (e) {
+      print('Error checking authentication status: $e');
+      return false;
+    }
   }
 
 ///////////////////////////////GETTING LECTURES/////////////////////////////////////
@@ -138,7 +153,7 @@ class WebAuth with ChangeNotifier {
         temp.addAll(lecture['roles']);
       });
       Set<String> set = Set<String>.from(temp);
-      List<String> roles = set.toList();
+      _roles = set.toList();
 
       print(roles);
       var oneLecture;
