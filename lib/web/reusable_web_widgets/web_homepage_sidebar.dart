@@ -13,7 +13,7 @@ class WebSideBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final webAuth = Provider.of<WebAuth>(context, listen: false);
+    final webAuth = Provider.of<WebAuth>(context);
     double maxwidth = MediaQuery.of(context).size.width;
     return Container(
       color: Colors.black,
