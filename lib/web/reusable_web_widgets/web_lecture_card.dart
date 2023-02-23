@@ -5,8 +5,8 @@ class WebLectureCard extends StatelessWidget {
   final String name;
   final String description;
   final int durationInSeconds;
-  final String remainingTime;
-  final String status;
+  // final int lastStoppedInSeconds;
+  // final String status;
   final String imageSrc;
 
   const WebLectureCard({
@@ -14,8 +14,8 @@ class WebLectureCard extends StatelessWidget {
     required this.name,
     required this.description,
     required this.durationInSeconds,
-    required this.remainingTime,
-    required this.status,
+    //required this.lastStoppedInSeconds,
+    //required this.status,
     required this.imageSrc,
   });
 
@@ -62,20 +62,20 @@ class WebLectureCard extends StatelessWidget {
                         fontSize: maxheight * (16 / 1510),
                         fontWeight: FontWeight.w400),
                   ),
-                  Text(
-                    // 'Remaning time: ${lectures[index].remainingTime}',
-                    'Remaning time: ${remainingTime}',
-                    style: GoogleFonts.notoSans(
-                        fontSize: maxheight * (16 / 1510),
-                        fontWeight: FontWeight.w400),
-                  ),
-                  Text(
-                    // 'Status: ${lectures[index].status}',
-                    'Status: ${status}',
-                    style: GoogleFonts.notoSans(
-                        fontSize: maxheight * (16 / 1510),
-                        fontWeight: FontWeight.w400),
-                  ),
+                  // Text(
+                  //   // 'Remaning time: ${lectures[index].remainingTime}',
+                  //   'Remaning time: ${lastStoppedInSeconds}',
+                  //   style: GoogleFonts.notoSans(
+                  //       fontSize: maxheight * (16 / 1510),
+                  //       fontWeight: FontWeight.w400),
+                  // ),
+                  // Text(
+                  //   // 'Status: ${lectures[index].status}',
+                  //   'Status: ${status}',
+                  //   style: GoogleFonts.notoSans(
+                  //       fontSize: maxheight * (16 / 1510),
+                  //       fontWeight: FontWeight.w400),
+                  // ),
                 ],
               ),
 ///////////////////////////////////////////////// LECTURE IMAGE ///////////////////////////////////////////////////////////////
