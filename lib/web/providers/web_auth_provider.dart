@@ -7,6 +7,7 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:v2_product_arena/amplifyconfiguration.dart';
+import 'package:v2_product_arena/web/features/home/models/lecture.dart';
 
 class WebAuth with ChangeNotifier {
   String errorTextOTP = '';
@@ -24,6 +25,12 @@ class WebAuth with ChangeNotifier {
   bool isPhoneNumError = false;
   bool isEmailError = false;
   bool isPasswordError = false;
+
+  List _lectures = [];
+
+  List get lectures {
+    return [..._lectures];
+  }
 
   Future<void> _configureAmplify() async {
     try {
@@ -143,8 +150,16 @@ class WebAuth with ChangeNotifier {
       Set<String> set = Set<String>.from(temp);
       List<String> roles = set.toList();
       print(roles);
+      var oneLecture;
+      responseMap['lectures'].forEach((lecture) {
+        oneLecture = lecture;
 
-      print('GET call succeeded: ${responseMap['lectures']}');
+        _lectures.add(oneLecture);
+      });
+
+      print(_lectures[0]['name']);
+      // print('GET call succeeded: ${responseMap['lectures'][1]['name']}');
+      notifyListeners();
     } on ApiException catch (e) {
       print('GET call failed: $e');
     }
