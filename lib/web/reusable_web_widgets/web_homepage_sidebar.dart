@@ -36,7 +36,7 @@ class WebSideBar extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: TextButton(
                   onPressed: () {
-                    webAuth.getLectureOrder();
+                    webAuth.getUserLectures();
                     Navigator.of(context).pushNamed(WebHomeScreen.routeName);
                   },
                   style: ButtonStyle(
