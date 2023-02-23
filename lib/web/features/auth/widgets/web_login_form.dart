@@ -279,6 +279,7 @@ class _WebLoginFormState extends State<WebLoginForm> {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,
+                foregroundColor: Colors.white,
                 minimumSize: const Size(double.infinity, 56),
               ),
               child: const Text(
