@@ -3,10 +3,7 @@ import 'package:amplify_flutter/amplify_flutter.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_home_screen.dart';
-
-import '../../../providers/web_auth_provider.dart';
 
 class WebLoginForm extends StatefulWidget {
   const WebLoginForm({super.key});
@@ -24,7 +21,6 @@ class _WebLoginFormState extends State<WebLoginForm> {
   bool emailErrored = false;
   bool passwordErrored = false;
   bool viewPassword = false;
-  final String _text = '';
 
   // ignore: avoid_init_to_null
   var _backErrorMsg = null;
@@ -39,8 +35,6 @@ class _WebLoginFormState extends State<WebLoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    final webAuth = Provider.of<WebAuth>(context, listen: false);
-
     return Form(
       key: _loginFormKey,
       child: SizedBox(
@@ -176,25 +170,20 @@ class _WebLoginFormState extends State<WebLoginForm> {
                 errorStyle: GoogleFonts.notoSans(
                   color: const Color(0xFFB3261E),
                 ),
-                suffixIcon: _text.isNotEmpty
-                    ? InkWell(
-                        key: const Key('togglePasswordView'),
-                        onTap: () {
-                          setState(() {
-                            viewPassword = !viewPassword;
-                          });
-                        },
-                        child: Icon(
-                          viewPassword
-                              ? Icons.visibility
-                              : Icons.visibility_off,
-                          color: viewPassword
-                              ? Colors.black
-                              : const Color(0xFF605D66),
-                          size: MediaQuery.of(context).size.height * 0.027,
-                        ),
-                      )
-                    : null,
+                suffixIcon: InkWell(
+                  key: const Key('togglePasswordView'),
+                  onTap: () {
+                    setState(() {
+                      viewPassword = !viewPassword;
+                    });
+                  },
+                  child: Icon(
+                    viewPassword ? Icons.visibility : Icons.visibility_off,
+                    color:
+                        viewPassword ? Colors.black : const Color(0xFF605D66),
+                    size: 30,
+                  ),
+                ),
                 label: Text(
                   'Password',
                   style: GoogleFonts.notoSans(
@@ -281,11 +270,9 @@ class _WebLoginFormState extends State<WebLoginForm> {
                     safePrint(e.toString());
                   }
                 }
-                // webAuth.getUserLectures();
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,
-                foregroundColor: Colors.white,
                 minimumSize: const Size(double.infinity, 56),
               ),
               child: const Text(

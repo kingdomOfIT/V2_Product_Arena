@@ -118,7 +118,7 @@ class _MyAppState extends State<MyApp> {
         home: defaultTargetPlatform == TargetPlatform.android ||
                 defaultTargetPlatform == TargetPlatform.iOS
             ? const MobileLoginScreen()
-            : const WebHomeScreen(), //const WebLoginScreen(),
+            : const WebLoginScreen(),
         routes: {
           MobileLoginScreen.routeName: (context) => const MobileLoginScreen(),
           MobileSignupScreen.routeName: (context) => const MobileSignupScreen(),
@@ -140,7 +140,8 @@ class _MyAppState extends State<MyApp> {
           WebEmailVerified.routeName: (context) => const WebEmailVerified(),
           WebLecturesPage.routeName: (context) => const WebLecturesPage(),
           WebRecentLecturesPage.routeName: (context) =>
-              const WebRecentLecturesPage()
+              const WebRecentLecturesPage(),
+          WebContactScreen.routeName: (context) => const WebContactScreen()
         },
       ),
     );
