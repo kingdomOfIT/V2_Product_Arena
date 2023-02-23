@@ -35,6 +35,7 @@ class WebSideBar extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextButton(
+                  key: const Key('homescreenButton'),
                   onPressed: () {
                     webAuth.getUserLectures();
                     Navigator.of(context).pushNamed(WebHomeScreen.routeName);
@@ -78,6 +79,7 @@ class WebSideBar extends StatelessWidget {
                   (e) => Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextButton(
+                      key: const Key('roleLecturesScreen'),
                       onPressed: () {
                         Navigator.of(context)
                             .pushNamed(WebLecturesPage.routeName);
@@ -122,6 +124,7 @@ class WebSideBar extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextButton(
+                key: const Key('recentLecturesButton'),
                 onPressed: () {
                   Navigator.of(context)
                       .pushNamed(WebRecentLecturesPage.routeName);
@@ -162,6 +165,7 @@ class WebSideBar extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextButton(
+                key: const Key('contactFormButton'),
                 onPressed: () {
                   // Navigator.of(context)
                   //     .pushNamed(WebRecentLecturesPage.routeName);
