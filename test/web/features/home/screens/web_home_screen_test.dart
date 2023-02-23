@@ -3,10 +3,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_contact_screen.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_home_screen.dart';
-import 'package:v2_product_arena/web/features/home/screens/web_lectures_page%20copy.dart';
+import 'package:v2_product_arena/web/features/home/screens/web_lectures_page.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_recent_lectures.dart';
 import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
-import 'package:v2_product_arena/web/reusable_web_widgets/web_lecture_card.dart';
 
 late WebAuth auth;
 
