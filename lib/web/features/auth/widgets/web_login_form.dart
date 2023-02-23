@@ -281,7 +281,7 @@ class _WebLoginFormState extends State<WebLoginForm> {
                     safePrint(e.toString());
                   }
                 }
-                webAuth.getUserLectures();
+                // webAuth.getUserLectures();
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,

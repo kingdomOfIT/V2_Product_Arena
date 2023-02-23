@@ -73,9 +73,9 @@ class WebSideBar extends StatelessWidget {
 
           ///////////////////ROLE SCREEN/////////////////////
           Column(
-            children: usersRole
+            children: webAuth.roles
                 .map(
-                  (e) => Padding(
+                  (role) => Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextButton(
                       onPressed: () {
@@ -95,13 +95,29 @@ class WebSideBar extends StatelessWidget {
                       child: Row(
                         children: [
                           Image.asset(
-                            e.icon,
+                            role == 'backend'
+                                ? 'assets/images/rolevectorwhite3.png'
+                                : role == 'fullstack'
+                                    ? 'assets/images/rolevectorwhite5.png'
+                                    : role == 'qa'
+                                        ? 'assets/images/rolevectorwhite1.png'
+                                        : role == 'productManager'
+                                            ? 'assets/images/rolevectorwhite2.png'
+                                            : 'assets/images/rolevectorblack4.png',
                             height: 20,
                             width: 20,
                           ),
                           const SizedBox(width: 10),
                           Text(
-                            e.name,
+                            role == 'backend'
+                                ? 'Backend'
+                                : role == 'fullstack'
+                                    ? 'FullStack Developer'
+                                    : role == 'qa'
+                                        ? 'QA'
+                                        : role == 'productManager'
+                                            ? 'Project Manager'
+                                            : 'UI&UX Designer',
                             style: GoogleFonts.notoSans(
                               fontWeight: FontWeight.w700,
                               fontSize: 16,
