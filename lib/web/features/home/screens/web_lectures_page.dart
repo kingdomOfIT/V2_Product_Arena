@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:v2_product_arena/web/features/home/models/lecture.dart';
 import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
@@ -70,18 +69,6 @@ class _WebLecturesPageState extends State<WebLecturesPage> {
                           //     ['lastStoppedInSeconds'],
                           imageSrc: lectures[index]['imageSrc'],
                         ),
-                        // Center(
-                        //   child: Container(
-                        //     height: 200,
-                        //     width: 200,
-                        //     child: Column(
-                        //       children: [
-                        //         Text(lectures[index]['name']),
-                        //         Text(lectures[index]['description']),
-                        //       ],
-                        //     ),
-                        //   ),
-                        // ),
                       );
                     },
                   ),

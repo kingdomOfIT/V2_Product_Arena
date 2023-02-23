@@ -1,4 +1,4 @@
-// ignore_for_file: depend_on_referenced_packages, use_build_context_synchronously, prefer_const_constructors, unused_local_variable, empty_catches, avoid_print
+// ignore_for_file: depend_on_referenced_packages, use_build_context_synchronously, prefer_const_constructors, unused_local_variable, empty_catches, avoid_print, prefer_final_fields
 
 import 'dart:convert';
 
@@ -7,7 +7,6 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:v2_product_arena/amplifyconfiguration.dart';
-import 'package:v2_product_arena/web/features/home/models/lecture.dart';
 
 class WebAuth with ChangeNotifier {
   String errorTextOTP = '';
@@ -61,15 +60,6 @@ class WebAuth with ChangeNotifier {
     await _configureAmplify();
 
     try {
-      // // //Loading icon
-      // showDialog(
-      //     context: context,
-      //     builder: (context) {
-      //       return Center(
-      //         child: Loader(),
-      //       );
-      //     });
-      // // //////////////
       final userAttributes = <CognitoUserAttributeKey, String>{
         CognitoUserAttributeKey.email: email,
         CognitoUserAttributeKey.phoneNumber: phone,
@@ -119,7 +109,7 @@ class WebAuth with ChangeNotifier {
   Future<void> signInUser() async {
     try {
       final result = await Amplify.Auth.signIn(
-        username: 'akahriman@pa.tech387.com',
+        username: 'bkaric@pa.tech387.com',
         password: 'Testing1!',
       );
       print('Loginovan');
@@ -149,6 +139,7 @@ class WebAuth with ChangeNotifier {
       });
       Set<String> set = Set<String>.from(temp);
       List<String> roles = set.toList();
+
       print(roles);
       var oneLecture;
       responseMap['lectures'].forEach((lecture) {
