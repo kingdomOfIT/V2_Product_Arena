@@ -44,12 +44,15 @@ class WebLectureCard extends StatelessWidget {
                       fontSize: maxheight * (32 / 1510),
                     ),
                   ),
-                  Text(
-                    // lectures[index].description,
-                    description,
-                    style: GoogleFonts.notoSans(
-                      fontWeight: FontWeight.w400,
-                      fontSize: maxheight * (18 / 1510),
+                  SizedBox(
+                    width: maxwidth * (615 / 1440),
+                    child: Text(
+                      // lectures[index].description,
+                      description,
+                      style: GoogleFonts.notoSans(
+                        fontWeight: FontWeight.w400,
+                        fontSize: maxheight * (18 / 1510),
+                      ),
                     ),
                   ),
                   SizedBox(
