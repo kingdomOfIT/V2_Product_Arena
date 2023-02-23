@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
+import 'package:v2_product_arena/web/features/home/screens/web_contact_screen.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_home_screen.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_lectures_page%20copy.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_recent_lectures.dart';
@@ -18,6 +19,8 @@ Widget createWebHomeScreen() => ChangeNotifierProvider<WebAuth>(
         routes: {
           '/web-lectures': (context) => const WebLecturesPage(),
           '/web-recent': (context) => const WebRecentLecturesPage(),
+          '/web-contact': (context) => const WebContactScreen(),
+          '/web-home': (context) => const WebHomeScreen(),
         },
         home: const WebHomeScreen(),
       ),
