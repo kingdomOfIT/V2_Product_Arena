@@ -1,6 +1,8 @@
-import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+// ignore: unused_import
+import 'package:v2_product_arena/web/reusable_web_widgets/oldsidebar.dart';
+// ignore: unused_import
 import 'package:v2_product_arena/web/reusable_web_widgets/web_homepage_sidebar.dart';
 
 class WebLectureVideoScreen extends StatefulWidget {
@@ -16,6 +18,8 @@ class _WebLectureVideoScreenState extends State<WebLectureVideoScreen> {
   final title = 'Tools: Basics';
   final numeration = '1';
   bool _showMore = false;
+  final description =
+      'In this video you will learn the basics of Figma. A tool with the help of which you will realize your ideas and create prototypes. Want to get started in design, but don’t know where to begin? These lessons and exercises will help you start designing immediately. Figma is a collaborative web application for interface design, with additional offline features enabled by desktop applications for macOS and Windows. The Figma mobile app for Android and iOS allows viewing and interacting with Figma prototypes in real-time on mobile and tablet devices.';
 
   @override
   Widget build(BuildContext context) {
@@ -154,7 +158,7 @@ class _WebLectureVideoScreenState extends State<WebLectureVideoScreen> {
                               Visibility(
                                 visible: _showMore,
                                 child: Text(
-                                  'In this video you will learn the basics of Figma. A tool with the help of which you will realize your ideas and create prototypes. Want to get started in design, but don’t know where to begin? These lessons and exercises will help you start designing immediately. Figma is a collaborative web application for interface design, with additional offline features enabled by desktop applications for macOS and Windows. The Figma mobile app for Android and iOS allows viewing and interacting with Figma prototypes in real-time on mobile and tablet devices.',
+                                  description,
                                   style: GoogleFonts.notoSans(
                                     fontSize: 16,
                                     color: Colors.black,

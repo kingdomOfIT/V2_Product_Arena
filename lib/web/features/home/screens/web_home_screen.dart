@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+// ignore: unused_import
+import 'package:v2_product_arena/web/reusable_web_widgets/oldsidebar.dart';
+// ignore: unused_import
 import 'package:v2_product_arena/web/reusable_web_widgets/web_homepage_sidebar.dart';
 
 class WebHomeScreen extends StatelessWidget {
@@ -38,7 +41,8 @@ class WebHomeScreen extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            (MediaQuery.of(context).size.width > 920)
+                            (MediaQuery.of(context).size.width > 920 &&
+                                    MediaQuery.of(context).size.height > 790)
                                 ? Image.asset(
                                     'assets/images/TopUI.png',
                                     //height: 200,
@@ -46,7 +50,8 @@ class WebHomeScreen extends StatelessWidget {
                                         0.15,
                                   )
                                 : const SizedBox(),
-                            (MediaQuery.of(context).size.width > 920)
+                            (MediaQuery.of(context).size.width > 920 &&
+                                    MediaQuery.of(context).size.height > 790)
                                 ? const SizedBox(
                                     width: 50,
                                   )
@@ -116,7 +121,8 @@ class WebHomeScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    (MediaQuery.of(context).size.width > 920)
+                    (MediaQuery.of(context).size.width > 920 &&
+                            MediaQuery.of(context).size.height > 790)
                         ? Image.asset(
                             'assets/images/BottomQA.png',
                             height: 200,
