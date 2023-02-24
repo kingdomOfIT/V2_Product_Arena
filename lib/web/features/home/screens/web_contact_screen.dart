@@ -4,6 +4,9 @@ import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
+// ignore: unused_import
+import 'package:v2_product_arena/web/reusable_web_widgets/oldsidebar.dart';
+// ignore: unused_import
 import 'package:v2_product_arena/constants/global_variables.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_homepage_sidebar.dart';
 
@@ -87,16 +90,19 @@ class _WebContactScreenState extends State<WebContactScreen> {
                               key: const Key('contactField'),
                               controller: contactController,
                               validator: (value) {
-                                return value;
+                                if (value == "" || value == null) {
+                                  return "Please type your message before sending";
+                                } else if (value.length < 10) {
+                                  return "Your message has to contain at least 10 characters";
+                                }
+                                return null;
                               },
                               maxLines: 8,
                               decoration: InputDecoration(
-                                label: Text(
-                                  'Your Message',
-                                  style: GoogleFonts.notoSans(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w700,
-                                  ),
+                                hintText: 'Your Message',
+                                hintStyle: GoogleFonts.notoSans(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w700,
                                 ),
                                 focusedBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(
