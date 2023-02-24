@@ -29,7 +29,7 @@ class SidebarButton extends StatelessWidget {
           "Log Out",
           style: GoogleFonts.notoSans(
             textStyle: TextStyle(
-                fontSize: 14,
+                fontSize: screenHeight * 0.0202,
                 fontWeight: FontWeight.w700,
                 color: Color(0xFFFFFFFF)),
           ),
