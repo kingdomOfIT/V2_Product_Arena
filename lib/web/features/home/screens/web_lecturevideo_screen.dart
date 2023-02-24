@@ -84,7 +84,7 @@ class _WebLectureVideoScreenState extends State<WebLectureVideoScreen> {
                         height: 10,
                       ),
                       Container(
-                        width: MediaQuery.of(context).size.width * 0.75,
+                        width: maxwidth * (1440 / 1440),
                         height: _showMore
                             ? MediaQuery.of(context).size.height * 0.75
                             : MediaQuery.of(context).size.height * 0.7,
@@ -151,7 +151,7 @@ class _WebLectureVideoScreenState extends State<WebLectureVideoScreen> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          'show more',
+                                          _showMore ? 'Show Less' : 'Show More',
                                           style: GoogleFonts.notoSans(
                                             fontSize: 16,
                                             color: Colors.black,
