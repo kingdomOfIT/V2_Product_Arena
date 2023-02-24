@@ -4,9 +4,6 @@ import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
-// ignore: unused_import
-import 'package:v2_product_arena/web/reusable_web_widgets/oldsidebar.dart';
-// ignore: unused_import
 import 'package:v2_product_arena/constants/global_variables.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_homepage_sidebar.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_profilepopup.dart';
@@ -29,15 +26,21 @@ class _WebContactScreenState extends State<WebContactScreen> {
     double maxwidth = MediaQuery.of(context).size.width;
     double maxheight = MediaQuery.of(context).size.height;
 
+    double maxwidth = MediaQuery.of(context).size.width;
+    double maxheight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Row(
         children: [
           const WebSideBar(),
           SizedBox(
             width: maxwidth * (1130 / 1440),
+          const WebSideBar(),
+          SizedBox(
+            width: maxwidth * (1130 / 1440),
             child: Column(
               children: [
-                const WebProfilePopup(),
+                const GreenProfileIcon(),
                 SizedBox(
                   width: maxwidth * (840 / 1440),
                   child: Column(
@@ -52,9 +55,8 @@ class _WebContactScreenState extends State<WebContactScreen> {
                                 text: TextSpan(
                                   text: 'CONTACT US\n',
                                   style: GoogleFonts.notoSans(
-                                    fontSize: 32,
-                                    fontWeight: FontWeight.w700,
-                                  ),
+                                      fontSize: 32,
+                                      fontWeight: FontWeight.w700),
                                   children: [
                                     TextSpan(
                                       text:
@@ -72,49 +74,41 @@ class _WebContactScreenState extends State<WebContactScreen> {
                           SizedBox(width: maxwidth * (30 / 1440)),
                           SizedBox(
                             width: MediaQuery.of(context).size.width * 0.25,
-                            child: Form(
-                              key: _contactFormKey,
-                              child: TextFormField(
-                                key: const Key('contactField'),
-                                controller: contactController,
-                                validator: (value) {
-                                  if (value == "" || value == null) {
-                                    return "Please type your message before sending";
-                                  } else if (value.length < 10) {
-                                    return "Your message has to contain at least 10 characters";
-                                  }
-                                  return null;
-                                },
-                                maxLines: 8,
-                                decoration: InputDecoration(
-                                  label: Text(
-                                    'Your Message',
-                                    style: GoogleFonts.notoSans(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                  focusedBorder: const OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFF22E974),
-                                    ),
-                                  ),
-                                  border: const OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  enabledBorder: const OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.black,
-                                    ),
+                            child: TextFormField(
+                              key: const Key('contactField'),
+                              controller: contactController,
+                              validator: (value) {
+                                return value;
+                              },
+                              maxLines: 8,
+                              decoration: InputDecoration(
+                                label: Text(
+                                  'Your Message',
+                                  style: GoogleFonts.notoSans(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w700,
                                   ),
                                 ),
-                                style: GoogleFonts.notoSans(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 14,
+                                focusedBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0xFF22E974),
+                                  ),
                                 ),
+                                border: const OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                enabledBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                              style: GoogleFonts.notoSans(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 14,
                               ),
                             ),
                           ),
@@ -124,27 +118,7 @@ class _WebContactScreenState extends State<WebContactScreen> {
                         height: 30,
                       ),
                       ElevatedButton(
-                        onPressed: () async {
-                          if (_contactFormKey.currentState!.validate()) {
-                            try {
-                              final restOperation = Amplify.API.post(
-                                'api/user/form',
-                                apiName: 'sendFormEmailAlfa',
-                                body: HttpPayload.json(
-                                  {
-                                    'question':
-                                        contactController.text.toString(),
-                                  },
-                                ),
-                              );
-                              final response = await restOperation.response;
-                              safePrint('POST call succeeded');
-                              safePrint(response.decodeBody());
-                            } on ApiException catch (e) {
-                              safePrint('POST call failed: ${e.message}');
-                            }
-                          }
-                        },
+                        onPressed: () {},
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.black,
                             foregroundColor: Colors.white,

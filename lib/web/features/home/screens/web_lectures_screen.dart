@@ -3,7 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_lecturevideo_screen.dart';
 import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_lecture_card.dart';
-import 'package:v2_product_arena/web/reusable_web_widgets/web_profilepopup.dart';
+
+import '../../../../constants/global_variables.dart';
 import '../../../reusable_web_widgets/web_homepage_sidebar.dart';
 
 class WebLecturesPage extends StatefulWidget {
@@ -39,33 +40,24 @@ class _WebLecturesPageState extends State<WebLecturesPage> {
               children: [
                 ////////////////////////////////////// PROFILE GREEN ICON////////////////////////////////////////
 
-                const WebProfilePopup(),
+                const GreenProfileIcon(),
 
                 ////////////////////////////////////// LECTURES CARDS  ////////////////////////////////////////
                 Expanded(
                   child: ListView.builder(
                     itemCount: roleLectures.length,
                     itemBuilder: (BuildContext ctx, int index) {
-                      return InkWell(
-                        onTap: () {
-                          Navigator.of(context).pushNamed(
-                            WebLectureVideoScreen.routeName,
-                            arguments: roleLectures[index]['name'],
-                          );
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: maxwidth * (50 / 1440)),
-                          child: WebLectureCard(
-                            name:
-                                '${index + 1}. ${roleLectures[index]['name']}',
-                            description: roleLectures[index]['description'],
-                            durationInSeconds: roleLectures[index]
-                                ['durationInSeconds'],
-                            // lastStoppedInSeconds: lectures[index]
-                            //     ['lastStoppedInSeconds'],
-                            imageSrc: roleLectures[index]['imageSrc'],
-                          ),
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: maxwidth * (50 / 1440)),
+                        child: WebLectureCard(
+                          name: '${index + 1}. ${lectures[index]['name']}',
+                          description: lectures[index]['description'],
+                          durationInSeconds: lectures[index]
+                              ['durationInSeconds'],
+                          // lastStoppedInSeconds: lectures[index]
+                          //     ['lastStoppedInSeconds'],
+                          imageSrc: lectures[index]['imageSrc'],
                         ),
                       );
                     },
