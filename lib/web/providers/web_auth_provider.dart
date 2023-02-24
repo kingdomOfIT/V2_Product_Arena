@@ -7,6 +7,7 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:v2_product_arena/amplifyconfiguration.dart';
+import 'package:v2_product_arena/web/features/auth/screens/web_login_screen.dart';
 
 class WebAuth with ChangeNotifier {
   String errorTextOTP = '';
@@ -137,7 +138,7 @@ class WebAuth with ChangeNotifier {
 ///////////////////////////////GETTING LECTURES/////////////////////////////////////
 
   Future<void> getUserLectures() async {
-    await signInUser();
+    //await signInUser();
     try {
       final restOperation = Amplify.API.get('/api/user/lectures',
           apiName: 'getLecturesAlfa',
@@ -168,6 +169,17 @@ class WebAuth with ChangeNotifier {
     } on ApiException catch (e) {
       print('GET call failed: $e');
     }
+  }
+
+  Future<void> signOutCurrentUser(BuildContext context) async {
+    try {
+      await Amplify.Auth.signOut();
+      // ignore: use_build_context_synchronously
+      // Navigator.of(context).pushReplacementNamed(WebLoginScreen.routeName);
+    } on AuthException catch (e) {
+      safePrint(e);
+    }
+    notifyListeners();
   }
 
 ///////////////////////////////GETTING LECTURES ORDER/////////////////////////////////////
