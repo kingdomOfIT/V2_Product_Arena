@@ -79,11 +79,11 @@ class _WebContactScreenState extends State<WebContactScreen> {
                             )
                           ],
                         ),
-                        const SizedBox(
-                          width: 30,
+                        SizedBox(
+                          width: maxwidth * (30 / 1440),
                         ),
                         SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.25,
+                          width: maxwidth * (350 / 1440),
                           child: Form(
                             key: _contactFormKey,
                             child: TextFormField(
@@ -219,7 +219,7 @@ class _WebContactScreenState extends State<WebContactScreen> {
                           width: 40,
                         ),
                         SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.3,
+                          width: maxwidth * (350 / 1440),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
@@ -252,11 +252,13 @@ class _WebContactScreenState extends State<WebContactScreen> {
                               ),
                               Row(
                                 children: <Widget>[
-                                  Image.asset(
-                                    'assets/images/mail.png',
+                                  Flexible(
+                                    child: Image.asset(
+                                      'assets/images/mail.png',
+                                    ),
                                   ),
-                                  const SizedBox(
-                                    width: 10,
+                                  SizedBox(
+                                    width: maxwidth * (10 / 1440),
                                   ),
                                   Text(
                                     'hello@tech387.com',
