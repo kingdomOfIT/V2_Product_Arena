@@ -34,7 +34,7 @@ class _MobileSidebarState extends State<MobileSidebar> {
                   style: GoogleFonts.notoSans(
                     textStyle: TextStyle(
                       fontWeight: FontWeight.w700,
-                      fontSize: 32,
+                      fontSize: screenHeight * 0.0461,
                       color: Color(0xFF22E974),
                     ),
                   ),
@@ -48,7 +48,7 @@ class _MobileSidebarState extends State<MobileSidebar> {
               style: GoogleFonts.notoSans(
                 textStyle: TextStyle(
                   fontWeight: FontWeight.w700,
-                  fontSize: 16,
+                  fontSize: screenHeight * 0.0213,
                   color: Colors.white,
                 ),
               ),
@@ -63,12 +63,14 @@ class _MobileSidebarState extends State<MobileSidebar> {
               text: TextSpan(
                 text: "2/27",
                 style: GoogleFonts.notoSans(
-                    fontWeight: FontWeight.w700, fontSize: 16),
+                    fontWeight: FontWeight.w700,
+                    fontSize: screenHeight * 0.0213),
                 children: <TextSpan>[
                   TextSpan(
                       text: " Lessons",
                       style: GoogleFonts.notoSans(
-                          fontWeight: FontWeight.w400, fontSize: 16)),
+                          fontWeight: FontWeight.w400,
+                          fontSize: screenHeight * 0.0213)),
                 ],
               ),
             ),
@@ -90,7 +92,7 @@ class _MobileSidebarState extends State<MobileSidebar> {
               "UI/UX Design",
               style: GoogleFonts.notoSans(
                 fontWeight: FontWeight.w700,
-                fontSize: 16,
+                fontSize: screenHeight * 0.0213,
                 color: Colors.white,
               ),
             ),
@@ -105,7 +107,7 @@ class _MobileSidebarState extends State<MobileSidebar> {
               "Recent Lessons",
               style: GoogleFonts.notoSans(
                 fontWeight: FontWeight.w700,
-                fontSize: 16,
+                fontSize: screenHeight * 0.0213,
                 color: Colors.white,
               ),
             ),
@@ -116,7 +118,7 @@ class _MobileSidebarState extends State<MobileSidebar> {
               "Contact us !",
               style: GoogleFonts.notoSans(
                 fontWeight: FontWeight.w700,
-                fontSize: 16,
+                fontSize: screenHeight * 0.0213,
                 color: Colors.white,
               ),
             ),
