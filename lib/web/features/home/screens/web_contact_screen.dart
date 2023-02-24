@@ -1,8 +1,12 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
+// ignore: unused_import
+import 'package:v2_product_arena/web/reusable_web_widgets/oldsidebar.dart';
+// ignore: unused_import
 import 'package:v2_product_arena/web/reusable_web_widgets/web_homepage_sidebar.dart';
 
 class WebContactScreen extends StatefulWidget {
@@ -15,6 +19,7 @@ class WebContactScreen extends StatefulWidget {
 }
 
 class _WebContactScreenState extends State<WebContactScreen> {
+  final _contactFormKey = GlobalKey<FormState>();
   final contactController = TextEditingController();
 
   @override
@@ -76,41 +81,47 @@ class _WebContactScreenState extends State<WebContactScreen> {
                         ),
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.25,
-                          child: TextFormField(
-                            key: const Key('contactField'),
-                            controller: contactController,
-                            validator: (value) {
-                              return value;
-                            },
-                            maxLines: 8,
-                            decoration: InputDecoration(
-                              label: Text(
-                                'Your Message',
-                                style: GoogleFonts.notoSans(
+                          child: Form(
+                            key: _contactFormKey,
+                            child: TextFormField(
+                              key: const Key('contactField'),
+                              controller: contactController,
+                              validator: (value) {
+                                if (value == "" || value == null) {
+                                  return "Please type your message before sending";
+                                } else if (value.length < 10) {
+                                  return "Your message has to contain at least 10 characters";
+                                }
+                                return null;
+                              },
+                              maxLines: 8,
+                              decoration: InputDecoration(
+                                hintText: 'Your Message',
+                                hintStyle: GoogleFonts.notoSans(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w700,
                                 ),
-                              ),
-                              focusedBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xFF22E974),
+                                focusedBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0xFF22E974),
+                                  ),
+                                ),
+                                border: const OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                enabledBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                  ),
                                 ),
                               ),
-                              border: const OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.black,
-                                ),
+                              style: GoogleFonts.notoSans(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 14,
                               ),
-                              enabledBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ),
-                            style: GoogleFonts.notoSans(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 14,
                             ),
                           ),
                         ),
@@ -120,7 +131,26 @@ class _WebContactScreenState extends State<WebContactScreen> {
                       height: 30,
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        if (_contactFormKey.currentState!.validate()) {
+                          try {
+                            final restOperation = Amplify.API.post(
+                              'api/user/form',
+                              apiName: 'sendFormEmailAlfa',
+                              body: HttpPayload.json(
+                                {
+                                  'question': contactController.text.toString(),
+                                },
+                              ),
+                            );
+                            final response = await restOperation.response;
+                            safePrint('POST call succeeded');
+                            safePrint(response.decodeBody());
+                          } on ApiException catch (e) {
+                            safePrint('POST call failed: ${e.message}');
+                          }
+                        }
+                      },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.black,
                           foregroundColor: Colors.white,

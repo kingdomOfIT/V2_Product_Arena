@@ -39,6 +39,12 @@ const amplifyconfig = ''' {
                     "endpoint": "https://t6u3urwy88.execute-api.us-east-1.amazonaws.com/staging",
                     "region": "us-east-1",
                     "authorizationType": "AWS_IAM"
+                },
+                "sendFormEmailAlfa": {
+                    "endpointType": "REST",
+                    "endpoint": "https://hpxszcte8a.execute-api.us-east-1.amazonaws.com/staging",
+                    "region": "us-east-1",
+                    "authorizationType": "AWS_IAM"
                 }
             }
         }
