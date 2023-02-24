@@ -241,6 +241,7 @@ class _WebLoginFormState extends State<WebLoginForm> {
                       username: emailController.text,
                       password: passwordController.text,
                     );
+                    await webAuth.getUserLectures();
                     safePrint(result);
                     if (result.isSignedIn && mounted) {
                       setState(() {

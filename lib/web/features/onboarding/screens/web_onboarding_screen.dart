@@ -313,6 +313,8 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
                                       .resetFirstErrorHeight();
                                   context.read<WebErrorMessage>().reset();
                                 }
+                                Provider.of<WebAuth>(context, listen: false)
+                                    .signOutCurrentUser(context);
                               }),
                         ],
                       ),
