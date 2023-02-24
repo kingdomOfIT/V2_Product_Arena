@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:v2_product_arena/constants/global_variables.dart';
-import 'package:v2_product_arena/web/features/home/screens/web_contact_screen.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_home_screen.dart';
-import 'package:v2_product_arena/web/features/home/screens/web_lectures_page.dart';
+import 'package:v2_product_arena/web/features/home/screens/web_lectures_screen.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_recent_lectures.dart';
 
+import '../features/home/screens/web_contact_screen.dart';
 import '../providers/web_auth_provider.dart';
 
 class WebSideBar extends StatelessWidget {
@@ -38,7 +37,6 @@ class WebSideBar extends StatelessWidget {
                 child: TextButton(
                   key: const Key('homescreenButton'),
                   onPressed: () {
-                    webAuth.getUserLectures();
                     Navigator.of(context).pushNamed(WebHomeScreen.routeName);
                   },
                   style: ButtonStyle(
@@ -52,17 +50,19 @@ class WebSideBar extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      Image.asset(
-                        'assets/images/WebSidebarHomescreenWhite.png',
-                        height: 20,
-                        width: 20,
+                      Flexible(
+                        child: Image.asset(
+                          'assets/images/WebSidebarHomescreenWhite.png',
+                          height: 20,
+                          width: 20,
+                        ),
                       ),
                       const SizedBox(width: 10),
                       Text(
                         'Homescreen',
                         style: GoogleFonts.notoSans(
                           fontWeight: FontWeight.w700,
-                          fontSize: 16,
+                          fontSize: maxwidth * (16 / 1440),
                           color: Colors.white,
                         ),
                       ),
@@ -97,20 +97,22 @@ class WebSideBar extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
-                          Image.asset(
-                            role == 'backend'
-                                ? 'assets/images/rolevectorwhite3.png'
-                                : role == 'fullstack'
-                                    ? 'assets/images/rolevectorwhite5.png'
-                                    : role == 'qa'
-                                        ? 'assets/images/rolevectorwhite1.png'
-                                        : role == 'productManager'
-                                            ? 'assets/images/rolevectorwhite2.png'
-                                            : 'assets/images/rolevectorblack4.png',
-                            height: 20,
-                            width: 20,
+                          Flexible(
+                            child: Image.asset(
+                              role == 'backend'
+                                  ? 'assets/images/rolevectorwhite3.png'
+                                  : role == 'fullstack'
+                                      ? 'assets/images/rolevectorwhite5.png'
+                                      : role == 'qa'
+                                          ? 'assets/images/rolevectorwhite1.png'
+                                          : role == 'productManager'
+                                              ? 'assets/images/rolevectorwhite2.png'
+                                              : 'assets/images/rolevectorblack4.png',
+                              height: 20,
+                              width: 20,
+                            ),
                           ),
-                          const SizedBox(width: 10),
+                          SizedBox(width: maxwidth * (10 / 1440)),
                           Text(
                             role == 'backend'
                                 ? 'Backend'
@@ -123,7 +125,7 @@ class WebSideBar extends StatelessWidget {
                                             : 'UI&UX Designer',
                             style: GoogleFonts.notoSans(
                               fontWeight: FontWeight.w700,
-                              fontSize: 16,
+                              fontSize: maxwidth * (16 / 1440),
                               color: Colors.white,
                             ),
                           ),
@@ -157,17 +159,19 @@ class WebSideBar extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    Image.asset(
-                      'assets/images/WebSidebarRecentWhite.png',
-                      height: 20,
-                      width: 20,
+                    Flexible(
+                      child: Image.asset(
+                        'assets/images/WebSidebarRecentWhite.png',
+                        height: 20,
+                        width: 20,
+                      ),
                     ),
-                    const SizedBox(width: 10),
+                    SizedBox(width: maxwidth * (10 / 1440)),
                     Text(
                       'Recent lectures',
                       style: GoogleFonts.notoSans(
                         fontWeight: FontWeight.w700,
-                        fontSize: 16,
+                        fontSize: maxwidth * (16 / 1440),
                         color: Colors.white,
                       ),
                     ),
@@ -178,44 +182,62 @@ class WebSideBar extends StatelessWidget {
           ]),
 
           ///////////////////CONTACT US/////////////////////
-          Column(children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextButton(
-                key: const Key('contactFormButton'),
-                onPressed: () {
-                  Navigator.of(context).pushNamed(WebContactScreen.routeName);
-                },
-                style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.resolveWith<Color>(
-                      (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.hovered)) {
-                      return Colors.green;
-                    }
-                    return Colors.white;
-                  }),
-                ),
-                child: Row(
-                  children: [
-                    Image.asset(
-                      'assets/images/WebSidebarContactusWhite.png',
-                      height: 20,
-                      width: 20,
-                    ),
-                    const SizedBox(width: 10),
-                    Text(
-                      'Contact us!',
-                      style: GoogleFonts.notoSans(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 16,
-                        color: Colors.white,
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(WebContactScreen.routeName);
+                  },
+                  style: ButtonStyle(
+                    foregroundColor: MaterialStateProperty.resolveWith<Color>(
+                        (Set<MaterialState> states) {
+                      if (states.contains(MaterialState.hovered)) {
+                        return Colors.green;
+                      }
+                      return Colors.white;
+                    }),
+                  ),
+                  child: Row(
+                    children: [
+                      Flexible(
+                        child: Image.asset(
+                          'assets/images/WebSidebarContactusWhite.png',
+                          height: 20,
+                          width: 20,
+                        ),
                       ),
-                    ),
-                  ],
+                      SizedBox(width: maxwidth * (10 / 1440)),
+                      Text(
+                        'Contact us!',
+                        style: GoogleFonts.notoSans(
+                          fontWeight: FontWeight.w700,
+                          fontSize: maxwidth * (16 / 1440),
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              onPressed: () {
+                webAuth.getUserLectures();
+              },
+              child: const Text(
+                'Pull',
+                style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 20,
                 ),
               ),
             ),
-          ]),
+          ),
         ],
       ),
     );
