@@ -26,6 +26,8 @@ class _WebContactScreenState extends State<WebContactScreen> {
   @override
   Widget build(BuildContext context) {
     double maxwidth = MediaQuery.of(context).size.width;
+    double maxheight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Row(
         children: [
