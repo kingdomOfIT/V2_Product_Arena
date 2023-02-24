@@ -54,8 +54,8 @@ class WelcomePage extends StatelessWidget {
                       text: TextSpan(
                         text: "Welcome to",
                         style: GoogleFonts.notoSans(
-                          textStyle: const TextStyle(
-                              fontSize: 32,
+                          textStyle: TextStyle(
+                              fontSize: screenHeight * 0.0461,
                               fontWeight: FontWeight.w400,
                               color: Color(0xFF000000)),
                         ),
@@ -63,8 +63,8 @@ class WelcomePage extends StatelessWidget {
                           TextSpan(
                             text: "\nProduct Arena",
                             style: GoogleFonts.notoSans(
-                              textStyle: const TextStyle(
-                                fontSize: 32,
+                              textStyle: TextStyle(
+                                fontSize: screenHeight * 0.0461,
                                 fontWeight: FontWeight.w700,
                                 color: Color(0xFF000000),
                               ),
@@ -85,8 +85,8 @@ class WelcomePage extends StatelessWidget {
                         text:
                             "Our goal is to recognise persistence,\nmotivation and adaptability, that’s why we \nencourage you to dive into these materials \nand wish you the best of luck in your \nstudies.",
                         style: GoogleFonts.notoSans(
-                          textStyle: const TextStyle(
-                              fontSize: 14,
+                          textStyle: TextStyle(
+                              fontSize: screenHeight * 0.0202,
                               fontWeight: FontWeight.w400,
                               color: Color(0xFF000000)),
                         ),
@@ -95,8 +95,8 @@ class WelcomePage extends StatelessWidget {
                             text:
                                 "\nOnce you have gone through all the lessons \nyou'll be able to take a test to show us what \nyou have learned!",
                             style: GoogleFonts.notoSans(
-                              textStyle: const TextStyle(
-                                fontSize: 14,
+                              textStyle: TextStyle(
+                                fontSize: screenHeight * 0.0202,
                                 fontWeight: FontWeight.w400,
                                 color: Color(0xFF000000),
                               ),
