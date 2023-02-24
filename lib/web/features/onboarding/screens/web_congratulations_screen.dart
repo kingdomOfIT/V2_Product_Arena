@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:v2_product_arena/web/features/auth/screens/web_login_screen.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_home_screen.dart';
 
 import '../../../reusable_web_widgets/web_footer.dart';
@@ -73,6 +74,6 @@ class _WebCongratulationsScreenState extends State<WebCongratulationsScreen> {
               ),
             ),
           )
-        : const WebHomeScreen();
+        : const WebLoginScreen();
   }
 }
