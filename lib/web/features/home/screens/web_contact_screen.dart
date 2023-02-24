@@ -4,9 +4,7 @@ import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
-// ignore: unused_import
-import 'package:v2_product_arena/web/reusable_web_widgets/oldsidebar.dart';
-// ignore: unused_import
+import 'package:v2_product_arena/constants/global_variables.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_homepage_sidebar.dart';
 
 class WebContactScreen extends StatefulWidget {
@@ -24,15 +22,15 @@ class _WebContactScreenState extends State<WebContactScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double maxwidth = MediaQuery.of(context).size.width;
+    double maxheight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Row(
         children: [
-          const Expanded(
-            flex: 2,
-            child: WebSideBar(),
-          ),
-          Expanded(
-            flex: 8,
+          const WebSideBar(),
+          SizedBox(
+            width: maxwidth * (1130 / 1440),
             child: Column(
               children: [
                 Padding(
@@ -89,19 +87,16 @@ class _WebContactScreenState extends State<WebContactScreen> {
                               key: const Key('contactField'),
                               controller: contactController,
                               validator: (value) {
-                                if (value == "" || value == null) {
-                                  return "Please type your message before sending";
-                                } else if (value.length < 10) {
-                                  return "Your message has to contain at least 10 characters";
-                                }
-                                return null;
+                                return value;
                               },
                               maxLines: 8,
                               decoration: InputDecoration(
-                                hintText: 'Your Message',
-                                hintStyle: GoogleFonts.notoSans(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w700,
+                                label: Text(
+                                  'Your Message',
+                                  style: GoogleFonts.notoSans(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w700,
+                                  ),
                                 ),
                                 focusedBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(
