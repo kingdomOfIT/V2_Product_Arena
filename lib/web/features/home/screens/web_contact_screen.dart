@@ -9,6 +9,7 @@ import 'package:v2_product_arena/web/reusable_web_widgets/oldsidebar.dart';
 // ignore: unused_import
 import 'package:v2_product_arena/constants/global_variables.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_homepage_sidebar.dart';
+import 'package:v2_product_arena/web/reusable_web_widgets/web_profilepopup.dart';
 
 class WebContactScreen extends StatefulWidget {
   static const routeName = '/web-contact';
@@ -36,15 +37,7 @@ class _WebContactScreenState extends State<WebContactScreen> {
             width: maxwidth * (1130 / 1440),
             child: Column(
               children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.only(top: 10, bottom: 10, right: 50),
-                  child: Container(
-                    height: 70,
-                    alignment: Alignment.topRight,
-                    child: Image.asset('assets/images/Profileicon.png'),
-                  ),
-                ),
+                const WebProfilePopup(),
                 MediaQuery.of(context).size.height > 610
                     ? const SizedBox(height: 100)
                     : const SizedBox(),

@@ -48,7 +48,7 @@ class _WebLectureVideoScreenState extends State<WebLectureVideoScreen> {
             width: maxwidth * (1130 / 1440),
             child: Column(
               children: [
-                const GreenProfileIcon(),
+                const WebProfilePopup(),
                 Padding(
                   padding: const EdgeInsets.only(top: 10, left: 70, right: 70),
                   child: Column(
