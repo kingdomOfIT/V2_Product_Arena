@@ -1,7 +1,8 @@
-import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_homepage_sidebar.dart';
+
+import '../../../../constants/global_variables.dart';
 
 class WebLectureVideoScreen extends StatefulWidget {
   static const routeName = '/web-video';
@@ -16,29 +17,22 @@ class _WebLectureVideoScreenState extends State<WebLectureVideoScreen> {
   final title = 'Tools: Basics';
   final numeration = '1';
   bool _showMore = false;
+  final description =
+      'In this video you will learn the basics of Figma. A tool with the help of which you will realize your ideas and create prototypes. Want to get started in design, but don’t know where to begin? These lessons and exercises will help you start designing immediately. Figma is a collaborative web application for interface design, with additional offline features enabled by desktop applications for macOS and Windows. The Figma mobile app for Android and iOS allows viewing and interacting with Figma prototypes in real-time on mobile and tablet devices.';
 
   @override
   Widget build(BuildContext context) {
+    double maxwidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: Row(
         children: [
-          const Expanded(
-            flex: 2,
-            child: WebSideBar(),
-          ),
-          Expanded(
-            flex: 8,
+          const WebSideBar(),
+          SizedBox(
+            width: maxwidth * (1130 / 1440),
             child: Column(
               children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.only(top: 10, bottom: 10, right: 50),
-                  child: Container(
-                    height: 70,
-                    alignment: Alignment.topRight,
-                    child: Image.asset('assets/images/Profileicon.png'),
-                  ),
-                ),
+                const GreenProfileIcon(),
                 Padding(
                   padding: const EdgeInsets.only(top: 10, left: 70, right: 70),
                   child: Column(
@@ -132,7 +126,7 @@ class _WebLectureVideoScreenState extends State<WebLectureVideoScreen> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          'Show More',
+                                          'show more',
                                           style: GoogleFonts.notoSans(
                                             fontSize: 16,
                                             color: Colors.black,
@@ -154,7 +148,7 @@ class _WebLectureVideoScreenState extends State<WebLectureVideoScreen> {
                               Visibility(
                                 visible: _showMore,
                                 child: Text(
-                                  'In this video you will learn the basics of Figma. A tool with the help of which you will realize your ideas and create prototypes. Want to get started in design, but don’t know where to begin? These lessons and exercises will help you start designing immediately. Figma is a collaborative web application for interface design, with additional offline features enabled by desktop applications for macOS and Windows. The Figma mobile app for Android and iOS allows viewing and interacting with Figma prototypes in real-time on mobile and tablet devices.',
+                                  description,
                                   style: GoogleFonts.notoSans(
                                     fontSize: 16,
                                     color: Colors.black,

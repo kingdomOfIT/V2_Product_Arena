@@ -20,8 +20,10 @@ import 'package:v2_product_arena/web/features/auth/screens/web_email_verifed.dar
 import 'package:v2_product_arena/web/features/auth/screens/web_login_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_signup_screen.dart';
+import 'package:v2_product_arena/web/features/home/screens/web_contact_screen.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_home_screen.dart';
-import 'package:v2_product_arena/web/features/home/screens/web_lectures_page.dart';
+import 'package:v2_product_arena/web/features/home/screens/web_lectures_screen.dart';
+import 'package:v2_product_arena/web/features/home/screens/web_lecturevideo_screen.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_recent_lectures.dart';
 import 'package:v2_product_arena/web/features/onboarding/screens/web_congratulations_screen.dart';
 import 'package:v2_product_arena/web/features/onboarding/screens/web_onboarding_screen.dart';
@@ -59,6 +61,7 @@ class _MyAppState extends State<MyApp> {
       await Amplify.addPlugins([authPlugin, api]);
       // call Amplify.configure to use the initialized categories in your app
       await Amplify.configure(amplifyconfig);
+      await Provider.of<WebAuth>(context).signInUser();
     } on Exception catch (e) {
       safePrint('An error occurred configuring Amplify: $e');
     }
@@ -139,7 +142,10 @@ class _MyAppState extends State<MyApp> {
           WebEmailVerified.routeName: (context) => const WebEmailVerified(),
           WebLecturesPage.routeName: (context) => const WebLecturesPage(),
           WebRecentLecturesPage.routeName: (context) =>
-              const WebRecentLecturesPage()
+              const WebRecentLecturesPage(),
+          WebLectureVideoScreen.routeName: (context) =>
+              const WebLectureVideoScreen(),
+          WebContactScreen.routeName: (context) => const WebContactScreen()
         },
       ),
     );

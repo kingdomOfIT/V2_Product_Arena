@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_homepage_sidebar.dart';
 
+import '../../../../constants/global_variables.dart';
+
 class WebHomeScreen extends StatelessWidget {
   static const routeName = '/web-home';
 
@@ -9,28 +11,17 @@ class WebHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double maxwidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: Row(
         children: [
-          const Expanded(
-            flex: 2,
-            child: WebSideBar(),
-          ),
-          Expanded(
-            flex: 8,
+          const WebSideBar(),
+          SizedBox(
+            width: maxwidth * (1130 / 1440),
             child: Column(
               children: [
-                Container(
-                  height: 70,
-                  alignment: Alignment.topRight,
-                  child: const Text(
-                    'TopBar',
-                    style: TextStyle(
-                      color: Colors.black,
-                      backgroundColor: Colors.green,
-                    ),
-                  ),
-                ),
+                const GreenProfileIcon(),
                 Column(
                   children: [
                     Column(

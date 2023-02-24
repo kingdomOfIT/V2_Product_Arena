@@ -168,3 +168,31 @@ PreferredSizeWidget? MyHeader() {
     ),
   );
 }
+
+class name extends StatelessWidget {
+  const name({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
+class GreenProfileIcon extends StatelessWidget {
+  const GreenProfileIcon({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.topRight,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 10, bottom: 10, right: 50),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width * (50 / 1440),
+          height: 50,
+          child: Image.asset('assets/images/Profileicon.png'),
+        ),
+      ),
+    );
+  }
+}

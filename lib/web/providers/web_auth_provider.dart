@@ -1,4 +1,4 @@
-// ignore_for_file: depend_on_referenced_packages, use_build_context_synchronously, prefer_const_constructors, unused_local_variable, empty_catches, avoid_print, prefer_final_fields
+// ignore_for_file: depend_on_referenced_packages, use_build_context_synchronously, prefer_const_constructors, unused_local_variable, empty_catches, avoid_print, prefer_final_fields, prefer_typing_uninitialized_variables
 
 import 'dart:convert';
 
@@ -164,7 +164,6 @@ class WebAuth with ChangeNotifier {
       });
 
       print(_lectures[0]['name']);
-      // print('GET call succeeded: ${responseMap['lectures'][1]['name']}');
       notifyListeners();
     } on ApiException catch (e) {
       print('GET call failed: $e');
@@ -172,22 +171,21 @@ class WebAuth with ChangeNotifier {
   }
 
 ///////////////////////////////GETTING LECTURES ORDER/////////////////////////////////////
-  Future<void> getLectureOrder() async {
-    await signInUser();
-    try {
-      final restOperation = Amplify.API.get('/api/lectures/order',
-          apiName: 'getLecturesOrder',
-          queryParameters: {
-            'paDate': 'Feb2023'
-            // , 'name': 'Flutter widgets'
-          });
-      final response = await restOperation.response;
-      Map<String, dynamic> responseMap = jsonDecode(response.decodeBody());
-      print(
-          'GET call succeeded: ${responseMap['lectureOrders']['productManager']}');
-      print(jsonEncode(responseMap));
-    } on ApiException catch (e) {
-      print('GET call failed: ${e.message}');
-    }
-  }
+//   Future<void> getLectureOrder() async {
+//     try {
+//       final restOperation = Amplify.API.get('/api/lectures/order',
+//           apiName: 'getLecturesOrder',
+//           queryParameters: {
+//             'paDate': 'Feb2023'
+//             // , 'name': 'Flutter widgets'
+//           });
+//       final response = await restOperation.response;
+//       Map<String, dynamic> responseMap = jsonDecode(response.decodeBody());
+//       print(
+//           'GET call succeeded: ${responseMap['lectureOrders']['productManager']}');
+//       print(jsonEncode(responseMap));
+//     } on ApiException catch (e) {
+//       print('GET call failed: ${e.message}');
+//     }
+//   }
 }
