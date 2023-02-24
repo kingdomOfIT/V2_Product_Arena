@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_homepage_sidebar.dart';
-import 'package:v2_product_arena/web/reusable_web_widgets/web_profilepopup.dart';
+
+import '../../../../constants/global_variables.dart';
 
 class WebHomeScreen extends StatelessWidget {
   static const routeName = '/web-home';
@@ -10,43 +11,56 @@ class WebHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double maxWidth = MediaQuery.of(context).size.width;
-    final double maxHeigth = MediaQuery.of(context).size.height;
-    final double contentWidth = maxWidth * 0.8 * (1130 / 1440);
-    final double contentHeight = maxHeigth * 0.78;
+    double maxwidth = MediaQuery.of(context).size.width;
 
-    return Container(
-      color: Colors.white,
-      child: Scaffold(
-        body: OverflowBox(
-          minWidth: 0,
-          child: Stack(
-            children: [
-              Row(
-                children: [
-                  const WebSideBar(),
-                  Expanded(
-                    child: Center(
-                      child: SizedBox(
-                        width: contentWidth,
-                        height: contentHeight,
-                        child: SingleChildScrollView(
-                          physics: const AlwaysScrollableScrollPhysics(),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    width: maxWidth * (250 / 1440),
-                                    child:
-                                        Image.asset('assets/images/TopUI.png'),
-                                  ),
-                                  const SizedBox(width: 90),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+    return Scaffold(
+      body: Row(
+        children: [
+          const WebSideBar(),
+          SizedBox(
+            width: maxwidth * (1130 / 1440),
+            child: Column(
+              children: [
+                const GreenProfileIcon(),
+                Column(
+                  children: [
+                    Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            (MediaQuery.of(context).size.width > 920)
+                                ? Image.asset(
+                                    'assets/images/TopUI.png',
+                                    //height: 200,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.15,
+                                  )
+                                : const SizedBox(),
+                            (MediaQuery.of(context).size.width > 920)
+                                ? const SizedBox(
+                                    width: 50,
+                                  )
+                                : const SizedBox(),
+                            (MediaQuery.of(context).size.width > 920)
+                                ? RichText(
+                                    text: TextSpan(
+                                      text: 'Welcome to\n',
+                                      style: GoogleFonts.notoSans(
+                                        fontSize: 40,
+                                      ),
+                                      children: [
+                                        TextSpan(
+                                          text: 'Product Arena',
+                                          style: GoogleFonts.notoSans(
+                                            fontSize: 40,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                : Column(
                                     children: [
                                       Text(
                                         'Welcome to',

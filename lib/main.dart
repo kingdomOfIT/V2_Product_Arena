@@ -61,6 +61,7 @@ class _MyAppState extends State<MyApp> {
       await Amplify.addPlugins([authPlugin, api]);
       // call Amplify.configure to use the initialized categories in your app
       await Amplify.configure(amplifyconfig);
+      await Provider.of<WebAuth>(context).signInUser();
     } on Exception catch (e) {
       safePrint('An error occurred configuring Amplify: $e');
     }
