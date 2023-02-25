@@ -2,6 +2,8 @@
 // ignore_for_file: depend_on_referenced_packages, use_build_context_synchronously, prefer_const_constructors, unused_local_variable, empty_catches, avoid_print, prefer_final_fields, prefer_typing_uninitialized_variables
 
 import 'dart:convert';
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_api/amplify_api.dart';
@@ -166,7 +168,8 @@ class WebAuth with ChangeNotifier {
 ///////////////////////////////GETTING LECTURES/////////////////////////////////////
 
   Future<void> getUserLectures() async {
-    //await signInUser();
+    await signInUser();
+
     try {
       final restOperation = Amplify.API.get('/api/user/lectures',
           apiName: 'getLecturesAlfa',
@@ -192,36 +195,6 @@ class WebAuth with ChangeNotifier {
 
         _lectures.add(oneLecture);
       });
-      firstRole = _roles.isNotEmpty ? _roles[0] : null;
-      if (firstRole != null) {
-        final firstRoleLectures = _lectures
-            .where((lecture) => lecture['roles'].contains(firstRole))
-            .toList();
-
-        var LectureFirst;
-        firstRoleLectures.forEach((lecture) {
-          LectureFirst = lecture;
-          _firstRoleLectures.add(LectureFirst);
-        });
-
-        //print(_firstRoleLectures);
-      }
-
-      print("------------\n----------\n------------");
-
-      secondRole = _roles.length > 1 ? _roles[1] : null;
-      if (secondRole != null) {
-        final secondRoleLectures = _lectures
-            .where((lecture) => lecture['roles'].contains(secondRole))
-            .toList();
-
-        var LectureSecond;
-        secondRoleLectures.forEach((lecture) {
-          LectureSecond = lecture;
-          _secondRoleLectures.add(LectureSecond);
-        });
-        //print(_secondRoleLectures);
-      }
 
       print(_lectures[0]['name']);
       notifyListeners();
@@ -233,8 +206,6 @@ class WebAuth with ChangeNotifier {
   Future<void> signOutCurrentUser(BuildContext context) async {
     try {
       await Amplify.Auth.signOut();
-      // ignore: use_build_context_synchronously
-      // Navigator.of(context).pushReplacementNamed(WebLoginScreen.routeName);
     } on AuthException catch (e) {
       safePrint(e);
     }
