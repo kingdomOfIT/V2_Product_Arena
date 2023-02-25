@@ -223,21 +223,6 @@ class WebSideBar extends StatelessWidget {
               ),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              onPressed: () {
-                webAuth.getUserLectures();
-              },
-              child: const Text(
-                'Pull',
-                style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20,
-                ),
-              ),
-            ),
-          ),
         ],
       ),
     );
