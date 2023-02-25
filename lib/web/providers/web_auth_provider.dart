@@ -166,7 +166,8 @@ class WebAuth with ChangeNotifier {
 ///////////////////////////////GETTING LECTURES/////////////////////////////////////
 
   Future<void> getUserLectures() async {
-    //await signInUser();
+    await signInUser();
+
     try {
       final restOperation = Amplify.API.get('/api/user/lectures',
           apiName: 'getLecturesAlfa',
