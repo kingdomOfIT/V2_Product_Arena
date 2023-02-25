@@ -166,7 +166,7 @@ class WebAuth with ChangeNotifier {
 ///////////////////////////////GETTING LECTURES/////////////////////////////////////
 
   Future<void> getUserLectures() async {
-    await signInUser();
+    // await signInUser();
 
     try {
       final restOperation = Amplify.API.get('/api/user/lectures',
@@ -224,7 +224,7 @@ class WebAuth with ChangeNotifier {
         //print(_secondRoleLectures);
       }
 
-      notifyListeners();
+      print(_lectures[0]['name']);
 
       notifyListeners();
     } on ApiException catch (e) {
