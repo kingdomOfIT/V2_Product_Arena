@@ -15,19 +15,28 @@ class WebHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double maxwidth = MediaQuery.of(context).size.width;
-
     return Scaffold(
       body: Row(
         children: [
           const WebSideBar(),
-          SizedBox(
+          Container(
+            color: Colors.white,
             width: maxwidth * (1130 / 1440),
             child: Column(
               children: [
                 const GreenProfileIcon(),
-                Column(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    SizedBox(
+                      width: maxwidth * (250 / 1440),
+                      child: Image.asset('assets/images/TopUI.png'),
+                    ),
+                    SizedBox(
+                      width: maxwidth * (90 / 1440),
+                    ),
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -125,7 +134,7 @@ class WebHomeScreen extends StatelessWidget {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
