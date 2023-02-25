@@ -6,7 +6,6 @@ import 'package:v2_product_arena/web/reusable_web_widgets/web_lecture_card.dart'
 
 import '../../../../constants/global_variables.dart';
 import '../../../reusable_web_widgets/web_homepage_sidebar.dart';
-import '../widgets/web_mock_data_lectures.dart';
 
 class WebLecturesPage extends StatefulWidget {
   static const routeName = '/web-lectures';
@@ -18,8 +17,6 @@ class WebLecturesPage extends StatefulWidget {
 }
 
 class _WebLecturesPageState extends State<WebLecturesPage> {
-  List<Lecture> lectures = Utils.getMockedLecture();
-
   @override
   Widget build(BuildContext context) {
     double maxwidth = MediaQuery.of(context).size.width;
