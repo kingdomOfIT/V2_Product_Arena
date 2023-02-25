@@ -38,6 +38,19 @@ class WebAuth with ChangeNotifier {
     return [..._roles];
   }
 
+  final List _firstRoleLectures = [];
+  List get firstRoleLectures {
+    return [..._firstRoleLectures];
+  }
+
+  final List _secondRoleLectures = [];
+  List get secondRoleLectures {
+    return [..._secondRoleLectures];
+  }
+
+  var firstRole;
+  var secondRole;
+
   Future<void> _configureAmplify() async {
     try {
       // amplify plugins
@@ -180,6 +193,36 @@ class WebAuth with ChangeNotifier {
 
         _lectures.add(oneLecture);
       });
+      firstRole = _roles.isNotEmpty ? _roles[0] : null;
+      if (firstRole != null) {
+        final firstRoleLectures = _lectures
+            .where((lecture) => lecture['roles'].contains(firstRole))
+            .toList();
+
+        var LectureFirst;
+        firstRoleLectures.forEach((lecture) {
+          LectureFirst = lecture;
+          _firstRoleLectures.add(LectureFirst);
+        });
+
+        //print(_firstRoleLectures);
+      }
+
+      print("------------\n----------\n------------");
+
+      secondRole = _roles.length > 1 ? _roles[1] : null;
+      if (secondRole != null) {
+        final secondRoleLectures = _lectures
+            .where((lecture) => lecture['roles'].contains(secondRole))
+            .toList();
+
+        var LectureSecond;
+        secondRoleLectures.forEach((lecture) {
+          LectureSecond = lecture;
+          _secondRoleLectures.add(LectureSecond);
+        });
+        //print(_secondRoleLectures);
+      }
 
       notifyListeners();
 
