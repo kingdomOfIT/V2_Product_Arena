@@ -1,6 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages, use_build_context_synchronously, prefer_const_constructors, unused_local_variable, empty_catches, avoid_print, prefer_final_fields, prefer_typing_uninitialized_variables
 
 import 'dart:convert';
+import 'dart:js';
 
 import 'package:flutter/material.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
@@ -77,6 +78,12 @@ class WebAuth with ChangeNotifier {
     String routeName,
   ) async {
     await _configureAmplify();
+    //Loader
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Center(child: CircularProgressIndicator());
+        });
 
     try {
       final userAttributes = <CognitoUserAttributeKey, String>{
@@ -100,6 +107,7 @@ class WebAuth with ChangeNotifier {
     } on AuthException catch (e) {
       safePrint(e.message);
       errorText = e.message;
+      Navigator.of(context).pop();
     }
     notifyListeners();
   }
@@ -110,6 +118,12 @@ class WebAuth with ChangeNotifier {
     BuildContext context,
     String routeName,
   ) async {
+    //Loader
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Center(child: CircularProgressIndicator());
+        });
     try {
       final result = await Amplify.Auth.confirmSignUp(
           username: email, confirmationCode: confirmationCode);
@@ -121,6 +135,7 @@ class WebAuth with ChangeNotifier {
       if (errorTextOTP.isNotEmpty) {
         isOTPerror = true;
         notifyListeners();
+        Navigator.of(context).pop();
       }
     }
   }
@@ -151,7 +166,8 @@ class WebAuth with ChangeNotifier {
 ///////////////////////////////GETTING LECTURES/////////////////////////////////////
 
   Future<void> getUserLectures() async {
-    //await signInUser();
+    await signInUser();
+
     try {
       final restOperation = Amplify.API.get('/api/user/lectures',
           apiName: 'getLecturesAlfa',
@@ -166,6 +182,7 @@ class WebAuth with ChangeNotifier {
       responseMap['lectures'].forEach((lecture) {
         temp.addAll(lecture['roles']);
       });
+
       Set<String> set = Set<String>.from(temp);
       _roles = set.toList();
 
@@ -207,7 +224,8 @@ class WebAuth with ChangeNotifier {
         //print(_secondRoleLectures);
       }
 
-      print(_lectures[0]['name']);
+      notifyListeners();
+
       notifyListeners();
     } on ApiException catch (e) {
       print('GET call failed: $e');
@@ -217,8 +235,6 @@ class WebAuth with ChangeNotifier {
   Future<void> signOutCurrentUser(BuildContext context) async {
     try {
       await Amplify.Auth.signOut();
-      // ignore: use_build_context_synchronously
-      // Navigator.of(context).pushReplacementNamed(WebLoginScreen.routeName);
     } on AuthException catch (e) {
       safePrint(e);
     }
