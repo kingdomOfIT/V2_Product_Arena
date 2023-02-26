@@ -32,7 +32,10 @@ class _WebContactScreenState extends State<WebContactScreen> {
             width: maxwidth * (1130 / 1440),
             child: Column(
               children: [
-                const WebProfilePopup(),
+                const Align(
+                  alignment: Alignment.topRight,
+                  child: WebProfilePopup(),
+                ),
                 SizedBox(
                   width: maxwidth * (840 / 1440),
                   child: Column(

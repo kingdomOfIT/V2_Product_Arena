@@ -42,7 +42,10 @@ class _WebLecturesPageState extends State<WebLecturesPage> {
               children: [
                 ////////////////////////////////////// PROFILE GREEN ICON////////////////////////////////////////
 
-                const WebProfilePopup(),
+                const Align(
+                  alignment: Alignment.topRight,
+                  child: WebProfilePopup(),
+                ),
 
                 ////////////////////////////////////// LECTURES CARDS  ////////////////////////////////////////
                 Expanded(
