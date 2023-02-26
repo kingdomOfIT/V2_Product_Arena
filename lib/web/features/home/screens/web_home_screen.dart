@@ -20,12 +20,12 @@ class WebHomeScreen extends StatelessWidget {
           const WebSideBar(),
           Container(
             alignment: Alignment.center,
-            width: maxwidth * (900 / 1440),
+            width: maxwidth * (1000 / 1440),
             height: double.infinity,
             decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage('assets/images/Homescreenbody.png'),
-                  fit: BoxFit.cover),
+                  fit: BoxFit.fill),
             ),
             child: const Text(''),
           ),
