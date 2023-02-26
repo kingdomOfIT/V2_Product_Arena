@@ -17,24 +17,27 @@ class WelcomepageAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: const Color(0xFFFFFFFF),
       elevation: 0,
       leading: Container(
-        height: screenHeight * 0.06,
-        width: screenWidth * 1,
+        height: screenHeight * (55 / 803),
+        width: screenWidth * (360 / 360),
         child: Padding(
           padding: EdgeInsets.only(
-              top: screenHeight * 0.0124,
-              bottom: screenHeight * 0.0124,
-              left: screenWidth * 0.0416),
+            top: screenHeight * (10 / 803),
+            bottom: screenHeight * (10 / 803),
+            left: screenWidth * (20 / 360),
+          ),
           child: Image.asset(
             "assets/images/PAlogowhite.png",
+            height: screenHeight * (35 / 803),
+            width: screenWidth * (35 / 360),
             fit: BoxFit.cover,
           ),
         ),
       ),
-      actions: [
+      actions: <Widget>[
         Builder(builder: (context) {
           return IconButton(
             onPressed: () {
-              scaffoldKey.currentState!.openDrawer();
+              scaffoldKey.currentState!.openEndDrawer();
             },
             icon: const Icon(Icons.menu),
             color: Colors.black87,
