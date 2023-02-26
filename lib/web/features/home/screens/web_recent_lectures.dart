@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:v2_product_arena/web/features/home/models/lecture.dart';
 import 'package:v2_product_arena/web/features/home/widgets/web_mock_data_recent_lectures.dart';
 import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
+import 'package:v2_product_arena/web/reusable_web_widgets/web_green_profile.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_lecture_card.dart';
 import '../../../reusable_web_widgets/web_homepage_sidebar.dart';
 
@@ -36,22 +37,11 @@ class _WebRecentLecturesPageState extends State<WebRecentLecturesPage> {
             color: Colors.white,
             width: maxwidth * (1130 / 1440),
             child: Column(
+              // ignore: prefer_const_literals_to_create_immutables
               children: [
                 ////////////////////////////////////// PROFILE GREEN ICON////////////////////////////////////////
 
-                Align(
-                  alignment: Alignment.topRight,
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.only(top: 10, bottom: 10, right: 50),
-                    child: SizedBox(
-                      width: maxwidth * (50 / 1440),
-                      height: 50,
-                      child: Image.asset('assets/images/Profileicon.png'),
-                    ),
-                  ),
-                ),
-
+                const WebProfilePopup(),
                 ////////////////////////////////////// LECTURES CARDS  ////////////////////////////////////////
                 Expanded(
                   child: ListView.builder(
