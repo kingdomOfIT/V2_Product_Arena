@@ -45,7 +45,7 @@ class _WebLectureCardState extends State<WebLectureCard> {
                     widget.name,
                     style: GoogleFonts.outfit(
                       fontWeight: FontWeight.w400,
-                      fontSize: maxheight * (32 / 1510),
+                      fontSize: maxheight * (50 / 1510),
                     ),
                   ),
                   SizedBox(
@@ -58,7 +58,7 @@ class _WebLectureCardState extends State<WebLectureCard> {
                       widget.description,
                       style: GoogleFonts.notoSans(
                         fontWeight: FontWeight.w400,
-                        fontSize: maxheight * (18 / 1510),
+                        fontSize: maxheight * (25 / 1510),
                       ),
                     ),
                   ),
@@ -69,7 +69,7 @@ class _WebLectureCardState extends State<WebLectureCard> {
                     // 'Total time: ${lectures[index].durationInSeconds}',
                     'Total time: ${widget.durationInSeconds}',
                     style: GoogleFonts.notoSans(
-                        fontSize: maxheight * (16 / 1510),
+                        fontSize: maxheight * (25 / 1510),
                         fontWeight: FontWeight.w400),
                   ),
                   // Text(
@@ -93,8 +93,8 @@ class _WebLectureCardState extends State<WebLectureCard> {
                 width: maxwidth * (30 / 1440),
               ),
               SizedBox(
-                width: maxwidth * (370 / 1440),
-                height: maxheight * (270 / 1510),
+                width: maxwidth * (390 / 1440),
+                height: maxheight * (290 / 1510),
                 child: Image.network(
                   // lectures[index].imageSrc,
                   widget.imageSrc,
