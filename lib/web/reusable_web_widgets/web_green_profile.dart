@@ -7,46 +7,43 @@ class WebProfilePopup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 10, bottom: 10, right: 50),
-      child: Container(
-        height: 70,
-        alignment: Alignment.topRight,
-        child: PopupMenuButton<int>(
-          icon: Image.asset('assets/images/Profileicon.png'),
-          iconSize: 50,
-          itemBuilder: (context) => [
-            PopupMenuItem(
-              //value: 1,
-              onTap: () async {
-                try {
-                  final res = await Amplify.Auth.signOut();
-                  safePrint(res);
-                  // ignore: use_build_context_synchronously
-                  Navigator.of(context)
-                      .pushReplacementNamed(WebLoginScreen.routeName);
-                } on AuthException catch (e) {
-                  safePrint(e.message);
-                }
-              },
-              child: Column(
-                children: [
-                  Row(
-                    children: const [
-                      Icon(Icons.logout),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text("Logout"),
-                    ],
-                  ),
-                ],
-              ),
+    return Container(
+      width: MediaQuery.of(context).size.width * (70 / 1440),
+      alignment: Alignment.topRight,
+      child: PopupMenuButton<int>(
+        icon: Image.asset('assets/images/Profileicon.png'),
+        iconSize: MediaQuery.of(context).size.width * (50 / 1440),
+        itemBuilder: (context) => [
+          PopupMenuItem(
+            //value: 1,
+            onTap: () async {
+              try {
+                final res = await Amplify.Auth.signOut();
+                safePrint(res);
+                // ignore: use_build_context_synchronously
+                Navigator.of(context)
+                    .pushReplacementNamed(WebLoginScreen.routeName);
+              } on AuthException catch (e) {
+                safePrint(e.message);
+              }
+            },
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    const Icon(Icons.logout),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * (10 / 1440),
+                    ),
+                    const Text("Logout"),
+                  ],
+                ),
+              ],
             ),
-          ],
-          offset: const Offset(-50, 65),
-          color: Colors.white,
-        ),
+          ),
+        ],
+        offset: const Offset(-50, 65),
+        color: Colors.white,
       ),
     );
   }

@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:v2_product_arena/web/features/home/models/lecture.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_lecturevideo_screen.dart';
 import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_green_profile.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_lecture_card.dart';
-
-import '../../../../constants/global_variables.dart';
 import '../../../reusable_web_widgets/web_homepage_sidebar.dart';
 
 class WebLecturesPage extends StatefulWidget {
@@ -23,10 +20,7 @@ class _WebLecturesPageState extends State<WebLecturesPage> {
   Widget build(BuildContext context) {
     double maxwidth = MediaQuery.of(context).size.width;
     final role = ModalRoute.of(context)!.settings.arguments as String;
-    final role = ModalRoute.of(context)!.settings.arguments as String;
     final lectures = Provider.of<WebAuth>(context, listen: false).lectures;
-    final roleLectures =
-        lectures.where((lecture) => lecture['roles'].contains(role)).toList();
     final roleLectures =
         lectures.where((lecture) => lecture['roles'].contains(role)).toList();
     return Scaffold(
@@ -45,12 +39,14 @@ class _WebLecturesPageState extends State<WebLecturesPage> {
               children: [
                 ////////////////////////////////////// PROFILE GREEN ICON////////////////////////////////////////
 
-                const WebProfilePopup(),
+                const Align(
+                  alignment: Alignment.topRight,
+                  child: WebProfilePopup(),
+                ),
 
                 ////////////////////////////////////// LECTURES CARDS  ////////////////////////////////////////
                 Expanded(
                   child: ListView.builder(
-                    itemCount: roleLectures.length,
                     itemCount: roleLectures.length,
                     itemBuilder: (BuildContext ctx, int index) {
                       return InkWell(

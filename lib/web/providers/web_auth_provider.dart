@@ -1,16 +1,10 @@
 // ignore_for_file: depend_on_referenced_packages, use_build_context_synchronously, prefer_const_constructors, unused_local_variable, empty_catches, avoid_print, prefer_final_fields, prefer_typing_uninitialized_variables
-// ignore_for_file: depend_on_referenced_packages, use_build_context_synchronously, prefer_const_constructors, unused_local_variable, empty_catches, avoid_print, prefer_final_fields, prefer_typing_uninitialized_variables
-
 import 'dart:convert';
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:v2_product_arena/amplifyconfiguration.dart';
-import 'package:v2_product_arena/web/features/auth/screens/web_login_screen.dart';
-import 'package:v2_product_arena/web/features/auth/screens/web_login_screen.dart';
 
 class WebAuth with ChangeNotifier {
   String errorTextOTP = '';
@@ -189,6 +183,7 @@ class WebAuth with ChangeNotifier {
       _roles = set.toList();
 
       print(roles);
+      print(lectures);
       var oneLecture;
       responseMap['lectures'].forEach((lecture) {
         oneLecture = lecture;
@@ -226,7 +221,8 @@ class WebAuth with ChangeNotifier {
         //print(_secondRoleLectures);
       }
 
-      print(_lectures[0]['name']);
+      notifyListeners();
+
       notifyListeners();
     } on ApiException catch (e) {
       print('GET call failed: $e');

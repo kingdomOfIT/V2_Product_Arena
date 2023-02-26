@@ -1,13 +1,11 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:v2_product_arena/constants/global_variables.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_green_profile.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_homepage_sidebar.dart';
-import 'package:v2_product_arena/web/reusable_web_widgets/web_profilepopup.dart';
 
 class WebContactScreen extends StatefulWidget {
   static const routeName = '/web-contact';
@@ -19,14 +17,10 @@ class WebContactScreen extends StatefulWidget {
 }
 
 class _WebContactScreenState extends State<WebContactScreen> {
-  final _contactFormKey = GlobalKey<FormState>();
   final contactController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    double maxwidth = MediaQuery.of(context).size.width;
-    double maxheight = MediaQuery.of(context).size.height;
-
     double maxwidth = MediaQuery.of(context).size.width;
     double maxheight = MediaQuery.of(context).size.height;
 
@@ -36,12 +30,12 @@ class _WebContactScreenState extends State<WebContactScreen> {
           const WebSideBar(),
           SizedBox(
             width: maxwidth * (1130 / 1440),
-          const WebSideBar(),
-          SizedBox(
-            width: maxwidth * (1130 / 1440),
             child: Column(
               children: [
-                const WebProfilePopup(),
+                const Align(
+                  alignment: Alignment.topRight,
+                  child: WebProfilePopup(),
+                ),
                 SizedBox(
                   width: maxwidth * (840 / 1440),
                   child: Column(

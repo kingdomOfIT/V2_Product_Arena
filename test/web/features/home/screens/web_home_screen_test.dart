@@ -20,6 +20,7 @@ Widget createWebHomeScreen() => ChangeNotifierProvider<WebAuth>(
           '/web-lectures': (context) => const WebLecturesPage(),
           '/web-recent': (context) => const WebRecentLecturesPage(),
           '/web-contact': (context) => const WebContactScreen(),
+          '/web-home': (context) => const WebHomeScreen(),
         },
         home: const WebHomeScreen(),
       ),

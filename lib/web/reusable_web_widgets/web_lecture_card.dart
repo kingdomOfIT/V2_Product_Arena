@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../features/home/screens/web_lecturevideo_screen.dart';
-
-class WebLectureCard extends StatefulWidget {
-import '../features/home/screens/web_lecturevideo_screen.dart';
-
 class WebLectureCard extends StatefulWidget {
   final String name;
   final String description;
@@ -24,11 +19,6 @@ class WebLectureCard extends StatefulWidget {
     required this.imageSrc,
   });
 
-  @override
-  State<WebLectureCard> createState() => _WebLectureCardState();
-}
-
-class _WebLectureCardState extends State<WebLectureCard> {
   @override
   State<WebLectureCard> createState() => _WebLectureCardState();
 }
