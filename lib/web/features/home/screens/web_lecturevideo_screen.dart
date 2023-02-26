@@ -3,6 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
+import 'package:v2_product_arena/web/reusable_web_widgets/web_green_profile.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_homepage_sidebar.dart';
 import 'package:video_player/video_player.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
@@ -51,7 +52,7 @@ class _WebLectureVideoScreenState extends State<WebLectureVideoScreen> {
             width: maxwidth * (1130 / 1440),
             child: Column(
               children: [
-                const GreenProfileIcon(),
+                const WebProfilePopup(),
                 Padding(
                   padding: const EdgeInsets.only(top: 10, left: 70, right: 70),
                   child: Column(
@@ -73,7 +74,7 @@ class _WebLectureVideoScreenState extends State<WebLectureVideoScreen> {
                                   style: GoogleFonts.notoSans(
                                     fontSize:
                                         MediaQuery.of(context).size.height *
-                                            (60 / 1024),
+                                            (30 / 1024),
                                     fontWeight: FontWeight.w700,
                                     color: Colors.black,
                                   ),
@@ -178,7 +179,9 @@ class _WebLectureVideoScreenState extends State<WebLectureVideoScreen> {
                                 child: Text(
                                   loadedLecture['description'],
                                   style: GoogleFonts.notoSans(
-                                    fontSize: 16,
+                                    fontSize:
+                                        MediaQuery.of(context).size.height *
+                                            (16 / 1024),
                                     color: Colors.black,
                                   ),
                                 ),

@@ -145,8 +145,8 @@ class WebAuth with ChangeNotifier {
   Future<void> signInUser() async {
     try {
       final result = await Amplify.Auth.signIn(
-        username: 'mirza.karic575@gmail.com',
-        password: 'Pass123!',
+        username: userEmail,
+        password: userPassword,
       );
       print('Loginovan');
     } on AuthException catch (e) {

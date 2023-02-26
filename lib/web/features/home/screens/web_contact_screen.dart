@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:v2_product_arena/constants/global_variables.dart';
+import 'package:v2_product_arena/web/reusable_web_widgets/web_green_profile.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_homepage_sidebar.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_profilepopup.dart';
 
@@ -40,7 +41,7 @@ class _WebContactScreenState extends State<WebContactScreen> {
             width: maxwidth * (1130 / 1440),
             child: Column(
               children: [
-                const GreenProfileIcon(),
+                const WebProfilePopup(),
                 SizedBox(
                   width: maxwidth * (840 / 1440),
                   child: Column(
