@@ -29,7 +29,10 @@ class WebHomeScreen extends StatelessWidget {
             ),
             child: const Text(''),
           ),
-          const WebProfilePopup()
+          const Align(
+            alignment: Alignment.topRight,
+            child: WebProfilePopup(),
+          )
         ],
       ),
     );
