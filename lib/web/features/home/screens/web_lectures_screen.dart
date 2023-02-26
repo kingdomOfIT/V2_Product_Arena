@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:v2_product_arena/web/features/home/models/lecture.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_lecturevideo_screen.dart';
 import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_lecture_card.dart';
-
-import '../../../../constants/global_variables.dart';
+import 'package:v2_product_arena/web/reusable_web_widgets/web_profilepopup.dart';
 import '../../../reusable_web_widgets/web_homepage_sidebar.dart';
 
 class WebLecturesPage extends StatefulWidget {
@@ -41,7 +39,7 @@ class _WebLecturesPageState extends State<WebLecturesPage> {
               children: [
                 ////////////////////////////////////// PROFILE GREEN ICON////////////////////////////////////////
 
-                const GreenProfileIcon(),
+                const WebProfilePopup(),
 
                 ////////////////////////////////////// LECTURES CARDS  ////////////////////////////////////////
                 Expanded(
