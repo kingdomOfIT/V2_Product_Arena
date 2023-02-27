@@ -110,7 +110,7 @@ class WebSideBar extends StatelessWidget {
                                               : webAuth.firstRole ==
                                                       'productManager'
                                                   ? 'assets/images/rolevectorwhite2.png'
-                                                  : 'assets/images/rolevectorblack4.png',
+                                                  : 'assets/images/rolevectorwhite4.png',
                                   height: 20,
                                   width: 20,
                                 ),

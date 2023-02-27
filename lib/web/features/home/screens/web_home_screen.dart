@@ -19,8 +19,7 @@ class WebHomeScreen extends StatelessWidget {
         children: [
           const WebSideBar(),
           Container(
-            alignment: Alignment.center,
-            width: maxwidth * (1000 / 1440),
+            width: maxwidth * (900 / 1440),
             height: double.infinity,
             decoration: const BoxDecoration(
               image: DecorationImage(
