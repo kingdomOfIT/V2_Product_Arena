@@ -10,6 +10,7 @@
 .svn/
 migrate_working_dir/
 ignorethis.dart
+oldcontactscreen.dart
 
 # IntelliJ related
 *.iml
