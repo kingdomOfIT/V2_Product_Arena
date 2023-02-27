@@ -2,6 +2,7 @@
 
 import "package:flutter/material.dart";
 import 'package:provider/provider.dart';
+import 'package:v2_product_arena/mobile/features/home/screens/mobile_contact_screen.dart';
 import 'package:v2_product_arena/mobile/features/lectures/screens/welcome_lectures_screen.dart';
 import 'package:v2_product_arena/mobile/features/lectures/widgets/lectures_sidebar_button.dart';
 import 'package:v2_product_arena/mobile/features/lectures/widgets/role_tile_drawer.dart';
@@ -148,19 +149,24 @@ class _MobileSidebarState extends State<MobileSidebar> {
               width: screenWidth * (24 / 360),
             ),
           ),
-          ListTile(
-            title: Text(
-              "Contact us !",
-              style: GoogleFonts.notoSans(
-                fontWeight: FontWeight.w700,
-                fontSize: screenHeight * (16 / 803),
-                color: Colors.white,
+          InkWell(
+            onTap: () {
+              Navigator.of(context).pushNamed(MobileContactUs.routeName);
+            },
+            child: ListTile(
+              title: Text(
+                "Contact us !",
+                style: GoogleFonts.notoSans(
+                  fontWeight: FontWeight.w700,
+                  fontSize: screenHeight * (16 / 803),
+                  color: Colors.white,
+                ),
               ),
-            ),
-            leading: Image.asset(
-              "assets/images/contact us.png",
-              height: screenHeight * (24 / 803),
-              width: screenWidth * (24 / 360),
+              leading: Image.asset(
+                "assets/images/contact us.png",
+                height: screenHeight * (24 / 803),
+                width: screenWidth * (24 / 360),
+              ),
             ),
           ),
           Align(

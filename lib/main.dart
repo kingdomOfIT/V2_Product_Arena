@@ -9,6 +9,7 @@ import 'package:v2_product_arena/amplifyconfiguration.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/email_verification_screen.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/mobile_login_screen.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/mobile_signup_screen.dart';
+import 'package:v2_product_arena/mobile/features/home/screens/mobile_contact_screen.dart';
 import 'package:v2_product_arena/mobile/features/home/screens/mobile_home_screen.dart';
 import 'package:v2_product_arena/mobile/features/lectures/screens/welcome_lectures_screen.dart';
 import 'package:v2_product_arena/mobile/features/onboarding/screens/mobile_onboarding_screen.dart';
@@ -151,7 +152,8 @@ class _MyAppState extends State<MyApp> {
               const WelcomeLecturesScreen(
                 role: '',
               ),
-          WebContactScreen.routeName: (context) => const WebContactScreen()
+          WebContactScreen.routeName: (context) => const WebContactScreen(),
+          MobileContactUs.routeName: (context) => const MobileContactUs(),
         },
       ),
     );
