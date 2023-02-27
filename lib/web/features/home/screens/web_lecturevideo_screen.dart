@@ -31,7 +31,10 @@ class _WebLectureVideoScreenState extends State<WebLectureVideoScreen> {
     //final isMuted = _controller.value.volume == 0;
     double maxwidth = MediaQuery.of(context).size.width;
     final webAuth = Provider.of<WebAuth>(context, listen: false);
-    final lectureName = ModalRoute.of(context)!.settings.arguments as String;
+    final args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final lectureName = args['lectureName'] as String;
+    final lectureIndex = args['index'];
     final loadedLecture = webAuth.lectures
         .firstWhere((lecture) => lecture['name'] == lectureName);
     String url = loadedLecture['contentLink'];
@@ -61,7 +64,7 @@ class _WebLectureVideoScreenState extends State<WebLectureVideoScreen> {
                         children: [
                           RichText(
                             text: TextSpan(
-                              text: '$numeration. ',
+                              text: '${lectureIndex + 1}. ',
                               style: GoogleFonts.notoSans(
                                 fontSize: MediaQuery.of(context).size.height *
                                     (60 / 1024),
