@@ -54,7 +54,10 @@ class _WebLecturesPageState extends State<WebLecturesPage> {
                         onTap: () {
                           Navigator.of(context).pushNamed(
                             WebLectureVideoScreen.routeName,
-                            arguments: roleLectures[index]['name'],
+                            arguments: {
+                              'lectureName': roleLectures[index]['name'],
+                              'index': index,
+                            },
                           );
                         },
                         child: Padding(
