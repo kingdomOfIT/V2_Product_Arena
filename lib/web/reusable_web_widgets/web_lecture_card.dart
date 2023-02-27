@@ -28,6 +28,11 @@ class _WebLectureCardState extends State<WebLectureCard> {
   Widget build(BuildContext context) {
     double maxwidth = MediaQuery.of(context).size.width;
     double maxheight = MediaQuery.of(context).size.height;
+    String formattedTime = Duration(seconds: widget.durationInSeconds)
+        .toString()
+        .split('.')
+        .first
+        .padLeft(8, "0");
     return Container(
       padding: EdgeInsets.all(maxwidth * (30 / 1440)),
       child: Column(
@@ -67,7 +72,7 @@ class _WebLectureCardState extends State<WebLectureCard> {
                   ),
                   Text(
                     // 'Total time: ${lectures[index].durationInSeconds}',
-                    'Total time: ${widget.durationInSeconds}',
+                    'Total time: ${formattedTime}',
                     style: GoogleFonts.notoSans(
                         fontSize: maxheight * (25 / 1510),
                         fontWeight: FontWeight.w400),
