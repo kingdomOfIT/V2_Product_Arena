@@ -14,6 +14,9 @@ class MobileAuth with ChangeNotifier {
   String userPassword = '';
   bool isSignUpComplete = false;
   bool isSignInComplete = false;
+  String userName = '';
+  String userSurname = '';
+  String emailUser = '';
 
   bool isLoading = false;
   bool isNameError = false;
@@ -133,6 +136,7 @@ class MobileAuth with ChangeNotifier {
       print('logged in');
       await getUserLectures();
       // ignore: use_build_context_synchronously
+      await fetchCurrentUserAttributes();
       Navigator.of(context).pushReplacementNamed(routeName);
     } on AuthException catch (e) {
       safePrint(e.message);
@@ -150,6 +154,34 @@ class MobileAuth with ChangeNotifier {
       safePrint(e);
     }
     notifyListeners();
+  }
+
+  Future<void> fetchCurrentUserAttributes() async {
+    try {
+      final result = await Amplify.Auth.fetchUserAttributes();
+
+      // for (final element in result) {
+      //   print('key: ${element.userAttributeKey}; value: ${element.value}');
+      // }
+      userName = result
+          .firstWhere((element) =>
+              element.userAttributeKey.toString() ==
+              'CognitoUserAttributeKey "given_name"')
+          .value;
+      userSurname = result
+          .firstWhere((element) =>
+              element.userAttributeKey.toString() ==
+              'CognitoUserAttributeKey "family_name"')
+          .value;
+      emailUser = result
+          .firstWhere((element) =>
+              element.userAttributeKey.toString() ==
+              'CognitoUserAttributeKey "email"')
+          .value;
+      print(userName);
+    } on AuthException catch (e) {
+      print(e.message);
+    }
   }
 
   Future<void> getUserLectures() async {
@@ -180,29 +212,11 @@ class MobileAuth with ChangeNotifier {
         _lecturesRole1 = _lecture
             .where((lecture) => lecture['roles'].contains(_roles[0]))
             .toList();
-
-        // int i, j;
-        // for (i = 0; i < _lecturesRole1.length; i++) {
-        //   for (j = i + 1; j < _lecturesRole1.length; j++) {
-        //     if (_lecturesRole1[i]['name'] == _lecturesRole1[j]['name']) {
-        //       _lecturesRole1.remove(_lecturesRole1[j]);
-        //     }
-        //   }
-        // }
-        // notifyListeners();
       } else {
         _lecturesRole1 = _lecture
             .where((lecture) => lecture['roles'].contains(_roles[0]))
             .toList();
 
-        // int i, j;
-        // for (i = 0; i < _lecturesRole1.length; i++) {
-        //   for (j = i + 1; j < _lecturesRole1.length; j++) {
-        //     if (_lecturesRole1[i]['name'] == _lecturesRole1[j]['name']) {
-        //       _lecturesRole1.remove(_lecturesRole1[j]);
-        //     }
-        //   }
-        // }
         _lecturesRole2 = _lecture
             .where((lecture) => lecture['roles'].contains(_roles[1]))
             .toList();
