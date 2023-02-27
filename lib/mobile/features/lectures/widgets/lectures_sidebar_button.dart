@@ -2,6 +2,7 @@
 
 import 'package:amplify_flutter/amplify_flutter.dart';
 import "package:flutter/material.dart";
+import 'package:v2_product_arena/mobile/features/auth/screens/mobile_login_screen.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_login_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -51,7 +52,7 @@ class SidebarButton extends StatelessWidget {
             safePrint(res);
             // ignore: use_build_context_synchronously
             Navigator.of(context)
-                .pushReplacementNamed(WebLoginScreen.routeName);
+                .pushReplacementNamed(MobileLoginScreen.routeName);
           } on AuthException catch (e) {
             safePrint(e.message);
           }

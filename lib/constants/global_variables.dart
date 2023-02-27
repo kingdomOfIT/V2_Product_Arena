@@ -95,6 +95,43 @@ List<Role> listRole = [
     'assets/images/rolevectorblack5.png',
   )
 ];
+List<Role> listRoleMob = [
+  Role(
+    {
+      'forFrontend': 'QA Engineering',
+      'forBackend': 'qa',
+    },
+    'assets/images/qamobicon.png',
+  ),
+  Role(
+    {
+      'forFrontend': 'Project Management',
+      'forBackend': 'productManager',
+    },
+    'assets/images/pmiconmob.png',
+  ),
+  Role(
+    {
+      'forFrontend': 'Backend',
+      'forBackend': 'backend',
+    },
+    'assets/images/backendiconmob.png',
+  ),
+  Role(
+    {
+      'forFrontend': 'UI/UX Design',
+      'forBackend': 'uiux',
+    },
+    'assets/images/uxmobicon.png',
+  ),
+  Role(
+    {
+      'forFrontend': 'Full Stack Developer',
+      'forBackend': 'fullstack',
+    },
+    'assets/images/fullstackmobicon.png',
+  )
+];
 List<Role> listRoleSel = [
   Role(
     {
