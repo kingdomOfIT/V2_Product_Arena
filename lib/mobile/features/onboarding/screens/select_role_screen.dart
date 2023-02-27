@@ -288,6 +288,8 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
                           context.read<ErrorMessage>().change();
                         } else {
                           submitOnboarding(finalRoles, finalAnswers);
+                          Provider.of<MobileAuth>(context, listen: false)
+                              .signOutCurrentUser(context);
                         }
 
                         safePrint(

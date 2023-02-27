@@ -30,13 +30,13 @@ class _RoleTileLecturesState extends State<RoleTileLectures> {
             child: Image.asset(widget.roleImage),
           ),
           const SizedBox(
-            width: 8,
+            width: 23,
           ),
           Text(
             widget.roleName,
             style: GoogleFonts.notoSans(
               color: Colors.white,
-              fontSize: 16,
+              fontSize: (16 / 803) * MediaQuery.of(context).size.height,
               fontWeight: FontWeight.w700,
             ),
           ),

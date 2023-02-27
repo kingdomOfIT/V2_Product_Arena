@@ -93,7 +93,7 @@ class _MobileSidebarState extends State<MobileSidebar> {
           ),
           Padding(
             padding: EdgeInsets.only(
-                left: (20 / 360) * MediaQuery.of(context).size.width),
+                left: (15 / 360) * MediaQuery.of(context).size.width),
             child: SizedBox(
               height: dataProvider.roles.length * 56,
               child: ListView.builder(
