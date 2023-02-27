@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "auth": {
+      "alfapaf4a8052b": [
+        "read"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "paths": {
+    "/api/lecture/laststopped": {
+      "name": "/api/lecture/laststopped",
+      "lambdaFunction": "updateLastStoppedAlfa",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
+    }
+  }
+}

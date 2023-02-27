@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "paths": {
+    "/api/user/feedback": {
+      "name": "/api/user/feedback",
+      "lambdaFunction": "updateFeedbackAlfa",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "create",
+          "read",
+          "update"
+        ]
+      }
+    }
+  }
+}

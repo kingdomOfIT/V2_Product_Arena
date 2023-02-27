@@ -39,6 +39,24 @@ const amplifyconfig = ''' {
                     "endpoint": "https://t6u3urwy88.execute-api.us-east-1.amazonaws.com/staging",
                     "region": "us-east-1",
                     "authorizationType": "AWS_IAM"
+                },
+                "sendFormEmailAlfa": {
+                    "endpointType": "REST",
+                    "endpoint": "https://hpxszcte8a.execute-api.us-east-1.amazonaws.com/staging",
+                    "region": "us-east-1",
+                    "authorizationType": "AWS_IAM"
+                },
+                "updateFeedback": {
+                    "endpointType": "REST",
+                    "endpoint": "https://kp9m40z9l3.execute-api.us-east-1.amazonaws.com/staging",
+                    "region": "us-east-1",
+                    "authorizationType": "AWS_IAM"
+                },
+                "getUserName": {
+                    "endpointType": "REST",
+                    "endpoint": "https://pjiwts1aa2.execute-api.us-east-1.amazonaws.com/staging",
+                    "region": "us-east-1",
+                    "authorizationType": "AWS_IAM"
                 }
             }
         }

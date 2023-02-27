@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "paths": {
+    "/api/lectures/order": {
+      "name": "/api/lectures/order",
+      "lambdaFunction": "getLecturesOrderAlfa",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
+    }
+  }
+}

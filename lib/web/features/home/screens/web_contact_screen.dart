@@ -22,6 +22,18 @@ class _WebContactScreenState extends State<WebContactScreen> {
   final _contactFormKey = GlobalKey<FormState>();
   final contactController = TextEditingController();
 
+  // @override
+  // void dispose() {
+  //   contactController.dispose();
+  //   super.dispose();
+  // }
+
+  // void clearController() {
+  //   setState(() {
+  //     contactController.clear();
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
     double maxwidth = MediaQuery.of(context).size.width;
@@ -381,10 +393,14 @@ class _WebContactScreenState extends State<WebContactScreen> {
                                     );
                                     final response =
                                         await restOperation.response;
+
                                     safePrint('POST call succeeded');
                                     safePrint(response.decodeBody());
                                   } on ApiException catch (e) {
                                     safePrint('POST call failed: ${e.message}');
+                                    setState(() {
+                                      contactController.text = '';
+                                    });
                                   }
                                 }
                               },

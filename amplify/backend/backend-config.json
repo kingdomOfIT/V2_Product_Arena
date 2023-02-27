@@ -1,0 +1,392 @@
+{
+  "api": {
+    "alfaUpdateLastStopped": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "updateLastStoppedAlfa"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
+    "getLecturesAlfa": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "alfaUserLectures"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
+    "getLecturesOrder": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "getLecturesOrderAlfa"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
+    "getUserLecturesAlfa": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "getUserLecturesLambdaAlfa"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
+    "getUserName": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "getUserName"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
+    "onboardnigAPIAlfa": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "onboardnigformGetterAlfa"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
+    "sendFormEmailAlfa": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "mailContactAlfa"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
+    "updateFeedback": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "updateFeedbackAlfa"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
+    "userDataInitAlfa": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "initializeUserAlfa"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
+  "auth": {
+    "alfapaf4a8052b": {
+      "customAuth": false,
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [
+            "REQUIRES_LOWERCASE",
+            "REQUIRES_NUMBERS",
+            "REQUIRES_SYMBOLS",
+            "REQUIRES_UPPERCASE"
+          ],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "ADDRESS",
+          "BIRTHDATE",
+          "EMAIL",
+          "FAMILY_NAME",
+          "GIVEN_NAME",
+          "PHONE_NUMBER"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
+    }
+  },
+  "function": {
+    "alfaUserLectures": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "getLecturesOrderAlfa": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "getUserLecturesLambdaAlfa": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "getUserName": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "initializeUserAlfa": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "mailContactAlfa": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "onboardnigformGetterAlfa": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "alfapaf4a8052b"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "updateFeedbackAlfa": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "updateLastStoppedAlfa": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "validationFunctionAlfa": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_alfaUserLectures_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "alfaUserLectures"
+        }
+      ]
+    },
+    "AMPLIFY_function_alfaUserLectures_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "alfaUserLectures"
+        }
+      ]
+    },
+    "AMPLIFY_function_getLecturesOrderAlfa_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getLecturesOrderAlfa"
+        }
+      ]
+    },
+    "AMPLIFY_function_getLecturesOrderAlfa_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getLecturesOrderAlfa"
+        }
+      ]
+    },
+    "AMPLIFY_function_getUserLecturesLambdaAlfa_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getUserLecturesLambdaAlfa"
+        }
+      ]
+    },
+    "AMPLIFY_function_getUserLecturesLambdaAlfa_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getUserLecturesLambdaAlfa"
+        }
+      ]
+    },
+    "AMPLIFY_function_getUserName_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getUserName"
+        }
+      ]
+    },
+    "AMPLIFY_function_getUserName_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getUserName"
+        }
+      ]
+    },
+    "AMPLIFY_function_initializeUserAlfa_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "initializeUserAlfa"
+        }
+      ]
+    },
+    "AMPLIFY_function_initializeUserAlfa_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "initializeUserAlfa"
+        }
+      ]
+    },
+    "AMPLIFY_function_mailContactAlfa_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "mailContactAlfa"
+        }
+      ]
+    },
+    "AMPLIFY_function_mailContactAlfa_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "mailContactAlfa"
+        }
+      ]
+    },
+    "AMPLIFY_function_onboardnigformGetterAlfa_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "onboardnigformGetterAlfa"
+        }
+      ]
+    },
+    "AMPLIFY_function_onboardnigformGetterAlfa_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "onboardnigformGetterAlfa"
+        }
+      ]
+    },
+    "AMPLIFY_function_updateFeedbackAlfa_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "updateFeedbackAlfa"
+        }
+      ]
+    },
+    "AMPLIFY_function_updateFeedbackAlfa_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "updateFeedbackAlfa"
+        }
+      ]
+    },
+    "AMPLIFY_function_updateLastStoppedAlfa_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "updateLastStoppedAlfa"
+        }
+      ]
+    },
+    "AMPLIFY_function_updateLastStoppedAlfa_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "updateLastStoppedAlfa"
+        }
+      ]
+    },
+    "AMPLIFY_function_validationFunctionAlfa_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "validationFunctionAlfa"
+        }
+      ]
+    },
+    "AMPLIFY_function_validationFunctionAlfa_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "validationFunctionAlfa"
+        }
+      ]
+    }
+  }
+}
