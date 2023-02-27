@@ -192,7 +192,8 @@ final onboardingVideoTextField =
     find.byKey(const Key('onboardingVideoTextField'));
 final onboardingSubmitButton = find.byKey(const Key('onboardingSubmitWeb'));
 final onboardingScrollableScreen = find.byKey(const Key('scrollWebOnboarding'));
-final secondTextButton = find.byKey(Key('productManager'));
+final secondTextButton = find.byType(TextButton).at(1);
+// final secondTextButton = find.byKey(Key('productManager'));
 final secondRoleButton = find.byKey(const Key('roleLecturesScreen')).last;
 final cardFinder = find.byType(WebLectureCard).at(4);
 
