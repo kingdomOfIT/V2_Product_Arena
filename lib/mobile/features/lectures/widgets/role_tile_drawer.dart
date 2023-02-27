@@ -19,37 +19,29 @@ class RoleTileLectures extends StatefulWidget {
 class _RoleTileLecturesState extends State<RoleTileLectures> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      child: SizedBox(
-        width: (280 / 360) * MediaQuery.of(context).size.width,
-        height: 50,
-        child: Row(
-          children: [
-            SizedBox(
-              height: (24 / 360) * MediaQuery.of(context).size.width,
-              width: (24 / 360) * MediaQuery.of(context).size.width,
-              child: Image.asset(widget.roleImage),
+    return SizedBox(
+      width: (280 / 360) * MediaQuery.of(context).size.width,
+      height: 50,
+      child: Row(
+        children: [
+          SizedBox(
+            height: (20 / 360) * MediaQuery.of(context).size.width,
+            width: (20 / 360) * MediaQuery.of(context).size.width,
+            child: Image.asset(widget.roleImage),
+          ),
+          const SizedBox(
+            width: 8,
+          ),
+          Text(
+            widget.roleName,
+            style: GoogleFonts.notoSans(
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.w700,
             ),
-            Text(
-              widget.roleName,
-              style: GoogleFonts.notoSans(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => WelcomeLecturesScreen(
-                    role: widget.roleName,
-                  )),
-        );
-      },
     );
   }
 }

@@ -20,21 +20,24 @@ class MobileSidebar extends StatefulWidget {
 
 class _MobileSidebarState extends State<MobileSidebar> {
   List<Role> lista = [];
+  List<String> roleName = [];
 
   @override
   Widget build(BuildContext context) {
     final dataProvider = Provider.of<MobileAuth>(context, listen: false);
     if (dataProvider.roles.length == 1) {
-      for (var role in listRole) {
+      for (var role in listRoleMob) {
         if (role.name['forBackend'] == dataProvider.roles[0]) {
           lista.add(role);
+          roleName.add(role.name['forFrontend']!);
         }
       }
     } else {
-      for (var role in listRole) {
+      for (var role in listRoleMob) {
         if (role.name['forBackend'] == dataProvider.roles[0] ||
             role.name['forBackend'] == dataProvider.roles[1]) {
           lista.add(role);
+          roleName.add(role.name['forFrontend']!);
         }
       }
     }
@@ -51,7 +54,7 @@ class _MobileSidebarState extends State<MobileSidebar> {
             width: screenWidth * (360 / 360),
             child: DrawerHeader(
               child: Text(
-                "John Doe",
+                'John Doe',
                 style: GoogleFonts.notoSans(
                   textStyle: TextStyle(
                     fontWeight: FontWeight.w700,
@@ -83,37 +86,53 @@ class _MobileSidebarState extends State<MobileSidebar> {
               Navigator.pop(context);
             },
           ),
-          SizedBox(
-            height: dataProvider.roles.length * 56,
-            child: ListView.builder(
-              itemCount: dataProvider.roles.length,
-              itemBuilder: (BuildContext context, int index) {
-                return RoleTileLectures(
-                  roleName: lista[index].name['forFrontend']!,
-                  roleImage: lista[index].image,
-                );
-              },
-            ),
-          ),
+
           Padding(
             padding: EdgeInsets.symmetric(horizontal: screenWidth * (20 / 360)),
             child: Divider(color: Colors.white),
           ),
-          ListTile(
-            title: Text(
-              "UI/UX Design",
-              style: GoogleFonts.notoSans(
-                fontWeight: FontWeight.w700,
-                fontSize: screenHeight * (16 / 803),
-                color: Colors.white,
+          Padding(
+            padding: EdgeInsets.only(
+                left: (20 / 360) * MediaQuery.of(context).size.width),
+            child: SizedBox(
+              height: dataProvider.roles.length * 56,
+              child: ListView.builder(
+                itemCount: dataProvider.roles.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return GestureDetector(
+                    child: RoleTileLectures(
+                      roleName: lista[index].name['forFrontend']!,
+                      roleImage: lista[index].image,
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => WelcomeLecturesScreen(
+                                  role: lista[index].name['forBackend']!,
+                                )),
+                      );
+                    },
+                  );
+                },
               ),
             ),
-            leading: Image.asset(
-              "assets/images/rolevectorwhite4.png",
-              height: screenHeight * (24 / 803),
-              width: screenWidth * (24 / 360),
-            ),
           ),
+          // ListTile(
+          //   title: Text(
+          //     "UI/UX Design",
+          //     style: GoogleFonts.notoSans(
+          //       fontWeight: FontWeight.w700,
+          //       fontSize: screenHeight * (16 / 803),
+          //       color: Colors.white,
+          //     ),
+          //   ),
+          //   leading: Image.asset(
+          //     "assets/images/rolevectorwhite4.png",
+          //     height: screenHeight * (24 / 803),
+          //     width: screenWidth * (24 / 360),
+          //   ),
+          // ),
           ListTile(
             title: Text(
               "Recent Lessons",
