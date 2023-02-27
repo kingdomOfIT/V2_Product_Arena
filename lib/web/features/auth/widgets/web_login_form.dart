@@ -99,7 +99,7 @@ class _WebLoginFormState extends State<WebLoginForm> {
                   'Email',
                   style: GoogleFonts.notoSans(
                     fontSize: 14,
-                    color: emailColor,
+                    //color: emailColor,
                   ),
                 ),
                 fillColor: Colors.black,
@@ -193,7 +193,7 @@ class _WebLoginFormState extends State<WebLoginForm> {
                   'Password',
                   style: GoogleFonts.notoSans(
                     fontSize: 14,
-                    color: passwordColor,
+                    //color: passwordColor,
                   ),
                 ),
                 focusedBorder: const OutlineInputBorder(
