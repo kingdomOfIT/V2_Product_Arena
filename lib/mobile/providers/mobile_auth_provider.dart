@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
@@ -38,6 +40,19 @@ class MobileAuth with ChangeNotifier {
   //     await Amplify.configure(amplifyconfig);
   //   } catch (e) {}
   // }
+  List _lecture = [];
+  List _lectureVideos = [];
+  int numberOfLessons = 0;
+  List<String> _roles = [];
+  List _lecturesRole1 = [];
+  List _lecturesRole2 = [];
+
+  List get lecture => _lecture;
+  List get lectureVideos => _lectureVideos;
+  List get lectureRole1 => _lecturesRole1;
+  List get lectureRole2 => _lecturesRole2;
+  List<String> get roles => _roles;
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   Future<void> signUpUser(
     String name,
@@ -89,10 +104,10 @@ class MobileAuth with ChangeNotifier {
       await Amplify.Auth.confirmSignUp(
           username: email, confirmationCode: confirmationCode);
       // ignore: use_build_context_synchronously
+
       Navigator.of(context).pushReplacementNamed(routeName);
 
       // print(result);
-
     } on AuthException catch (e) {
       safePrint(e.message);
       errorTextOTP = e.message;
@@ -114,6 +129,9 @@ class MobileAuth with ChangeNotifier {
 
       isSignInComplete = result.isSignedIn;
       notifyListeners();
+
+      print('logged in');
+      await getUserLectures();
       // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacementNamed(routeName);
     } on AuthException catch (e) {
@@ -132,5 +150,73 @@ class MobileAuth with ChangeNotifier {
       safePrint(e);
     }
     notifyListeners();
+  }
+
+  Future<void> getUserLectures() async {
+    // await signInUser(username, password, context, routeName);
+
+    try {
+      final restOperation = Amplify.API.get('/api/user/lectures',
+          apiName: 'getLecturesAlfa', queryParameters: {'paDate': 'Feb2023'});
+      final response = await restOperation.response;
+      Map<String, dynamic> responseMap = jsonDecode(response.decodeBody());
+
+      List temp = [];
+      responseMap['lectures'].forEach((lecture) {
+        temp.addAll(lecture['roles']);
+      });
+
+      Set<String> set = Set<String>.from(temp);
+      _roles = set.toList();
+
+      print(_roles);
+      var oneLecture;
+      responseMap['lectures'].forEach((lecture) {
+        oneLecture = lecture;
+
+        _lecture.add(oneLecture);
+      });
+      if (_roles.length == 1) {
+        _lecturesRole1 = _lecture
+            .where((lecture) => lecture['roles'].contains(_roles[0]))
+            .toList();
+
+        // int i, j;
+        // for (i = 0; i < _lecturesRole1.length; i++) {
+        //   for (j = i + 1; j < _lecturesRole1.length; j++) {
+        //     if (_lecturesRole1[i]['name'] == _lecturesRole1[j]['name']) {
+        //       _lecturesRole1.remove(_lecturesRole1[j]);
+        //     }
+        //   }
+        // }
+        // notifyListeners();
+      } else {
+        _lecturesRole1 = _lecture
+            .where((lecture) => lecture['roles'].contains(_roles[0]))
+            .toList();
+
+        // int i, j;
+        // for (i = 0; i < _lecturesRole1.length; i++) {
+        //   for (j = i + 1; j < _lecturesRole1.length; j++) {
+        //     if (_lecturesRole1[i]['name'] == _lecturesRole1[j]['name']) {
+        //       _lecturesRole1.remove(_lecturesRole1[j]);
+        //     }
+        //   }
+        // }
+        _lecturesRole2 = _lecture
+            .where((lecture) => lecture['roles'].contains(_roles[1]))
+            .toList();
+
+        // for (i = 0; i < _lecturesRole2.length; i++) {
+        //   for (j = i + 1; j < _lecturesRole2.length; j++) {
+        //     if (_lecturesRole2[i]['name'] == _lecturesRole2[j]['name']) {
+        //       _lecturesRole2.remove(_lecturesRole2[j]);
+        //     }
+        //   }
+        // }
+      }
+    } on ApiException catch (e) {
+      print('GET call failed: $e');
+    }
   }
 }

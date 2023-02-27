@@ -92,9 +92,12 @@ class _MobileOnboardingScreenState extends State<MobileOnboardingScreen> {
             child: PageIndicator(
               currentPage: _currentPage + 1,
               totalPages: 8,
+              width: (30 / 360) * MediaQuery.of(context).size.width,
+              height: 5,
+              indicatorHeight: 40,
             ),
           ),
-          const Positioned(bottom: 0, right: 0, left: 0, child: MobileFooter())
+          //  const Positioned(bottom: 0, right: 0, left: 0, child: MobileFooter())
         ],
       ),
     );
