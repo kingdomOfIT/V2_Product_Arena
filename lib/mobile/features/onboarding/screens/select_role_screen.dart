@@ -1,7 +1,12 @@
+import 'dart:convert';
+
+import 'package:amplify_api/amplify_api.dart';
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import 'package:provider/provider.dart';
+import 'package:v2_product_arena/amplifyconfiguration.dart';
 import 'package:v2_product_arena/constants/global_variables.dart';
 import 'package:v2_product_arena/mobile/features/onboarding/screens/mobile_verified_onboarding_screen.dart';
 import 'package:v2_product_arena/mobile/features/onboarding/widgets/role_tile.dart';
@@ -12,6 +17,7 @@ import 'package:v2_product_arena/mobile/providers/role_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/custom_button.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
+import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/mobile_footer.dart';
 
 class SelectRoleScreen extends StatefulWidget {
   final PageController pageController;
@@ -22,33 +28,44 @@ class SelectRoleScreen extends StatefulWidget {
 }
 
 class _SelectRoleScreenState extends State<SelectRoleScreen> {
+  List<String> roles = [];
   @override
   void initState() {
     super.initState();
-    // _configureAmplify();
+    _configureAmplify();
   }
 
-  // Future<void> _configureAmplify() async {
-  //   // Add any Amplify plugins you want to use
-  //   final authPlugin = AmplifyAuthCognito();
-  //   final api = AmplifyAPI();
-  //   await Amplify.addPlugins([authPlugin, api]);
-  //   try {
-  //     await Amplify.configure(amplifyconfig);
-  //   } on AmplifyAlreadyConfiguredException {
-  //     safePrint(
-  //         'Tried to reconfigure Amplify; this can occur when your app restarts on Android.');
-  //   }
-  // }
+  Future<void> _configureAmplify() async {
+    // Add any Amplify plugins you want to use
+    final authPlugin = AmplifyAuthCognito();
+    final api = AmplifyAPI();
+    await Amplify.addPlugins([authPlugin, api]);
+    try {
+      await Amplify.configure(amplifyconfig);
+    } on AmplifyAlreadyConfiguredException {
+      safePrint(
+          'Tried to reconfigure Amplify; this can occur when your app restarts on Android.');
+    }
+  }
 
   Future<void> signInUser() async {
-    // await _configureAmplify();
+    await _configureAmplify();
     try {
       await Amplify.Auth.signIn(
         username: Provider.of<MobileAuth>(context, listen: false)
             .userEmail, // email of user
         password: Provider.of<MobileAuth>(context, listen: false).userPassword,
       );
+      print('loginovo se');
+    } on AuthException catch (e) {
+      safePrint(e.message);
+    }
+  }
+
+  Future<void> signOutUser() async {
+    try {
+      final res = await Amplify.Auth.signOut();
+      print(res);
     } on AuthException catch (e) {
       safePrint(e.message);
     }
@@ -63,7 +80,7 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
       final restOperation = Amplify.API.post(
         "/api/onboarding/submit",
         body: HttpPayload.json({
-          "date": "Feb2023",
+          "date": "Jan2023",
           "roles": s1,
           "answers": {
             // answers are in the same order as questions, null if not answered
@@ -78,9 +95,27 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
         }),
         apiName: "userDataInitAlfa",
       );
-      await restOperation.response;
+      // await restOperation.response;
       // Map<String, dynamic> responseMap = jsonDecode(response.decodeBody());
       // ignore: use_build_context_synchronously
+      // final restOperation2 = Amplify.API.get('/api/user/lectures',
+      //     apiName: 'getLecturesAlfa',
+      //     queryParameters: {
+      //       'paDate': 'Feb2023'
+      //       // , 'name': 'Flutter widgets'
+      //     });
+      // final response = await restOperation2.response;
+      // Map<String, dynamic> responseMap2 = jsonDecode(response.decodeBody());
+      // // mapa1 = responseMap;
+
+      // List temp = [];
+      // responseMap2['lectures'].forEach((lecture) {
+      //   temp.addAll(lecture['roles']);
+      // });
+      // Set<String> set = Set<String>.from(temp);
+      // List<String> roles = set.toList();
+      // print(roles);
+
       Navigator.of(context)
           .pushReplacementNamed(MobileVerifiedOnboardingScreen.routeName);
       // print(responseMap['lectures']);
@@ -91,6 +126,60 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
       isLoading = false;
     });
   }
+
+  // Future<Map<String, dynamic>> getUserLectures(
+  //     Map<String, dynamic> mapa1) async {
+  //   await signOutUser();
+  //   setState(() {
+  //     isLoading = true;
+  //   });
+  //   await signInUser();
+
+  //   try {
+  //     final restOperation = Amplify.API.get('/api/user/lectures',
+  //         apiName: 'getLecturesAlfa',
+  //         queryParameters: {
+  //           'paDate': 'Feb2023'
+  //           // , 'name': 'Flutter widgets'
+  //         });
+  //     final response = await restOperation.response;
+  //     Map<String, dynamic> responseMap = jsonDecode(response.decodeBody());
+  //     mapa1 = responseMap;
+  //     List temp = [];
+  //     responseMap['lectures'].forEach((lecture) {
+  //       temp.addAll(lecture['roles']);
+  //     });
+  //     Set<String> set = Set<String>.from(temp);
+  //     List<String> roles = set.toList();
+  //     //print(roles);
+  //     final restOperation2 = Amplify.API.get('/api/lectures/order',
+  //         apiName: 'getLecturesOrder',
+  //         queryParameters: {
+  //           'paDate': 'Feb2023'
+  //           // , 'name': 'Flutter widgets'
+  //         });
+  //     final response2 = await restOperation2.response;
+  //     Map<String, dynamic> orders =
+  //         jsonDecode(response2.decodeBody())['lectureOrders'];
+  //     // print(orders);
+  //     Map<String, dynamic> lectures = {};
+  //     roles.forEach((role) {
+  //       lectures[role] = List<dynamic>.filled(
+  //           (orders[role] as Map<String, dynamic>).length, 0);
+  //     });
+  //     responseMap['lectures'].forEach((lecture) {
+  //       lecture['roles'].forEach((role) {
+  //         //print(orders[role][lecture['name']]);
+  //         lectures[role][orders[role][lecture['name']]] = lecture;
+  //       });
+  //     });
+  //     print(lectures['fullstack']);
+  //     // print('GET call succeeded: ${responseMap['lectures']}');
+  //   } on ApiException catch (e) {
+  //     print('GET call failed: $e');
+  //   }
+  //   return mapa1;
+  // }
 
   bool isLoading = false;
 
@@ -111,17 +200,18 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
                 lineWidth: 10.0,
               ),
             )
-          : Padding(
-              padding: EdgeInsets.only(
+          : SingleChildScrollView(
+              key: const Key('testScroll'),
+              child: Padding(
+                padding: EdgeInsets.only(
                   left: (32 / 360) * MediaQuery.of(context).size.width,
-                  right: (32 / 360) * MediaQuery.of(context).size.width),
-              child: SingleChildScrollView(
-                key: const Key('testScroll'),
+                  right: (32 / 360) * MediaQuery.of(context).size.width,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(
-                      height: 60,
+                    SizedBox(
+                      height: (60 / 800) * MediaQuery.of(context).size.height,
                     ),
                     Text(
                       'Za koju poziciju se prijavljuješ?',
@@ -207,7 +297,8 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
                             .selctRole);
                       },
                       color: Colors.black,
-                    )
+                    ),
+                    const MobileFooter(),
                   ],
                 ),
               ),
