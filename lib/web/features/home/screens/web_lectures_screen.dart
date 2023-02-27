@@ -47,6 +47,7 @@ class _WebLecturesPageState extends State<WebLecturesPage> {
                 ////////////////////////////////////// LECTURES CARDS  ////////////////////////////////////////
                 Expanded(
                   child: ListView.builder(
+                    key: const Key('scrollableListView'),
                     itemCount: roleLectures.length,
                     itemBuilder: (BuildContext ctx, int index) {
                       return InkWell(

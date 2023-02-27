@@ -192,10 +192,7 @@ final onboardingVideoTextField =
     find.byKey(const Key('onboardingVideoTextField'));
 final onboardingSubmitButton = find.byKey(const Key('onboardingSubmitWeb'));
 final onboardingScrollableScreen = find.byKey(const Key('scrollWebOnboarding'));
-final secondTextButton = find.byType(TextButton).at(1);
-// final secondTextButton = find.byKey(Key('productManager'));
-final secondRoleButton = find.byKey(const Key('roleLecturesScreen')).last;
-final cardFinder = find.byType(WebLectureCard).at(4);
+final firstRoleTextButton = find.byType(TextButton).at(1);
 
 @GenerateMocks([SignUpResult, AmplifyClass])
 void main() {
@@ -405,17 +402,20 @@ void main() {
       await tester.tap(loginButton);
       await tester.pumpAndSettle();
 
-      await tester.ensureVisible(secondTextButton);
-      await tester.tap(secondTextButton);
+      await tester.ensureVisible(firstRoleTextButton);
+      await tester.tap(firstRoleTextButton);
       await tester.pumpAndSettle();
       // final listView = find.byType(ListView);
+// await tester.drag(find.byType(C), Offset(0.0, -200));     await tester.pump();
 
       // await tester.scrollUntilVisible(cardFinder, -500);
-
-      // await tester.ensureVisible(cardFinder);
-      // await tester.tap(cardFinder);
-      // await tester.pumpAndSettle();
-
+      final listViewFinder = find.byKey(const Key('scrollableListView'));
+      final fifthCardFinder = find.text('6. Design System: Material Design');
+      await tester.drag(listViewFinder, const Offset(0, -800));
+      await tester
+          .pump(const Duration(milliseconds: 500)); // add delay/ add delay
+      await tester.tap(fifthCardFinder);
+      await tester.pumpAndSettle();
       // final listView = find.byType(ListView);
       // await tester.fling(listView, const Offset(0, -200), 1000);
       // await tester.pumpAndSettle();
