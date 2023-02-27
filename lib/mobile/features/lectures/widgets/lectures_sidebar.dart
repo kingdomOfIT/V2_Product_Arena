@@ -54,7 +54,7 @@ class _MobileSidebarState extends State<MobileSidebar> {
             width: screenWidth * (360 / 360),
             child: DrawerHeader(
               child: Text(
-                'John Doe',
+                '${dataProvider.userName} ${dataProvider.userSurname}',
                 style: GoogleFonts.notoSans(
                   textStyle: TextStyle(
                     fontWeight: FontWeight.w700,
@@ -68,7 +68,7 @@ class _MobileSidebarState extends State<MobileSidebar> {
           ),
           ListTile(
             title: Text(
-              dataProvider.userEmail,
+              dataProvider.emailUser,
               style: GoogleFonts.notoSans(
                 textStyle: TextStyle(
                   fontWeight: FontWeight.w700,
