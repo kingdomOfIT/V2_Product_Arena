@@ -10,7 +10,7 @@ class WebProfilePopup extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 10, bottom: 10, right: 50),
       child: Container(
-        height: 70,
+        height: MediaQuery.of(context).size.height * (100 / 1094),
         alignment: Alignment.topRight,
         child: PopupMenuButton<int>(
           icon: Image.asset('assets/images/Profileicon.png'),
