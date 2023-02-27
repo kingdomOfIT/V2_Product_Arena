@@ -4,15 +4,21 @@ import 'package:google_fonts/google_fonts.dart';
 class PageIndicator extends StatelessWidget {
   final int currentPage;
   final int totalPages;
+  final double height;
+  final double width;
+  final double indicatorHeight;
   const PageIndicator({
     super.key,
     required this.currentPage,
     required this.totalPages,
+    required this.height,
+    required this.width,
+    required this.indicatorHeight,
   });
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40.0,
+      height: indicatorHeight,
       width: double.infinity,
       //padding: const EdgeInsets.symmetric(horizontal: 10.0),
       decoration: const BoxDecoration(
@@ -39,8 +45,8 @@ class PageIndicator extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: List.generate(totalPages, (index) {
               return Container(
-                width: (30 / 360) * MediaQuery.of(context).size.width,
-                height: 5.0,
+                width: width,
+                height: height,
                 decoration: BoxDecoration(
                     color: index < currentPage
                         ? Colors.grey[600]

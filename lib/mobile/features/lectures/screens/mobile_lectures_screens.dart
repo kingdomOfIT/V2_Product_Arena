@@ -1,10 +1,14 @@
+import 'dart:collection';
 import 'package:flutter/material.dart';
-import 'package:v2_product_arena/mobile/features/lectures/const.dart';
+import 'package:provider/provider.dart';
 import 'package:v2_product_arena/mobile/features/lectures/widgets/lectures_video_tile.dart';
+import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
 
 class MobileLecturesScreen extends StatefulWidget {
   final PageController pageController;
-  const MobileLecturesScreen({super.key, required this.pageController});
+  final String role;
+  const MobileLecturesScreen(
+      {super.key, required this.pageController, required this.role});
 
   @override
   State<MobileLecturesScreen> createState() => _MobileLecturesScreenState();
@@ -13,6 +17,14 @@ class MobileLecturesScreen extends StatefulWidget {
 class _MobileLecturesScreenState extends State<MobileLecturesScreen> {
   @override
   Widget build(BuildContext context) {
+    final dataProvider = Provider.of<MobileAuth>(context);
+    List listContains = [];
+    List roleLectures = [];
+    if (widget.role == dataProvider.roles[0]) {
+      roleLectures = dataProvider.lectureRole1;
+    } else {
+      roleLectures = dataProvider.lectureRole2;
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text('Mobile lectures'),
@@ -22,11 +34,11 @@ class _MobileLecturesScreenState extends State<MobileLecturesScreen> {
           padding: EdgeInsets.symmetric(
               horizontal: (32 / 360) * MediaQuery.of(context).size.width),
           child: ListView.separated(
-            itemCount: 5,
+            itemCount: roleLectures.length,
             itemBuilder: (BuildContext context, int index) {
               return LecturesVideoTile(
-                linkImage: imageLinks[index],
-                lectureName: lectureNames[index],
+                linkImage: roleLectures[index]['imageSrc'],
+                lectureName: roleLectures[index]['name'],
                 i: index + 1,
                 pageController: widget.pageController,
               );

@@ -16,37 +16,46 @@ class LecturesVideoTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      key: const Key('video_tile'),
       child: Container(
-        height: (90 / 800) * MediaQuery.of(context).size.height,
+        height: 90,
         width: (296 / 360) * MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           border: Border.all(width: 1, color: const Color(0xFFCAC4D0)),
-          borderRadius: BorderRadius.circular(6),
+          borderRadius: BorderRadius.circular(4),
         ),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(
-              height: (90 / 800) * MediaQuery.of(context).size.height,
-              width: (100 / 360) * MediaQuery.of(context).size.width,
-              child: Image.network(linkImage),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                height: 90,
+                width: (100 / 360) * MediaQuery.of(context).size.width,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(4),
+                      bottomLeft: Radius.circular(4)),
+                ),
+                child: Image.network(
+                  linkImage,
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
-            RichText(
-              text: TextSpan(
-                  text: '$i. Tools:',
-                  style: GoogleFonts.notoSans(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.black,
-                  ),
-                  children: [
-                    TextSpan(
-                      text: lectureName,
-                      style: GoogleFonts.notoSans(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black),
-                    ),
-                  ]),
+            const SizedBox(
+              width: 7,
+            ),
+            Expanded(
+              flex: 2,
+              child: Text(
+                '$i. $lectureName',
+                style: GoogleFonts.notoSans(
+                    fontSize: 14, fontWeight: FontWeight.w700),
+              ),
+            ),
+            const Icon(
+              Icons.keyboard_arrow_right,
             ),
           ],
         ),
