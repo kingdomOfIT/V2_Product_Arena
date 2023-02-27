@@ -99,7 +99,7 @@ class _WebLoginFormState extends State<WebLoginForm> {
                   'Email',
                   style: GoogleFonts.notoSans(
                     fontSize: 14,
-                    color: emailColor,
+                    //color: emailColor,
                   ),
                 ),
                 fillColor: Colors.black,
@@ -175,25 +175,34 @@ class _WebLoginFormState extends State<WebLoginForm> {
                 errorStyle: GoogleFonts.notoSans(
                   color: const Color(0xFFB3261E),
                 ),
-                suffixIcon: InkWell(
-                  key: const Key('togglePasswordView'),
-                  onTap: () {
-                    setState(() {
-                      viewPassword = !viewPassword;
-                    });
-                  },
-                  child: Icon(
-                    viewPassword ? Icons.visibility : Icons.visibility_off,
-                    color:
-                        viewPassword ? Colors.black : const Color(0xFF605D66),
-                    size: 30,
-                  ),
-                ),
+                suffixIcon: passwordController.text.isEmpty
+                    ? null
+                    : InkWell(
+                        key: const Key('togglePasswordView'),
+                        onTap: () {
+                          setState(() {
+                            viewPassword = !viewPassword;
+                          });
+                        },
+                        child: Icon(
+                          viewPassword
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: viewPassword
+                              ? passwordErrored
+                                  ? const Color(0xFFB3261E)
+                                  : Colors.black
+                              : passwordErrored
+                                  ? const Color(0xFFB3261E)
+                                  : const Color(0xFF605D66),
+                          size: 30,
+                        ),
+                      ),
                 label: Text(
                   'Password',
                   style: GoogleFonts.notoSans(
                     fontSize: 14,
-                    color: passwordColor,
+                    //color: passwordColor,
                   ),
                 ),
                 focusedBorder: const OutlineInputBorder(

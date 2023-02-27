@@ -21,6 +21,7 @@ class MobileContactUs extends StatefulWidget {
 class _MobileContactUsState extends State<MobileContactUs> {
   final formKey = GlobalKey<FormState>();
   final contactUsController = TextEditingController();
+  String successText = '';
 
   @override
   Widget build(BuildContext context) {
@@ -115,62 +116,76 @@ class _MobileContactUsState extends State<MobileContactUs> {
                   SizedBox(
                     height: deviceHeight * (25 / 800),
                   ),
-                  Container(
-                    height: deviceHeight * (34 / 803),
-                    width: deviceWidth * (94 / 360),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.black87,
-                          side: const BorderSide(
-                            color: Color(0xFFFFFFFF),
-                            width: 2,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(deviceWidth * (3 / 360)),
-                          )),
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                          top: deviceHeight * (7.5 / 803),
-                          right: deviceWidth * (2 / 360),
-                          bottom: deviceHeight * (7.5 / 803),
-                          left: deviceWidth * (2 / 360),
-                        ),
-                        child: Text(
-                          'Submit',
-                          textAlign: TextAlign.center,
+                  successText.isNotEmpty
+                      ? Text(
+                          successText,
                           style: GoogleFonts.notoSans(
-                            textStyle: TextStyle(
-                                fontSize: deviceHeight * (14 / 803),
-                                fontWeight: FontWeight.w700,
-                                fontStyle: FontStyle.normal,
-                                color: const Color(0xFFFFFFFF)),
+                            color: const Color(0xFF22E974),
+                            fontWeight: FontWeight.w700,
+                            fontSize: 14,
+                          ),
+                        )
+                      : Container(
+                          height: deviceHeight * (34 / 803),
+                          width: deviceWidth * (94 / 360),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.black87,
+                              side: const BorderSide(
+                                color: Color(0xFFFFFFFF),
+                                width: 2,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                    deviceWidth * (3 / 360)),
+                              ),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                top: deviceHeight * (7.5 / 803),
+                                right: deviceWidth * (2 / 360),
+                                bottom: deviceHeight * (7.5 / 803),
+                                left: deviceWidth * (2 / 360),
+                              ),
+                              child: Text(
+                                'Submit',
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.notoSans(
+                                  textStyle: TextStyle(
+                                      fontSize: deviceHeight * (14 / 803),
+                                      fontWeight: FontWeight.w700,
+                                      fontStyle: FontStyle.normal,
+                                      color: const Color(0xFFFFFFFF)),
+                                ),
+                              ),
+                            ),
+                            onPressed: () async {
+                              if (formKey.currentState!.validate()) {
+                                try {
+                                  final restOperation = Amplify.API.post(
+                                    'api/user/form',
+                                    apiName: 'sendFormEmailAlfa',
+                                    body: HttpPayload.json(
+                                      {
+                                        'question':
+                                            contactUsController.text.toString(),
+                                      },
+                                    ),
+                                  );
+                                  final response = await restOperation.response;
+                                  setState(() {
+                                    successText = 'Hvala na javljanju';
+                                  });
+                                  safePrint('POST call succeeded');
+                                  safePrint(response.decodeBody());
+                                  contactUsController.clear();
+                                } on ApiException catch (e) {
+                                  safePrint('POST call failed: ${e.message}');
+                                }
+                              }
+                            },
                           ),
                         ),
-                      ),
-                      onPressed: () async {
-                        if (formKey.currentState!.validate()) {
-                          try {
-                            final restOperation = Amplify.API.post(
-                              'api/user/form',
-                              apiName: 'sendFormEmailAlfa',
-                              body: HttpPayload.json(
-                                {
-                                  'question':
-                                      contactUsController.text.toString(),
-                                },
-                              ),
-                            );
-                            final response = await restOperation.response;
-                            safePrint('POST call succeeded');
-                            safePrint(response.decodeBody());
-                          } on ApiException catch (e) {
-                            safePrint('POST call failed: ${e.message}');
-                          }
-                        }
-                      },
-                    ),
-                  ),
                   SizedBox(
                     height: deviceHeight * (60 / 800),
                   ),
