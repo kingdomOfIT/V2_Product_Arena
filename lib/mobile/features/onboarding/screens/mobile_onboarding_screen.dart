@@ -97,7 +97,7 @@ class _MobileOnboardingScreenState extends State<MobileOnboardingScreen> {
               indicatorHeight: 40,
             ),
           ),
-          //  const Positioned(bottom: 0, right: 0, left: 0, child: MobileFooter())
+          const Positioned(bottom: 0, right: 0, left: 0, child: MobileFooter())
         ],
       ),
     );

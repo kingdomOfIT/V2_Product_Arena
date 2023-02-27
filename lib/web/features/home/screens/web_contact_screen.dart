@@ -5,9 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 // ignore: unused_import
-import 'package:v2_product_arena/web/reusable_web_widgets/web_green_profile.dart';
+import 'package:v2_product_arena/web/reusable_web_widgets/oldsidebar.dart';
 // ignore: unused_import
 import 'package:v2_product_arena/web/reusable_web_widgets/web_homepage_sidebar.dart';
+import 'package:v2_product_arena/web/reusable_web_widgets/web_profilepopup.dart';
 
 class WebContactScreen extends StatefulWidget {
   static const routeName = '/web-contact';
@@ -25,7 +26,6 @@ class _WebContactScreenState extends State<WebContactScreen> {
   @override
   Widget build(BuildContext context) {
     double maxwidth = MediaQuery.of(context).size.width;
-
     return Scaffold(
       body: Row(
         children: [
@@ -38,10 +38,7 @@ class _WebContactScreenState extends State<WebContactScreen> {
             child: MediaQuery.of(context).size.height > 670
                 ? Column(
                     children: [
-                      const Align(
-                        alignment: Alignment.topRight,
-                        child: WebProfilePopup(),
-                      ),
+                      const WebProfilePopup(),
                       // MediaQuery.of(context).size.height > 670
                       //     ?
                       const SizedBox(height: 100),
@@ -53,8 +50,11 @@ class _WebContactScreenState extends State<WebContactScreen> {
                             children: [
                               Column(
                                 children: [
+                                  const SizedBox(
+                                    height: 40,
+                                  ),
                                   RichText(
-                                    textAlign: TextAlign.end,
+                                    textAlign: TextAlign.right,
                                     text: TextSpan(
                                       text: 'CONTACT US\n',
                                       style: GoogleFonts.notoSans(
@@ -65,7 +65,7 @@ class _WebContactScreenState extends State<WebContactScreen> {
                                       children: [
                                         TextSpan(
                                           text:
-                                              'You are more than welcome to leave your\nmessage and we will be in touch shortly.',
+                                              'You are more than welcome to leave your\nmessage and we will be in touch shortly.\n\n\n',
                                           style: GoogleFonts.notoSans(
                                             color: Colors.black,
                                             fontSize: 16,
@@ -74,7 +74,7 @@ class _WebContactScreenState extends State<WebContactScreen> {
                                         ),
                                       ],
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                               SizedBox(
@@ -97,6 +97,7 @@ class _WebContactScreenState extends State<WebContactScreen> {
                                     },
                                     maxLines: 8,
                                     decoration: InputDecoration(
+                                      labelText: 'Your Message',
                                       hintText: 'Your Message',
                                       hintStyle: GoogleFonts.notoSans(
                                         fontSize: 14,
@@ -129,7 +130,7 @@ class _WebContactScreenState extends State<WebContactScreen> {
                             ],
                           ),
                           const SizedBox(
-                            height: 30,
+                            height: 10,
                           ),
                           ElevatedButton(
                             onPressed: () async {
@@ -170,6 +171,9 @@ class _WebContactScreenState extends State<WebContactScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                              SizedBox(
+                                width: maxwidth * (110 / 1440),
+                              ),
                               Flexible(
                                 child: InkWell(
                                   child: Image.asset(
@@ -288,8 +292,11 @@ class _WebContactScreenState extends State<WebContactScreen> {
                               children: [
                                 Column(
                                   children: [
+                                    const SizedBox(
+                                      height: 40,
+                                    ),
                                     RichText(
-                                      textAlign: TextAlign.end,
+                                      textAlign: TextAlign.right,
                                       text: TextSpan(
                                         text: 'CONTACT US\n',
                                         style: GoogleFonts.notoSans(
@@ -300,7 +307,7 @@ class _WebContactScreenState extends State<WebContactScreen> {
                                         children: [
                                           TextSpan(
                                             text:
-                                                'You are more than welcome to leave your\nmessage and we will be in touch shortly.',
+                                                'You are more than welcome to leave your\nmessage and we will be in touch shortly.\n\n\n',
                                             style: GoogleFonts.notoSans(
                                               color: Colors.black,
                                               fontSize: 16,
@@ -309,7 +316,7 @@ class _WebContactScreenState extends State<WebContactScreen> {
                                           ),
                                         ],
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
                                 SizedBox(
@@ -406,6 +413,9 @@ class _WebContactScreenState extends State<WebContactScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
+                                SizedBox(
+                                  width: maxwidth * (110 / 1440),
+                                ),
                                 Flexible(
                                   child: InkWell(
                                     child: Image.asset(
