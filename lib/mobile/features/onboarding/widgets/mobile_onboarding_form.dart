@@ -6,6 +6,7 @@ import 'package:v2_product_arena/constants/global_variables.dart';
 import 'package:v2_product_arena/mobile/features/onboarding/widgets/form_button.dart';
 import 'package:v2_product_arena/mobile/providers/answer_provider.dart';
 import 'package:v2_product_arena/mobile/providers/error_message_provider.dart';
+import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/mobile_footer.dart';
 
 class MobileOnboardingForm extends StatefulWidget {
   final TextEditingController controller;
@@ -185,6 +186,7 @@ class _MobileOnboardingFormState extends State<MobileOnboardingForm> {
                     ],
                   ),
                 ),
+                const MobileFooter(),
               ],
             ),
           ),
