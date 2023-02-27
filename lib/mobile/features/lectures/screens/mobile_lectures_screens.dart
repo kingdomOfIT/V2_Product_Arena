@@ -15,7 +15,7 @@ class _MobileLecturesScreenState extends State<MobileLecturesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Mobile lectures'),
+        title: const Text('Mobile lectures'),
       ),
       body: SafeArea(
         child: Padding(

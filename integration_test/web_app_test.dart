@@ -26,7 +26,6 @@ import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
 import 'package:v2_product_arena/web/providers/web_ob_answers.dart';
 import 'package:v2_product_arena/web/providers/web_ob_error.dart';
 import 'package:v2_product_arena/web/providers/web_ob_role.dart';
-import 'package:v2_product_arena/web/reusable_web_widgets/web_lecture_card.dart';
 import 'mobile_auth_provider_test.mocks.dart';
 import 'web_mocked_repository.dart';
 
