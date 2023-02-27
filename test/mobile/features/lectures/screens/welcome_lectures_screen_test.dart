@@ -13,8 +13,8 @@ Widget createMobileWelcomeLecturesScreen() =>
         return auth;
       },
       child: const MaterialApp(
-        home: WelcomeLecturesScreen(),
-      ),
+          // home: WelcomeLecturesScreen(),
+          ),
     );
 void main() {
   testWidgets('welcome lectures screen ...', (tester) async {

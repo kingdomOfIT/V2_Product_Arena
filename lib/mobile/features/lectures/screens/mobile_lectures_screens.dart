@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:v2_product_arena/mobile/features/lectures/widgets/lectures_video_tile.dart';

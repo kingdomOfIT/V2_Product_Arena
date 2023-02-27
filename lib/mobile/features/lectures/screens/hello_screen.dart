@@ -31,7 +31,7 @@ class _WelcomePageState extends State<WelcomePage> {
         key: _scaffoldKey,
         endDrawer: Drawer(
           width: screenWidth * (360 / 360),
-          child: MobileSidebar(),
+          child: const MobileSidebar(),
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -62,7 +62,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         textStyle: TextStyle(
                             fontSize: screenHeight * (32 / 803),
                             fontWeight: FontWeight.w400,
-                            color: Color(0xFF000000)),
+                            color: const Color(0xFF000000)),
                       ),
                       children: <TextSpan>[
                         TextSpan(
@@ -71,7 +71,7 @@ class _WelcomePageState extends State<WelcomePage> {
                             textStyle: TextStyle(
                               fontSize: screenHeight * (32 / 803),
                               fontWeight: FontWeight.w700,
-                              color: Color(0xFF000000),
+                              color: const Color(0xFF000000),
                             ),
                           ),
                         ),
@@ -93,7 +93,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         textStyle: TextStyle(
                             fontSize: screenHeight * (14 / 803),
                             fontWeight: FontWeight.w400,
-                            color: Color(0xFF000000)),
+                            color: const Color(0xFF000000)),
                       ),
                       children: <TextSpan>[
                         TextSpan(
@@ -103,7 +103,7 @@ class _WelcomePageState extends State<WelcomePage> {
                             textStyle: TextStyle(
                               fontSize: screenHeight * (14 / 803),
                               fontWeight: FontWeight.w400,
-                              color: Color(0xFF000000),
+                              color: const Color(0xFF000000),
                             ),
                           ),
                         ),
