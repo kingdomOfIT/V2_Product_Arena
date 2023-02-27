@@ -5,6 +5,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/mobile_signup_screen.dart';
 import 'package:v2_product_arena/mobile/features/auth/widgets/mobile_login_form.dart';
 import 'package:v2_product_arena/mobile/features/home/screens/mobile_home_screen.dart';
+import 'package:v2_product_arena/mobile/features/lectures/screens/hello_screen.dart';
+import 'package:v2_product_arena/mobile/features/lectures/screens/welcome_lectures_screen.dart';
 import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
 import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/custom_button.dart';
 import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/mobile_appbar.dart';
@@ -56,8 +58,11 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
         emailController.text,
         passwordController.text,
         context,
-        MobileHomeScreen.routeName,
+        WelcomePage.routeName,
+        // ExampleLectures.routeName,
       );
+
+      // ignore: use_build_context_synchronously
     }
     setState(() {
       isLoading = false;

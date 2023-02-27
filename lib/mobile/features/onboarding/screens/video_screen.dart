@@ -5,6 +5,7 @@ import 'package:v2_product_arena/constants/global_variables.dart';
 import 'package:v2_product_arena/mobile/features/onboarding/widgets/form_button.dart';
 import 'package:v2_product_arena/mobile/providers/answer_provider.dart';
 import 'package:v2_product_arena/mobile/providers/error_message_provider.dart';
+import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/mobile_footer.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -42,223 +43,219 @@ class _LinkVideoScreenState extends State<LinkVideoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final deviceHeight = MediaQuery.of(context).size.height;
-    final deviceWidth = MediaQuery.of(context).size.width;
-    return YoutubePlayerBuilder(
-        player: YoutubePlayer(
-          controller: _controller!,
-          showVideoProgressIndicator: true,
-          progressIndicatorColor: Colors.red,
-          progressColors: const ProgressBarColors(
-            playedColor: Colors.red,
-            handleColor: Colors.black38,
-          ),
-        ),
-        builder: (context, player) {
-          return Scaffold(
-              backgroundColor: const Color.fromRGBO(233, 233, 233, 1),
-              appBar: MyHeader(),
-              body: SafeArea(
-                child: SingleChildScrollView(
-                  key: const Key('videoScroll'),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal:
-                            MediaQuery.of(context).size.width * (32 / 360)),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(
-                          height: 50,
+    double deviceHeight = MediaQuery.of(context).size.height;
+    double deviceWidth = MediaQuery.of(context).size.width;
+    // return YoutubePlayerBuilder(
+    //     player: YoutubePlayer(
+    //       controller: _controller!,
+    //       showVideoProgressIndicator: true,
+    //       progressIndicatorColor: Colors.red,
+    //       progressColors: const ProgressBarColors(
+    //         playedColor: Colors.red,
+    //         handleColor: Colors.black38,
+    //       ),
+    //     ),
+    //     builder: (context, player) {
+    return Scaffold(
+        backgroundColor: const Color.fromRGBO(233, 233, 233, 1),
+        appBar: MyHeader(),
+        body: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.only(
+              left: (32 / 360) * MediaQuery.of(context).size.width,
+              right: (32 / 360) * MediaQuery.of(context).size.width,
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: (50 / 800) * deviceHeight,
+                  ),
+                  Text(
+                    'Pogledajte video snimak Amera i poslušajte njegovu poruku.',
+                    style: GoogleFonts.notoSans(
+                      color: const Color(0xFF000000),
+                      fontWeight: FontWeight.w700,
+                      fontSize: (16 / 360) * MediaQuery.of(context).size.width,
+                    ),
+                  ),
+                  SizedBox(
+                    height: (20 / 800) * deviceHeight,
+                  ),
+                  //player,
+                  SizedBox(
+                    height: (35 / 800) * deviceHeight,
+                  ),
+                  Text(
+                    'Snimi video i predstavi se! Recite nam nešto zanimljivo o sebi ili o nečemu što vas zanima.',
+                    style: GoogleFonts.notoSans(
+                        color: const Color(0xFF000000),
+                        fontWeight: FontWeight.w700,
+                        fontSize:
+                            (16 / 360) * MediaQuery.of(context).size.width),
+                  ),
+                  SizedBox(
+                    height: (15 / 800) * deviceHeight,
+                  ),
+                  Text(
+                    'Molimo te da link staviš u box!',
+                    style: GoogleFonts.notoSans(
+                      fontSize: deviceHeight * 0.013,
+                      color: Colors.black54,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  Form(
+                    key: _formKey,
+                    child: TextFormField(
+                      key: const Key('vasOdgovorTextField'),
+                      controller: widget.controller,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: deviceHeight * 0.0187,
+                        fontWeight: FontWeight.w700,
+                      ),
+                      decoration: InputDecoration(
+                        isDense: true,
+                        labelStyle: const TextStyle(fontSize: 20),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
                         ),
-                        Text(
-                          'Pogledajte video snimak Amera i poslušajte njegovu poruku.',
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5),
+                            borderSide: const BorderSide(
+                              color: Color.fromRGBO(34, 233, 116, 1),
+                            )),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5),
+                            borderSide: const BorderSide(
+                              color: Colors.black,
+                            )),
+                        contentPadding: EdgeInsets.symmetric(
+                          vertical: deviceHeight * 0.013,
+                          horizontal: deviceWidth * 0.05,
+                        ),
+                        hintText: 'https://',
+                        hintStyle: GoogleFonts.notoSans(
+                          fontSize: deviceHeight * (14 / 800),
+                          color: Colors.black54,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      validator: (value) {
+                        if (!videohttp.hasMatch(value!)) {
+                          return 'Invalid format';
+                        } else {
+                          return null;
+                        }
+                      },
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        'Za učitavanje videa koristi ',
+                        style: GoogleFonts.notoSans(
+                          fontSize: deviceHeight * 0.013,
+                          color: Colors.black54,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () async {
+                          await launchUrl(
+                            Uri.parse('https://www.file.io/'),
+                          );
+                        },
+                        child: Text(
+                          'file.io',
                           style: GoogleFonts.notoSans(
-                            color: const Color(0xFF000000),
-                            fontWeight: FontWeight.w700,
-                            fontSize:
-                                (16 / 360) * MediaQuery.of(context).size.width,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        player,
-                        const SizedBox(
-                          height: 35,
-                        ),
-                        Text(
-                          'Snimi video i predstavi se! Recite nam nešto zanimljivo o sebi ili o nečemu što vas zanima.',
-                          style: GoogleFonts.notoSans(
-                              color: const Color(0xFF000000),
-                              fontWeight: FontWeight.w700,
-                              fontSize: (16 / 360) *
-                                  MediaQuery.of(context).size.width),
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        Text(
-                          'Molimo te da link staviš u box!',
-                          style: GoogleFonts.notoSans(
+                            decoration: TextDecoration.underline,
                             fontSize: deviceHeight * 0.013,
                             color: Colors.black54,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
-                        Form(
-                          key: _formKey,
-                          child: TextFormField(
-                            key: const Key('vasOdgovorTextField'),
-                            controller: widget.controller,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: deviceHeight * 0.0187,
-                              fontWeight: FontWeight.w700,
-                            ),
-                            decoration: InputDecoration(
-                              isDense: true,
-                              labelStyle: const TextStyle(fontSize: 20),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(5),
-                                  borderSide: const BorderSide(
-                                    color: Color.fromRGBO(34, 233, 116, 1),
-                                  )),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(5),
-                                  borderSide: const BorderSide(
-                                    color: Colors.black,
-                                  )),
-                              contentPadding: EdgeInsets.symmetric(
-                                vertical: deviceHeight * 0.013,
-                                horizontal: deviceWidth * 0.05,
-                              ),
-                              hintText: 'https://',
-                              hintStyle: GoogleFonts.notoSans(
-                                fontSize: deviceHeight * (14 / 800),
-                                color: Colors.black54,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            validator: (value) {
-                              if (!videohttp.hasMatch(value!)) {
-                                return 'Invalid format';
-                              } else {
-                                return null;
-                              }
-                            },
-                          ),
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              'Za učitavanje videa koristi ',
-                              style: GoogleFonts.notoSans(
-                                fontSize: deviceHeight * 0.013,
-                                color: Colors.black54,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            InkWell(
-                              onTap: () async {
-                                await launchUrl(
-                                  Uri.parse('https://www.file.io/'),
-                                );
-                              },
+                      ),
+                    ],
+                  ),
+                  Consumer<ErrorMessage>(
+                    builder: (context, error, child) {
+                      return Container(
+                        padding: const EdgeInsets.only(left: 20.0, top: 5.0),
+                        height: error.errorHeight,
+                        child: Row(
+                          children: <Widget>[
+                            Icon(error.errorIcon,
+                                size: 20.0, color: Colors.red[700]),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 5.0),
                               child: Text(
-                                'file.io',
-                                style: GoogleFonts.notoSans(
-                                  decoration: TextDecoration.underline,
-                                  fontSize: deviceHeight * 0.013,
-                                  color: Colors.black54,
-                                  fontWeight: FontWeight.w400,
+                                error.errorText,
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  color: Colors.red[700],
                                 ),
                               ),
                             ),
                           ],
                         ),
-                        Consumer<ErrorMessage>(
-                          builder: (context, error, child) {
-                            return Container(
-                              padding:
-                                  const EdgeInsets.only(left: 20.0, top: 5.0),
-                              height: error.errorHeight,
-                              child: Row(
-                                children: <Widget>[
-                                  Icon(error.errorIcon,
-                                      size: 20.0, color: Colors.red[700]),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 5.0),
-                                    child: Text(
-                                      error.errorText,
-                                      style: TextStyle(
-                                        fontSize: 16.0,
-                                        color: Colors.red[700],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                        ),
-                        const SizedBox(
-                          height: 65,
-                        ),
-                        Row(
-                          children: [
-                            FormButton(
-                              backgroundColor: Colors.white,
-                              text: 'Back',
-                              buttonWidth: (90 / 360) *
-                                  MediaQuery.of(context).size.width,
-                              buttonHeight: 40,
-                              textColor: Colors.black,
-                              borderColor: Colors.black,
-                              onPressed: () {
-                                widget.pageController.previousPage(
-                                    duration: const Duration(milliseconds: 400),
-                                    curve: Curves.easeInBack);
-                              },
-                            ),
-                            SizedBox(
-                              width: (116 / 360) *
-                                  MediaQuery.of(context).size.width,
-                            ),
-                            FormButton(
-                                key: const Key('nextButtonVideo'),
-                                backgroundColor: Colors.black,
-                                text: 'Next',
-                                buttonWidth: (90 / 360) *
-                                    MediaQuery.of(context).size.width,
-                                buttonHeight: 40,
-                                textColor: Colors.white,
-                                borderColor: Colors.black,
-                                onPressed: () {
-                                  if (_formKey.currentState!.validate() ==
-                                      true) {
-                                    context
-                                        .read<AnswerProvider>()
-                                        .addItem(widget.controller.text);
-                                    context.read<ErrorMessage>().reset();
-                                    widget.pageController.nextPage(
-                                        duration:
-                                            const Duration(milliseconds: 400),
-                                        curve: Curves.easeIn);
-                                  } else {
-                                    context.read<ErrorMessage>().change();
-                                  }
-                                }),
-                          ],
-                        ),
-                      ],
-                    ),
+                      );
+                    },
                   ),
-                ),
-              ));
-        });
+                  SizedBox(
+                    height: (65 / 800) * deviceHeight,
+                  ),
+                  Row(
+                    children: [
+                      FormButton(
+                        backgroundColor: Colors.white,
+                        text: 'Back',
+                        buttonWidth:
+                            (90 / 360) * MediaQuery.of(context).size.width,
+                        buttonHeight: 40,
+                        textColor: Colors.black,
+                        borderColor: Colors.black,
+                        onPressed: () {
+                          widget.pageController.previousPage(
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.easeInBack);
+                        },
+                      ),
+                      SizedBox(
+                        width: (116 / 360) * MediaQuery.of(context).size.width,
+                      ),
+                      FormButton(
+                          key: const Key('nextButtonVideo'),
+                          backgroundColor: Colors.black,
+                          text: 'Next',
+                          buttonWidth:
+                              (90 / 360) * MediaQuery.of(context).size.width,
+                          buttonHeight: 40,
+                          textColor: Colors.white,
+                          borderColor: Colors.black,
+                          onPressed: () {
+                            if (_formKey.currentState!.validate() == true) {
+                              context
+                                  .read<AnswerProvider>()
+                                  .addItem(widget.controller.text);
+                              context.read<ErrorMessage>().reset();
+                              widget.pageController.nextPage(
+                                  duration: const Duration(milliseconds: 400),
+                                  curve: Curves.easeIn);
+                            } else {
+                              context.read<ErrorMessage>().change();
+                            }
+                          }),
+                    ],
+                  ),
+                  const MobileFooter(),
+                ],
+              ),
+            ),
+          ),
+        ));
+    // });
   }
 }
