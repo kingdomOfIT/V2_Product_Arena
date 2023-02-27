@@ -10,6 +10,7 @@ import 'package:v2_product_arena/mobile/features/auth/screens/email_verification
 import 'package:v2_product_arena/mobile/features/auth/screens/mobile_login_screen.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/mobile_signup_screen.dart';
 import 'package:v2_product_arena/mobile/features/home/screens/mobile_home_screen.dart';
+import 'package:v2_product_arena/mobile/features/lectures/screens/welcome_lectures_screen.dart';
 import 'package:v2_product_arena/mobile/features/onboarding/screens/mobile_onboarding_screen.dart';
 import 'package:v2_product_arena/mobile/features/onboarding/screens/mobile_verified_onboarding_screen.dart';
 import 'package:v2_product_arena/mobile/providers/answer_provider.dart';
@@ -33,6 +34,7 @@ import 'package:v2_product_arena/web/providers/web_ob_error.dart';
 import 'package:v2_product_arena/web/providers/web_ob_role.dart';
 
 import 'mobile/features/auth/screens/email_verified_screen.dart';
+import 'mobile/features/lectures/screens/hello_screen.dart';
 import 'mobile/providers/role_provider.dart';
 import 'web/features/auth/screens/web_verification_screen.dart';
 
@@ -144,6 +146,11 @@ class _MyAppState extends State<MyApp> {
               const WebRecentLecturesPage(),
           WebLectureVideoScreen.routeName: (context) =>
               const WebLectureVideoScreen(),
+          WelcomePage.routeName: (context) => const WelcomePage(),
+          WelcomeLecturesScreen.routeName: (context) =>
+              const WelcomeLecturesScreen(
+                role: '',
+              ),
           WebContactScreen.routeName: (context) => const WebContactScreen()
         },
       ),
