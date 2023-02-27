@@ -186,7 +186,6 @@ class _MobileOnboardingFormState extends State<MobileOnboardingForm> {
                     ],
                   ),
                 ),
-                const MobileFooter(),
               ],
             ),
           ),

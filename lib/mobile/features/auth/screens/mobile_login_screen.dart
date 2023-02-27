@@ -61,7 +61,6 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
         WelcomePage.routeName,
         // ExampleLectures.routeName,
       );
-
       // ignore: use_build_context_synchronously
     }
     setState(() {

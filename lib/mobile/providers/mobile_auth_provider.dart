@@ -145,11 +145,9 @@ class MobileAuth with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> signOutCurrentUser(BuildContext context) async {
+  Future<void> signOutCurrentUser() async {
     try {
       await Amplify.Auth.signOut();
-      // ignore: use_build_context_synchronously
-      Navigator.of(context).pushReplacementNamed(MobileLoginScreen.routeName);
     } on AuthException catch (e) {
       safePrint(e);
     }
