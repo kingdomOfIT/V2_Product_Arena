@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_green_profile.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_homepage_sidebar.dart';
-
-import '../../../../constants/global_variables.dart';
 
 class WebHomeScreen extends StatelessWidget {
   static const routeName = '/web-home';
@@ -20,19 +17,19 @@ class WebHomeScreen extends StatelessWidget {
           const WebSideBar(),
           Container(
             alignment: Alignment.center,
-            width: maxwidth * (1000 / 1440),
+            width: maxwidth * (900 / 1440),
             height: double.infinity,
             decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage('assets/images/Homescreenbody.png'),
-                  fit: BoxFit.fill),
+                  fit: BoxFit.cover),
             ),
             child: const Text(''),
           ),
           const Align(
             alignment: Alignment.topRight,
             child: WebProfilePopup(),
-          ),
+          )
         ],
       ),
     );

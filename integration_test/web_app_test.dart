@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -11,7 +12,11 @@ import 'package:v2_product_arena/web/features/auth/screens/web_email_verifed.dar
 import 'package:v2_product_arena/web/features/auth/screens/web_login_screen.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_signup_screen.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_verification_screen.dart';
+import 'package:v2_product_arena/web/features/home/screens/web_contact_screen.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_home_screen.dart';
+import 'package:v2_product_arena/web/features/home/screens/web_lectures_screen.dart';
+import 'package:v2_product_arena/web/features/home/screens/web_lecturevideo_screen.dart';
+import 'package:v2_product_arena/web/features/home/screens/web_recent_lectures.dart';
 import 'package:v2_product_arena/web/features/onboarding/screens/web_congratulations_screen.dart';
 import 'package:v2_product_arena/web/features/onboarding/screens/web_onboarding_screen.dart';
 import 'package:v2_product_arena/web/features/onboarding/web_constansts_ob.dart';
@@ -21,7 +26,9 @@ import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
 import 'package:v2_product_arena/web/providers/web_ob_answers.dart';
 import 'package:v2_product_arena/web/providers/web_ob_error.dart';
 import 'package:v2_product_arena/web/providers/web_ob_role.dart';
+import 'package:v2_product_arena/web/reusable_web_widgets/web_lecture_card.dart';
 import 'mobile_auth_provider_test.mocks.dart';
+import 'web_mocked_repository.dart';
 
 class MockWebAuth extends WebAuth {}
 
@@ -74,9 +81,26 @@ class MockAPI extends Mock implements APICategory {
     var result = MockRestOperation();
     when(result.response).thenAnswer((_) async {
       return AWSHttpResponse(
-        statusCode: 200,
+        statusCode: 201,
         headers: const {},
         body: Uint8List.fromList([]),
+      );
+    });
+    return result;
+  }
+
+  @override
+  RestOperation get(String path,
+      {Map<String, String>? headers,
+      Map<String, String>? queryParameters,
+      String? apiName}) {
+    var result = MockRestOperation();
+    when(result.response).thenAnswer((_) async {
+      Map<String, dynamic> mockedResponseData = mockedLecturesResponseData;
+      return AWSHttpResponse(
+        statusCode: 200,
+        headers: const {},
+        body: Uint8List.fromList(utf8.encode(jsonEncode(mockedResponseData))),
       );
     });
     return result;
@@ -88,7 +112,7 @@ late WebErrorMessage errorAuth;
 late WebAnswerProvider answerAuth;
 late WebRole roleAuth;
 
-Widget createWebLoginScreen() => MultiProvider(
+Widget createWebSignupScreen() => MultiProvider(
       providers: [
         ChangeNotifierProvider<WebAuth>(
           create: (context) {
@@ -125,8 +149,12 @@ Widget createWebLoginScreen() => MultiProvider(
           '/verified': (context) => const Verifed(),
           '/web-onboarding-view': (context) => const WebOnboardingView(),
           '/web-congratulations': (context) => const WebCongratulationsScreen(),
+          '/web-contact': (context) => const WebContactScreen(),
+          '/web-lectures': (context) => const WebLecturesPage(),
+          '/web-recent': (context) => const WebRecentLecturesPage(),
+          '/web-video': (context) => const WebLectureVideoScreen(),
         },
-        home: const WebLoginScreen(),
+        home: WebSignUpScreen(),
       ),
     );
 
@@ -164,6 +192,9 @@ final onboardingVideoTextField =
     find.byKey(const Key('onboardingVideoTextField'));
 final onboardingSubmitButton = find.byKey(const Key('onboardingSubmitWeb'));
 final onboardingScrollableScreen = find.byKey(const Key('scrollWebOnboarding'));
+final secondTextButton = find.byKey(Key('productManager'));
+final secondRoleButton = find.byKey(const Key('roleLecturesScreen')).last;
+final cardFinder = find.byType(WebLectureCard).at(4);
 
 @GenerateMocks([SignUpResult, AmplifyClass])
 void main() {
@@ -175,30 +206,7 @@ void main() {
       when(test.API).thenReturn(MockAPI());
       AmplifyClass.instance = test;
 
-      await tester.pumpWidget(createWebLoginScreen());
-      await tester.pumpAndSettle();
-      await tester.ensureVisible(emailLoginField);
-
-      await tester.tap(emailLoginField);
-      await tester.enterText(emailLoginField, 'bkaric@pa.tech387.com');
-      await tester.pumpAndSettle();
-
-      await tester.tap(passwordLoginField);
-      await tester.enterText(passwordLoginField, 'Testing1!');
-      await tester.pumpAndSettle();
-
-      await tester.tap(togglePasswordViewLogin);
-      await tester.pumpAndSettle();
-
-      await tester.tap(loginButton);
-      await tester.pumpAndSettle();
-
-      await tester.ensureVisible(logOutButton);
-      await tester.tap(logOutButton);
-      await tester.pumpAndSettle();
-
-      await tester.ensureVisible(signupRedirectionButton);
-      await tester.tap(signupRedirectionButton);
+      await tester.pumpWidget(createWebSignupScreen());
       await tester.pumpAndSettle();
 
       await tester.ensureVisible(nameSignupTextField);
@@ -365,19 +373,61 @@ void main() {
       //     onboardingScrollableScreen, const Offset(0, -200), 1000);
       // await tester.pumpAndSettle();
 
-      final roleTileFinder = find.byWidgetPredicate(
-          (widget) => widget is RoleTile && widget.role == listRole[0]);
-      await tester.ensureVisible(roleTileFinder);
-
-      await tester.tap(roleTileFinder);
-
+      final rolePMFinder = find.byWidgetPredicate(
+          (widget) => widget is RoleTile && widget.role == listRole[1]);
+      await tester.ensureVisible(rolePMFinder);
+      await tester.tap(rolePMFinder);
       await tester.pumpAndSettle();
+
+      final roleUIUXFinder = find.byWidgetPredicate(
+          (widget) => widget is RoleTile && widget.role == listRole[3]);
+      await tester.ensureVisible(roleUIUXFinder);
+      await tester.tap(roleUIUXFinder);
+      await tester.pumpAndSettle();
+
       await tester.ensureVisible(onboardingSubmitButton);
       await tester.tap(onboardingSubmitButton);
-
       await tester.pumpAndSettle(const Duration(seconds: 4));
 
+      await tester.ensureVisible(emailLoginField);
+      await tester.tap(emailLoginField);
+      await tester.enterText(emailLoginField, 'bkaric@pa.tech387.com');
+      await tester.pumpAndSettle();
+
+      await tester.tap(passwordLoginField);
+      await tester.enterText(passwordLoginField, 'Testing1!');
+      await tester.pumpAndSettle();
+
+      await tester.tap(togglePasswordViewLogin);
+      await tester.pumpAndSettle();
+
+      await tester.tap(loginButton);
+      await tester.pumpAndSettle();
+
+      await tester.ensureVisible(secondTextButton);
+      await tester.tap(secondTextButton);
+      await tester.pumpAndSettle();
+      // final listView = find.byType(ListView);
+
+      // await tester.scrollUntilVisible(cardFinder, -500);
+
+      // await tester.ensureVisible(cardFinder);
+      // await tester.tap(cardFinder);
+      // await tester.pumpAndSettle();
+
+      // final listView = find.byType(ListView);
+      // await tester.fling(listView, const Offset(0, -200), 1000);
+      // await tester.pumpAndSettle();
+
+      // await tester.ensureVisible(secondRoleButton);
+      // await tester.tap(secondRoleButton);
+      // await tester.pumpAndSettle();
+      await tester.ensureVisible(logOutButton);
       await tester.tap(logOutButton);
+      await tester.pumpAndSettle();
+
+      await tester.ensureVisible(signupRedirectionButton);
+      await tester.tap(signupRedirectionButton);
       await tester.pumpAndSettle();
     });
   });

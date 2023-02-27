@@ -5,8 +5,6 @@ import 'package:v2_product_arena/web/features/home/screens/web_lecturevideo_scre
 import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_green_profile.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_lecture_card.dart';
-
-import '../../../../constants/global_variables.dart';
 import '../../../reusable_web_widgets/web_homepage_sidebar.dart';
 
 class WebLecturesPage extends StatefulWidget {

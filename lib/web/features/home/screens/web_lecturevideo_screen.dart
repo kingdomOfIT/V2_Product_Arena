@@ -7,7 +7,6 @@ import 'package:v2_product_arena/web/reusable_web_widgets/web_green_profile.dart
 import 'package:v2_product_arena/web/reusable_web_widgets/web_homepage_sidebar.dart';
 import 'package:video_player/video_player.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
-import '../../../../constants/global_variables.dart';
 
 class WebLectureVideoScreen extends StatefulWidget {
   static const routeName = '/web-video';
