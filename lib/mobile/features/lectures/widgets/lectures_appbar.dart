@@ -35,11 +35,16 @@ class _WelcomepageAppBarState extends State<WelcomepageAppBar> {
             bottom: screenHeight * (10 / 803),
             left: screenWidth * (20 / 360),
           ),
-          child: Image.asset(
-            "assets/images/PAlogowhite.png",
-            height: screenHeight * (35 / 803),
-            width: screenWidth * (35 / 360),
-            fit: BoxFit.cover,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.of(context).pushNamed(WelcomePage.routeName);
+            },
+            child: Image.asset(
+              "assets/images/PAlogowhite.png",
+              height: screenWidth * (35 / 360),
+              width: screenWidth * (35 / 360),
+              fit: BoxFit.cover,
+            ),
           ),
         ),
       ),
