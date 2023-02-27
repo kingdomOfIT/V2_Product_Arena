@@ -43,14 +43,14 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
     }
   }
 
-  Future<void> signOutUser() async {
-    try {
-      final res = await Amplify.Auth.signOut();
-      print(res);
-    } on AuthException catch (e) {
-      safePrint(e.message);
-    }
-  }
+  // Future<void> signOutUser() async {
+  //   try {
+  //     final res = await Amplify.Auth.signOut();
+  //     print(res);
+  //   } on AuthException catch (e) {
+  //     safePrint(e.message);
+  //   }
+  // }
 
   Future<void> submitOnboarding(List<String> s1, List<String> s2) async {
     await signInUser();
@@ -61,7 +61,7 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
       final restOperation = Amplify.API.post(
         "/api/onboarding/submit",
         body: HttpPayload.json({
-          "date": "Jan2023",
+          "date": "Feb2023",
           "roles": s1,
           "answers": {
             // answers are in the same order as questions, null if not answered
@@ -96,7 +96,8 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
       // Set<String> set = Set<String>.from(temp);
       // List<String> roles = set.toList();
       // print(roles);
-
+      await Provider.of<MobileAuth>(context, listen: false)
+          .signOutCurrentUser();
       Navigator.of(context)
           .pushReplacementNamed(MobileVerifiedOnboardingScreen.routeName);
       // print(responseMap['lectures']);
@@ -262,15 +263,13 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
                           fontWeight: FontWeight.w700,
                         ),
                       ),
-                      buttonFunction: () {
+                      buttonFunction: () async {
                         if (context.read<Role>().length > 2) {
                           context.read<ErrorMessage>().change2();
                         } else if (context.read<Role>().length == 0) {
                           context.read<ErrorMessage>().change();
                         } else {
                           submitOnboarding(finalRoles, finalAnswers);
-                          Provider.of<MobileAuth>(context, listen: false)
-                              .signOutCurrentUser(context);
                         }
 
                         safePrint(

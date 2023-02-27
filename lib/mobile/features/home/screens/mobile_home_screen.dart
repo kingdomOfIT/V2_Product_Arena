@@ -23,7 +23,7 @@ class MobileHomeScreen extends StatelessWidget {
             ),
             buttonFunction: () =>
                 Provider.of<MobileAuth>(context, listen: false)
-                    .signOutCurrentUser(context),
+                    .signOutCurrentUser(),
             color: Colors.black),
       ),
     );
