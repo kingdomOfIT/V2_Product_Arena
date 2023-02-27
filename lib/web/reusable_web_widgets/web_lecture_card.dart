@@ -45,12 +45,15 @@ class _WebLectureCardState extends State<WebLectureCard> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    // lectures[index].name,
-                    widget.name,
-                    style: GoogleFonts.outfit(
-                      fontWeight: FontWeight.w400,
-                      fontSize: maxheight * (50 / 1510),
+                  SizedBox(
+                    width: maxwidth * (540 / 1440),
+                    child: Text(
+                      // lectures[index].name,
+                      widget.name,
+                      style: GoogleFonts.outfit(
+                        fontWeight: FontWeight.w400,
+                        fontSize: maxheight * (50 / 1510),
+                      ),
                     ),
                   ),
                   SizedBox(
