@@ -53,8 +53,8 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
       });
 
       await Provider.of<MobileAuth>(context, listen: false).signInUser(
-        emailController.text,
-        passwordController.text,
+        emailController.text.trim(),
+        passwordController.text.trim(),
         context,
         WelcomePage.routeName,
         // ExampleLectures.routeName,
@@ -212,7 +212,7 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
                               // ignore: prefer_const_constructors
                               SizedBox(
                                 // height: deviceHeight * 0.012,
-                                height: 23,
+                                height: 20,
                               ),
                             ],
                           ),

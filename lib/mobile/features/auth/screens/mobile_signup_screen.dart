@@ -113,7 +113,7 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
         cityController.text,
         selectedValue!,
         phoneController.text,
-        emailController.text,
+        emailController.text.trim(),
         passwordController.text,
         context,
         EmailVerificationScreen.routeName,
