@@ -69,6 +69,7 @@ class _MobileContactUsState extends State<MobileContactUs> {
         ],
       ),
       body: Scaffold(
+        key: _key,
         backgroundColor: Colors.black,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
