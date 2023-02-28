@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:v2_product_arena/mobile/features/lectures/screens/hello_screen.dart';
 import 'package:v2_product_arena/mobile/features/lectures/widgets/lectures_appbar.dart';
+import 'package:v2_product_arena/mobile/features/lectures/widgets/lectures_sidebar.dart';
 import 'package:v2_product_arena/mobile/features/onboarding/widgets/form_button.dart';
 import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -90,21 +91,32 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
           ),
         ),
         actions: <Widget>[
-          GestureDetector(
-            onTap: () {
-              dataProvider.isSidebarOpened2
-                  ? _key.currentState!.closeEndDrawer()
-                  : _key.currentState!.openEndDrawer();
-              dataProvider.changeSidebar2();
-            },
-            child: dataProvider.isSidebarOpened2
-                ? const Icon(Icons.close)
-                : const Icon(Icons.menu),
+          Padding(
+            padding: EdgeInsets.only(
+                right: (32 / 360) * MediaQuery.of(context).size.width),
+            child: GestureDetector(
+              onTap: () {
+                dataProvider.isSidebarOpened2
+                    ? _key.currentState!.closeEndDrawer()
+                    : _key.currentState!.openEndDrawer();
+                dataProvider.changeSidebar2();
+              },
+              child: dataProvider.isSidebarOpened2
+                  ? const Icon(Icons.close)
+                  : const Icon(Icons.menu),
+            ),
           ),
         ],
       ),
       body: Scaffold(
         key: _key,
+        drawerScrimColor: Colors.transparent,
+        endDrawer: Padding(
+          padding: const EdgeInsets.only(top: 23),
+          child: Drawer(
+              width: MediaQuery.of(context).size.width,
+              child: const MobileSidebar()),
+        ),
         backgroundColor: const Color(0xFFE9E9E9),
         body: YoutubePlayerBuilder(
             player: YoutubePlayer(

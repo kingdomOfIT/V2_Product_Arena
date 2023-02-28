@@ -206,8 +206,10 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
                               fit: BoxFit.cover,
                             ),
                           ),
+                          // ignore: prefer_const_constructors
                           SizedBox(
-                            height: deviceHeight * 0.012,
+                            // height: deviceHeight * 0.012,
+                            height: 23,
                           ),
                         ],
                       ),

@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:v2_product_arena/mobile/features/lectures/screens/hello_screen.dart';
 import 'package:v2_product_arena/mobile/features/lectures/widgets/lectures_appbar.dart';
+import 'package:v2_product_arena/mobile/features/lectures/widgets/lectures_sidebar.dart';
 import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
 import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/mobile_footer.dart';
 
@@ -45,31 +46,39 @@ class _MobileContactUsState extends State<MobileContactUs> {
               onTap: () {
                 Navigator.of(context).pushNamed(WelcomePage.routeName);
               },
-              child: Image.asset(
-                "assets/images/PAlogowhite.png",
-                height: MediaQuery.of(context).size.width * (35 / 360),
+              child: SizedBox(
                 width: MediaQuery.of(context).size.width * (35 / 360),
-                fit: BoxFit.cover,
+                height: MediaQuery.of(context).size.width * (35 / 360),
+                child: Image.asset(
+                  "assets/images/PAlogowhite.png",
+                ),
               ),
             ),
           ),
         ),
         actions: <Widget>[
-          GestureDetector(
-            onTap: () {
-              dataProvider.isSidebarOpened3
-                  ? _key.currentState!.closeEndDrawer()
-                  : _key.currentState!.openEndDrawer();
-              dataProvider.changeSidebar3();
-            },
-            child: dataProvider.isSidebarOpened3
-                ? const Icon(Icons.close)
-                : const Icon(Icons.menu),
+          Padding(
+            padding: EdgeInsets.only(
+                right: (32 / 360) * MediaQuery.of(context).size.width),
+            child: GestureDetector(
+              onTap: () {
+                dataProvider.isSidebarOpened3
+                    ? _key.currentState!.closeEndDrawer()
+                    : _key.currentState!.openEndDrawer();
+                dataProvider.changeSidebar3();
+              },
+              child: dataProvider.isSidebarOpened3
+                  ? const Icon(Icons.close)
+                  : const Icon(Icons.menu),
+            ),
           ),
         ],
       ),
       body: Scaffold(
         key: _key,
+        endDrawer: Drawer(
+            width: MediaQuery.of(context).size.width,
+            child: const MobileSidebar()),
         backgroundColor: Colors.black,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

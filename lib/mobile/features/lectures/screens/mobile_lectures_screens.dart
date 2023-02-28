@@ -53,16 +53,20 @@ class _MobileLecturesScreenState extends State<MobileLecturesScreen> {
           ),
         ),
         actions: <Widget>[
-          GestureDetector(
-            onTap: () {
-              dataProvider.isSidebarOpened1
-                  ? _key.currentState!.closeEndDrawer()
-                  : _key.currentState!.openEndDrawer();
-              dataProvider.changeSidebar1();
-            },
-            child: dataProvider.isSidebarOpened1
-                ? const Icon(Icons.close)
-                : const Icon(Icons.menu),
+          Padding(
+            padding: EdgeInsets.only(
+                right: (32 / 360) * MediaQuery.of(context).size.width),
+            child: GestureDetector(
+              onTap: () {
+                dataProvider.isSidebarOpened1
+                    ? _key.currentState!.closeEndDrawer()
+                    : _key.currentState!.openEndDrawer();
+                dataProvider.changeSidebar1();
+              },
+              child: dataProvider.isSidebarOpened1
+                  ? const Icon(Icons.close)
+                  : const Icon(Icons.menu),
+            ),
           ),
         ],
       ),
