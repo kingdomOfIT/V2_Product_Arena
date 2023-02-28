@@ -83,9 +83,6 @@ class _MobileSidebarState extends State<MobileSidebar> {
               height: screenHeight * (24 / 803),
               width: screenWidth * (24 / 360),
             ),
-            onTap: () {
-              Navigator.pop(context);
-            },
           ),
 
           Padding(
@@ -106,12 +103,22 @@ class _MobileSidebarState extends State<MobileSidebar> {
                       roleImage: lista[index].image,
                     ),
                     onTap: () {
+                      if (dataProvider.isSidebarOpened == true) {
+                        dataProvider.changeSidebar();
+                      } else if (dataProvider.isSidebarOpened1 == true) {
+                        dataProvider.changeSidebar1();
+                      } else if (dataProvider.isSidebarOpened2 == true) {
+                        dataProvider.changeSidebar2();
+                      } else if (dataProvider.isSidebarOpened3 == true) {
+                        dataProvider.changeSidebar3();
+                      }
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => WelcomeLecturesScreen(
-                                  role: lista[index].name['forBackend']!,
-                                )),
+                          builder: (context) => WelcomeLecturesScreen(
+                            role: lista[index].name['forBackend']!,
+                          ),
+                        ),
                       );
                     },
                   );
@@ -151,6 +158,15 @@ class _MobileSidebarState extends State<MobileSidebar> {
           ),
           InkWell(
             onTap: () {
+              if (dataProvider.isSidebarOpened == true) {
+                dataProvider.changeSidebar();
+              } else if (dataProvider.isSidebarOpened1 == true) {
+                dataProvider.changeSidebar1();
+              } else if (dataProvider.isSidebarOpened2 == true) {
+                dataProvider.changeSidebar2();
+              } else if (dataProvider.isSidebarOpened3 == true) {
+                dataProvider.changeSidebar3();
+              }
               Navigator.of(context).pushNamed(MobileContactUs.routeName);
             },
             child: ListTile(
