@@ -86,11 +86,11 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
                 lineWidth: 10.0,
               ),
             )
-          : Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SingleChildScrollView(
-                  child: Column(
+          : SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
                     children: [
                       Padding(
                         padding: EdgeInsets.only(
@@ -211,18 +211,18 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
                               ),
                               // ignore: prefer_const_constructors
                               SizedBox(
-                                // height: deviceHeight * 0.012,
-                                height: 23,
+                                height: deviceHeight * 0.012,
+                                // height: 21,
                               ),
                             ],
                           ),
                         ),
                       ),
+                      const MobileFooter(),
                     ],
                   ),
-                ),
-                const MobileFooter(),
-              ],
+                ],
+              ),
             ),
     );
   }

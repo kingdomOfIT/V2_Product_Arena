@@ -65,49 +65,52 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
   Widget build(BuildContext context) {
     final dataProvider = Provider.of<MobileAuth>(context);
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xFFFFFFFF),
-        elevation: 0,
-        leading: Container(
-          height: 55,
-          width: MediaQuery.of(context).size.width,
-          child: Padding(
-            padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * (10 / 803),
-              bottom: MediaQuery.of(context).size.height * (10 / 803),
-              left: MediaQuery.of(context).size.width * (20 / 360),
-            ),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.of(context).pushNamed(WelcomePage.routeName);
-              },
-              child: Image.asset(
-                "assets/images/PAlogowhite.png",
-                height: MediaQuery.of(context).size.width * (35 / 360),
-                width: MediaQuery.of(context).size.width * (35 / 360),
-                fit: BoxFit.cover,
+      appBar: !dataProvider.isPlayingInFullscr
+          ? AppBar(
+              backgroundColor: const Color(0xFFFFFFFF),
+              elevation: 0,
+              leading: Container(
+                height: 55,
+                width: MediaQuery.of(context).size.width,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * (10 / 803),
+                    bottom: MediaQuery.of(context).size.height * (10 / 803),
+                    left: MediaQuery.of(context).size.width * (20 / 360),
+                  ),
+                  child: GestureDetector(
+                    onTap: () {
+                      _controller.pause();
+                      Navigator.of(context).pushNamed(WelcomePage.routeName);
+                    },
+                    child: Image.asset(
+                      "assets/images/PAlogowhite.png",
+                      height: MediaQuery.of(context).size.width * (35 / 360),
+                      width: MediaQuery.of(context).size.width * (35 / 360),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
               ),
-            ),
-          ),
-        ),
-        actions: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(
-                right: (32 / 360) * MediaQuery.of(context).size.width),
-            child: GestureDetector(
-              onTap: () {
-                dataProvider.isSidebarOpened2
-                    ? _key.currentState!.closeEndDrawer()
-                    : _key.currentState!.openEndDrawer();
-                dataProvider.changeSidebar2();
-              },
-              child: dataProvider.isSidebarOpened2
-                  ? const Icon(Icons.close)
-                  : const Icon(Icons.menu),
-            ),
-          ),
-        ],
-      ),
+              actions: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(
+                      right: (32 / 360) * MediaQuery.of(context).size.width),
+                  child: GestureDetector(
+                    onTap: () {
+                      dataProvider.isSidebarOpened2
+                          ? _key.currentState!.closeEndDrawer()
+                          : _key.currentState!.openEndDrawer();
+                      dataProvider.changeSidebar2();
+                    },
+                    child: dataProvider.isSidebarOpened2
+                        ? const Icon(Icons.close)
+                        : const Icon(Icons.menu),
+                  ),
+                ),
+              ],
+            )
+          : null,
       body: Scaffold(
         key: _key,
         drawerScrimColor: Colors.transparent,
@@ -128,7 +131,8 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
               onReady: () {
                 _controller.addListener(() {
                   setState(() {});
-
+                  dataProvider.isPlayingInFullscr =
+                      _controller.value.isFullScreen;
                   if (_controller.value.playerState == PlayerState.paused) {
                     setState(() {
                       _buttonsVisible = true;

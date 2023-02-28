@@ -1,13 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:provider/provider.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_email_verifed.dart';
+import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
 
+late WebAuth auth;
+
+Widget createWebEmailVerifiedScreen() => ChangeNotifierProvider<WebAuth>(
+      create: (context) {
+        auth = WebAuth();
+        return auth;
+      },
+      child: const MaterialApp(
+        home: Verifed(),
+      ),
+    );
 void main() {
   group('Web email verified screen tests', () {
     testWidgets(
         'GIVEN web email verified screen, WHEN screen loads, THEN check circle image should be visible',
         (tester) async {
-      await tester.pumpWidget(const MaterialApp(home: Verifed()));
+      await tester.pumpWidget(createWebEmailVerifiedScreen());
       await tester.pumpAndSettle(const Duration(seconds: 5));
       final imageFinder = find.byWidgetPredicate((widget) =>
           widget is DecoratedBox &&
@@ -26,7 +39,7 @@ void main() {
     testWidgets(
         'GIVEN web email verified screen, WHEN screen loads, THEN all required text should be visible',
         (tester) async {
-      await tester.pumpWidget(const MaterialApp(home: Verifed()));
+      await tester.pumpWidget(createWebEmailVerifiedScreen());
       await tester.pumpAndSettle(const Duration(seconds: 5));
 
       expect(find.text('Email verified'), findsOneWidget);
