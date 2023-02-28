@@ -53,7 +53,7 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
       });
 
       await Provider.of<MobileAuth>(context, listen: false).signInUser(
-        emailController.text,
+        emailController.text.trim(),
         passwordController.text,
         context,
         WelcomePage.routeName,

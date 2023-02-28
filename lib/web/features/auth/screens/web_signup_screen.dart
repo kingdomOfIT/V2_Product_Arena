@@ -55,7 +55,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
         cityController.text,
         dropdownValue!,
         phoneController.text,
-        emailController.text,
+        emailController.text.trim(),
         passwordController.text,
         context,
         SignupConfirmation.routeName,
