@@ -56,6 +56,34 @@ class MobileAuth with ChangeNotifier {
   List<String> get roles => _roles;
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
+  bool _isSidebarOpened = false;
+  bool get isSidebarOpened => _isSidebarOpened;
+  void changeSidebar() {
+    _isSidebarOpened = !_isSidebarOpened;
+    notifyListeners();
+  }
+
+  bool _isSidebarOpened1 = false;
+  bool get isSidebarOpened1 => _isSidebarOpened1;
+  void changeSidebar1() {
+    _isSidebarOpened1 = !_isSidebarOpened1;
+    notifyListeners();
+  }
+
+  bool _isSidebarOpened2 = false;
+  bool get isSidebarOpened2 => _isSidebarOpened2;
+  void changeSidebar2() {
+    _isSidebarOpened2 = !_isSidebarOpened2;
+    notifyListeners();
+  }
+
+  bool _isSidebarOpened3 = false;
+  bool get isSidebarOpened3 => _isSidebarOpened3;
+  void changeSidebar3() {
+    _isSidebarOpened3 = !_isSidebarOpened3;
+    notifyListeners();
+  }
+
   Future<void> signUpUser(
     String name,
     String surname,
