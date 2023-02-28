@@ -104,6 +104,7 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
         ],
       ),
       body: Scaffold(
+        key: _key,
         backgroundColor: const Color(0xFFE9E9E9),
         body: YoutubePlayerBuilder(
             player: YoutubePlayer(
