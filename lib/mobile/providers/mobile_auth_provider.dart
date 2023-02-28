@@ -84,6 +84,13 @@ class MobileAuth with ChangeNotifier {
     notifyListeners();
   }
 
+  bool isPlayingInFullscr = false;
+
+  void changePlaying() {
+    isPlayingInFullscr = !isPlayingInFullscr;
+    notifyListeners();
+  }
+
   Future<void> signUpUser(
     String name,
     String surname,

@@ -70,6 +70,7 @@ class _MobileLecturesScreenState extends State<MobileLecturesScreen> {
           ),
         ],
       ),
+      drawerEnableOpenDragGesture: false,
       body: Scaffold(
         key: _key,
         endDrawer: Drawer(

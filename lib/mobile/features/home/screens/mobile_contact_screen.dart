@@ -77,8 +77,9 @@ class _MobileContactUsState extends State<MobileContactUs> {
       body: Scaffold(
         key: _key,
         endDrawer: Drawer(
-            width: MediaQuery.of(context).size.width,
-            child: const MobileSidebar()),
+          width: MediaQuery.of(context).size.width,
+          child: const MobileSidebar(),
+        ),
         backgroundColor: Colors.black,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

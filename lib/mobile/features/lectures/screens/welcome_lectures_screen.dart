@@ -78,7 +78,7 @@ class _WelcomeLecturesScreenState extends State<WelcomeLecturesScreen> {
                   left: (28 / 360) * MediaQuery.of(context).size.width,
                   top: 55),
               child: Visibility(
-                visible: _currentPage != 0,
+                visible: _currentPage != 0 && !dataProvider.isPlayingInFullscr,
                 child: LecturesPageIndicator(
                   currentPage: _currentPage,
                   totalPages: duzina + 1,
@@ -89,8 +89,11 @@ class _WelcomeLecturesScreenState extends State<WelcomeLecturesScreen> {
                 ),
               ),
             ),
-            const Positioned(
-                bottom: 0, left: 0, right: 0, child: MobileFooter()),
+            Visibility(
+              visible: !dataProvider.isPlayingInFullscr,
+              child: const Positioned(
+                  bottom: 0, left: 0, right: 0, child: MobileFooter()),
+            ),
           ],
         ),
       ),
