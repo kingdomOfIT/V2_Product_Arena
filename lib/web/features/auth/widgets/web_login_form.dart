@@ -241,7 +241,7 @@ class _WebLoginFormState extends State<WebLoginForm> {
                 if (_loginFormKey.currentState!.validate()) {
                   try {
                     final result = await Amplify.Auth.signIn(
-                      username: emailController.text,
+                      username: emailController.text.trim(),
                       password: passwordController.text,
                     );
                     await webAuth.getUserLectures();
