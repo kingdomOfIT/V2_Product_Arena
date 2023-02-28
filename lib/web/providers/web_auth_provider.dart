@@ -197,10 +197,10 @@ class WebAuth with ChangeNotifier {
             .toList();
 
         var LectureFirst;
-        firstRoleLectures.forEach((lecture) {
+        for (var lecture in firstRoleLectures) {
           LectureFirst = lecture;
           _firstRoleLectures.add(LectureFirst);
-        });
+        }
 
         //print(_firstRoleLectures);
       }
@@ -214,10 +214,10 @@ class WebAuth with ChangeNotifier {
             .toList();
 
         var LectureSecond;
-        secondRoleLectures.forEach((lecture) {
+        for (var lecture in secondRoleLectures) {
           LectureSecond = lecture;
           _secondRoleLectures.add(LectureSecond);
-        });
+        }
         //print(_secondRoleLectures);
       }
 

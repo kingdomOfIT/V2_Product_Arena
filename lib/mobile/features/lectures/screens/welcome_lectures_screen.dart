@@ -18,14 +18,8 @@ class WelcomeLecturesScreen extends StatefulWidget {
 class _WelcomeLecturesScreenState extends State<WelcomeLecturesScreen> {
   final PageController _pageController = PageController(initialPage: 0);
   int _currentPage = 0;
-  int _indicatorPage = 0;
   List listContains = [];
   List roleLectures = [];
-  //ovdje je bio future init
-  // Future<void> _initFuture(BuildContext context) async {
-  //   await Provider.of<MobileAuth>(context, listen: false)
-  //       .getUserLectures();
-  // }
 
   @override
   void initState() {
@@ -81,7 +75,7 @@ class _WelcomeLecturesScreenState extends State<WelcomeLecturesScreen> {
             Padding(
               padding: EdgeInsets.only(
                   right: (32 / 360) * MediaQuery.of(context).size.width,
-                  left: (32 / 360) * MediaQuery.of(context).size.width,
+                  left: (28 / 360) * MediaQuery.of(context).size.width,
                   top: 55),
               child: Visibility(
                 visible: _currentPage != 0,
@@ -89,7 +83,7 @@ class _WelcomeLecturesScreenState extends State<WelcomeLecturesScreen> {
                   currentPage: _currentPage,
                   totalPages: duzina + 1,
                   width:
-                      (MediaQuery.of(context).size.width - 112) / (duzina + 1),
+                      (MediaQuery.of(context).size.width - 108) / (duzina + 1),
                   height: 3,
                   indicatorHeight: 23,
                 ),

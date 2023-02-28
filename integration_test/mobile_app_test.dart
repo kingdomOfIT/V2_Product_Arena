@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -10,7 +11,10 @@ import 'package:v2_product_arena/mobile/features/auth/screens/email_verification
 import 'package:v2_product_arena/mobile/features/auth/screens/email_verified_screen.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/mobile_login_screen.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/mobile_signup_screen.dart';
+import 'package:v2_product_arena/mobile/features/home/screens/mobile_contact_screen.dart';
 import 'package:v2_product_arena/mobile/features/home/screens/mobile_home_screen.dart';
+import 'package:v2_product_arena/mobile/features/lectures/screens/hello_screen.dart';
+import 'package:v2_product_arena/mobile/features/lectures/screens/welcome_lectures_screen.dart';
 import 'package:v2_product_arena/mobile/features/onboarding/screens/mobile_onboarding_screen.dart';
 import 'package:v2_product_arena/mobile/features/onboarding/screens/mobile_verified_onboarding_screen.dart';
 import 'package:v2_product_arena/mobile/features/onboarding/widgets/role_tile.dart';
@@ -21,6 +25,7 @@ import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
 import 'package:v2_product_arena/mobile/providers/role_provider.dart';
 import 'mobile_auth_provider_test.mocks.dart';
+import 'web_mocked_repository.dart';
 
 class MockMobileAuth extends MobileAuth {}
 
@@ -61,6 +66,23 @@ class MockAuth extends Mock implements AuthCategory {
     when(result.runtimeTypeName).thenReturn('');
     return result;
   }
+
+  @override
+  Future<List<AuthUserAttribute<AuthUserAttributeKey>>> fetchUserAttributes(
+      {FetchUserAttributesOptions? options}) async {
+    var result = MockAuthUserAttributeKey();
+    when(result.key);
+    final userAttributes = [
+      const AuthUserAttribute<AuthUserAttributeKey>(
+          userAttributeKey: AuthUserAttributeKey.familyName, value: 'Alfa'),
+      const AuthUserAttribute<AuthUserAttributeKey>(
+          userAttributeKey: AuthUserAttributeKey.familyName, value: 'Team'),
+      const AuthUserAttribute<AuthUserAttributeKey>(
+          userAttributeKey: AuthUserAttributeKey.email,
+          value: 'bkaric@pa.tech387.com'),
+    ];
+    return Future.value(userAttributes);
+  }
 }
 
 class MockAPI extends Mock implements APICategory {
@@ -80,6 +102,31 @@ class MockAPI extends Mock implements APICategory {
     });
     return result;
   }
+
+  @override
+  RestOperation get(String path,
+      {Map<String, String>? headers,
+      Map<String, String>? queryParameters,
+      String? apiName}) {
+    var result = MockRestOperation();
+    when(result.response).thenAnswer((_) async {
+      if (path == '/api/user/lectures') {
+        Map<String, dynamic> mockedResponseData = mockedLecturesResponseData;
+        return AWSHttpResponse(
+          statusCode: 200,
+          headers: const {},
+          body: Uint8List.fromList(utf8.encode(jsonEncode(mockedResponseData))),
+        );
+      } else {
+        return AWSHttpResponse(
+          statusCode: 200,
+          headers: const {},
+          body: Uint8List.fromList([]),
+        );
+      }
+    });
+    return result;
+  }
 }
 
 late MobileAuth mobileAuthent;
@@ -87,7 +134,7 @@ late ErrorMessage errorAuth;
 late AnswerProvider answerAuth;
 late Role roleAuth;
 
-Widget createMobileLoginScreen() => MultiProvider(
+Widget createMobileSignupScreen() => MultiProvider(
       providers: [
         ChangeNotifierProvider<MobileAuth>(
           create: (context) {
@@ -122,8 +169,13 @@ Widget createMobileLoginScreen() => MultiProvider(
           '/mobile-onboarding': (context) => const MobileOnboardingScreen(),
           '/mobile-verified-onboarding': (context) =>
               const MobileVerifiedOnboardingScreen(),
+          '/lectures-welcome': (context) => const WelcomePage(),
+          '/welcome-lectures': (context) => const WelcomeLecturesScreen(
+                role: '',
+              ),
+          '/mobile-contact-us': (context) => const MobileContactUs(),
         },
-        home: const MobileLoginScreen(),
+        home: const MobileSignupScreen(),
       ),
     );
 
@@ -161,55 +213,46 @@ final onboardingScrollableLastQScreen = find.byKey(const Key('scroll'));
 final onboardingVideoTextField = find.byKey(const Key('vasOdgovorTextField'));
 final onboardingVideoNextButton = find.byKey(const Key('nextButtonVideo'));
 final onboardingSubmitButton = find.byKey(const Key('submitOnboarding'));
+final drawerButton = find.byKey(const Key('drawerButton'));
+final appbarLogo = find.byKey(const Key('appbarLogo'));
+final pmRoleTileFinder = find.byWidgetPredicate(
+    (widget) => widget is RoleTile && widget.role == listRole[1]);
+final uiuxRoleTileFinder = find.byWidgetPredicate(
+    (widget) => widget is RoleTile && widget.role == listRole[3]);
 
 @GenerateMocks([SignInResult, SignUpResult, AmplifyClass])
 void main() {
-  group('Testing App Performance Tests', () {
+  group('Mobile application flow test', () {
     setUpAll(() async {
       IntegrationTestWidgetsFlutterBinding.ensureInitialized();
     });
-    testWidgets('Mobile signup', (tester) async {
+    testWidgets('Mobile application flow test', (tester) async {
       MockAmplifyClass test = MockAmplifyClass();
       when(test.Auth).thenReturn(MockAuth());
       when(test.API).thenReturn(MockAPI());
       AmplifyClass.instance = test;
-      await tester.pumpWidget(createMobileLoginScreen());
+
+      final mockAuth = MockAuth();
+      when(mockAuth.fetchUserAttributes()).thenAnswer((_) async => [
+            const AuthUserAttribute<AuthUserAttributeKey>(
+                userAttributeKey: AuthUserAttributeKey.givenName,
+                value: 'John'),
+            const AuthUserAttribute<AuthUserAttributeKey>(
+                userAttributeKey: AuthUserAttributeKey.familyName,
+                value: 'Doe'),
+            const AuthUserAttribute<AuthUserAttributeKey>(
+                userAttributeKey: AuthUserAttributeKey.email,
+                value: 'john.doe@example.com'),
+          ]);
+
+      final mockAmplifyClass = MockAmplifyClass();
+      when(mockAmplifyClass.Auth).thenReturn(mockAuth);
+
+      AmplifyClass.instance = mockAmplifyClass;
+
+      await tester.pumpWidget(createMobileSignupScreen());
       await tester.pumpAndSettle();
 
-      await tester.ensureVisible(emailLoginField);
-      await tester.tap(emailLoginField);
-      await tester.enterText(emailLoginField, 'bkaric@pa.tech387.com');
-      await tester.pumpAndSettle();
-
-      await tester.tap(passwordLoginField);
-      await tester.enterText(passwordLoginField, 'Testing1!');
-      await tester.pumpAndSettle();
-
-      await tester.tap(togglePasswordLogin);
-      await tester.pumpAndSettle();
-
-      await tester.tap(loginButton);
-      await tester.pumpAndSettle();
-
-      await tester.ensureVisible(logOutButton);
-      await tester.tap(logOutButton);
-      await tester.pumpAndSettle();
-
-      await tester.ensureVisible(signupRedirectionButton);
-      await tester.tap(signupRedirectionButton);
-      await tester.pumpAndSettle();
-    });
-
-    testWidgets('Mobile signup', (tester) async {
-      MockAmplifyClass test = MockAmplifyClass();
-      when(test.Auth).thenReturn(MockAuth());
-      when(test.API).thenReturn(MockAPI());
-      AmplifyClass.instance = test;
-      await tester.pumpWidget(createMobileLoginScreen());
-      await tester.pumpAndSettle();
-      await tester.ensureVisible(signupRedirectionButton);
-      await tester.tap(signupRedirectionButton);
-      await tester.pumpAndSettle();
       await tester.ensureVisible(nameTextField);
       await tester.tap(nameTextField);
       await tester.enterText(nameTextField, 'Test');
@@ -349,9 +392,9 @@ void main() {
       await tester.enterText(onboardingAnswerTextField, 'anything');
       await tester.pumpAndSettle();
 
-      await tester.fling(
-          onboardingScrollableLastQScreen, const Offset(0, -200), 1000);
-      await tester.pumpAndSettle();
+      // await tester.fling(
+      //     onboardingScrollableLastQScreen, const Offset(0, -200), 1000);
+      // await tester.pumpAndSettle();
 
       if (FocusManager.instance.primaryFocus?.hasFocus == true) {
         FocusManager.instance.primaryFocus?.unfocus();
@@ -360,34 +403,52 @@ void main() {
       await tester.tap(onboardingNextButton);
       await tester.pumpAndSettle();
 
-      await tester.ensureVisible(onboardingVideoTextField);
-      await tester.tap(onboardingVideoTextField);
       await tester.enterText(onboardingVideoTextField,
           'https://www.youtube.com/watch?v=75i5VmTI6A0');
-      await tester.pumpAndSettle();
-      if (FocusManager.instance.primaryFocus?.hasFocus == true) {
-        FocusManager.instance.primaryFocus?.unfocus();
-      }
-      await tester.fling(
-          find.byKey(const Key('videoScroll')), const Offset(0, -200), 1000);
-      await tester.pumpAndSettle();
-      await tester.ensureVisible(onboardingVideoNextButton);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+      // await tester.fling(
+      //     find.byKey(const Key('videoScroll')), const Offset(0, -200), 1000);
+      // await tester.pumpAndSettle();
       await tester.tap(onboardingVideoNextButton);
       await tester.pumpAndSettle();
 
-      final roleTileFinder = find.byWidgetPredicate(
-          (widget) => widget is RoleTile && widget.role == listRole[0]);
-
-      await tester.tap(roleTileFinder);
-
+      await tester.tap(pmRoleTileFinder);
       await tester.pumpAndSettle();
+      await tester.tap(uiuxRoleTileFinder);
+      await tester.pumpAndSettle();
+
       await tester.ensureVisible(onboardingSubmitButton);
       await tester.tap(onboardingSubmitButton);
 
       await tester.pumpAndSettle(const Duration(seconds: 5));
 
+      await tester.ensureVisible(emailLoginField);
+      await tester.tap(emailLoginField);
+      await tester.enterText(emailLoginField, 'bkaric@pa.tech387.com');
+      await tester.pumpAndSettle();
+
+      await tester.tap(passwordLoginField);
+      await tester.enterText(passwordLoginField, 'Testing1!');
+      await tester.pumpAndSettle();
+
+      await tester.tap(togglePasswordLogin);
+      await tester.pumpAndSettle();
+
+      await tester.tap(loginButton);
+      await tester.pumpAndSettle();
+
+      await tester.ensureVisible(drawerButton);
+      await tester.tap(drawerButton);
+
+      await tester.tap(find.text('UI/UX Design'));
+      await tester.pumpAndSettle();
+
       await tester.ensureVisible(logOutButton);
       await tester.tap(logOutButton);
+      await tester.pumpAndSettle();
+
+      await tester.ensureVisible(signupRedirectionButton);
+      await tester.tap(signupRedirectionButton);
       await tester.pumpAndSettle();
     });
   });

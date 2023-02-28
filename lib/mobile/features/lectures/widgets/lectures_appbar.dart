@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:v2_product_arena/mobile/features/lectures/widgets/lectures_sidebar.dart';
 import 'package:v2_product_arena/mobile/features/lectures/screens/hello_screen.dart';
 
 class WelcomepageAppBar extends StatefulWidget implements PreferredSizeWidget {
@@ -10,9 +9,9 @@ class WelcomepageAppBar extends StatefulWidget implements PreferredSizeWidget {
   State<WelcomepageAppBar> createState() => _WelcomepageAppBarState();
 
   @override
-  Size get preferredSize => Size.fromHeight(55.0);
+  Size get preferredSize => const Size.fromHeight(55.0);
 
-  Size get PreferredSize => Size.fromWidth(360.0);
+  Size get PreferredSize => const Size.fromWidth(360.0);
 }
 
 class _WelcomepageAppBarState extends State<WelcomepageAppBar> {
@@ -26,7 +25,7 @@ class _WelcomepageAppBarState extends State<WelcomepageAppBar> {
     return AppBar(
       backgroundColor: const Color(0xFFFFFFFF),
       elevation: 0,
-      leading: Container(
+      leading: SizedBox(
         height: 55,
         width: screenWidth,
         child: Padding(
@@ -36,6 +35,7 @@ class _WelcomepageAppBarState extends State<WelcomepageAppBar> {
             left: screenWidth * (20 / 360),
           ),
           child: GestureDetector(
+            key: const Key('appbarLogo'),
             onTap: () {
               Navigator.of(context).pushNamed(WelcomePage.routeName);
             },
@@ -51,6 +51,7 @@ class _WelcomepageAppBarState extends State<WelcomepageAppBar> {
       actions: <Widget>[
         if (!isSidebarOpen)
           IconButton(
+            key: const Key('drawerButton'),
             onPressed: () {
               widget.scaffoldKey.currentState!.openEndDrawer();
               setState(() {
@@ -58,7 +59,7 @@ class _WelcomepageAppBarState extends State<WelcomepageAppBar> {
               });
             },
             icon: const Icon(Icons.menu),
-            color: Color(0xFF212529),
+            color: const Color(0xFF212529),
           ),
         if (isSidebarOpen)
           IconButton(
@@ -69,7 +70,7 @@ class _WelcomepageAppBarState extends State<WelcomepageAppBar> {
               });
             },
             icon: const Icon(Icons.close),
-            color: Color(0xFF000000),
+            color: const Color(0xFF000000),
           )
       ],
     );

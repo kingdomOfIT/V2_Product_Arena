@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
 import 'package:v2_product_arena/constants/global_variables.dart';
 import 'package:v2_product_arena/mobile/features/onboarding/widgets/form_button.dart';
 import 'package:v2_product_arena/mobile/providers/answer_provider.dart';
 import 'package:v2_product_arena/mobile/providers/error_message_provider.dart';
-import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/mobile_footer.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -66,6 +64,7 @@ class _LinkVideoScreenState extends State<LinkVideoScreen> {
                     right: (32 / 360) * MediaQuery.of(context).size.width,
                   ),
                   child: SingleChildScrollView(
+                    key: const Key('videoScroll'),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

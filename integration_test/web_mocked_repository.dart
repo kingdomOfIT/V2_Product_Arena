@@ -7,7 +7,7 @@ Map<String, dynamic> mockedLecturesResponseData = {
       'contentLink': 'https://www.youtube.com/watch?v=HGsMNYq889U',
       'description':
           'FigJam je alat koji će nam pomoći u vizualizaciji podataka, kolaboraciji i brainstormingom sa timom.',
-      'imageSrc': 'https://imgur.com/a/rvbPJLk',
+      'imageSrc': 'https://i.imgur.com/8YI7WzG.jpg',
       'updatedAt': 0
     },
     {

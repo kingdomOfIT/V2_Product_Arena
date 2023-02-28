@@ -1,12 +1,6 @@
-import 'dart:convert';
-
-import 'package:amplify_api/amplify_api.dart';
-import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-
 import 'package:provider/provider.dart';
-import 'package:v2_product_arena/amplifyconfiguration.dart';
 import 'package:v2_product_arena/constants/global_variables.dart';
 import 'package:v2_product_arena/mobile/features/onboarding/screens/mobile_verified_onboarding_screen.dart';
 import 'package:v2_product_arena/mobile/features/onboarding/widgets/role_tile.dart';
@@ -17,7 +11,6 @@ import 'package:v2_product_arena/mobile/providers/role_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/custom_button.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
-import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/mobile_footer.dart';
 
 class SelectRoleScreen extends StatefulWidget {
   final PageController pageController;
@@ -37,20 +30,10 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
             .userEmail, // email of user
         password: Provider.of<MobileAuth>(context, listen: false).userPassword,
       );
-      print('loginovo se');
     } on AuthException catch (e) {
       safePrint(e.message);
     }
   }
-
-  // Future<void> signOutUser() async {
-  //   try {
-  //     final res = await Amplify.Auth.signOut();
-  //     print(res);
-  //   } on AuthException catch (e) {
-  //     safePrint(e.message);
-  //   }
-  // }
 
   Future<void> submitOnboarding(List<String> s1, List<String> s2) async {
     await signInUser();
@@ -58,13 +41,12 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
       isLoading = true;
     });
     try {
-      final restOperation = Amplify.API.post(
+      Amplify.API.post(
         "/api/onboarding/submit",
         body: HttpPayload.json({
           "date": "Feb2023",
           "roles": s1,
           "answers": {
-            // answers are in the same order as questions, null if not answered
             "0": s2[0],
             "1": s2[1],
             "2": s2[2],
@@ -76,26 +58,6 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
         }),
         apiName: "userDataInitAlfa",
       );
-      // await restOperation.response;
-      // Map<String, dynamic> responseMap = jsonDecode(response.decodeBody());
-      // ignore: use_build_context_synchronously
-      // final restOperation2 = Amplify.API.get('/api/user/lectures',
-      //     apiName: 'getLecturesAlfa',
-      //     queryParameters: {
-      //       'paDate': 'Feb2023'
-      //       // , 'name': 'Flutter widgets'
-      //     });
-      // final response = await restOperation2.response;
-      // Map<String, dynamic> responseMap2 = jsonDecode(response.decodeBody());
-      // // mapa1 = responseMap;
-
-      // List temp = [];
-      // responseMap2['lectures'].forEach((lecture) {
-      //   temp.addAll(lecture['roles']);
-      // });
-      // Set<String> set = Set<String>.from(temp);
-      // List<String> roles = set.toList();
-      // print(roles);
       await Provider.of<MobileAuth>(context, listen: false)
           .signOutCurrentUser();
       Navigator.of(context)
@@ -108,60 +70,6 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
       isLoading = false;
     });
   }
-
-  // Future<Map<String, dynamic>> getUserLectures(
-  //     Map<String, dynamic> mapa1) async {
-  //   await signOutUser();
-  //   setState(() {
-  //     isLoading = true;
-  //   });
-  //   await signInUser();
-
-  //   try {
-  //     final restOperation = Amplify.API.get('/api/user/lectures',
-  //         apiName: 'getLecturesAlfa',
-  //         queryParameters: {
-  //           'paDate': 'Feb2023'
-  //           // , 'name': 'Flutter widgets'
-  //         });
-  //     final response = await restOperation.response;
-  //     Map<String, dynamic> responseMap = jsonDecode(response.decodeBody());
-  //     mapa1 = responseMap;
-  //     List temp = [];
-  //     responseMap['lectures'].forEach((lecture) {
-  //       temp.addAll(lecture['roles']);
-  //     });
-  //     Set<String> set = Set<String>.from(temp);
-  //     List<String> roles = set.toList();
-  //     //print(roles);
-  //     final restOperation2 = Amplify.API.get('/api/lectures/order',
-  //         apiName: 'getLecturesOrder',
-  //         queryParameters: {
-  //           'paDate': 'Feb2023'
-  //           // , 'name': 'Flutter widgets'
-  //         });
-  //     final response2 = await restOperation2.response;
-  //     Map<String, dynamic> orders =
-  //         jsonDecode(response2.decodeBody())['lectureOrders'];
-  //     // print(orders);
-  //     Map<String, dynamic> lectures = {};
-  //     roles.forEach((role) {
-  //       lectures[role] = List<dynamic>.filled(
-  //           (orders[role] as Map<String, dynamic>).length, 0);
-  //     });
-  //     responseMap['lectures'].forEach((lecture) {
-  //       lecture['roles'].forEach((role) {
-  //         //print(orders[role][lecture['name']]);
-  //         lectures[role][orders[role][lecture['name']]] = lecture;
-  //       });
-  //     });
-  //     print(lectures['fullstack']);
-  //     // print('GET call succeeded: ${responseMap['lectures']}');
-  //   } on ApiException catch (e) {
-  //     print('GET call failed: $e');
-  //   }
-  //   return mapa1;
-  // }
 
   bool isLoading = false;
 

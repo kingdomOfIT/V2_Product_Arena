@@ -75,7 +75,7 @@ class _WebLectureCardState extends State<WebLectureCard> {
                   ),
                   Text(
                     // 'Total time: ${lectures[index].durationInSeconds}',
-                    'Total time: ${formattedTime}',
+                    'Total time: $formattedTime',
                     style: GoogleFonts.notoSans(
                         fontSize: maxheight * (25 / 1510),
                         fontWeight: FontWeight.w400),

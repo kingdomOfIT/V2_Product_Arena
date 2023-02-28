@@ -156,12 +156,14 @@ class _WebContactScreenState extends State<WebContactScreen> {
                                   Visibility(
                                     visible: isMessageSent,
                                     child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       children: const [
                                         SizedBox(
                                           height: 10,
                                         ),
                                         Text(
-                                          'Your message has been sent.',
+                                          'Thank you for contacting us! We have received your message and will get back to you as soon as possible.',
                                           style: TextStyle(
                                             color: Color(0xFF22E974),
                                           ),
@@ -177,6 +179,7 @@ class _WebContactScreenState extends State<WebContactScreen> {
                             height: 10,
                           ),
                           ElevatedButton(
+                            key: const Key('submitContactFormButton'),
                             onPressed: () async {
                               if (_contactFormKey.currentState!.validate()) {
                                 //signInUser();

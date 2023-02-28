@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_green_profile.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_homepage_sidebar.dart';
+import 'package:video_player/video_player.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 class WebLectureVideoScreen extends StatefulWidget {
@@ -65,7 +67,7 @@ class _WebLectureVideoScreenState extends State<WebLectureVideoScreen> {
                               width: maxwidth * (900 / 1440),
                               child: RichText(
                                 text: TextSpan(
-                                  text: '$numeration. ',
+                                  text: '${lectureIndex + 1}. ',
                                   style: GoogleFonts.notoSans(
                                     fontSize:
                                         MediaQuery.of(context).size.height *
@@ -153,6 +155,7 @@ class _WebLectureVideoScreenState extends State<WebLectureVideoScreen> {
                                       ),
                                     ),
                                     InkWell(
+                                      key: const Key('showMoreButton'),
                                       onTap: () {
                                         setState(() {
                                           _showMore = !_showMore;

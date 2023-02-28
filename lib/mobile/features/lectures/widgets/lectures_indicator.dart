@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class LecturesPageIndicator extends StatelessWidget {
   final int currentPage;
@@ -29,13 +28,17 @@ class LecturesPageIndicator extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: List.generate(totalPages, (index) {
-          return Container(
-            width: width,
-            height: height,
-            decoration: BoxDecoration(
-                color:
-                    index == currentPage ? Colors.grey[600] : Colors.grey[500],
-                borderRadius: const BorderRadius.all(Radius.circular(2.0))),
+          return Visibility(
+            visible: index != 0,
+            child: Container(
+              width: width,
+              height: height,
+              decoration: BoxDecoration(
+                  color: index == currentPage
+                      ? Colors.grey[600]
+                      : Colors.grey[500],
+                  borderRadius: const BorderRadius.all(Radius.circular(2.0))),
+            ),
           );
         }),
       ),
