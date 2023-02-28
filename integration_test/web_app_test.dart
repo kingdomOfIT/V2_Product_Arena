@@ -95,12 +95,20 @@ class MockAPI extends Mock implements APICategory {
       String? apiName}) {
     var result = MockRestOperation();
     when(result.response).thenAnswer((_) async {
-      Map<String, dynamic> mockedResponseData = mockedLecturesResponseData;
-      return AWSHttpResponse(
-        statusCode: 200,
-        headers: const {},
-        body: Uint8List.fromList(utf8.encode(jsonEncode(mockedResponseData))),
-      );
+      if (path == '/api/user/lectures') {
+        Map<String, dynamic> mockedResponseData = mockedLecturesResponseData;
+        return AWSHttpResponse(
+          statusCode: 200,
+          headers: const {},
+          body: Uint8List.fromList(utf8.encode(jsonEncode(mockedResponseData))),
+        );
+      } else {
+        return AWSHttpResponse(
+          statusCode: 200,
+          headers: const {},
+          body: Uint8List.fromList([]),
+        );
+      }
     });
     return result;
   }
@@ -192,12 +200,23 @@ final onboardingVideoTextField =
 final onboardingSubmitButton = find.byKey(const Key('onboardingSubmitWeb'));
 final onboardingScrollableScreen = find.byKey(const Key('scrollWebOnboarding'));
 final firstRoleTextButton = find.byType(TextButton).at(1);
+final secondRoleTextButton = find.byType(TextButton).at(2);
+final listViewFinder = find.byKey(const Key('scrollableListView'));
+final showMoreButton = find.byKey(const Key('showMoreButton'));
+final recentLecturesButton = find.byKey(const Key('recentLecturesButton'));
+final homescreenButton = find.byKey(const Key('homescreenButton'));
+final contactFormButton = find.byKey(const Key('contactFormButton'));
+final contactField = find.byKey(const Key('contactField'));
+final submitContactFormButton =
+    find.byKey(const Key('submitContactFormButton'));
+final profilePopupButton = find.byType(PopupMenuButton<int>);
+final popupLogoutButton = find.byType(PopupMenuItem<int>);
 
 @GenerateMocks([SignUpResult, AmplifyClass])
 void main() {
-  group('Web flow test (login, signup, onboarding)', () {
+  group('Web application flow test', () {
     IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-    testWidgets('Web signup', (tester) async {
+    testWidgets('Web application flow test', (tester) async {
       MockAmplifyClass test = MockAmplifyClass();
       when(test.Auth).thenReturn(MockAuth());
       when(test.API).thenReturn(MockAPI());
@@ -258,6 +277,8 @@ void main() {
       await tester.tap(signupButton);
       await tester.pumpAndSettle();
 
+      expect(find.text('Just to be sure...'), findsOneWidget);
+
       await tester.tap(emailVerificationTextField1);
       await tester.enterText(emailVerificationTextField1, '1');
 
@@ -291,76 +312,22 @@ void main() {
       await tester.tap(emailVerifyButton);
       await tester.pumpAndSettle();
 
+      expect(find.text('Email verified'), findsOneWidget);
+
       await tester.pumpAndSettle(const Duration(seconds: 5));
 
       await tester.tap(onboardingAnswerYes);
       await tester.pumpAndSettle();
 
-      // final List<Widget> qatiles =
-      //     tester.widgetList(find.byType(QATile)).toList();
-      // for (int i = 0; i < qatiles.length; i++) {
-      //   final qatileFinder = find.byWidget(qatiles[i]);
-      //   final RenderBox qatileBox = tester.renderObject(qatileFinder);
-      //   final Offset qatileCenter =
-      //       qatileBox.localToGlobal(qatileBox.size.center(Offset.zero));
-      //   final Rect screen = Offset.zero &
-      //       tester.binding.window.physicalSize /
-      //           tester.binding.window.devicePixelRatio;
-
-      //   if (screen.contains(qatileCenter)) {
-      //     await tester.tap(qatileFinder);
-      //   } else {
-      //     await Future.delayed(const Duration(seconds: 1));
-      //     await tester.ensureVisible(qatileFinder);
-      //     await tester.tap(qatileFinder);
-      //   }
-      //   await tester.pump();
-
-      //   final textFormField = find.descendant(
-      //     of: qatileFinder,
-      //     matching: find.byType(TextFormField),
-      //   );
-      //   await tester.enterText(textFormField, 'Some text for QATile $i');
-      // }
-      // await tester.pumpAndSettle();
-
       final List<Widget> qatiles =
           tester.widgetList(find.byType(QATile)).toList();
       for (int i = 0; i < qatiles.length; i++) {
-        // Tap on QATile
-        // await tester.tap(find.byWidget(qatiles[i]));
-        // await tester.pump();
-
         final textFormField = find.descendant(
             of: find.byWidget(qatiles[i]),
             matching: find.byType(TextFormField));
         await tester.enterText(textFormField, 'Some text for QATile $i');
         await tester.pumpAndSettle();
       }
-      // await tester.pumpAndSettle();
-      // await tester.tap(onboardingAnswerQ1);
-      // await tester.enterText(onboardingAnswerQ1, 'anything');
-      // await tester.pumpAndSettle();
-
-      // await tester.tap(onboardingAnswerQ2);
-      // await tester.enterText(onboardingAnswerQ2, 'anything');
-      // await tester.pumpAndSettle();
-
-      // await tester.tap(onboardingAnswerQ3);
-      // await tester.enterText(onboardingAnswerQ3, 'anything');
-      // await tester.pumpAndSettle();
-
-      // await tester.tap(onboardingAnswerQ4);
-      // await tester.enterText(onboardingAnswerQ4, 'anything');
-      // await tester.pumpAndSettle();
-
-      // await tester.tap(onboardingAnswerQ5);
-      // await tester.enterText(onboardingAnswerQ5, 'anything');
-      // await tester.pumpAndSettle();
-
-      // await tester.tap(onboardingAnswerQ6);
-      // await tester.enterText(onboardingAnswerQ6, 'anything');
-      // await tester.pumpAndSettle();
 
       await tester.tap(onboardingVideoTextField);
       await tester.enterText(onboardingVideoTextField,
@@ -401,34 +368,81 @@ void main() {
       await tester.tap(loginButton);
       await tester.pumpAndSettle();
 
+      await tester.ensureVisible(secondRoleTextButton);
+      await tester.tap(secondRoleTextButton);
+      await tester.pumpAndSettle();
+      await tester.drag(listViewFinder, const Offset(0, -1400));
+      await tester
+          .pump(const Duration(milliseconds: 500)); // add delay/ add delay
+      await tester.pumpAndSettle();
+
       await tester.ensureVisible(firstRoleTextButton);
       await tester.tap(firstRoleTextButton);
       await tester.pumpAndSettle();
-      // final listView = find.byType(ListView);
-// await tester.drag(find.byType(C), Offset(0.0, -200));     await tester.pump();
 
-      // await tester.scrollUntilVisible(cardFinder, -500);
-      final listViewFinder = find.byKey(const Key('scrollableListView'));
       final fifthCardFinder = find.text('6. Design System: Material Design');
       await tester.drag(listViewFinder, const Offset(0, -800));
       await tester
           .pump(const Duration(milliseconds: 500)); // add delay/ add delay
       await tester.tap(fifthCardFinder);
       await tester.pumpAndSettle();
-      // final listView = find.byType(ListView);
-      // await tester.fling(listView, const Offset(0, -200), 1000);
-      // await tester.pumpAndSettle();
 
-      // await tester.ensureVisible(secondRoleButton);
-      // await tester.tap(secondRoleButton);
-      // await tester.pumpAndSettle();
-      await tester.ensureVisible(logOutButton);
-      await tester.tap(logOutButton);
+      await tester.ensureVisible(showMoreButton);
+      await tester.tap(showMoreButton);
       await tester.pumpAndSettle();
+
+      expect(
+          find.text(
+              '"Material Design" je dizajn sistem razvijen od Google-a i jedan je od najbolje dokumentovanih. Ovdje možeš pronaći svu dokumentaciju. Detaljno je proučite i pokušajte da je iskoristite.'),
+          findsOneWidget);
+
+      await tester.ensureVisible(contactFormButton);
+      await tester.tap(contactFormButton);
+      await tester.pumpAndSettle();
+
+      await tester.ensureVisible(contactField);
+      await tester.tap(contactField);
+      await tester.pumpAndSettle();
+      await tester.enterText(contactField, 'Test');
+      await tester.tap(submitContactFormButton);
+      await tester.pumpAndSettle();
+
+      expect(find.text('Your message has to contain at least 10 characters'),
+          findsOneWidget);
+
+      await tester.tap(contactField);
+      await tester.enterText(contactField, 'Testiranje submita');
+      await tester.pumpAndSettle();
+      await tester.tap(submitContactFormButton);
+      await tester.pumpAndSettle();
+
+      await tester.ensureVisible(recentLecturesButton);
+      await tester.tap(recentLecturesButton);
+      await tester.pumpAndSettle();
+
+      expect(
+          find.text('Agile Product Ownership in a Nutshell'), findsNWidgets(2));
+
+      await tester.ensureVisible(homescreenButton);
+      await tester.tap(homescreenButton);
+      await tester.pumpAndSettle();
+
+      await tester.ensureVisible(profilePopupButton);
+      await tester.tap(profilePopupButton);
+      await tester.pumpAndSettle();
+
+      await tester.ensureVisible(popupLogoutButton);
+      await tester.tap(popupLogoutButton);
+      await tester.pumpAndSettle();
+
+      expect(find.text('All great things take time to accomplish'),
+          findsOneWidget);
 
       await tester.ensureVisible(signupRedirectionButton);
       await tester.tap(signupRedirectionButton);
       await tester.pumpAndSettle();
+
+      expect(find.text('Welcome to'), findsOneWidget);
     });
   });
 }

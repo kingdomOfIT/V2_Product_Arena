@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
-import 'package:v2_product_arena/mobile/features/auth/screens/mobile_login_screen.dart';
 
 class MobileAuth with ChangeNotifier {
   String errorText = '';
@@ -43,8 +42,8 @@ class MobileAuth with ChangeNotifier {
   //     await Amplify.configure(amplifyconfig);
   //   } catch (e) {}
   // }
-  List _lecture = [];
-  List _lectureVideos = [];
+  final List _lecture = [];
+  final List _lectureVideos = [];
   int numberOfLessons = 0;
   List<String> _roles = [];
   List _lecturesRole1 = [];
@@ -133,7 +132,7 @@ class MobileAuth with ChangeNotifier {
       isSignInComplete = result.isSignedIn;
       notifyListeners();
 
-      print('logged in');
+      safePrint('logged in');
       await getUserLectures();
       // ignore: use_build_context_synchronously
       await fetchCurrentUserAttributes();
@@ -176,9 +175,9 @@ class MobileAuth with ChangeNotifier {
               element.userAttributeKey.toString() ==
               'CognitoUserAttributeKey "email"')
           .value;
-      print(userName);
+      safePrint(userName);
     } on AuthException catch (e) {
-      print(e.message);
+      safePrint(e.message);
     }
   }
 
@@ -199,7 +198,7 @@ class MobileAuth with ChangeNotifier {
       Set<String> set = Set<String>.from(temp);
       _roles = set.toList();
 
-      print(_roles);
+      safePrint(_roles);
       var oneLecture;
       responseMap['lectures'].forEach((lecture) {
         oneLecture = lecture;
@@ -228,7 +227,7 @@ class MobileAuth with ChangeNotifier {
         // }
       }
     } on ApiException catch (e) {
-      print('GET call failed: $e');
+      safePrint('GET call failed: $e');
     }
   }
 }

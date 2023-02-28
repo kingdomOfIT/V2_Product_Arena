@@ -1,7 +1,19 @@
+import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/email_verified_screen.dart';
 
+@GenerateMocks([
+  SignInResult,
+  SignUpResult,
+  SignOutResult,
+  AuthUserAttributeKey,
+  RestOperation,
+  AWSHttpResponse,
+  APICategory,
+  AmplifyClass
+])
 void main() {
   group('Mobile email verified screen tests', () {
     testWidgets(

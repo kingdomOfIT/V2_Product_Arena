@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:v2_product_arena/mobile/features/lectures/screens/welcome_lectures_screen.dart';
 
 class RoleTileLectures extends StatefulWidget {
   final String roleName;
