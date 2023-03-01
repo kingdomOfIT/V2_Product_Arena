@@ -6,6 +6,7 @@ import 'package:v2_product_arena/mobile/features/home/screens/mobile_contact_scr
 import 'package:v2_product_arena/mobile/features/lectures/screens/welcome_lectures_screen.dart';
 import 'package:v2_product_arena/mobile/features/lectures/widgets/lectures_sidebar_button.dart';
 import 'package:v2_product_arena/mobile/features/lectures/widgets/role_tile_drawer.dart';
+import 'package:v2_product_arena/mobile/providers/error_message_provider.dart';
 import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
 import 'package:v2_product_arena/mobile/providers/role_provider.dart';
 import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/mobile_footer.dart';
@@ -21,24 +22,41 @@ class MobileSidebar extends StatefulWidget {
 
 class _MobileSidebarState extends State<MobileSidebar> {
   List<Role> lista = [];
+  List<Role> lista1 = [];
   List<String> roleName = [];
 
   @override
   Widget build(BuildContext context) {
     final dataProvider = Provider.of<MobileAuth>(context, listen: false);
+    final selectedProvider = Provider.of<ErrorMessage>(context);
     if (dataProvider.roles.length == 1) {
-      for (var role in listRoleMob) {
+      for (var role in listRoleSel) {
         if (role.name['forBackend'] == dataProvider.roles[0]) {
           lista.add(role);
           roleName.add(role.name['forFrontend']!);
         }
       }
     } else {
-      for (var role in listRoleMob) {
+      for (var role in listRoleSel) {
         if (role.name['forBackend'] == dataProvider.roles[0] ||
             role.name['forBackend'] == dataProvider.roles[1]) {
           lista.add(role);
           roleName.add(role.name['forFrontend']!);
+        }
+      }
+    }
+
+    if (dataProvider.roles.length == 1) {
+      for (var role in listRoleMobSel) {
+        if (role.name['forBackend'] == dataProvider.roles[0]) {
+          lista1.add(role);
+        }
+      }
+    } else {
+      for (var role in listRoleMobSel) {
+        if (role.name['forBackend'] == dataProvider.roles[0] ||
+            role.name['forBackend'] == dataProvider.roles[1]) {
+          lista1.add(role);
         }
       }
     }
@@ -84,14 +102,13 @@ class _MobileSidebarState extends State<MobileSidebar> {
               width: screenWidth * (24 / 360),
             ),
           ),
-
           Padding(
             padding: EdgeInsets.symmetric(horizontal: screenWidth * (20 / 360)),
             child: Divider(color: Colors.white),
           ),
           Padding(
             padding: EdgeInsets.only(
-                left: (15 / 360) * MediaQuery.of(context).size.width),
+                left: (0 / 360) * MediaQuery.of(context).size.width),
             child: SizedBox(
               height: dataProvider.roles.length * 56,
               child: ListView.builder(
@@ -100,7 +117,14 @@ class _MobileSidebarState extends State<MobileSidebar> {
                   return GestureDetector(
                     child: RoleTileLectures(
                       roleName: lista[index].name['forFrontend']!,
-                      roleImage: lista[index].image,
+                      roleImage: selectedProvider.selectedRole
+                              .contains(lista[index].name['forFrontend']!)
+                          ? lista1[index].image
+                          : lista[index].image,
+                      color: selectedProvider.selectedRole
+                              .contains(lista[index].name['forFrontend']!)
+                          ? Colors.green
+                          : Colors.white,
                     ),
                     onTap: () {
                       if (dataProvider.isSidebarOpened == true) {
@@ -111,6 +135,14 @@ class _MobileSidebarState extends State<MobileSidebar> {
                         dataProvider.changeSidebar2();
                       } else if (dataProvider.isSidebarOpened3 == true) {
                         dataProvider.changeSidebar3();
+                      }
+                      if (selectedProvider.selectedRole.isEmpty) {
+                        selectedProvider.selectedRole
+                            .add(lista[index].name['forFrontend']!);
+                      } else {
+                        selectedProvider.selectedRole.clear();
+                        selectedProvider.selectedRole
+                            .add(lista[index].name['forFrontend']!);
                       }
                       Navigator.push(
                         context,
@@ -126,34 +158,34 @@ class _MobileSidebarState extends State<MobileSidebar> {
               ),
             ),
           ),
-          // ListTile(
-          //   title: Text(
-          //     "UI/UX Design",
-          //     style: GoogleFonts.notoSans(
-          //       fontWeight: FontWeight.w700,
-          //       fontSize: screenHeight * (16 / 803),
-          //       color: Colors.white,
-          //     ),
-          //   ),
-          //   leading: Image.asset(
-          //     "assets/images/rolevectorwhite4.png",
-          //     height: screenHeight * (24 / 803),
-          //     width: screenWidth * (24 / 360),
-          //   ),
-          // ),
-          ListTile(
-            title: Text(
-              "Recent Lessons",
-              style: GoogleFonts.notoSans(
-                fontWeight: FontWeight.w700,
-                fontSize: screenHeight * (16 / 803),
-                color: Colors.white,
+          GestureDetector(
+            onTap: () {
+              if (selectedProvider.selectedRole.isEmpty) {
+                selectedProvider.selectedRole.add('Recent Lessons');
+              } else {
+                selectedProvider.selectedRole.clear();
+                selectedProvider.selectedRole.add('Recent Lessons');
+              }
+            },
+            child: ListTile(
+              title: Text(
+                "Recent Lessons",
+                style: GoogleFonts.notoSans(
+                  fontWeight: FontWeight.w700,
+                  fontSize: screenHeight * (16 / 803),
+                  color:
+                      selectedProvider.selectedRole.contains('Recent Lessons')
+                          ? Colors.green
+                          : Colors.white,
+                ),
               ),
-            ),
-            leading: Image.asset(
-              "assets/images/Recent icon.png",
-              height: screenHeight * (24 / 803),
-              width: screenWidth * (24 / 360),
+              leading: Image.asset(
+                selectedProvider.selectedRole.contains('Recent Lessons')
+                    ? 'assets/images/recent_icon_green.png'
+                    : 'assets/images/Recent icon.png',
+                height: screenHeight * (24 / 803),
+                width: screenWidth * (24 / 360),
+              ),
             ),
           ),
           InkWell(
@@ -167,6 +199,12 @@ class _MobileSidebarState extends State<MobileSidebar> {
               } else if (dataProvider.isSidebarOpened3 == true) {
                 dataProvider.changeSidebar3();
               }
+              if (selectedProvider.selectedRole.isEmpty) {
+                selectedProvider.selectedRole.add('Contact us');
+              } else {
+                selectedProvider.selectedRole.clear();
+                selectedProvider.selectedRole.add('Contact us');
+              }
               Navigator.of(context).pushNamed(MobileContactUs.routeName);
             },
             child: ListTile(
@@ -175,11 +213,15 @@ class _MobileSidebarState extends State<MobileSidebar> {
                 style: GoogleFonts.notoSans(
                   fontWeight: FontWeight.w700,
                   fontSize: screenHeight * (16 / 803),
-                  color: Colors.white,
+                  color: selectedProvider.selectedRole.contains('Contact us')
+                      ? Colors.green
+                      : Colors.white,
                 ),
               ),
               leading: Image.asset(
-                "assets/images/contact us.png",
+                selectedProvider.selectedRole.contains('Contact us')
+                    ? 'assets/images/contactus_green.png'
+                    : 'assets/images/contact us.png',
                 height: screenHeight * (24 / 803),
                 width: screenWidth * (24 / 360),
               ),

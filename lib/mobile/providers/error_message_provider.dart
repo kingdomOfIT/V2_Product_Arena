@@ -4,6 +4,8 @@ class ErrorMessage with ChangeNotifier {
   String errorText = '';
   IconData? errorIcon;
   double errorHeight = 0;
+
+  List selectedRole = [];
   String get text => errorText;
   IconData? get icon => errorIcon;
   double get height => errorHeight;

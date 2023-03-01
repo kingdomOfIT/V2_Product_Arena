@@ -101,35 +101,35 @@ List<Role> listRoleMob = [
       'forFrontend': 'QA Engineering',
       'forBackend': 'qa',
     },
-    'assets/images/qamobicon.png',
+    'assets/images/rolevectorblack1.png',
   ),
   Role(
     {
       'forFrontend': 'Project Management',
       'forBackend': 'productManager',
     },
-    'assets/images/pmiconmob.png',
+    'assets/images/rolevectorblack2.png',
   ),
   Role(
     {
       'forFrontend': 'Backend',
       'forBackend': 'backend',
     },
-    'assets/images/backendiconmob.png',
+    'assets/images/rolevectorblack3.png',
   ),
   Role(
     {
       'forFrontend': 'UI/UX Design',
       'forBackend': 'uiux',
     },
-    'assets/images/uxmobicon.png',
+    'assets/images/rolevectorblack4.png',
   ),
   Role(
     {
       'forFrontend': 'Full Stack Developer',
       'forBackend': 'fullstack',
     },
-    'assets/images/fullstackmobicon.png',
+    'assets/images/rolevectorwhite5.png',
   )
 ];
 List<Role> listRoleSel = [
@@ -160,6 +160,44 @@ List<Role> listRoleSel = [
       'forBackend': 'uiux',
     },
     'assets/images/rolevectorwhite4.png',
+  ),
+  Role(
+    {
+      'forFrontend': 'Full Stack Developer',
+      'forBackend': 'fullstack',
+    },
+    'assets/images/rolevectorwhite5.png',
+  )
+];
+
+List<Role> listRoleMobSel = [
+  Role(
+    {
+      'forFrontend': 'QA Engineering',
+      'forBackend': 'qa',
+    },
+    'assets/images/qa_icon_green.png',
+  ),
+  Role(
+    {
+      'forFrontend': 'Project Management',
+      'forBackend': 'productManager',
+    },
+    'assets/images/rolevectorwhite2.png',
+  ),
+  Role(
+    {
+      'forFrontend': 'Backend',
+      'forBackend': 'backend',
+    },
+    'assets/images/backend_green.png',
+  ),
+  Role(
+    {
+      'forFrontend': 'UI/UX Design',
+      'forBackend': 'uiux',
+    },
+    'assets/images/uiux_green.png',
   ),
   Role(
     {
