@@ -99,7 +99,7 @@ class WebFooter extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Flexible(
-                              child: GestureDetector(
+                              child: InkWell(
                                 child: Image.asset(
                                   'assets/images/facebook.png',
                                 ),
@@ -108,7 +108,7 @@ class WebFooter extends StatelessWidget {
                               ),
                             ),
                             Flexible(
-                              child: GestureDetector(
+                              child: InkWell(
                                 child: Image.asset(
                                   'assets/images/instagram.png',
                                 ),
@@ -117,7 +117,7 @@ class WebFooter extends StatelessWidget {
                               ),
                             ),
                             Flexible(
-                              child: GestureDetector(
+                              child: InkWell(
                                 child: Image.asset(
                                   'assets/images/linked.png',
                                 ),
@@ -126,7 +126,7 @@ class WebFooter extends StatelessWidget {
                               ),
                             ),
                             Flexible(
-                              child: GestureDetector(
+                              child: InkWell(
                                 child: Image.asset(
                                   'assets/images/tech.png',
                                 ),
