@@ -129,6 +129,7 @@ class _MyAppState extends State<MyApp> {
             ? const MobileLoginScreen()
             : const MobileLoginScreen(),
         routes: {
+          RecentLectures.routeName: (context) => RecentLectures(),
           MobileLoginScreen.routeName: (context) => const MobileLoginScreen(),
           MobileSignupScreen.routeName: (context) => const MobileSignupScreen(),
           MobileOnboardingScreen.routeName: (context) =>
