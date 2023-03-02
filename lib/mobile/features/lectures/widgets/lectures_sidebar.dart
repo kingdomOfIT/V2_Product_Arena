@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:v2_product_arena/mobile/features/home/screens/mobile_contact_screen.dart';
 import 'package:v2_product_arena/mobile/features/lectures/screens/welcome_lectures_screen.dart';
 import 'package:v2_product_arena/mobile/features/lectures/widgets/lectures_sidebar_button.dart';
+import 'package:v2_product_arena/mobile/features/lectures/widgets/recent_lectures_tile.dart';
 import 'package:v2_product_arena/mobile/features/lectures/widgets/role_tile_drawer.dart';
 import 'package:v2_product_arena/mobile/providers/error_message_provider.dart';
 import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
@@ -168,6 +169,7 @@ class _MobileSidebarState extends State<MobileSidebar> {
                     selectedProvider.selectedRole.clear();
                     selectedProvider.selectedRole.add('Recent Lessons');
                   }
+                  Navigator.of(context).pushNamed(RecentLectures.routeName);
                 },
                 child: SizedBox(
                   height: 56,
@@ -232,7 +234,7 @@ class _MobileSidebarState extends State<MobileSidebar> {
                         width: (8 / 360) * MediaQuery.of(context).size.width,
                       ),
                       Text(
-                        "Contact us !",
+                        "Contact us!",
                         style: GoogleFonts.notoSans(
                           fontWeight: FontWeight.w700,
                           fontSize: screenHeight * (16 / 803),
