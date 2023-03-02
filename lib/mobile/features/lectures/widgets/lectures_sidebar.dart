@@ -65,176 +65,197 @@ class _MobileSidebarState extends State<MobileSidebar> {
     final double screenHeight = mediaQuery.size.height;
     return Drawer(
       backgroundColor: Color(0xFF000000),
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          SizedBox(
-            height: screenHeight * (90 / 803),
-            width: screenWidth * (360 / 360),
-            child: DrawerHeader(
-              child: Text(
-                '${dataProvider.userName} ${dataProvider.userSurname}',
-                style: GoogleFonts.notoSans(
-                  textStyle: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: screenHeight * (32 / 803),
-                    color: Color(0xFF22E974),
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.only(
+              left: (24 / 360) * MediaQuery.of(context).size.width),
+          child: Column(
+            children: [
+              SizedBox(
+                height: screenHeight * (90 / 803),
+                width: screenWidth,
+                child: Text(
+                  '${dataProvider.userName} ${dataProvider.userSurname}',
+                  style: GoogleFonts.notoSans(
+                    textStyle: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: screenHeight * (32 / 803),
+                      color: Color(0xFF22E974),
+                    ),
                   ),
                 ),
               ),
-              margin: EdgeInsets.all(screenHeight * (0 / 803)),
-            ),
-          ),
-          ListTile(
-            title: Text(
-              dataProvider.emailUser,
-              style: GoogleFonts.notoSans(
-                textStyle: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: screenHeight * (16 / 803),
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            leading: Image.asset(
-              "assets/images/user-line.png",
-              height: screenHeight * (24 / 803),
-              width: screenWidth * (24 / 360),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: screenWidth * (20 / 360)),
-            child: Divider(color: Colors.white),
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-                left: (0 / 360) * MediaQuery.of(context).size.width),
-            child: SizedBox(
-              height: dataProvider.roles.length * 56,
-              child: ListView.builder(
-                itemCount: dataProvider.roles.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return GestureDetector(
-                    child: RoleTileLectures(
-                      roleName: lista[index].name['forFrontend']!,
-                      roleImage: selectedProvider.selectedRole
-                              .contains(lista[index].name['forFrontend']!)
-                          ? lista1[index].image
-                          : lista[index].image,
-                      color: selectedProvider.selectedRole
-                              .contains(lista[index].name['forFrontend']!)
-                          ? Colors.green
-                          : Colors.white,
+              Row(
+                children: [
+                  Image.asset(
+                    "assets/images/user-line.png",
+                    height: screenHeight * (24 / 803),
+                    width: screenWidth * (24 / 360),
+                  ),
+                  SizedBox(
+                    width: (8 / 360) * MediaQuery.of(context).size.width,
+                  ),
+                  Text(
+                    dataProvider.emailUser,
+                    style: GoogleFonts.notoSans(
+                      textStyle: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: screenHeight * (16 / 803),
+                        color: Colors.white,
+                      ),
                     ),
-                    onTap: () {
-                      if (dataProvider.isSidebarOpened == true) {
-                        dataProvider.changeSidebar();
-                      } else if (dataProvider.isSidebarOpened1 == true) {
-                        dataProvider.changeSidebar1();
-                      } else if (dataProvider.isSidebarOpened2 == true) {
-                        dataProvider.changeSidebar2();
-                      } else if (dataProvider.isSidebarOpened3 == true) {
-                        dataProvider.changeSidebar3();
-                      }
-                      if (selectedProvider.selectedRole.isEmpty) {
-                        selectedProvider.selectedRole
-                            .add(lista[index].name['forFrontend']!);
-                      } else {
-                        selectedProvider.selectedRole.clear();
-                        selectedProvider.selectedRole
-                            .add(lista[index].name['forFrontend']!);
-                      }
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => WelcomeLecturesScreen(
-                            role: lista[index].name['forBackend']!,
+                  ),
+                ],
+              ),
+              Padding(
+                padding:
+                    EdgeInsets.symmetric(horizontal: screenWidth * (20 / 360)),
+                child: Divider(color: Colors.white),
+              ),
+              SizedBox(
+                height: dataProvider.roles.length * 56,
+                child: ListView.builder(
+                  itemCount: dataProvider.roles.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return GestureDetector(
+                      child: RoleTileLectures(
+                        roleName: lista[index].name['forFrontend']!,
+                        roleImage: selectedProvider.selectedRole
+                                .contains(lista[index].name['forFrontend']!)
+                            ? lista1[index].image
+                            : lista[index].image,
+                        color: selectedProvider.selectedRole
+                                .contains(lista[index].name['forFrontend']!)
+                            ? Color(0xFF22E974)
+                            : Colors.white,
+                      ),
+                      onTap: () {
+                        if (dataProvider.isSidebarOpened == true) {
+                          dataProvider.changeSidebar();
+                        } else if (dataProvider.isSidebarOpened1 == true) {
+                          dataProvider.changeSidebar1();
+                        } else if (dataProvider.isSidebarOpened2 == true) {
+                          dataProvider.changeSidebar2();
+                        } else if (dataProvider.isSidebarOpened3 == true) {
+                          dataProvider.changeSidebar3();
+                        }
+                        if (selectedProvider.selectedRole.isEmpty) {
+                          selectedProvider.selectedRole
+                              .add(lista[index].name['forFrontend']!);
+                        } else {
+                          selectedProvider.selectedRole.clear();
+                          selectedProvider.selectedRole
+                              .add(lista[index].name['forFrontend']!);
+                        }
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => WelcomeLecturesScreen(
+                              role: lista[index].name['forBackend']!,
+                            ),
                           ),
-                        ),
-                      );
-                    },
-                  );
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  if (selectedProvider.selectedRole.isEmpty) {
+                    selectedProvider.selectedRole.add('Recent Lessons');
+                  } else {
+                    selectedProvider.selectedRole.clear();
+                    selectedProvider.selectedRole.add('Recent Lessons');
+                  }
                 },
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              if (selectedProvider.selectedRole.isEmpty) {
-                selectedProvider.selectedRole.add('Recent Lessons');
-              } else {
-                selectedProvider.selectedRole.clear();
-                selectedProvider.selectedRole.add('Recent Lessons');
-              }
-            },
-            child: ListTile(
-              title: Text(
-                "Recent Lessons",
-                style: GoogleFonts.notoSans(
-                  fontWeight: FontWeight.w700,
-                  fontSize: screenHeight * (16 / 803),
-                  color:
-                      selectedProvider.selectedRole.contains('Recent Lessons')
-                          ? Colors.green
-                          : Colors.white,
+                child: SizedBox(
+                  height: 56,
+                  child: Row(
+                    children: [
+                      Image.asset(
+                        selectedProvider.selectedRole.contains('Recent Lessons')
+                            ? 'assets/images/recent_icon_green.png'
+                            : 'assets/images/Recent icon.png',
+                        height: screenHeight * (24 / 803),
+                        width: screenWidth * (24 / 360),
+                      ),
+                      SizedBox(
+                        width: (8 / 360) * MediaQuery.of(context).size.width,
+                      ),
+                      Text(
+                        "Recent Lessons",
+                        style: GoogleFonts.notoSans(
+                          fontWeight: FontWeight.w700,
+                          fontSize: screenHeight * (16 / 803),
+                          color: selectedProvider.selectedRole
+                                  .contains('Recent Lessons')
+                              ? Color(0xFF22E974)
+                              : Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              leading: Image.asset(
-                selectedProvider.selectedRole.contains('Recent Lessons')
-                    ? 'assets/images/recent_icon_green.png'
-                    : 'assets/images/Recent icon.png',
-                height: screenHeight * (24 / 803),
-                width: screenWidth * (24 / 360),
-              ),
-            ),
-          ),
-          InkWell(
-            onTap: () {
-              if (dataProvider.isSidebarOpened == true) {
-                dataProvider.changeSidebar();
-              } else if (dataProvider.isSidebarOpened1 == true) {
-                dataProvider.changeSidebar1();
-              } else if (dataProvider.isSidebarOpened2 == true) {
-                dataProvider.changeSidebar2();
-              } else if (dataProvider.isSidebarOpened3 == true) {
-                dataProvider.changeSidebar3();
-              }
-              if (selectedProvider.selectedRole.isEmpty) {
-                selectedProvider.selectedRole.add('Contact us');
-              } else {
-                selectedProvider.selectedRole.clear();
-                selectedProvider.selectedRole.add('Contact us');
-              }
-              Navigator.of(context).pushNamed(MobileContactUs.routeName);
-            },
-            child: ListTile(
-              title: Text(
-                "Contact us !",
-                style: GoogleFonts.notoSans(
-                  fontWeight: FontWeight.w700,
-                  fontSize: screenHeight * (16 / 803),
-                  color: selectedProvider.selectedRole.contains('Contact us')
-                      ? Colors.green
-                      : Colors.white,
+              InkWell(
+                onTap: () {
+                  if (dataProvider.isSidebarOpened == true) {
+                    dataProvider.changeSidebar();
+                  } else if (dataProvider.isSidebarOpened1 == true) {
+                    dataProvider.changeSidebar1();
+                  } else if (dataProvider.isSidebarOpened2 == true) {
+                    dataProvider.changeSidebar2();
+                  } else if (dataProvider.isSidebarOpened3 == true) {
+                    dataProvider.changeSidebar3();
+                  }
+                  if (selectedProvider.selectedRole.isEmpty) {
+                    selectedProvider.selectedRole.add('Contact us');
+                  } else {
+                    selectedProvider.selectedRole.clear();
+                    selectedProvider.selectedRole.add('Contact us');
+                  }
+                  Navigator.of(context).pushNamed(MobileContactUs.routeName);
+                },
+                child: SizedBox(
+                  height: 56,
+                  child: Row(
+                    children: [
+                      Image.asset(
+                        selectedProvider.selectedRole.contains('Contact us')
+                            ? 'assets/images/contactus_green.png'
+                            : 'assets/images/contact us.png',
+                        height: screenHeight * (24 / 803),
+                        width: screenWidth * (24 / 360),
+                      ),
+                      SizedBox(
+                        width: (8 / 360) * MediaQuery.of(context).size.width,
+                      ),
+                      Text(
+                        "Contact us !",
+                        style: GoogleFonts.notoSans(
+                          fontWeight: FontWeight.w700,
+                          fontSize: screenHeight * (16 / 803),
+                          color: selectedProvider.selectedRole
+                                  .contains('Contact us')
+                              ? Color(0xFF22E974)
+                              : Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              leading: Image.asset(
-                selectedProvider.selectedRole.contains('Contact us')
-                    ? 'assets/images/contactus_green.png'
-                    : 'assets/images/contact us.png',
-                height: screenHeight * (24 / 803),
-                width: screenWidth * (24 / 360),
-              ),
-            ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: EdgeInsets.only(top: screenHeight * (149 / 803)),
+                  child: SidebarButton(),
+                ),
+              )
+            ],
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: EdgeInsets.only(top: screenHeight * (149 / 803)),
-              child: SidebarButton(),
-            ),
-          )
-        ],
+        ),
       ),
     );
   }

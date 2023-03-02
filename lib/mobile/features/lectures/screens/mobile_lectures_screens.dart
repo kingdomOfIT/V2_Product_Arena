@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:v2_product_arena/mobile/features/lectures/screens/hello_screen.dart';
 import 'package:v2_product_arena/mobile/features/lectures/widgets/lectures_sidebar.dart';
 import 'package:v2_product_arena/mobile/features/lectures/widgets/lectures_video_tile.dart';
+import 'package:v2_product_arena/mobile/providers/error_message_provider.dart';
 import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
 
 class MobileLecturesScreen extends StatefulWidget {
@@ -41,6 +42,7 @@ class _MobileLecturesScreenState extends State<MobileLecturesScreen> {
             ),
             child: GestureDetector(
               onTap: () {
+                Provider.of<ErrorMessage>(context).selectedRole.clear();
                 Navigator.of(context).pushNamed(WelcomePage.routeName);
               },
               child: Image.asset(
@@ -57,13 +59,19 @@ class _MobileLecturesScreenState extends State<MobileLecturesScreen> {
             padding: EdgeInsets.only(
                 right: (32 / 360) * MediaQuery.of(context).size.width),
             child: GestureDetector(
+              onHorizontalDragEnd: (DragEndDetails details) {
+                if (details.primaryVelocity! > 0 &&
+                    _key.currentState?.isEndDrawerOpen == false) {
+                  dataProvider.changeSidebar1();
+                }
+              },
               onTap: () {
                 dataProvider.isSidebarOpened1
                     ? _key.currentState!.closeEndDrawer()
                     : _key.currentState!.openEndDrawer();
                 dataProvider.changeSidebar1();
               },
-              child: dataProvider.isSidebarOpened1
+              child: (dataProvider.isSidebarOpened1)
                   ? const Icon(Icons.close)
                   : const Icon(Icons.menu),
             ),

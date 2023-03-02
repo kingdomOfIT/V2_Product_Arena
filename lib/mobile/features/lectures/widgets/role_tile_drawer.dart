@@ -26,7 +26,7 @@ class _RoleTileLecturesState extends State<RoleTileLectures> {
       builder: ((context, value, child) {
         return SizedBox(
           width: (280 / 360) * MediaQuery.of(context).size.width,
-          height: 50,
+          height: 56,
           child: Row(
             children: [
               SizedBox(
@@ -34,8 +34,8 @@ class _RoleTileLecturesState extends State<RoleTileLectures> {
                 width: (24 / 360) * MediaQuery.of(context).size.width,
                 child: Image.asset(widget.roleImage),
               ),
-              const SizedBox(
-                width: 23,
+              SizedBox(
+                width: (8 / 360) * MediaQuery.of(context).size.width,
               ),
               Text(
                 widget.roleName,

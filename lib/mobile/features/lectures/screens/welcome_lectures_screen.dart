@@ -72,23 +72,25 @@ class _WelcomeLecturesScreenState extends State<WelcomeLecturesScreen> {
                 return videoPageList[index % videoPageList.length];
               },
             ),
-            Padding(
-              padding: EdgeInsets.only(
-                  right: (32 / 360) * MediaQuery.of(context).size.width,
-                  left: (28 / 360) * MediaQuery.of(context).size.width,
-                  top: 55),
-              child: Visibility(
-                visible: _currentPage != 0 && !dataProvider.isPlayingInFullscr,
-                child: LecturesPageIndicator(
-                  currentPage: _currentPage,
-                  totalPages: duzina + 1,
-                  width:
-                      (MediaQuery.of(context).size.width - 108) / (duzina + 1),
-                  height: 3,
-                  indicatorHeight: 23,
-                ),
-              ),
-            ),
+            // Padding(
+            //   padding: EdgeInsets.only(
+            //       right: (32 / 360) * MediaQuery.of(context).size.width,
+            //       left: (28 / 360) * MediaQuery.of(context).size.width,
+            //       top: 55),
+            //   child: Visibility(
+            //     visible: _currentPage != 0 &&
+            //         !dataProvider.isPlayingInFullscr &&
+            //         !dataProvider.isSidebarOpened3,
+            //     child: LecturesPageIndicator(
+            //       currentPage: _currentPage,
+            //       totalPages: duzina + 1,
+            //       width:
+            //           (MediaQuery.of(context).size.width - 108) / (duzina + 1),
+            //       height: 3,
+            //       indicatorHeight: 23,
+            //     ),
+            //   ),
+            // ),
             Visibility(
               visible: !dataProvider.isPlayingInFullscr,
               child: const Positioned(
