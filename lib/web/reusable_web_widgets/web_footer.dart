@@ -59,7 +59,7 @@ class WebFooter extends StatelessWidget {
                             ),
                             Flexible(
                               child: Text(
-                                'Put Mladih Muslimana 2, City Gardens Residence, 71 000 Sarajevo, Bosnia and Herzegovina14425 Falconhead Blvd, Bee Cave, TX 78738, United States',
+                                'Put Mladih Muslimana 2, City Gardens Residence, 71 000 Sarajevo, Bosnia and Herzegovina\n14425 Falconhead Blvd, Bee Cave, TX 78738, United States',
                                 style: TextStyle(
                                   fontSize: deviceHeight * 0.011,
                                 ),
