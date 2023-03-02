@@ -59,6 +59,12 @@ class _MobileLecturesScreenState extends State<MobileLecturesScreen> {
             padding: EdgeInsets.only(
                 right: (32 / 360) * MediaQuery.of(context).size.width),
             child: GestureDetector(
+              onHorizontalDragEnd: (DragEndDetails details) {
+                if (details.primaryVelocity! > 0 &&
+                    _key.currentState?.isEndDrawerOpen == false) {
+                  dataProvider.changeSidebar1();
+                }
+              },
               onTap: () {
                 dataProvider.isSidebarOpened1
                     ? _key.currentState!.closeEndDrawer()
