@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:v2_product_arena/mobile/features/lectures/screens/mobile_lectures_screens.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_lecturevideo_screen.dart';
 import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_green_profile.dart';
@@ -23,6 +24,7 @@ class _WebLecturesPageState extends State<WebLecturesPage> {
     final lectures = Provider.of<WebAuth>(context, listen: false).lectures;
     final roleLectures =
         lectures.where((lecture) => lecture['roles'].contains(role)).toList();
+
     return Scaffold(
       body: Row(
         children: [
