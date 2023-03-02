@@ -4,7 +4,6 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
-import 'dart:convert' as _i5;
 
 import 'package:amplify_core/amplify_core.dart' as _i1;
 import 'package:amplify_core/src/types/storage/base/storage_operation_options.dart'
@@ -76,39 +75,7 @@ class _FakeAWSLogger_4 extends _i2.SmartFake implements _i1.AWSLogger {
         );
 }
 
-class _FakeAPIPluginInterface_5 extends _i2.SmartFake
-    implements _i1.APIPluginInterface {
-  _FakeAPIPluginInterface_5(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeGraphQLOperation_6<T> extends _i2.SmartFake
-    implements _i1.GraphQLOperation<T> {
-  _FakeGraphQLOperation_6(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeRestOperation_7 extends _i2.SmartFake implements _i1.RestOperation {
-  _FakeRestOperation_7(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeAuthCategory_8<
+class _FakeAuthCategory_5<
         PluginAuthUser extends _i1.AuthUser<_i1.SignInDetails>,
         PluginUserAttributeKey extends _i1.AuthUserAttributeKey,
         PluginAuthUserAttribute extends _i1
@@ -223,7 +190,7 @@ class _FakeAuthCategory_8<
             PluginResendUserAttributeConfirmationCodeOptions,
             PluginResendUserAttributeConfirmationCodeResult,
             Plugin> {
-  _FakeAuthCategory_8(
+  _FakeAuthCategory_5(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -232,9 +199,9 @@ class _FakeAuthCategory_8<
         );
 }
 
-class _FakeAnalyticsCategory_9 extends _i2.SmartFake
+class _FakeAnalyticsCategory_6 extends _i2.SmartFake
     implements _i1.AnalyticsCategory {
-  _FakeAnalyticsCategory_9(
+  _FakeAnalyticsCategory_6(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -243,7 +210,7 @@ class _FakeAnalyticsCategory_9 extends _i2.SmartFake
         );
 }
 
-class _FakeStorageCategory_10<
+class _FakeStorageCategory_7<
         PluginStorageListOperation extends _i1.StorageListOperation<
             _i1.StorageListRequest<_i1.StorageListOptions>,
             _i1.StorageListResult<_i1.StorageItem>>,
@@ -342,7 +309,7 @@ class _FakeStorageCategory_10<
             PluginStorageItem,
             PluginTransferProgress,
             Plugin> {
-  _FakeStorageCategory_10(
+  _FakeStorageCategory_7(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -351,9 +318,9 @@ class _FakeStorageCategory_10<
         );
 }
 
-class _FakeDataStoreCategory_11 extends _i2.SmartFake
+class _FakeDataStoreCategory_8 extends _i2.SmartFake
     implements _i1.DataStoreCategory {
-  _FakeDataStoreCategory_11(
+  _FakeDataStoreCategory_8(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -362,8 +329,8 @@ class _FakeDataStoreCategory_11 extends _i2.SmartFake
         );
 }
 
-class _FakeAPICategory_12 extends _i2.SmartFake implements _i1.APICategory {
-  _FakeAPICategory_12(
+class _FakeAPICategory_9 extends _i2.SmartFake implements _i1.APICategory {
+  _FakeAPICategory_9(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -372,8 +339,8 @@ class _FakeAPICategory_12 extends _i2.SmartFake implements _i1.APICategory {
         );
 }
 
-class _FakeAmplifyHub_13 extends _i2.SmartFake implements _i1.AmplifyHub {
-  _FakeAmplifyHub_13(
+class _FakeAmplifyHub_10 extends _i2.SmartFake implements _i1.AmplifyHub {
+  _FakeAmplifyHub_10(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -382,8 +349,8 @@ class _FakeAmplifyHub_13 extends _i2.SmartFake implements _i1.AmplifyHub {
         );
 }
 
-class _FakeAmplifyConfig_14 extends _i2.SmartFake implements _i1.AmplifyConfig {
-  _FakeAmplifyConfig_14(
+class _FakeAmplifyConfig_11 extends _i2.SmartFake implements _i1.AmplifyConfig {
+  _FakeAmplifyConfig_11(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -605,355 +572,6 @@ class MockRestOperation extends _i2.Mock implements _i1.RestOperation {
       ) as _i4.Future<void>);
 }
 
-/// A class which mocks [AWSHttpResponse].
-///
-/// See the documentation for Mockito's code generation for more information.
-// ignore: must_be_immutable
-class MockAWSHttpResponse extends _i2.Mock implements _i1.AWSHttpResponse {
-  MockAWSHttpResponse() {
-    _i2.throwOnMissingStub(this);
-  }
-
-  @override
-  List<int> get bodyBytes => (super.noSuchMethod(
-        Invocation.getter(#bodyBytes),
-        returnValue: <int>[],
-      ) as List<int>);
-  @override
-  _i4.Stream<List<int>> get body => (super.noSuchMethod(
-        Invocation.getter(#body),
-        returnValue: _i4.Stream<List<int>>.empty(),
-      ) as _i4.Stream<List<int>>);
-  @override
-  int get statusCode => (super.noSuchMethod(
-        Invocation.getter(#statusCode),
-        returnValue: 0,
-      ) as int);
-  @override
-  Map<String, String> get headers => (super.noSuchMethod(
-        Invocation.getter(#headers),
-        returnValue: <String, String>{},
-      ) as Map<String, String>);
-  @override
-  _i4.Stream<List<int>> split() => (super.noSuchMethod(
-        Invocation.method(
-          #split,
-          [],
-        ),
-        returnValue: _i4.Stream<List<int>>.empty(),
-      ) as _i4.Stream<List<int>>);
-  @override
-  String decodeBody({_i5.Encoding? encoding = const _i5.Utf8Codec()}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #decodeBody,
-          [],
-          {#encoding: encoding},
-        ),
-        returnValue: '',
-      ) as String);
-  @override
-  _i4.Future<void> close() => (super.noSuchMethod(
-        Invocation.method(
-          #close,
-          [],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-}
-
-/// A class which mocks [APICategory].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockAPICategory extends _i2.Mock implements _i1.APICategory {
-  MockAPICategory() {
-    _i2.throwOnMissingStub(this);
-  }
-
-  @override
-  _i1.Category get category => (super.noSuchMethod(
-        Invocation.getter(#category),
-        returnValue: _i1.Category.analytics,
-      ) as _i1.Category);
-  @override
-  List<_i1.APIPluginInterface> get plugins => (super.noSuchMethod(
-        Invocation.getter(#plugins),
-        returnValue: <_i1.APIPluginInterface>[],
-      ) as List<_i1.APIPluginInterface>);
-  @override
-  _i1.APIPluginInterface get defaultPlugin => (super.noSuchMethod(
-        Invocation.getter(#defaultPlugin),
-        returnValue: _FakeAPIPluginInterface_5(
-          this,
-          Invocation.getter(#defaultPlugin),
-        ),
-      ) as _i1.APIPluginInterface);
-  @override
-  _i1.GraphQLOperation<T> query<T>({required _i1.GraphQLRequest<T>? request}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #query,
-          [],
-          {#request: request},
-        ),
-        returnValue: _FakeGraphQLOperation_6<T>(
-          this,
-          Invocation.method(
-            #query,
-            [],
-            {#request: request},
-          ),
-        ),
-      ) as _i1.GraphQLOperation<T>);
-  @override
-  _i1.GraphQLOperation<T> mutate<T>(
-          {required _i1.GraphQLRequest<T>? request}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #mutate,
-          [],
-          {#request: request},
-        ),
-        returnValue: _FakeGraphQLOperation_6<T>(
-          this,
-          Invocation.method(
-            #mutate,
-            [],
-            {#request: request},
-          ),
-        ),
-      ) as _i1.GraphQLOperation<T>);
-  @override
-  _i4.Stream<_i1.GraphQLResponse<T>> subscribe<T>(
-    _i1.GraphQLRequest<T>? request, {
-    void Function()? onEstablished,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #subscribe,
-          [request],
-          {#onEstablished: onEstablished},
-        ),
-        returnValue: _i4.Stream<_i1.GraphQLResponse<T>>.empty(),
-      ) as _i4.Stream<_i1.GraphQLResponse<T>>);
-  @override
-  _i1.RestOperation delete(
-    String? path, {
-    Map<String, String>? headers,
-    _i1.HttpPayload? body,
-    Map<String, String>? queryParameters,
-    String? apiName,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #delete,
-          [path],
-          {
-            #headers: headers,
-            #body: body,
-            #queryParameters: queryParameters,
-            #apiName: apiName,
-          },
-        ),
-        returnValue: _FakeRestOperation_7(
-          this,
-          Invocation.method(
-            #delete,
-            [path],
-            {
-              #headers: headers,
-              #body: body,
-              #queryParameters: queryParameters,
-              #apiName: apiName,
-            },
-          ),
-        ),
-      ) as _i1.RestOperation);
-  @override
-  _i1.RestOperation get(
-    String? path, {
-    Map<String, String>? headers,
-    Map<String, String>? queryParameters,
-    String? apiName,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #get,
-          [path],
-          {
-            #headers: headers,
-            #queryParameters: queryParameters,
-            #apiName: apiName,
-          },
-        ),
-        returnValue: _FakeRestOperation_7(
-          this,
-          Invocation.method(
-            #get,
-            [path],
-            {
-              #headers: headers,
-              #queryParameters: queryParameters,
-              #apiName: apiName,
-            },
-          ),
-        ),
-      ) as _i1.RestOperation);
-  @override
-  _i1.RestOperation head(
-    String? path, {
-    Map<String, String>? headers,
-    Map<String, String>? queryParameters,
-    String? apiName,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #head,
-          [path],
-          {
-            #headers: headers,
-            #queryParameters: queryParameters,
-            #apiName: apiName,
-          },
-        ),
-        returnValue: _FakeRestOperation_7(
-          this,
-          Invocation.method(
-            #head,
-            [path],
-            {
-              #headers: headers,
-              #queryParameters: queryParameters,
-              #apiName: apiName,
-            },
-          ),
-        ),
-      ) as _i1.RestOperation);
-  @override
-  _i1.RestOperation patch(
-    String? path, {
-    Map<String, String>? headers,
-    _i1.HttpPayload? body,
-    Map<String, String>? queryParameters,
-    String? apiName,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #patch,
-          [path],
-          {
-            #headers: headers,
-            #body: body,
-            #queryParameters: queryParameters,
-            #apiName: apiName,
-          },
-        ),
-        returnValue: _FakeRestOperation_7(
-          this,
-          Invocation.method(
-            #patch,
-            [path],
-            {
-              #headers: headers,
-              #body: body,
-              #queryParameters: queryParameters,
-              #apiName: apiName,
-            },
-          ),
-        ),
-      ) as _i1.RestOperation);
-  @override
-  _i1.RestOperation post(
-    String? path, {
-    Map<String, String>? headers,
-    _i1.HttpPayload? body,
-    Map<String, String>? queryParameters,
-    String? apiName,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #post,
-          [path],
-          {
-            #headers: headers,
-            #body: body,
-            #queryParameters: queryParameters,
-            #apiName: apiName,
-          },
-        ),
-        returnValue: _FakeRestOperation_7(
-          this,
-          Invocation.method(
-            #post,
-            [path],
-            {
-              #headers: headers,
-              #body: body,
-              #queryParameters: queryParameters,
-              #apiName: apiName,
-            },
-          ),
-        ),
-      ) as _i1.RestOperation);
-  @override
-  _i1.RestOperation put(
-    String? path, {
-    Map<String, String>? headers,
-    _i1.HttpPayload? body,
-    Map<String, String>? queryParameters,
-    String? apiName,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #put,
-          [path],
-          {
-            #headers: headers,
-            #body: body,
-            #queryParameters: queryParameters,
-            #apiName: apiName,
-          },
-        ),
-        returnValue: _FakeRestOperation_7(
-          this,
-          Invocation.method(
-            #put,
-            [path],
-            {
-              #headers: headers,
-              #body: body,
-              #queryParameters: queryParameters,
-              #apiName: apiName,
-            },
-          ),
-        ),
-      ) as _i1.RestOperation);
-  @override
-  _i4.Future<void> addPlugin(
-    _i1.APIPluginInterface? plugin, {
-    required _i1.AmplifyAuthProviderRepository? authProviderRepo,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #addPlugin,
-          [plugin],
-          {#authProviderRepo: authProviderRepo},
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-  @override
-  _i4.Future<void> reset() => (super.noSuchMethod(
-        Invocation.method(
-          #reset,
-          [],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-}
-
 /// A class which mocks [AmplifyClass].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -1002,7 +620,7 @@ class MockAmplifyClass extends _i2.Mock implements _i1.AmplifyClass {
           _i1.AuthPluginInterface<_i1.AuthUser<_i1.SignInDetails>, _i1.AuthUserAttributeKey, _i1.AuthUserAttribute<_i1.AuthUserAttributeKey>, _i1.AuthDevice, _i1.SignUpOptions, _i1.SignUpResult, _i1.ConfirmSignUpOptions, _i1.SignUpResult, _i1.ResendSignUpCodeOptions, _i1.ResendSignUpCodeResult, _i1.SignInOptions, _i1.SignInResult<_i1.AuthUserAttributeKey>, _i1.ConfirmSignInOptions, _i1.SignInResult<_i1.AuthUserAttributeKey>, _i1.SignOutOptions, _i1.SignOutResult, _i1.UpdatePasswordOptions, _i1.UpdatePasswordResult, _i1.ResetPasswordOptions, _i1.ResetPasswordResult, _i1.ConfirmResetPasswordOptions, _i1.UpdatePasswordResult, _i1.AuthUserOptions, _i1.FetchUserAttributesOptions, _i1.AuthSessionOptions, _i1.AuthSession, _i1.SignInWithWebUIOptions, _i1.SignInResult<_i1.AuthUserAttributeKey>, _i1.UpdateUserAttributeOptions, _i1.UpdateUserAttributeResult, _i1.UpdateUserAttributesOptions, _i1.ConfirmUserAttributeOptions, _i1.ConfirmUserAttributeResult, _i1.ResendUserAttributeConfirmationCodeOptions, _i1.ResendUserAttributeConfirmationCodeResult>>
       get Auth => (super.noSuchMethod(
             Invocation.getter(#Auth),
-            returnValue: _FakeAuthCategory_8<
+            returnValue: _FakeAuthCategory_5<
                 _i1.AuthUser<_i1.SignInDetails>,
                 _i1.AuthUserAttributeKey,
                 _i1.AuthUserAttribute<_i1.AuthUserAttributeKey>,
@@ -1117,7 +735,7 @@ class MockAmplifyClass extends _i2.Mock implements _i1.AmplifyClass {
   @override
   _i1.AnalyticsCategory get Analytics => (super.noSuchMethod(
         Invocation.getter(#Analytics),
-        returnValue: _FakeAnalyticsCategory_9(
+        returnValue: _FakeAnalyticsCategory_6(
           this,
           Invocation.getter(#Analytics),
         ),
@@ -1126,7 +744,7 @@ class MockAmplifyClass extends _i2.Mock implements _i1.AmplifyClass {
   _i1.StorageCategory<_i1.StorageListOperation<_i1.StorageListRequest<_i1.StorageListOptions>, _i1.StorageListResult<_i1.StorageItem>>, _i1.StorageListOptions, _i1.StorageGetPropertiesOperation<_i1.StorageGetPropertiesRequest<_i3.StorageOperationOptions>, _i1.StorageGetPropertiesResult<_i1.StorageItem>>, _i1.StorageGetPropertiesOptions, _i1.StorageGetUrlOperation<_i1.StorageGetUrlRequest<_i1.StorageGetUrlOptions>, _i1.StorageGetUrlResult>, _i1.StorageGetUrlOptions, _i1.StorageUploadDataOperation<_i1.StorageUploadDataRequest<_i3.StorageOperationOptions>, _i1.StorageUploadDataResult<_i1.StorageItem>>, _i1.StorageUploadDataOptions, _i1.StorageUploadFileOperation<_i1.StorageUploadFileRequest<_i3.StorageOperationOptions>, _i1.StorageUploadFileResult<_i1.StorageItem>>, _i1.StorageUploadFileOptions, _i1.StorageDownloadDataOperation<_i1.StorageDownloadDataRequest<_i1.StorageDownloadDataOptions>, _i1.StorageDownloadDataResult<_i1.StorageItem>>, _i1.StorageDownloadDataOptions, _i1.StorageDownloadFileOperation<_i1.StorageDownloadFileRequest<_i1.StorageDownloadFileOptions>, _i1.StorageDownloadFileResult<_i1.StorageItem>>, _i1.StorageDownloadFileOptions, _i1.StorageCopyOperation<_i1.StorageCopyRequest<_i1.StorageItem, _i1.StorageCopyOptions>, _i1.StorageCopyResult<_i1.StorageItem>>, _i1.StorageCopyOptions, _i1.StorageMoveOperation<_i1.StorageMoveRequest<_i1.StorageItem, _i1.StorageMoveOptions>, _i1.StorageMoveResult<_i1.StorageItem>>, _i1.StorageMoveOptions, _i1.StorageRemoveOperation<_i1.StorageRemoveRequest<_i1.StorageRemoveOptions>, _i1.StorageRemoveResult<_i1.StorageItem>>, _i1.StorageRemoveOptions, _i1.StorageRemoveManyOperation<_i1.StorageRemoveManyRequest<_i1.StorageRemoveManyOptions>, _i1.StorageRemoveManyResult<_i1.StorageItem>>, _i1.StorageRemoveManyOptions, _i1.StorageItem, _i1.StorageTransferProgress, _i1.StoragePluginInterface<_i1.StorageListOperation<_i1.StorageListRequest<_i1.StorageListOptions>, _i1.StorageListResult<_i1.StorageItem>>, _i1.StorageListOptions, _i1.StorageGetPropertiesOperation<_i1.StorageGetPropertiesRequest<_i3.StorageOperationOptions>, _i1.StorageGetPropertiesResult<_i1.StorageItem>>, _i1.StorageGetPropertiesOptions, _i1.StorageGetUrlOperation<_i1.StorageGetUrlRequest<_i1.StorageGetUrlOptions>, _i1.StorageGetUrlResult>, _i1.StorageGetUrlOptions, _i1.StorageUploadDataOperation<_i1.StorageUploadDataRequest<_i3.StorageOperationOptions>, _i1.StorageUploadDataResult<_i1.StorageItem>>, _i1.StorageUploadDataOptions, _i1.StorageUploadFileOperation<_i1.StorageUploadFileRequest<_i3.StorageOperationOptions>, _i1.StorageUploadFileResult<_i1.StorageItem>>, _i1.StorageUploadFileOptions, _i1.StorageDownloadDataOperation<_i1.StorageDownloadDataRequest<_i1.StorageDownloadDataOptions>, _i1.StorageDownloadDataResult<_i1.StorageItem>>, _i1.StorageDownloadDataOptions, _i1.StorageDownloadFileOperation<_i1.StorageDownloadFileRequest<_i1.StorageDownloadFileOptions>, _i1.StorageDownloadFileResult<_i1.StorageItem>>, _i1.StorageDownloadFileOptions, _i1.StorageCopyOperation<_i1.StorageCopyRequest<_i1.StorageItem, _i1.StorageCopyOptions>, _i1.StorageCopyResult<_i1.StorageItem>>, _i1.StorageCopyOptions, _i1.StorageMoveOperation<_i1.StorageMoveRequest<_i1.StorageItem, _i1.StorageMoveOptions>, _i1.StorageMoveResult<_i1.StorageItem>>, _i1.StorageMoveOptions, _i1.StorageRemoveOperation<_i1.StorageRemoveRequest<_i1.StorageRemoveOptions>, _i1.StorageRemoveResult<_i1.StorageItem>>, _i1.StorageRemoveOptions, _i1.StorageRemoveManyOperation<_i1.StorageRemoveManyRequest<_i1.StorageRemoveManyOptions>, _i1.StorageRemoveManyResult<_i1.StorageItem>>, _i1.StorageRemoveManyOptions, _i1.StorageItem, _i1.StorageTransferProgress>> get Storage =>
       (super.noSuchMethod(
         Invocation.getter(#Storage),
-        returnValue: _FakeStorageCategory_10<
+        returnValue: _FakeStorageCategory_7<
             _i1.StorageListOperation<
                 _i1.StorageListRequest<_i1.StorageListOptions>,
                 _i1.StorageListResult<_i1.StorageItem>>,
@@ -1279,7 +897,7 @@ class MockAmplifyClass extends _i2.Mock implements _i1.AmplifyClass {
   @override
   _i1.DataStoreCategory get DataStore => (super.noSuchMethod(
         Invocation.getter(#DataStore),
-        returnValue: _FakeDataStoreCategory_11(
+        returnValue: _FakeDataStoreCategory_8(
           this,
           Invocation.getter(#DataStore),
         ),
@@ -1287,7 +905,7 @@ class MockAmplifyClass extends _i2.Mock implements _i1.AmplifyClass {
   @override
   _i1.APICategory get API => (super.noSuchMethod(
         Invocation.getter(#API),
-        returnValue: _FakeAPICategory_12(
+        returnValue: _FakeAPICategory_9(
           this,
           Invocation.getter(#API),
         ),
@@ -1295,7 +913,7 @@ class MockAmplifyClass extends _i2.Mock implements _i1.AmplifyClass {
   @override
   _i1.AmplifyHub get Hub => (super.noSuchMethod(
         Invocation.getter(#Hub),
-        returnValue: _FakeAmplifyHub_13(
+        returnValue: _FakeAmplifyHub_10(
           this,
           Invocation.getter(#Hub),
         ),
@@ -1308,7 +926,7 @@ class MockAmplifyClass extends _i2.Mock implements _i1.AmplifyClass {
   @override
   _i4.Future<_i1.AmplifyConfig> get asyncConfig => (super.noSuchMethod(
         Invocation.getter(#asyncConfig),
-        returnValue: _i4.Future<_i1.AmplifyConfig>.value(_FakeAmplifyConfig_14(
+        returnValue: _i4.Future<_i1.AmplifyConfig>.value(_FakeAmplifyConfig_11(
           this,
           Invocation.getter(#asyncConfig),
         )),

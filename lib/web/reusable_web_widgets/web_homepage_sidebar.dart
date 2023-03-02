@@ -118,15 +118,15 @@ class WebSideBar extends StatelessWidget {
                               SizedBox(width: maxwidth * (10 / 1440)),
                               Text(
                                 webAuth.firstRole == 'backend'
-                                    ? 'Backend'
+                                    ? 'Backend Development'
                                     : webAuth.firstRole == 'fullstack'
-                                        ? 'FullStack Developer'
+                                        ? 'Fullstack Development'
                                         : webAuth.firstRole == 'qa'
-                                            ? 'QA'
+                                            ? 'Quality Assurance'
                                             : webAuth.firstRole ==
                                                     'productManager'
-                                                ? 'Project Manager'
-                                                : 'UI&UX Designer',
+                                                ? 'Project Management'
+                                                : 'UI/UX Design',
                                 style: GoogleFonts.notoSans(
                                   fontWeight: FontWeight.w700,
                                   fontSize: maxwidth * (16 / 1440),
@@ -156,15 +156,15 @@ class WebSideBar extends StatelessWidget {
                               SizedBox(width: maxwidth * (10 / 1440)),
                               Text(
                                 webAuth.secondRole == 'backend'
-                                    ? 'Backend'
+                                    ? 'Backend Development'
                                     : webAuth.secondRole == 'fullstack'
-                                        ? 'FullStack Developer'
+                                        ? 'Fullstack Development'
                                         : webAuth.secondRole == 'qa'
-                                            ? 'QA'
+                                            ? 'Quality Assurance'
                                             : webAuth.secondRole ==
                                                     'productManager'
-                                                ? 'Project Manager'
-                                                : 'UI&UX Designer',
+                                                ? 'Project Management'
+                                                : 'UI/UX Design',
                                 style: GoogleFonts.notoSans(
                                   fontWeight: FontWeight.w700,
                                   fontSize: maxwidth * (16 / 1440),

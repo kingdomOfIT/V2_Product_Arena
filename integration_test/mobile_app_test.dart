@@ -27,7 +27,9 @@ import 'package:v2_product_arena/mobile/providers/role_provider.dart';
 import 'mobile_auth_provider_test.mocks.dart';
 import 'web_mocked_repository.dart';
 
-class MockMobileAuth extends MobileAuth {}
+class MockMobileAuth extends Mock implements MobileAuth {}
+
+class MockAuthUserAttribute extends Mock implements AuthUserAttribute {}
 
 class MockAuth extends Mock implements AuthCategory {
   @override
@@ -69,19 +71,19 @@ class MockAuth extends Mock implements AuthCategory {
 
   @override
   Future<List<AuthUserAttribute<AuthUserAttributeKey>>> fetchUserAttributes(
-      {FetchUserAttributesOptions? options}) async {
-    var result = MockAuthUserAttributeKey();
-    when(result.key);
-    final userAttributes = [
-      const AuthUserAttribute<AuthUserAttributeKey>(
-          userAttributeKey: AuthUserAttributeKey.familyName, value: 'Alfa'),
-      const AuthUserAttribute<AuthUserAttributeKey>(
-          userAttributeKey: AuthUserAttributeKey.familyName, value: 'Team'),
-      const AuthUserAttribute<AuthUserAttributeKey>(
+      {FetchUserAttributesOptions? options}) {
+    final attributes = [
+      AuthUserAttribute<AuthUserAttributeKey>(
           userAttributeKey: AuthUserAttributeKey.email,
-          value: 'bkaric@pa.tech387.com'),
+          value: 'johndoe@example.com'),
+      AuthUserAttribute<AuthUserAttributeKey>(
+          userAttributeKey: AuthUserAttributeKey.address,
+          value: '123 Main St.'),
+      AuthUserAttribute<AuthUserAttributeKey>(
+          userAttributeKey: AuthUserAttributeKey.birthdate,
+          value: '1980-01-01'),
     ];
-    return Future.value(userAttributes);
+    return Future.value(attributes);
   }
 }
 
@@ -231,24 +233,6 @@ void main() {
       when(test.Auth).thenReturn(MockAuth());
       when(test.API).thenReturn(MockAPI());
       AmplifyClass.instance = test;
-
-      final mockAuth = MockAuth();
-      when(mockAuth.fetchUserAttributes()).thenAnswer((_) async => [
-            const AuthUserAttribute<AuthUserAttributeKey>(
-                userAttributeKey: AuthUserAttributeKey.givenName,
-                value: 'John'),
-            const AuthUserAttribute<AuthUserAttributeKey>(
-                userAttributeKey: AuthUserAttributeKey.familyName,
-                value: 'Doe'),
-            const AuthUserAttribute<AuthUserAttributeKey>(
-                userAttributeKey: AuthUserAttributeKey.email,
-                value: 'john.doe@example.com'),
-          ]);
-
-      final mockAmplifyClass = MockAmplifyClass();
-      when(mockAmplifyClass.Auth).thenReturn(mockAuth);
-
-      AmplifyClass.instance = mockAmplifyClass;
 
       await tester.pumpWidget(createMobileSignupScreen());
       await tester.pumpAndSettle();
@@ -437,8 +421,8 @@ void main() {
       await tester.tap(loginButton);
       await tester.pumpAndSettle();
 
-      await tester.ensureVisible(drawerButton);
-      await tester.tap(drawerButton);
+      // await tester.ensureVisible(drawerButton);
+      // await tester.tap(drawerButton);
 
       await tester.tap(find.text('UI/UX Design'));
       await tester.pumpAndSettle();
