@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:v2_product_arena/constants/global_variables.dart';
 // ignore: unused_import
 import 'package:v2_product_arena/web/reusable_web_widgets/oldsidebar.dart';
 // ignore: unused_import
@@ -83,7 +84,7 @@ class WebHomeScreen extends StatelessWidget {
                           'Our goal is to recognise persistence, motivation and adaptability, that\'s why we encourage you to dive into these materials and wish you the best of luck in your studies.',
                           style: GoogleFonts.outfit(
                             fontSize: MediaQuery.of(context).size.height *
-                                (35 / 1094),
+                                (28 / 1094),
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -96,7 +97,7 @@ class WebHomeScreen extends StatelessWidget {
                           "Once you have gone through all the lessons you'll be able to take a test to show us what you have learned!",
                           style: GoogleFonts.outfit(
                             fontSize: MediaQuery.of(context).size.height *
-                                (35 / 1094),
+                                (28 / 1094),
                           ),
                           textAlign: TextAlign.center,
                         ),
