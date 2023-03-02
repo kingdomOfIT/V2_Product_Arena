@@ -12,6 +12,7 @@ import 'package:v2_product_arena/mobile/features/auth/screens/mobile_signup_scre
 import 'package:v2_product_arena/mobile/features/home/screens/mobile_contact_screen.dart';
 import 'package:v2_product_arena/mobile/features/home/screens/mobile_home_screen.dart';
 import 'package:v2_product_arena/mobile/features/lectures/screens/welcome_lectures_screen.dart';
+import 'package:v2_product_arena/mobile/features/lectures/widgets/recent_lectures_tile.dart';
 import 'package:v2_product_arena/mobile/features/onboarding/screens/mobile_onboarding_screen.dart';
 import 'package:v2_product_arena/mobile/features/onboarding/screens/mobile_verified_onboarding_screen.dart';
 import 'package:v2_product_arena/mobile/providers/answer_provider.dart';
@@ -158,6 +159,7 @@ class _MyAppState extends State<MyApp> {
               ),
           WebContactScreen.routeName: (context) => const WebContactScreen(),
           MobileContactUs.routeName: (context) => const MobileContactUs(),
+          RecentLectures.routeName: (context) => RecentLectures(),
         },
       ),
     );
