@@ -6,6 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:v2_product_arena/mobile/features/lectures/screens/hello_screen.dart';
 import 'package:v2_product_arena/mobile/features/lectures/widgets/lectures_appbar.dart';
 import 'package:v2_product_arena/mobile/features/lectures/widgets/lectures_sidebar.dart';
+import 'package:v2_product_arena/mobile/providers/error_message_provider.dart';
 import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
 import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/mobile_footer.dart';
 
@@ -44,6 +45,9 @@ class _MobileContactUsState extends State<MobileContactUs> {
             ),
             child: GestureDetector(
               onTap: () {
+                Provider.of<ErrorMessage>(context, listen: false)
+                    .selectedRole
+                    .clear();
                 Navigator.of(context).pushNamed(WelcomePage.routeName);
               },
               child: SizedBox(
