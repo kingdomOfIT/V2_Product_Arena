@@ -19,6 +19,7 @@ class WebLoginScreen extends StatelessWidget {
       isScrollable = false;
     }
     return Scaffold(
+      backgroundColor: const Color(0xFFE9E9E9),
       appBar: PreferredSize(
         preferredSize:
             Size.fromHeight(MediaQuery.of(context).size.height * 0.06),
