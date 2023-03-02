@@ -183,7 +183,7 @@ List<Role> listRoleMobSel = [
       'forFrontend': 'Project Management',
       'forBackend': 'productManager',
     },
-    'assets/images/rolevectorwhite2.png',
+    'assets/images/pm_green.png',
   ),
   Role(
     {
@@ -204,7 +204,7 @@ List<Role> listRoleMobSel = [
       'forFrontend': 'Full Stack Developer',
       'forBackend': 'fullstack',
     },
-    'assets/images/rolevectorwhite5.png',
+    'assets/images/fs_green.png',
   )
 ];
 

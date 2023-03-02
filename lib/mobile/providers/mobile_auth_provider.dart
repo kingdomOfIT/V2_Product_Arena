@@ -84,10 +84,11 @@ class MobileAuth with ChangeNotifier {
     notifyListeners();
   }
 
-  bool isPlayingInFullscr = false;
+  bool _isPlayingInFullscr = false;
+  bool get isPlayingInFullscr => _isPlayingInFullscr;
 
-  void changePlaying() {
-    isPlayingInFullscr = !isPlayingInFullscr;
+  void changePlaying(bool a) {
+    _isPlayingInFullscr = a;
     notifyListeners();
   }
 
