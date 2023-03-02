@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:v2_product_arena/constants/global_variables.dart';
-// ignore: unused_import
-import 'package:v2_product_arena/web/reusable_web_widgets/oldsidebar.dart';
-// ignore: unused_import
 import 'package:v2_product_arena/web/reusable_web_widgets/web_homepage_sidebar.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_profilepopup.dart';
 

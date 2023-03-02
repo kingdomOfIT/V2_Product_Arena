@@ -4,9 +4,6 @@ import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
-// ignore: unused_import
-import 'package:v2_product_arena/web/reusable_web_widgets/oldsidebar.dart';
-// ignore: unused_import
 import 'package:v2_product_arena/web/reusable_web_widgets/web_homepage_sidebar.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_profilepopup.dart';
 
@@ -19,18 +16,6 @@ class WebContactScreen extends StatefulWidget {
   State<WebContactScreen> createState() => _WebContactScreenState();
 }
 
-// Future<void> signInUser() async {
-//   try {
-//     await Amplify.Auth.signIn(
-//       username: 'bhitoshdrgb@eurokool.com',
-//       password: 'Pass123!',
-//     );
-//     safePrint('Loginovan');
-//   } on AuthException catch (e) {
-//     safePrint(e.message);
-//   }
-// }
-
 bool isMessageSent = false;
 
 class _WebContactScreenState extends State<WebContactScreen> {
@@ -40,6 +25,7 @@ class _WebContactScreenState extends State<WebContactScreen> {
   @override
   Widget build(BuildContext context) {
     double maxwidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: Row(
         children: [
