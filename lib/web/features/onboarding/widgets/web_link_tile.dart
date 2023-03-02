@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:v2_product_arena/web/providers/web_ob_answers.dart';
 import 'package:provider/provider.dart';
 import '../web_constansts_ob.dart';
@@ -78,9 +80,37 @@ class LinkTile extends StatelessWidget {
               ),
             ),
           ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: CustomText('Za učitavanje videa koristi file.io', 10),
+          // Align(
+          //   alignment: Alignment.centerLeft,
+          //   child: CustomText('Za učitavanje videa koristi file.io', 10),
+          // ),
+          Row(
+            children: [
+              Text(
+                'Za učitavanje videa koristi ',
+                style: GoogleFonts.notoSans(
+                  fontSize: (10 / 800) * MediaQuery.of(context).size.height,
+                  color: const Color(0xFF605D66),
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              InkWell(
+                onTap: () async {
+                  await launchUrl(
+                    Uri.parse('https://www.file.io/'),
+                  );
+                },
+                child: Text(
+                  'file.io',
+                  style: GoogleFonts.notoSans(
+                    //decoration: TextDecoration.underline,
+                    fontSize: (10 / 800) * MediaQuery.of(context).size.height,
+                    color: const Color(0xFF605D66),
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+            ],
           ),
         ]),
       ),
