@@ -15,6 +15,7 @@ class WebSideBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final webAuth = Provider.of<WebAuth>(context);
     double maxwidth = MediaQuery.of(context).size.width;
+    double maxheigt = MediaQuery.of(context).size.height;
     return Container(
       color: Colors.black,
       width: maxwidth * (310 / 1440),
@@ -53,8 +54,8 @@ class WebSideBar extends StatelessWidget {
                       Flexible(
                         child: Image.asset(
                           'assets/images/WebSidebarHomescreenWhite.png',
-                          height: 20,
-                          width: 20,
+                          height: maxheigt * (30 / 1094),
+                          width: maxwidth * (30 / 1440),
                         ),
                       ),
                       const SizedBox(width: 10),
@@ -101,6 +102,8 @@ class WebSideBar extends StatelessWidget {
                             children: [
                               Flexible(
                                 child: Image.asset(
+                                  height: maxheigt * (30 / 1094),
+                                  width: maxwidth * (30 / 1440),
                                   webAuth.firstRole == 'backend'
                                       ? 'assets/images/rolevectorwhite3.png'
                                       : webAuth.firstRole == 'fullstack'
@@ -111,8 +114,6 @@ class WebSideBar extends StatelessWidget {
                                                       'productManager'
                                                   ? 'assets/images/rolevectorwhite2.png'
                                                   : 'assets/images/rolevectorwhite4.png',
-                                  height: 20,
-                                  width: 20,
                                 ),
                               ),
                               SizedBox(width: maxwidth * (10 / 1440)),
@@ -149,8 +150,8 @@ class WebSideBar extends StatelessWidget {
                                                       'productManager'
                                                   ? 'assets/images/rolevectorwhite2.png'
                                                   : 'assets/images/rolevectorblack4.png',
-                                  height: 20,
-                                  width: 20,
+                                  height: maxheigt * (30 / 1094),
+                                  width: maxwidth * (30 / 1440),
                                 ),
                               ),
                               SizedBox(width: maxwidth * (10 / 1440)),
@@ -202,8 +203,8 @@ class WebSideBar extends StatelessWidget {
                     Flexible(
                       child: Image.asset(
                         'assets/images/WebSidebarRecentWhite.png',
-                        height: 20,
-                        width: 20,
+                        height: maxheigt * (30 / 1094),
+                        width: maxwidth * (30 / 1440),
                       ),
                     ),
                     SizedBox(width: maxwidth * (10 / 1440)),
@@ -245,8 +246,8 @@ class WebSideBar extends StatelessWidget {
                       Flexible(
                         child: Image.asset(
                           'assets/images/WebSidebarContactusWhite.png',
-                          height: 20,
-                          width: 20,
+                          height: maxheigt * (30 / 1094),
+                          width: maxwidth * (30 / 1440),
                         ),
                       ),
                       SizedBox(width: maxwidth * (10 / 1440)),
