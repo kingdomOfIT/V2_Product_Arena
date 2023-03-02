@@ -68,7 +68,8 @@ class _MobileSidebarState extends State<MobileSidebar> {
       child: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(
-              left: (24 / 360) * MediaQuery.of(context).size.width),
+              left: (24 / 360) * MediaQuery.of(context).size.width,
+              right: (24 / 360) * MediaQuery.of(context).size.width),
           child: Column(
             children: [
               SizedBox(
@@ -85,33 +86,32 @@ class _MobileSidebarState extends State<MobileSidebar> {
                   ),
                 ),
               ),
-              Row(
-                children: [
-                  Image.asset(
-                    "assets/images/user-line.png",
-                    height: screenHeight * (24 / 803),
-                    width: screenWidth * (24 / 360),
-                  ),
-                  SizedBox(
-                    width: (8 / 360) * MediaQuery.of(context).size.width,
-                  ),
-                  Text(
-                    dataProvider.emailUser,
-                    style: GoogleFonts.notoSans(
-                      textStyle: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: screenHeight * (16 / 803),
-                        color: Colors.white,
+              SizedBox(
+                height: 56,
+                child: Row(
+                  children: [
+                    Image.asset(
+                      "assets/images/user-line.png",
+                      height: screenHeight * (24 / 803),
+                      width: screenWidth * (24 / 360),
+                    ),
+                    SizedBox(
+                      width: (8 / 360) * MediaQuery.of(context).size.width,
+                    ),
+                    Text(
+                      dataProvider.emailUser,
+                      style: GoogleFonts.notoSans(
+                        textStyle: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: screenHeight * (16 / 803),
+                          color: Colors.white,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-              Padding(
-                padding:
-                    EdgeInsets.symmetric(horizontal: screenWidth * (20 / 360)),
-                child: Divider(color: Colors.white),
-              ),
+              Divider(color: Colors.white),
               SizedBox(
                 height: dataProvider.roles.length * 56,
                 child: ListView.builder(

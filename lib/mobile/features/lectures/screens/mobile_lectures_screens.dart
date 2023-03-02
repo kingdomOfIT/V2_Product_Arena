@@ -59,12 +59,6 @@ class _MobileLecturesScreenState extends State<MobileLecturesScreen> {
             padding: EdgeInsets.only(
                 right: (32 / 360) * MediaQuery.of(context).size.width),
             child: GestureDetector(
-              onHorizontalDragEnd: (DragEndDetails details) {
-                if (details.primaryVelocity! > 0 &&
-                    _key.currentState?.isEndDrawerOpen == false) {
-                  dataProvider.changeSidebar1();
-                }
-              },
               onTap: () {
                 dataProvider.isSidebarOpened1
                     ? _key.currentState!.closeEndDrawer()
@@ -78,40 +72,49 @@ class _MobileLecturesScreenState extends State<MobileLecturesScreen> {
           ),
         ],
       ),
-      drawerEnableOpenDragGesture: false,
       body: Scaffold(
         key: _key,
         endDrawer: Drawer(
             width: MediaQuery.of(context).size.width,
             child: const MobileSidebar()),
-        body: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.only(
-                right: (32 / 360) * MediaQuery.of(context).size.width,
-                left: (32 / 360) * MediaQuery.of(context).size.width,
-                top: 20,
-                bottom: 90),
-            child: Column(
-              children: [
-                Expanded(
-                  child: ListView.separated(
-                    itemCount: roleLectures.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return LecturesVideoTile(
-                        linkImage: roleLectures[index]['imageSrc'],
-                        lectureName: roleLectures[index]['name'],
-                        i: index + 1,
-                        pageController: widget.pageController,
-                      );
-                    },
-                    separatorBuilder: (BuildContext context, int index) {
-                      return SizedBox(
-                        height: (20 / 800) * MediaQuery.of(context).size.height,
-                      );
-                    },
+        body: GestureDetector(
+          onHorizontalDragEnd: (DragEndDetails details) {
+            if (details.primaryVelocity! > 0 &&
+                _key.currentState?.isEndDrawerOpen == true) {
+              dataProvider.changeSidebar1();
+              print('otvoren');
+            }
+          },
+          child: SafeArea(
+            child: Padding(
+              padding: EdgeInsets.only(
+                  right: (32 / 360) * MediaQuery.of(context).size.width,
+                  left: (32 / 360) * MediaQuery.of(context).size.width,
+                  top: 20,
+                  bottom: 90),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: ListView.separated(
+                      itemCount: roleLectures.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return LecturesVideoTile(
+                          linkImage: roleLectures[index]['imageSrc'],
+                          lectureName: roleLectures[index]['name'],
+                          i: index + 1,
+                          pageController: widget.pageController,
+                        );
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return SizedBox(
+                          height:
+                              (20 / 800) * MediaQuery.of(context).size.height,
+                        );
+                      },
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

@@ -91,10 +91,18 @@ class _WelcomeLecturesScreenState extends State<WelcomeLecturesScreen> {
             //     ),
             //   ),
             // ),
-            Visibility(
-              visible: !dataProvider.isPlayingInFullscr,
-              child: const Positioned(
-                  bottom: 0, left: 0, right: 0, child: MobileFooter()),
+            Consumer<MobileAuth>(
+              builder: ((context, value, child) {
+                if (!value.isPlayingInFullscr) {
+                  return const Positioned(
+                      bottom: 0, left: 0, right: 0, child: MobileFooter());
+                } else {
+                  return const SizedBox(
+                    height: 0,
+                    width: 0,
+                  );
+                }
+              }),
             ),
           ],
         ),

@@ -46,12 +46,6 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
     _controller = YoutubePlayerController(
       initialVideoId: getVideoId(widget.videoId),
     );
-    // _currentPage = 0;
-    // widget.pageController.addListener(() {
-    //   setState(() {
-    //     _currentPage = widget.pageController.page!.toInt();
-    //   });
-    // });
   }
 
   @override
@@ -125,7 +119,6 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
           : null,
       body: Scaffold(
         key: _key,
-        // drawerScrimColor: Colors.transparent,
         appBar: !dataProvider.isPlayingInFullscr
             ? PreferredSize(
                 preferredSize: Size(MediaQuery.of(context).size.width, 23),
@@ -158,8 +151,7 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
               onReady: () {
                 _controller.addListener(() {
                   setState(() {});
-                  dataProvider.isPlayingInFullscr =
-                      _controller.value.isFullScreen;
+                  dataProvider.changePlaying(_controller.value.isFullScreen);
                   if (_controller.value.playerState == PlayerState.paused) {
                     setState(() {
                       _buttonsVisible = true;
@@ -178,158 +170,164 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
                 padding: EdgeInsets.only(
                     left: (32 / 360) * MediaQuery.of(context).size.width,
                     right: (32 / 360) * MediaQuery.of(context).size.width),
-                child: Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        '${widget.pageController.page!.toInt()}. Tools: ${widget.lectureName}',
-                        style: GoogleFonts.notoSans(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.black),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          '${widget.pageController.page!.toInt()}. Tools: ${widget.lectureName}',
+                          style: GoogleFonts.notoSans(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.black),
+                        ),
                       ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _buttonsVisible = true;
-                        });
-
-                        _timer?.cancel();
-                        _timer = Timer(const Duration(seconds: 5), () {
+                      GestureDetector(
+                        onTap: () {
                           setState(() {
-                            _buttonsVisible = false;
+                            _buttonsVisible = true;
                           });
-                        });
-                      },
-                      child: Stack(
-                        children: [
-                          player,
-                          Positioned(
-                            left:
-                                (83 / 360) * MediaQuery.of(context).size.width,
-                            right:
-                                (83 / 360) * MediaQuery.of(context).size.width,
-                            top: 82,
-                            child: Visibility(
-                              visible: _buttonsVisible,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  SizedBox(
-                                    height: (25 / 360) *
-                                        MediaQuery.of(context).size.width,
-                                    width: (25 / 360) *
-                                        MediaQuery.of(context).size.width,
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        _controller.seekTo(Duration(
-                                          seconds: _controller
-                                                  .value.position.inSeconds -
-                                              10,
-                                        ));
-                                      },
-                                      child: Image.asset(
-                                          'assets/images/leftskip.png'),
+
+                          _timer?.cancel();
+                          _timer = Timer(const Duration(seconds: 5), () {
+                            setState(() {
+                              _buttonsVisible = false;
+                            });
+                          });
+                        },
+                        child: Stack(
+                          children: [
+                            dataProvider.isPlayingInFullscr
+                                ? IgnorePointer(child: player)
+                                : player,
+                            Positioned(
+                              left: (83 / 360) *
+                                  MediaQuery.of(context).size.width,
+                              right: (83 / 360) *
+                                  MediaQuery.of(context).size.width,
+                              top: 82,
+                              child: Visibility(
+                                visible: _buttonsVisible,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    SizedBox(
+                                      height: (25 / 360) *
+                                          MediaQuery.of(context).size.width,
+                                      width: (25 / 360) *
+                                          MediaQuery.of(context).size.width,
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          _controller.seekTo(Duration(
+                                            seconds: _controller
+                                                    .value.position.inSeconds -
+                                                10,
+                                          ));
+                                        },
+                                        child: Image.asset(
+                                            'assets/images/leftskip.png'),
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: (25 / 360) *
-                                        MediaQuery.of(context).size.width,
-                                    width: (25 / 360) *
-                                        MediaQuery.of(context).size.width,
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        _controller.seekTo(Duration(
-                                          seconds: _controller
-                                                  .value.position.inSeconds +
-                                              10,
-                                        ));
-                                      },
-                                      child: Image.asset(
-                                          'assets/images/rightskip.png'),
+                                    SizedBox(
+                                      height: (25 / 360) *
+                                          MediaQuery.of(context).size.width,
+                                      width: (25 / 360) *
+                                          MediaQuery.of(context).size.width,
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          _controller.seekTo(Duration(
+                                            seconds: _controller
+                                                    .value.position.inSeconds +
+                                                10,
+                                          ));
+                                        },
+                                        child: Image.asset(
+                                            'assets/images/rightskip.png'),
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 18,
-                    ),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        widget.lectureDecription,
-                        style: GoogleFonts.notoSans(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.black),
+                      const SizedBox(
+                        height: 18,
                       ),
-                    ),
-                    SizedBox(
-                      height: (250 / 800) * MediaQuery.of(context).size.height,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          bottom:
-                              (115 / 800) * MediaQuery.of(context).size.height),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Visibility(
-                            visible: widget.pageController.page!.toInt() > 1,
-                            child: FormButton(
-                              key: const Key('back_button_lectures'),
-                              backgroundColor: Colors.white,
-                              textColor: Colors.black,
-                              text: 'Back',
-                              borderColor: Colors.black,
-                              onPressed: () {
-                                if (widget.pageController.page!.toInt() <
-                                    widget.numb) {
-                                  widget.pageController.previousPage(
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          widget.lectureDecription,
+                          style: GoogleFonts.notoSans(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.black),
+                        ),
+                      ),
+                      SizedBox(
+                        height:
+                            (250 / 800) * MediaQuery.of(context).size.height,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            bottom: (115 / 800) *
+                                MediaQuery.of(context).size.height),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Visibility(
+                              visible: widget.pageController.page!.toInt() > 1,
+                              child: FormButton(
+                                key: const Key('back_button_lectures'),
+                                backgroundColor: Colors.white,
+                                textColor: Colors.black,
+                                text: 'Back',
+                                borderColor: Colors.black,
+                                onPressed: () {
+                                  if (widget.pageController.page!.toInt() <
+                                      widget.numb) {
+                                    widget.pageController.previousPage(
+                                        duration:
+                                            const Duration(milliseconds: 400),
+                                        curve: Curves.easeInBack);
+                                  } else {
+                                    widget.pageController
+                                        .jumpToPage(widget.numb - 1);
+                                  }
+                                },
+                                buttonWidth: (92 / 360) *
+                                    MediaQuery.of(context).size.width,
+                                buttonHeight: 40,
+                              ),
+                            ),
+                            Visibility(
+                              visible: widget.pageController.page!.toInt() <
+                                  widget.numb,
+                              child: FormButton(
+                                key: const Key('next_button_lectures'),
+                                backgroundColor: Colors.black,
+                                textColor: Colors.white,
+                                text: 'Next',
+                                borderColor: Colors.black,
+                                onPressed: () {
+                                  widget.pageController.nextPage(
                                       duration:
                                           const Duration(milliseconds: 400),
-                                      curve: Curves.easeInBack);
-                                } else {
-                                  widget.pageController
-                                      .jumpToPage(widget.numb - 1);
-                                }
-                              },
-                              buttonWidth: (92 / 360) *
-                                  MediaQuery.of(context).size.width,
-                              buttonHeight: 40,
+                                      curve: Curves.easeIn);
+                                },
+                                buttonWidth: (92 / 360) *
+                                    MediaQuery.of(context).size.width,
+                                buttonHeight: 40,
+                              ),
                             ),
-                          ),
-                          Visibility(
-                            visible: widget.pageController.page!.toInt() <
-                                widget.numb,
-                            child: FormButton(
-                              key: const Key('next_button_lectures'),
-                              backgroundColor: Colors.black,
-                              textColor: Colors.white,
-                              text: 'Next',
-                              borderColor: Colors.black,
-                              onPressed: () {
-                                widget.pageController.nextPage(
-                                    duration: const Duration(milliseconds: 400),
-                                    curve: Curves.easeIn);
-                              },
-                              buttonWidth: (92 / 360) *
-                                  MediaQuery.of(context).size.width,
-                              buttonHeight: 40,
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               );
             }),
