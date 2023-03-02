@@ -30,6 +30,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
   final _formKey = GlobalKey<FormState>();
 
   var dropdownValue;
+  var dropdownValueError;
 
   String _text = '';
   bool isHiddenPassword = true;
@@ -169,7 +170,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                           child: TextFormField(
                                             key: const Key('nameSignup'),
                                             style: GoogleFonts.notoSans(
-                                              color: webAuth.isPhoneNumError
+                                              color: webAuth.isNameError
                                                   ? const Color(0xFFB3261E)
                                                   : Colors.black,
                                               fontSize: 14,
@@ -206,7 +207,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                                 ),
                                               ),
                                             ),
-                                            onChanged: (text) =>
+                                            onChanged: (value) =>
                                                 setState(() => _text),
                                             controller: nameController,
                                             validator: (value) {
@@ -433,7 +434,14 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                           onChanged: (String? newValue) {
                                             setState(() {
                                               dropdownValue = newValue!;
+                                              dropdownValueError = null;
                                             });
+                                          },
+                                          validator: (value) {
+                                            if (value == null) {
+                                              return 'Please select a status!';
+                                            }
+                                            return dropdownValueError;
                                           },
                                         ),
                                       ),

@@ -33,8 +33,8 @@ class _WebLectureCardState extends State<WebLectureCard> {
         .split('.')
         .first
         .padLeft(8, "0");
-    return Container(
-      padding: EdgeInsets.all(maxwidth * (30 / 1440)),
+    return SizedBox(
+      width: maxwidth * (1100 / 1440),
       child: Column(
         children: [
           Row(
@@ -97,21 +97,21 @@ class _WebLectureCardState extends State<WebLectureCard> {
                 ],
               ),
               ///////////////////////////////////////////////// LECTURE IMAGE ///////////////////////////////////////////////////////////////
-              SizedBox(
-                width: maxwidth * (30 / 1440),
-              ),
-              SizedBox(
-                width: maxwidth * (390 / 1440),
-                height: maxheight * (290 / 1510),
-                child: Image.network(
-                  // lectures[index].imageSrc,
-                  widget.imageSrc,
+
+              Expanded(
+                child: SizedBox(
+                  width: maxwidth * (370 / 1440),
+                  height: maxheight * (270 / 1097),
+                  child: Image.network(
+                    // lectures[index].imageSrc,
+                    widget.imageSrc,
+                  ),
                 ),
               ),
             ],
           ),
           Divider(
-            height: maxheight * (25 / 1510),
+            height: maxheight * (50 / 1510),
             thickness: 1,
           ),
         ],

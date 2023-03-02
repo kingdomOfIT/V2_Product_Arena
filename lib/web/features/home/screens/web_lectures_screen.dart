@@ -41,7 +41,10 @@ class _WebLecturesPageState extends State<WebLecturesPage> {
 
                 const Align(
                   alignment: Alignment.topRight,
-                  child: WebProfilePopup(),
+                  child: Padding(
+                    padding: EdgeInsets.only(right: 25),
+                    child: WebProfilePopup(),
+                  ),
                 ),
 
                 ////////////////////////////////////// LECTURES CARDS  ////////////////////////////////////////
