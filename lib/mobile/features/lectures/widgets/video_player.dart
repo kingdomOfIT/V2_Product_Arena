@@ -145,9 +145,10 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
             player: YoutubePlayer(
               controller: _controller,
               progressColors: const ProgressBarColors(
-                  playedColor: Color(0xFFFF0000),
-                  backgroundColor: Color(0xFF605D66),
-                  handleColor: Color(0xFFFF0000)),
+                playedColor: Color(0xFFFF0000),
+                backgroundColor: Color(0xFF605D66),
+                handleColor: Color(0xFFFF0000),
+              ),
               onReady: () {
                 _controller.addListener(() {
                   setState(() {});
