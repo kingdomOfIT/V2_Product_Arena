@@ -4,9 +4,10 @@ import 'package:v2_product_arena/constants/global_variables.dart';
 import 'package:v2_product_arena/mobile/features/onboarding/widgets/form_button.dart';
 import 'package:v2_product_arena/mobile/providers/answer_provider.dart';
 import 'package:v2_product_arena/mobile/providers/error_message_provider.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+// import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 class LinkVideoScreen extends StatefulWidget {
   final TextEditingController controller;
@@ -26,13 +27,9 @@ class _LinkVideoScreenState extends State<LinkVideoScreen> {
   @override
   void initState() {
     super.initState();
-    _controller = YoutubePlayerController(
-      initialVideoId:
-          '2_uX7GxPzDI', // https://www.youtube.com/watch?v=Tb9k9_Bo-G4
-      flags: const YoutubePlayerFlags(
-        autoPlay: false,
-        isLive: false,
-      ),
+    _controller = YoutubePlayerController.fromVideoId(
+      videoId: '2_uX7GxPzDI', // https://www.youtube.com/watch?v=Tb9k9_Bo-G4
+      autoPlay: false,
     );
   }
 
@@ -43,16 +40,15 @@ class _LinkVideoScreenState extends State<LinkVideoScreen> {
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
     double deviceWidth = MediaQuery.of(context).size.width;
-    return YoutubePlayerBuilder(
-        player: YoutubePlayer(
-          controller: _controller!,
-          showVideoProgressIndicator: true,
-          progressIndicatorColor: Colors.red,
-          progressColors: const ProgressBarColors(
-            playedColor: Colors.red,
-            handleColor: Colors.black38,
-          ),
-        ),
+    return YoutubePlayerScaffold(
+        controller: _controller!,
+        // showVideoProgressIndicator: true,
+        // progressIndicatorColor: Colors.red,
+        // progressColors: const ProgressBarColors(
+        //   playedColor: Colors.red,
+        //   handleColor: Colors.black38,
+        // ),
+
         builder: (context, player) {
           return Scaffold(
               backgroundColor: const Color.fromRGBO(233, 233, 233, 1),
