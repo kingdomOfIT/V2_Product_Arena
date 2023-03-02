@@ -10,8 +10,6 @@ import 'package:v2_product_arena/mobile/features/auth/screens/email_verified_scr
   SignOutResult,
   AuthUserAttributeKey,
   RestOperation,
-  AWSHttpResponse,
-  APICategory,
   AmplifyClass
 ])
 void main() {
