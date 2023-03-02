@@ -19,6 +19,7 @@ class MobileLecturesScreen extends StatefulWidget {
 class _MobileLecturesScreenState extends State<MobileLecturesScreen> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
   @override
+  bool isSideBarOpened = false;
   Widget build(BuildContext context) {
     final dataProvider = Provider.of<MobileAuth>(context);
     List roleLectures = [];
@@ -42,7 +43,9 @@ class _MobileLecturesScreenState extends State<MobileLecturesScreen> {
             ),
             child: GestureDetector(
               onTap: () {
-                Provider.of<ErrorMessage>(context).selectedRole.clear();
+                Provider.of<ErrorMessage>(context, listen: false)
+                    .selectedRole
+                    .clear();
                 Navigator.of(context).pushNamed(WelcomePage.routeName);
               },
               child: Image.asset(
@@ -60,14 +63,23 @@ class _MobileLecturesScreenState extends State<MobileLecturesScreen> {
                 right: (32 / 360) * MediaQuery.of(context).size.width),
             child: GestureDetector(
               onTap: () {
-                dataProvider.isSidebarOpened1
+                (dataProvider.isSidebarOpened1)
                     ? _key.currentState!.closeEndDrawer()
                     : _key.currentState!.openEndDrawer();
                 dataProvider.changeSidebar1();
               },
-              child: (dataProvider.isSidebarOpened1)
-                  ? const Icon(Icons.close)
-                  : const Icon(Icons.menu),
+              // child: (dataProvider.isSidebarOpened1)
+              //     ? const Icon(Icons.close)
+              //     : const Icon(Icons.menu),
+              child: Consumer<MobileAuth>(
+                builder: (context, value, child) {
+                  if (value.isSidebarOpened1) {
+                    return const Icon(Icons.close);
+                  } else {
+                    return const Icon(Icons.menu);
+                  }
+                },
+              ),
             ),
           ),
         ],
@@ -77,44 +89,37 @@ class _MobileLecturesScreenState extends State<MobileLecturesScreen> {
         endDrawer: Drawer(
             width: MediaQuery.of(context).size.width,
             child: const MobileSidebar()),
-        body: GestureDetector(
-          onHorizontalDragEnd: (DragEndDetails details) {
-            if (details.primaryVelocity! > 0 &&
-                _key.currentState?.isEndDrawerOpen == true) {
-              dataProvider.changeSidebar1();
-              print('otvoren');
-            }
-          },
-          child: SafeArea(
-            child: Padding(
-              padding: EdgeInsets.only(
-                  right: (32 / 360) * MediaQuery.of(context).size.width,
-                  left: (32 / 360) * MediaQuery.of(context).size.width,
-                  top: 20,
-                  bottom: 90),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: ListView.separated(
-                      itemCount: roleLectures.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return LecturesVideoTile(
-                          linkImage: roleLectures[index]['imageSrc'],
-                          lectureName: roleLectures[index]['name'],
-                          i: index + 1,
-                          pageController: widget.pageController,
-                        );
-                      },
-                      separatorBuilder: (BuildContext context, int index) {
-                        return SizedBox(
-                          height:
-                              (20 / 800) * MediaQuery.of(context).size.height,
-                        );
-                      },
-                    ),
+        onEndDrawerChanged: (isOpen) {
+          dataProvider.changeSidebar1();
+        },
+        body: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.only(
+                right: (32 / 360) * MediaQuery.of(context).size.width,
+                left: (32 / 360) * MediaQuery.of(context).size.width,
+                top: 20,
+                bottom: 90),
+            child: Column(
+              children: [
+                Expanded(
+                  child: ListView.separated(
+                    itemCount: roleLectures.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return LecturesVideoTile(
+                        linkImage: roleLectures[index]['imageSrc'],
+                        lectureName: roleLectures[index]['name'],
+                        i: index + 1,
+                        pageController: widget.pageController,
+                      );
+                    },
+                    separatorBuilder: (BuildContext context, int index) {
+                      return SizedBox(
+                        height: (20 / 800) * MediaQuery.of(context).size.height,
+                      );
+                    },
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
