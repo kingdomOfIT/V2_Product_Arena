@@ -333,7 +333,7 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                         : Colors.black,
                                     fontWeight: FontWeight.w700,
                                   ),
-                                  keyboardType: TextInputType.datetime,
+                                  keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
                                     isDense: true,
                                     labelStyle: const TextStyle(fontSize: 20),

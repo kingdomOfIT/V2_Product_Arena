@@ -33,6 +33,7 @@ import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
 import 'package:v2_product_arena/web/providers/web_ob_answers.dart';
 import 'package:v2_product_arena/web/providers/web_ob_error.dart';
 import 'package:v2_product_arena/web/providers/web_ob_role.dart';
+import 'package:v2_product_arena/web/providers/web_sidebar_provider.dart';
 
 import 'mobile/features/auth/screens/email_verified_screen.dart';
 import 'mobile/features/lectures/screens/hello_screen.dart';
@@ -99,6 +100,9 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider<WebRole>(
           create: (context) => WebRole({}, ''),
+        ),
+        ChangeNotifierProvider<SideBar>(
+          create: (context) => SideBar(),
         ),
       ],
       child: MaterialApp(

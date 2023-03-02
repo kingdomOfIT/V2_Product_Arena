@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_home_screen.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_lectures_screen.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_recent_lectures.dart';
+import 'package:v2_product_arena/web/providers/web_sidebar_provider.dart';
 
 import '../features/home/screens/web_contact_screen.dart';
 import '../providers/web_auth_provider.dart';
@@ -14,6 +15,7 @@ class WebSideBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final webAuth = Provider.of<WebAuth>(context);
+    final sideBarProvider = Provider.of<SideBar>(context, listen: false);
     double maxwidth = MediaQuery.of(context).size.width;
     double maxheigt = MediaQuery.of(context).size.height;
     return Container(
@@ -39,6 +41,10 @@ class WebSideBar extends StatelessWidget {
                   key: const Key('homescreenButton'),
                   onPressed: () {
                     Navigator.of(context).pushNamed(WebHomeScreen.routeName);
+                    sideBarProvider.isHome = true;
+                    sideBarProvider.isCurrentRole = false;
+                    sideBarProvider.isRecentLectuers = false;
+                    sideBarProvider.isContactUs = false;
                   },
                   style: ButtonStyle(
                     foregroundColor: MaterialStateProperty.resolveWith<Color>(
@@ -64,7 +70,9 @@ class WebSideBar extends StatelessWidget {
                         style: GoogleFonts.notoSans(
                           fontWeight: FontWeight.w700,
                           fontSize: maxwidth * (16 / 1440),
-                          color: Colors.white,
+                          color: sideBarProvider.isHome
+                              ? const Color.fromRGBO(34, 233, 116, 1)
+                              : Colors.white,
                         ),
                       ),
                     ],
@@ -87,6 +95,15 @@ class WebSideBar extends StatelessWidget {
                         WebLecturesPage.routeName,
                         arguments: role,
                       );
+                      sideBarProvider.isHome = false;
+                      if (role == webAuth.secondRole) {
+                        sideBarProvider.isCurrentRole = false;
+                      } else {
+                        sideBarProvider.isCurrentRole = true;
+                      }
+
+                      sideBarProvider.isRecentLectuers = false;
+                      sideBarProvider.isContactUs = false;
                     },
                     style: ButtonStyle(
                       foregroundColor: MaterialStateProperty.resolveWith<Color>(
@@ -131,7 +148,9 @@ class WebSideBar extends StatelessWidget {
                                 style: GoogleFonts.notoSans(
                                   fontWeight: FontWeight.w700,
                                   fontSize: maxwidth * (16 / 1440),
-                                  color: Colors.white,
+                                  color: sideBarProvider.isCurrentRole
+                                      ? const Color.fromRGBO(34, 233, 116, 1)
+                                      : Colors.white,
                                 ),
                               ),
                             ],
@@ -169,7 +188,14 @@ class WebSideBar extends StatelessWidget {
                                 style: GoogleFonts.notoSans(
                                   fontWeight: FontWeight.w700,
                                   fontSize: maxwidth * (16 / 1440),
-                                  color: Colors.white,
+                                  color: sideBarProvider.isHome == false &&
+                                          sideBarProvider.isCurrentRole ==
+                                              false &&
+                                          sideBarProvider.isRecentLectuers ==
+                                              false &&
+                                          sideBarProvider.isContactUs == false
+                                      ? const Color.fromRGBO(34, 233, 116, 1)
+                                      : Colors.white,
                                 ),
                               ),
                             ],
@@ -188,6 +214,10 @@ class WebSideBar extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context)
                       .pushNamed(WebRecentLecturesPage.routeName);
+                  sideBarProvider.isHome = false;
+                  sideBarProvider.isCurrentRole = false;
+                  sideBarProvider.isRecentLectuers = true;
+                  sideBarProvider.isContactUs = false;
                 },
                 style: ButtonStyle(
                   foregroundColor: MaterialStateProperty.resolveWith<Color>(
@@ -213,7 +243,9 @@ class WebSideBar extends StatelessWidget {
                       style: GoogleFonts.notoSans(
                         fontWeight: FontWeight.w700,
                         fontSize: maxwidth * (16 / 1440),
-                        color: Colors.white,
+                        color: sideBarProvider.isRecentLectuers
+                            ? const Color.fromRGBO(34, 233, 116, 1)
+                            : Colors.white,
                       ),
                     ),
                   ],
@@ -231,6 +263,10 @@ class WebSideBar extends StatelessWidget {
                   key: const Key('contactFormButton'),
                   onPressed: () {
                     Navigator.of(context).pushNamed(WebContactScreen.routeName);
+                    sideBarProvider.isHome = false;
+                    sideBarProvider.isCurrentRole = false;
+                    sideBarProvider.isRecentLectuers = false;
+                    sideBarProvider.isContactUs = true;
                   },
                   style: ButtonStyle(
                     foregroundColor: MaterialStateProperty.resolveWith<Color>(
@@ -256,7 +292,9 @@ class WebSideBar extends StatelessWidget {
                         style: GoogleFonts.notoSans(
                           fontWeight: FontWeight.w700,
                           fontSize: maxwidth * (16 / 1440),
-                          color: Colors.white,
+                          color: sideBarProvider.isContactUs
+                              ? const Color.fromRGBO(34, 233, 116, 1)
+                              : Colors.white,
                         ),
                       ),
                     ],
