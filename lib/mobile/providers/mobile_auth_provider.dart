@@ -252,14 +252,6 @@ class MobileAuth with ChangeNotifier {
         _lecturesRole2 = _lecture
             .where((lecture) => lecture['roles'].contains(_roles[1]))
             .toList();
-
-        // for (i = 0; i < _lecturesRole2.length; i++) {
-        //   for (j = i + 1; j < _lecturesRole2.length; j++) {
-        //     if (_lecturesRole2[i]['name'] == _lecturesRole2[j]['name']) {
-        //       _lecturesRole2.remove(_lecturesRole2[j]);
-        //     }
-        //   }
-        // }
       }
     } on ApiException catch (e) {
       safePrint('GET call failed: $e');
