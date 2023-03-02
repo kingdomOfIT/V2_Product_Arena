@@ -84,6 +84,13 @@ class MobileAuth with ChangeNotifier {
     notifyListeners();
   }
 
+  bool _isSidebarOpened4 = false;
+  bool get isSidebarOpened4 => _isSidebarOpened4;
+  void changeSidebar4() {
+    _isSidebarOpened4 = !_isSidebarOpened4;
+    notifyListeners();
+  }
+
   bool _isPlayingInFullscr = false;
   bool get isPlayingInFullscr => _isPlayingInFullscr;
 

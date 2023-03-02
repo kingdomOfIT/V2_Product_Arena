@@ -139,6 +139,8 @@ class _MobileSidebarState extends State<MobileSidebar> {
                           dataProvider.changeSidebar2();
                         } else if (dataProvider.isSidebarOpened3 == true) {
                           dataProvider.changeSidebar3();
+                        } else if (dataProvider.isSidebarOpened4 == true) {
+                          dataProvider.changeSidebar4();
                         }
                         if (selectedProvider.selectedRole.isEmpty) {
                           selectedProvider.selectedRole
@@ -163,6 +165,17 @@ class _MobileSidebarState extends State<MobileSidebar> {
               ),
               GestureDetector(
                 onTap: () {
+                  if (dataProvider.isSidebarOpened == true) {
+                    dataProvider.changeSidebar();
+                  } else if (dataProvider.isSidebarOpened1 == true) {
+                    dataProvider.changeSidebar1();
+                  } else if (dataProvider.isSidebarOpened2 == true) {
+                    dataProvider.changeSidebar2();
+                  } else if (dataProvider.isSidebarOpened3 == true) {
+                    dataProvider.changeSidebar3();
+                  } else if (dataProvider.isSidebarOpened4 == true) {
+                    dataProvider.changeSidebar4();
+                  }
                   if (selectedProvider.selectedRole.isEmpty) {
                     selectedProvider.selectedRole.add('Recent Lessons');
                   } else {
@@ -210,6 +223,8 @@ class _MobileSidebarState extends State<MobileSidebar> {
                     dataProvider.changeSidebar2();
                   } else if (dataProvider.isSidebarOpened3 == true) {
                     dataProvider.changeSidebar3();
+                  } else if (dataProvider.isSidebarOpened4 == true) {
+                    dataProvider.changeSidebar4();
                   }
                   if (selectedProvider.selectedRole.isEmpty) {
                     selectedProvider.selectedRole.add('Contact us');
