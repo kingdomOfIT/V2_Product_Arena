@@ -46,12 +46,6 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
     _controller = YoutubePlayerController(
       initialVideoId: getVideoId(widget.videoId),
     );
-    // _currentPage = 0;
-    // widget.pageController.addListener(() {
-    //   setState(() {
-    //     _currentPage = widget.pageController.page!.toInt();
-    //   });
-    // });
   }
 
   @override
@@ -177,23 +171,24 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
                 padding: EdgeInsets.only(
                     left: (32 / 360) * MediaQuery.of(context).size.width,
                     right: (32 / 360) * MediaQuery.of(context).size.width),
-                child: Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        '${widget.pageController.page!.toInt()}. Tools: ${widget.lectureName}',
-                        style: GoogleFonts.notoSans(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.black),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          '${widget.pageController.page!.toInt()}. Tools: ${widget.lectureName}',
+                          style: GoogleFonts.notoSans(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.black),
+                        ),
                       ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _buttonsVisible = true;
-                        });
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _buttonsVisible = true;
+                          });
 
                           _timer?.cancel();
                           _timer = Timer(const Duration(seconds: 5), () {
