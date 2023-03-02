@@ -73,43 +73,54 @@ class _MobileSidebarState extends State<MobileSidebar> {
               right: (24 / 360) * MediaQuery.of(context).size.width),
           child: Column(
             children: [
-              SizedBox(
-                height: screenHeight * (90 / 803),
-                width: screenWidth,
-                child: Text(
-                  '${dataProvider.userName} ${dataProvider.userSurname}',
-                  style: GoogleFonts.notoSans(
-                    textStyle: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: screenHeight * (32 / 803),
-                      color: Color(0xFF22E974),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: SizedBox(
+                  height: screenHeight * (90 / 803),
+                  width: screenWidth,
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        left: (24 / 360) * MediaQuery.of(context).size.width,
+                        top: 24),
+                    child: Text(
+                      '${dataProvider.userName} ${dataProvider.userSurname}',
+                      style: GoogleFonts.notoSans(
+                        textStyle: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: screenHeight * (32 / 803),
+                          color: Color(0xFF22E974),
+                        ),
+                      ),
                     ),
                   ),
                 ),
               ),
-              SizedBox(
-                height: 56,
-                child: Row(
-                  children: [
-                    Image.asset(
-                      "assets/images/user-line.png",
-                      height: screenHeight * (24 / 803),
-                      width: screenWidth * (24 / 360),
-                    ),
-                    SizedBox(
-                      width: (8 / 360) * MediaQuery.of(context).size.width,
-                    ),
-                    Text(
-                      dataProvider.emailUser,
-                      style: GoogleFonts.notoSans(
-                        textStyle: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: screenHeight * (16 / 803),
-                          color: Colors.white,
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: SizedBox(
+                  height: 56,
+                  child: Row(
+                    children: [
+                      Image.asset(
+                        "assets/images/user-line.png",
+                        height: screenHeight * (24 / 803),
+                        width: screenWidth * (24 / 360),
+                      ),
+                      SizedBox(
+                        width: (8 / 360) * MediaQuery.of(context).size.width,
+                      ),
+                      Text(
+                        dataProvider.emailUser,
+                        style: GoogleFonts.notoSans(
+                          textStyle: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: screenHeight * (16 / 803),
+                            color: Colors.white,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               Divider(color: Colors.white),
