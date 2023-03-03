@@ -188,8 +188,8 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
                       },
                       color: Colors.black,
                     ),
-                    const SizedBox(
-                      height: 120,
+                    SizedBox(
+                      height: (120 / 800) * MediaQuery.of(context).size.height,
                     ),
                   ],
                 ),

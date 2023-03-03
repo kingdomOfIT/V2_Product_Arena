@@ -251,8 +251,9 @@ class _LinkVideoScreenState extends State<LinkVideoScreen> {
                                 }),
                           ],
                         ),
-                        const SizedBox(
-                          height: 120,
+                        SizedBox(
+                          height:
+                              (120 / 800) * MediaQuery.of(context).size.height,
                         ),
                       ],
                     ),
