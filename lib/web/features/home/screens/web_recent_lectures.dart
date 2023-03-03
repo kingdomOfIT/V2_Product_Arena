@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:v2_product_arena/web/features/home/models/lecture.dart';
+import 'package:v2_product_arena/web/features/home/screens/web_lecturevideo_screen.dart';
 import 'package:v2_product_arena/web/features/home/widgets/web_mock_data_recent_lectures.dart';
 import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_green_profile.dart';
@@ -43,10 +44,7 @@ class _WebRecentLecturesPageState extends State<WebRecentLecturesPage> {
 
                 const Align(
                   alignment: Alignment.topRight,
-                  child: Padding(
-                    padding: EdgeInsets.only(right: 25),
-                    child: WebProfilePopup(),
-                  ),
+                  child: WebProfilePopup(),
                 ),
                 ////////////////////////////////////// LECTURES CARDS  ////////////////////////////////////////
                 Expanded(
@@ -56,15 +54,26 @@ class _WebRecentLecturesPageState extends State<WebRecentLecturesPage> {
                       return Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: maxwidth * (50 / 1440)),
-                        child: WebLectureCard(
-                          // name: lectures[index].name,
-                          name: lectures[index]['name'],
-                          description: lectures[index]['description'],
-                          durationInSeconds: lectures[index]
-                              ['durationInSeconds'],
-                          // lastStoppedInSeconds: lectures[index]
-                          //     ['lastStoppedInSeconds'],
-                          imageSrc: lectures[index]['imageSrc'],
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.of(context).pushNamed(
+                              WebLectureVideoScreen.routeName,
+                              arguments: {
+                                'lectureName': lectures[index]['name'],
+                                'index': index,
+                              },
+                            );
+                          },
+                          child: WebLectureCard(
+                            // name: lectures[index].name,
+                            name: lectures[index]['name'],
+                            description: lectures[index]['description'],
+                            durationInSeconds: lectures[index]
+                                ['durationInSeconds'],
+                            // lastStoppedInSeconds: lectures[index]
+                            //     ['lastStoppedInSeconds'],
+                            imageSrc: lectures[index]['imageSrc'],
+                          ),
                         ),
                       );
                     },
