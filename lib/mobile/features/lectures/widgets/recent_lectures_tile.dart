@@ -28,7 +28,9 @@ class RecentLectures extends StatelessWidget {
             ),
             child: GestureDetector(
               onTap: () {
-                Provider.of<ErrorMessage>(context).selectedRole.clear();
+                Provider.of<ErrorMessage>(context, listen: false)
+                    .selectedRole
+                    .clear();
                 Navigator.of(context).pushNamed(WelcomePage.routeName);
               },
               child: Image.asset(
