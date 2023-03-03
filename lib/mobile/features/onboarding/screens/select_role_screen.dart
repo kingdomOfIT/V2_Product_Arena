@@ -35,11 +35,14 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
     }
   }
 
+  bool isLoading = false;
+
   Future<void> submitOnboarding(List<String> s1, List<String> s2) async {
-    await signInUser();
     setState(() {
       isLoading = true;
     });
+    await signInUser();
+
     try {
       Amplify.API.post(
         "/api/onboarding/submit",
@@ -70,8 +73,6 @@ class _SelectRoleScreenState extends State<SelectRoleScreen> {
       isLoading = false;
     });
   }
-
-  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
