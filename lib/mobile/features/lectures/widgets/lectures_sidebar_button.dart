@@ -49,10 +49,16 @@ class SidebarButton extends StatelessWidget {
         onPressed: () async {
           try {
             final res = await Amplify.Auth.signOut();
+
             safePrint(res);
             // ignore: use_build_context_synchronously
-            Navigator.of(context)
-                .pushReplacementNamed(MobileLoginScreen.routeName);
+            // Navigator.of(context)
+            //     .pushReplacementNamed(MobileLoginScreen.routeName);
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => MobileLoginScreen()),
+              (Route<dynamic> route) => false,
+            );
           } on AuthException catch (e) {
             safePrint(e.message);
           }

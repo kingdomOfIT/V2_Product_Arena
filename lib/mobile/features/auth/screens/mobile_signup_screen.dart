@@ -243,10 +243,10 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                       mobileAuth.isNameError = true;
 
                                       return 'Please fill the required field.';
-                                    } else if (value.length < 4) {
+                                    } else if (value.length < 2) {
                                       mobileAuth.isNameError = true;
 
-                                      return 'Name must contain a minimum of 4 characters.';
+                                      return 'Name must contain a minimum of 2 characters.';
                                     } else {
                                       mobileAuth.isNameError = false;
                                     }
@@ -309,9 +309,9 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                     if (value!.isEmpty) {
                                       mobileAuth.isSurnameError = true;
                                       return 'Please fill the required field.';
-                                    } else if (value.length < 4) {
+                                    } else if (value.length < 2) {
                                       mobileAuth.isSurnameError = true;
-                                      return 'Surname must contain a minimum of 4 characters.';
+                                      return 'Surname must contain a minimum of 2 characters.';
                                     } else {
                                       mobileAuth.isSurnameError = false;
                                     }
