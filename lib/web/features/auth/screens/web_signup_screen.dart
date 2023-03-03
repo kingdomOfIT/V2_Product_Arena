@@ -214,9 +214,9 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                               if (value!.isEmpty) {
                                                 webAuth.isNameError = true;
                                                 return 'Please fill the required field.';
-                                              } else if (value.length < 4) {
+                                              } else if (value.length < 2) {
                                                 webAuth.isNameError = true;
-                                                return 'Name must contain a minimum of 4 characters.';
+                                                return 'Name must contain a minimum of 2 characters.';
                                               } else {
                                                 webAuth.isNameError = false;
                                                 return null;
@@ -272,9 +272,9 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                               if (value!.isEmpty) {
                                                 webAuth.isSurnameError = true;
                                                 return 'Please fill the required field.';
-                                              } else if (value.length < 4) {
+                                              } else if (value.length < 2) {
                                                 webAuth.isSurnameError = true;
-                                                return 'Surname must contain a minimum of 4 characters.';
+                                                return 'Surname must contain a minimum of 2 characters.';
                                               } else {
                                                 webAuth.isSurnameError = false;
                                                 return null;
