@@ -6,7 +6,7 @@ import 'package:v2_product_arena/web/reusable_web_widgets/web_green_profile.dart
 import 'package:v2_product_arena/web/reusable_web_widgets/web_homepage_sidebar.dart';
 
 class WebContactScreen extends StatefulWidget {
-  static const routeName = '/web-contact';
+  static const routeName = '/contact-us';
   const WebContactScreen({super.key});
 
   @override

@@ -9,7 +9,7 @@ import 'package:video_player/video_player.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 class WebLectureVideoScreen extends StatefulWidget {
-  static const routeName = '/web-video';
+  static const routeName = '/lecture-details';
 
   const WebLectureVideoScreen({super.key});
 

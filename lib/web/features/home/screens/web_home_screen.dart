@@ -4,7 +4,7 @@ import 'package:v2_product_arena/web/reusable_web_widgets/web_homepage_sidebar.d
 import 'package:v2_product_arena/web/reusable_web_widgets/web_profilepopup.dart';
 
 class WebHomeScreen extends StatelessWidget {
-  static const routeName = '/web-home';
+  static const routeName = '/home';
 
   const WebHomeScreen({super.key});
 

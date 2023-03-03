@@ -20,7 +20,7 @@ import 'package:provider/provider.dart';
 
 class WebOnboardingView extends StatefulWidget {
   const WebOnboardingView({super.key});
-  static const routeName = '/web-onboarding-view';
+  static const routeName = '/onboarding';
 
   @override
   State<WebOnboardingView> createState() => _WebOnboardingViewState();

@@ -13,7 +13,7 @@ import 'package:intl/intl.dart';
 import '../../../../mobile/features/auth/screens/mobile_signup_screen.dart';
 
 class WebSignUpScreen extends StatefulWidget {
-  static const routeName = '/web-signup';
+  static const routeName = '/signup';
 
   @override
   State<WebSignUpScreen> createState() => _WebSignUpScreenState();

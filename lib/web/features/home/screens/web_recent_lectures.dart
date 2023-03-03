@@ -8,7 +8,7 @@ import 'package:v2_product_arena/web/reusable_web_widgets/web_lecture_card.dart'
 import '../../../reusable_web_widgets/web_homepage_sidebar.dart';
 
 class WebRecentLecturesPage extends StatefulWidget {
-  static const routeName = '/web-recent';
+  static const routeName = '/recent-lectures';
 
   const WebRecentLecturesPage({super.key});
 
