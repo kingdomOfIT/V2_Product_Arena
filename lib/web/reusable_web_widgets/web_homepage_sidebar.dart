@@ -58,12 +58,17 @@ class WebSideBar extends StatelessWidget {
                   child: Row(
                     children: [
                       Flexible(
-                        child: Image.asset(
-                          'assets/images/WebSidebarHomescreenWhite.png',
-                          height: maxheigt * (30 / 1094),
-                          width: maxwidth * (30 / 1440),
-                        ),
-                      ),
+                          child: sideBarProvider.isHome
+                              ? buildImage(
+                                  'assets/images/WebSidebarHomescreenGreen.png',
+                                  maxheigt,
+                                  maxwidth,
+                                )
+                              : buildImage(
+                                  'assets/images/WebSidebarHomescreenWhite.png',
+                                  maxheigt,
+                                  maxwidth,
+                                )),
                       const SizedBox(width: 10),
                       Text(
                         'Homescreen',
@@ -118,20 +123,35 @@ class WebSideBar extends StatelessWidget {
                         ? Row(
                             children: [
                               Flexible(
-                                child: Image.asset(
-                                  height: maxheigt * (30 / 1094),
-                                  width: maxwidth * (30 / 1440),
-                                  webAuth.firstRole == 'backend'
-                                      ? 'assets/images/rolevectorwhite3.png'
-                                      : webAuth.firstRole == 'fullstack'
-                                          ? 'assets/images/rolevectorwhite5.png'
-                                          : webAuth.firstRole == 'qa'
-                                              ? 'assets/images/rolevectorwhite1.png'
-                                              : webAuth.firstRole ==
-                                                      'productManager'
-                                                  ? 'assets/images/rolevectorwhite2.png'
-                                                  : 'assets/images/rolevectorwhite4.png',
-                                ),
+                                child: sideBarProvider.isCurrentRole
+                                    ? Image.asset(
+                                        height: maxheigt * (30 / 1094),
+                                        width: maxwidth * (30 / 1440),
+                                        webAuth.firstRole == 'backend'
+                                            ? 'assets/images/backend_green.png'
+                                            : webAuth.firstRole == 'fullstack'
+                                                ? 'assets/images/fs_green.png'
+                                                : webAuth.firstRole == 'qa'
+                                                    ? 'assets/images/qa_icon_green.png'
+                                                    : webAuth.firstRole ==
+                                                            'productManager'
+                                                        ? 'assets/images/pm_green.png'
+                                                        : 'assets/images/uiux_green.png',
+                                      )
+                                    : Image.asset(
+                                        height: maxheigt * (30 / 1094),
+                                        width: maxwidth * (30 / 1440),
+                                        webAuth.firstRole == 'backend'
+                                            ? 'assets/images/rolevectorwhite3.png'
+                                            : webAuth.firstRole == 'fullstack'
+                                                ? 'assets/images/rolevectorwhite5.png'
+                                                : webAuth.firstRole == 'qa'
+                                                    ? 'assets/images/rolevectorwhite1.png'
+                                                    : webAuth.firstRole ==
+                                                            'productManager'
+                                                        ? 'assets/images/rolevectorwhite2.png'
+                                                        : 'assets/images/rolevectorwhite4.png',
+                                      ),
                               ),
                               SizedBox(width: maxwidth * (10 / 1440)),
                               Text(
@@ -158,20 +178,40 @@ class WebSideBar extends StatelessWidget {
                         : Row(
                             children: [
                               Flexible(
-                                child: Image.asset(
-                                  webAuth.secondRole == 'backend'
-                                      ? 'assets/images/rolevectorwhite3.png'
-                                      : webAuth.secondRole == 'fullstack'
-                                          ? 'assets/images/rolevectorwhite5.png'
-                                          : webAuth.secondRole == 'qa'
-                                              ? 'assets/images/rolevectorwhite1.png'
-                                              : webAuth.secondRole ==
-                                                      'productManager'
-                                                  ? 'assets/images/rolevectorwhite2.png'
-                                                  : 'assets/images/rolevectorblack4.png',
-                                  height: maxheigt * (30 / 1094),
-                                  width: maxwidth * (30 / 1440),
-                                ),
+                                child: sideBarProvider.isHome == false &&
+                                        sideBarProvider.isCurrentRole ==
+                                            false &&
+                                        sideBarProvider.isRecentLectuers ==
+                                            false &&
+                                        sideBarProvider.isContactUs == false
+                                    ? Image.asset(
+                                        height: maxheigt * (30 / 1094),
+                                        width: maxwidth * (30 / 1440),
+                                        webAuth.secondRole == 'backend'
+                                            ? 'assets/images/backend_green.png'
+                                            : webAuth.secondRole == 'fullstack'
+                                                ? 'assets/images/fs_green.png'
+                                                : webAuth.secondRole == 'qa'
+                                                    ? 'assets/images/qa_icon_green.png'
+                                                    : webAuth.secondRole ==
+                                                            'productManager'
+                                                        ? 'assets/images/pm_green.png'
+                                                        : 'assets/images/uiux_green.png',
+                                      )
+                                    : Image.asset(
+                                        height: maxheigt * (30 / 1094),
+                                        width: maxwidth * (30 / 1440),
+                                        webAuth.secondRole == 'backend'
+                                            ? 'assets/images/rolevectorwhite3.png'
+                                            : webAuth.secondRole == 'fullstack'
+                                                ? 'assets/images/rolevectorwhite5.png'
+                                                : webAuth.secondRole == 'qa'
+                                                    ? 'assets/images/rolevectorwhite1.png'
+                                                    : webAuth.secondRole ==
+                                                            'productManager'
+                                                        ? 'assets/images/rolevectorwhite2.png'
+                                                        : 'assets/images/rolevectorwhite4.png',
+                                      ),
                               ),
                               SizedBox(width: maxwidth * (10 / 1440)),
                               Text(
@@ -231,12 +271,17 @@ class WebSideBar extends StatelessWidget {
                 child: Row(
                   children: [
                     Flexible(
-                      child: Image.asset(
-                        'assets/images/WebSidebarRecentWhite.png',
-                        height: maxheigt * (30 / 1094),
-                        width: maxwidth * (30 / 1440),
-                      ),
-                    ),
+                        child: sideBarProvider.isRecentLectuers
+                            ? buildImage(
+                                'assets/images/recent_icon_green.png',
+                                maxheigt,
+                                maxwidth,
+                              )
+                            : buildImage(
+                                'assets/images/WebSidebarRecentWhite.png',
+                                maxheigt,
+                                maxwidth,
+                              )),
                     SizedBox(width: maxwidth * (10 / 1440)),
                     Text(
                       'Recent lectures',
@@ -280,12 +325,17 @@ class WebSideBar extends StatelessWidget {
                   child: Row(
                     children: [
                       Flexible(
-                        child: Image.asset(
-                          'assets/images/WebSidebarContactusWhite.png',
-                          height: maxheigt * (30 / 1094),
-                          width: maxwidth * (30 / 1440),
-                        ),
-                      ),
+                          child: sideBarProvider.isContactUs
+                              ? buildImage(
+                                  'assets/images/contactus_green.png',
+                                  maxheigt,
+                                  maxwidth,
+                                )
+                              : buildImage(
+                                  'assets/images/WebSidebarContactusWhite.png',
+                                  maxheigt,
+                                  maxwidth,
+                                )),
                       SizedBox(width: maxwidth * (10 / 1440)),
                       Text(
                         'Contact us!',
@@ -305,6 +355,14 @@ class WebSideBar extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Widget buildImage(String name, double maxheigt, double maxwidth) {
+    return Image.asset(
+      name,
+      height: maxheigt * (30 / 1094),
+      width: maxwidth * (30 / 1440),
     );
   }
 }
