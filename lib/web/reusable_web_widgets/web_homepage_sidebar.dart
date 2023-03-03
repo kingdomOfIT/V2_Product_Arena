@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:v2_product_arena/web/features/home/screens/new_contact_us.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_home_screen.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_lectures_screen.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_recent_lectures.dart';
@@ -262,7 +263,8 @@ class WebSideBar extends StatelessWidget {
                 child: TextButton(
                   key: const Key('contactFormButton'),
                   onPressed: () {
-                    Navigator.of(context).pushNamed(WebContactScreen.routeName);
+                    Navigator.of(context)
+                        .pushNamed(NewContactUsScreen.routeName);
                     sideBarProvider.isHome = false;
                     sideBarProvider.isCurrentRole = false;
                     sideBarProvider.isRecentLectuers = false;

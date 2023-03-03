@@ -22,6 +22,7 @@ import 'package:v2_product_arena/web/features/auth/screens/web_email_verifed.dar
 import 'package:v2_product_arena/web/features/auth/screens/web_login_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_signup_screen.dart';
+import 'package:v2_product_arena/web/features/home/screens/new_contact_us.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_contact_screen.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_home_screen.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_lectures_screen.dart';
@@ -158,6 +159,7 @@ class _MyAppState extends State<MyApp> {
               ),
           WebContactScreen.routeName: (context) => const WebContactScreen(),
           MobileContactUs.routeName: (context) => const MobileContactUs(),
+          NewContactUsScreen.routeName: (context) => const NewContactUsScreen(),
         },
       ),
     );
