@@ -139,7 +139,6 @@ class _LinkVideoScreenState extends State<LinkVideoScreen> {
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
-                            keyboardType: TextInputType.url,
                             validator: (value) {
                               if (!videohttp.hasMatch(value!)) {
                                 return 'Invalid format';

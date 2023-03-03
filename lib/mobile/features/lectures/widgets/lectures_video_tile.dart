@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
 
 class LecturesVideoTile extends StatelessWidget {
   final String linkImage;
@@ -61,6 +63,7 @@ class LecturesVideoTile extends StatelessWidget {
         ),
       ),
       onTap: () {
+        Provider.of<MobileAuth>(context, listen: false).changeSidebar(false);
         pageController.animateToPage(i,
             duration: const Duration(milliseconds: 400), curve: Curves.easeIn);
       },
