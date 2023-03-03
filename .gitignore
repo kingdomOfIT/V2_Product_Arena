@@ -36,6 +36,9 @@ oldcontactscreen.dart
 
 #Test coverage
 /coverage/
+/test
+/test-driver
+/integration_test
 
 # Symbolication related
 app.*.symbols

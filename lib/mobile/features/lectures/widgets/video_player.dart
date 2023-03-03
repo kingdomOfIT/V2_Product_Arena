@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:v2_product_arena/mobile/features/lectures/screens/hello_screen.dart';
-import 'package:v2_product_arena/mobile/features/lectures/widgets/lectures_appbar.dart';
 import 'package:v2_product_arena/mobile/features/lectures/widgets/lectures_indicator.dart';
 import 'package:v2_product_arena/mobile/features/lectures/widgets/lectures_sidebar.dart';
 import 'package:v2_product_arena/mobile/features/onboarding/widgets/form_button.dart';

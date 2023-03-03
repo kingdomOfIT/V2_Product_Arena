@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:v2_product_arena/mobile/features/lectures/widgets/video_player.dart';
 import 'package:v2_product_arena/mobile/features/lectures/screens/mobile_lectures_screens.dart';
 import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
-import 'package:v2_product_arena/mobile/features/lectures/widgets/lectures_indicator.dart';
 import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/mobile_footer.dart';
 
 class WelcomeLecturesScreen extends StatefulWidget {

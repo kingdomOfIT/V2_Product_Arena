@@ -32,7 +32,7 @@ class _MobileLecturesScreenState extends State<MobileLecturesScreen> {
       appBar: AppBar(
         backgroundColor: const Color(0xFFFFFFFF),
         elevation: 0,
-        leading: Container(
+        leading: SizedBox(
           height: 55,
           width: MediaQuery.of(context).size.width,
           child: Padding(

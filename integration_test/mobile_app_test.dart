@@ -73,13 +73,13 @@ class MockAuth extends Mock implements AuthCategory {
   Future<List<AuthUserAttribute<AuthUserAttributeKey>>> fetchUserAttributes(
       {FetchUserAttributesOptions? options}) {
     final attributes = [
-      AuthUserAttribute<AuthUserAttributeKey>(
+      const AuthUserAttribute<AuthUserAttributeKey>(
           userAttributeKey: AuthUserAttributeKey.email,
           value: 'johndoe@example.com'),
-      AuthUserAttribute<AuthUserAttributeKey>(
+      const AuthUserAttribute<AuthUserAttributeKey>(
           userAttributeKey: AuthUserAttributeKey.address,
           value: '123 Main St.'),
-      AuthUserAttribute<AuthUserAttributeKey>(
+      const AuthUserAttribute<AuthUserAttributeKey>(
           userAttributeKey: AuthUserAttributeKey.birthdate,
           value: '1980-01-01'),
     ];

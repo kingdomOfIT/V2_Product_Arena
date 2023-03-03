@@ -8,6 +8,7 @@ import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_appbar.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_footer.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../mobile/features/auth/screens/mobile_signup_screen.dart';
 
@@ -81,6 +82,24 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
   void togglePasswordView() {
     setState(() {
       isHiddenPassword = !isHiddenPassword;
+    });
+  }
+
+  DateTime date = DateTime(2022, 02, 02);
+
+  void _selectBirthDate() {
+    showDatePicker(
+      context: context,
+      initialDate: date,
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+    ).then((pickedDate) {
+      if (pickedDate == null) {
+        return;
+      }
+      String formattedDate = DateFormat("dd-MM-yyyy").format(pickedDate);
+
+      birthdateController.text = formattedDate;
     });
   }
 
@@ -214,9 +233,9 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                               if (value!.isEmpty) {
                                                 webAuth.isNameError = true;
                                                 return 'Please fill the required field.';
-                                              } else if (value.length < 2) {
+                                              } else if (value.length < 4) {
                                                 webAuth.isNameError = true;
-                                                return 'Name must contain a minimum of 2 characters.';
+                                                return 'Name must contain a minimum of 4 characters.';
                                               } else {
                                                 webAuth.isNameError = false;
                                                 return null;
@@ -272,9 +291,9 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                               if (value!.isEmpty) {
                                                 webAuth.isSurnameError = true;
                                                 return 'Please fill the required field.';
-                                              } else if (value.length < 2) {
+                                              } else if (value.length < 4) {
                                                 webAuth.isSurnameError = true;
-                                                return 'Surname must contain a minimum of 2 characters.';
+                                                return 'Surname must contain a minimum of 4 characters.';
                                               } else {
                                                 webAuth.isSurnameError = false;
                                                 return null;
@@ -306,6 +325,14 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                         focusedBorder: const OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFF22E974),
+                                          ),
+                                        ),
+                                        prefixIcon: InkWell(
+                                          key: const Key('datePicker'),
+                                          onTap: _selectBirthDate,
+                                          child: Icon(
+                                            Icons.calendar_month,
+                                            size: maxheight * 0.03,
                                           ),
                                         ),
                                         focusedErrorBorder:
