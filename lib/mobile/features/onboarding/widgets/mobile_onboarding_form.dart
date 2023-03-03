@@ -185,6 +185,9 @@ class _MobileOnboardingFormState extends State<MobileOnboardingForm> {
                     ],
                   ),
                 ),
+                SizedBox(
+                  height: (120 / 800) * MediaQuery.of(context).size.height,
+                )
               ],
             ),
           ),
