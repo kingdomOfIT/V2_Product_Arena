@@ -66,7 +66,7 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
   int _currentPage = 0;
   @override
   Widget build(BuildContext context) {
-    final dataProvider = Provider.of<MobileAuth>(context);
+    final dataProvider = Provider.of<MobileAuth>(context, listen: false);
     return Scaffold(
       appBar: !dataProvider.isPlayingInFullscr
           ? AppBar(
@@ -87,6 +87,7 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
                       Provider.of<ErrorMessage>(context, listen: false)
                           .selectedRole
                           .clear();
+                      dataProvider.changeSidebar(false);
                       Navigator.of(context).pushNamed(WelcomePage.routeName);
                     },
                     child: Image.asset(
@@ -102,16 +103,23 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
                 Padding(
                   padding: EdgeInsets.only(
                       right: (32 / 360) * MediaQuery.of(context).size.width),
-                  child: GestureDetector(
-                    onTap: () {
-                      dataProvider.isSidebarOpened2
-                          ? _key.currentState!.closeEndDrawer()
-                          : _key.currentState!.openEndDrawer();
-                      dataProvider.changeSidebar2();
-                    },
-                    child: dataProvider.isSidebarOpened2
-                        ? const Icon(Icons.close)
-                        : const Icon(Icons.menu),
+                  child: Consumer<MobileAuth>(
+                    builder: ((context, value, child) {
+                      return GestureDetector(
+                        onTap: () {
+                          if (value.isSidebarOpened) {
+                            _key.currentState!.closeEndDrawer();
+                            value.changeSidebar(false);
+                          } else {
+                            _key.currentState!.openEndDrawer();
+                            value.changeSidebar(true);
+                          }
+                        },
+                        child: !value.isSidebarOpened
+                            ? const Icon(Icons.menu)
+                            : const Icon(Icons.close),
+                      );
+                    }),
                   ),
                 ),
               ],
@@ -140,6 +148,9 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
         endDrawer: Drawer(
             width: MediaQuery.of(context).size.width,
             child: const MobileSidebar()),
+        onEndDrawerChanged: (isOpen) {
+          dataProvider.changeSidebar(isOpen);
+        },
         backgroundColor: const Color(0xFFE9E9E9),
         body: YoutubePlayerBuilder(
             player: YoutubePlayer(

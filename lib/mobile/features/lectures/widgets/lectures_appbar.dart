@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:v2_product_arena/mobile/features/lectures/screens/hello_screen.dart';
+import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
 
 class WelcomepageAppBar extends StatefulWidget implements PreferredSizeWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
@@ -22,6 +24,7 @@ class _WelcomepageAppBarState extends State<WelcomepageAppBar> {
     final mediaQuery = MediaQuery.of(context);
     final double screenWidth = mediaQuery.size.width;
     final double screenHeight = mediaQuery.size.height;
+    final dataProvider = Provider.of<MobileAuth>(context, listen: false);
     return AppBar(
       backgroundColor: const Color(0xFFFFFFFF),
       elevation: 0,
@@ -37,6 +40,7 @@ class _WelcomepageAppBarState extends State<WelcomepageAppBar> {
           child: GestureDetector(
             key: const Key('appbarLogo'),
             onTap: () {
+              dataProvider.changeSidebar(false);
               Navigator.of(context).pushNamed(WelcomePage.routeName);
             },
             child: Image.asset(
@@ -49,29 +53,28 @@ class _WelcomepageAppBarState extends State<WelcomepageAppBar> {
         ),
       ),
       actions: <Widget>[
-        if (!isSidebarOpen)
-          IconButton(
-            key: const Key('drawerButton'),
-            onPressed: () {
-              widget.scaffoldKey.currentState!.openEndDrawer();
-              setState(() {
-                isSidebarOpen = true;
-              });
-            },
-            icon: const Icon(Icons.menu),
-            color: const Color(0xFF212529),
+        Padding(
+          padding: EdgeInsets.only(
+              right: (32 / 360) * MediaQuery.of(context).size.width),
+          child: Consumer<MobileAuth>(
+            builder: ((context, value, child) {
+              return GestureDetector(
+                onTap: () {
+                  if (value.isSidebarOpened) {
+                    widget.scaffoldKey.currentState!.closeEndDrawer();
+                    value.changeSidebar(false);
+                  } else {
+                    widget.scaffoldKey.currentState!.openEndDrawer();
+                    value.changeSidebar(true);
+                  }
+                },
+                child: !value.isSidebarOpened
+                    ? const Icon(Icons.menu)
+                    : const Icon(Icons.close),
+              );
+            }),
           ),
-        if (isSidebarOpen)
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              setState(() {
-                isSidebarOpen = false;
-              });
-            },
-            icon: const Icon(Icons.close),
-            color: const Color(0xFF000000),
-          )
+        ),
       ],
     );
   }

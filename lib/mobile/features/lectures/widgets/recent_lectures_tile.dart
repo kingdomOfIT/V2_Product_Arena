@@ -12,7 +12,7 @@ class RecentLectures extends StatelessWidget {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
   @override
   Widget build(BuildContext context) {
-    final dataProvider = Provider.of<MobileAuth>(context);
+    final dataProvider = Provider.of<MobileAuth>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFFFFFFFF),
@@ -31,6 +31,7 @@ class RecentLectures extends StatelessWidget {
                 Provider.of<ErrorMessage>(context, listen: false)
                     .selectedRole
                     .clear();
+                dataProvider.changeSidebar(false);
                 Navigator.of(context).pushNamed(WelcomePage.routeName);
               },
               child: Image.asset(
@@ -46,16 +47,23 @@ class RecentLectures extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(
                 right: (32 / 360) * MediaQuery.of(context).size.width),
-            child: GestureDetector(
-              onTap: () {
-                (dataProvider.isSidebarOpened1)
-                    ? _key.currentState!.closeEndDrawer()
-                    : _key.currentState!.openEndDrawer();
-                dataProvider.changeSidebar1();
-              },
-              child: (dataProvider.isSidebarOpened1)
-                  ? const Icon(Icons.close)
-                  : const Icon(Icons.menu),
+            child: Consumer<MobileAuth>(
+              builder: ((context, value, child) {
+                return GestureDetector(
+                  onTap: () {
+                    if (value.isSidebarOpened) {
+                      _key.currentState!.closeEndDrawer();
+                      value.changeSidebar(false);
+                    } else {
+                      _key.currentState!.openEndDrawer();
+                      value.changeSidebar(true);
+                    }
+                  },
+                  child: !value.isSidebarOpened
+                      ? const Icon(Icons.menu)
+                      : const Icon(Icons.close),
+                );
+              }),
             ),
           ),
         ],
@@ -65,6 +73,9 @@ class RecentLectures extends StatelessWidget {
         endDrawer: Drawer(
             width: MediaQuery.of(context).size.width,
             child: const MobileSidebar()),
+        onEndDrawerChanged: (isOpen) {
+          dataProvider.changeSidebar(isOpen);
+        },
         body: SafeArea(
           child: Center(
             child:

@@ -77,9 +77,7 @@ class _MobileSidebarState extends State<MobileSidebar> {
                 height: screenHeight * (90 / 803),
                 width: screenWidth,
                 child: Padding(
-                  padding: EdgeInsets.only(
-                      left: (24 / 360) * MediaQuery.of(context).size.width,
-                      top: 24),
+                  padding: EdgeInsets.only(top: 24),
                   child: Text(
                     '${dataProvider.userName} ${dataProvider.userSurname}',
                     style: GoogleFonts.notoSans(
@@ -137,15 +135,7 @@ class _MobileSidebarState extends State<MobileSidebar> {
                       ),
                       onTap: () {
                         if (dataProvider.isSidebarOpened == true) {
-                          dataProvider.changeSidebar();
-                        } else if (dataProvider.isSidebarOpened1 == true) {
-                          dataProvider.changeSidebar1();
-                        } else if (dataProvider.isSidebarOpened2 == true) {
-                          dataProvider.changeSidebar2();
-                        } else if (dataProvider.isSidebarOpened3 == true) {
-                          dataProvider.changeSidebar3();
-                        } else if (dataProvider.isSidebarOpened4 == true) {
-                          dataProvider.changeSidebar4();
+                          dataProvider.changeSidebar(false);
                         }
                         if (selectedProvider.selectedRole.isEmpty) {
                           selectedProvider.selectedRole
@@ -171,15 +161,7 @@ class _MobileSidebarState extends State<MobileSidebar> {
               GestureDetector(
                 onTap: () {
                   if (dataProvider.isSidebarOpened == true) {
-                    dataProvider.changeSidebar();
-                  } else if (dataProvider.isSidebarOpened1 == true) {
-                    dataProvider.changeSidebar1();
-                  } else if (dataProvider.isSidebarOpened2 == true) {
-                    dataProvider.changeSidebar2();
-                  } else if (dataProvider.isSidebarOpened3 == true) {
-                    dataProvider.changeSidebar3();
-                  } else if (dataProvider.isSidebarOpened4 == true) {
-                    dataProvider.changeSidebar4();
+                    dataProvider.changeSidebar(false);
                   }
                   if (selectedProvider.selectedRole.isEmpty) {
                     selectedProvider.selectedRole.add('Recent Lessons');
@@ -221,15 +203,7 @@ class _MobileSidebarState extends State<MobileSidebar> {
               InkWell(
                 onTap: () {
                   if (dataProvider.isSidebarOpened == true) {
-                    dataProvider.changeSidebar();
-                  } else if (dataProvider.isSidebarOpened1 == true) {
-                    dataProvider.changeSidebar1();
-                  } else if (dataProvider.isSidebarOpened2 == true) {
-                    dataProvider.changeSidebar2();
-                  } else if (dataProvider.isSidebarOpened3 == true) {
-                    dataProvider.changeSidebar3();
-                  } else if (dataProvider.isSidebarOpened4 == true) {
-                    dataProvider.changeSidebar4();
+                    dataProvider.changeSidebar(false);
                   }
                   if (selectedProvider.selectedRole.isEmpty) {
                     selectedProvider.selectedRole.add('Contact us');

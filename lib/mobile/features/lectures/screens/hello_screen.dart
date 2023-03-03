@@ -18,7 +18,7 @@ class _WelcomePageState extends State<WelcomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final dataProvider = Provider.of<MobileAuth>(context);
+    final dataProvider = Provider.of<MobileAuth>(context, listen: false);
     dataProvider.scaffoldKey = _scaffoldKey;
     final mediaQuery = MediaQuery.of(context);
     final double screenWidth = mediaQuery.size.width;
@@ -33,6 +33,9 @@ class _WelcomePageState extends State<WelcomePage> {
           width: screenWidth * (360 / 360),
           child: const MobileSidebar(),
         ),
+        onEndDrawerChanged: (isOpen) {
+          dataProvider.changeSidebar(isOpen);
+        },
         body: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
