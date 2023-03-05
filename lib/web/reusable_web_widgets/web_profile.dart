@@ -5,8 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_login_screen.dart';
 import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
 
-class WebProfilePopup extends StatelessWidget {
-  const WebProfilePopup({super.key});
+class WebProfile extends StatelessWidget {
+  const WebProfile({super.key});
 
   @override
   Widget build(BuildContext context) {

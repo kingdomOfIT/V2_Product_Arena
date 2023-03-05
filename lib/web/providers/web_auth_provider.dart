@@ -24,6 +24,10 @@ class WebAuth with ChangeNotifier {
   bool isEmailError = false;
   bool isPasswordError = false;
 
+  String userName = '';
+  String userSurname = '';
+  String emailUser = '';
+
   List _lectures = [];
   List _roles = [];
 
@@ -144,6 +148,7 @@ class WebAuth with ChangeNotifier {
         password: userPassword,
       );
       print('Loginovan');
+      //await fetchCurrentUserAttributes();
     } on AuthException catch (e) {
       safePrint(e.message);
     }
@@ -256,4 +261,32 @@ class WebAuth with ChangeNotifier {
 //       print('GET call failed: ${e.message}');
 //     }
 //   }
+
+  Future<void> fetchCurrentUserAttributes() async {
+    try {
+      final result = await Amplify.Auth.fetchUserAttributes();
+
+      // for (final element in result) {
+      //   print('key: ${element.userAttributeKey}; value: ${element.value}');
+      // }
+      userName = result
+          .firstWhere((element) =>
+              element.userAttributeKey.toString() ==
+              'CognitoUserAttributeKey "given_name"')
+          .value;
+      userSurname = result
+          .firstWhere((element) =>
+              element.userAttributeKey.toString() ==
+              'CognitoUserAttributeKey "family_name"')
+          .value;
+      emailUser = result
+          .firstWhere((element) =>
+              element.userAttributeKey.toString() ==
+              'CognitoUserAttributeKey "email"')
+          .value;
+      safePrint(userName);
+    } on AuthException catch (e) {
+      safePrint(e.message);
+    }
+  }
 }
