@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_homepage_sidebar.dart';
+import 'package:v2_product_arena/web/reusable_web_widgets/web_profile.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_profilepopup.dart';
 
 class WebHomeScreen extends StatelessWidget {
@@ -20,7 +21,7 @@ class WebHomeScreen extends StatelessWidget {
             width: maxwidth * (1130 / 1440),
             child: Column(
               children: [
-                const WebProfilePopup(),
+                const WebProfile(),
                 SizedBox(
                   child: Column(
                     children: [

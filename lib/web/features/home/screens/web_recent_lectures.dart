@@ -5,6 +5,7 @@ import 'package:v2_product_arena/web/features/home/widgets/web_mock_data_recent_
 import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_green_profile.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_lecture_card.dart';
+import 'package:v2_product_arena/web/reusable_web_widgets/web_profile.dart';
 import '../../../reusable_web_widgets/web_homepage_sidebar.dart';
 
 class WebRecentLecturesPage extends StatefulWidget {
@@ -45,7 +46,7 @@ class _WebRecentLecturesPageState extends State<WebRecentLecturesPage> {
                   alignment: Alignment.topRight,
                   child: Padding(
                     padding: EdgeInsets.only(right: 25),
-                    child: WebProfilePopup(),
+                    child: WebProfile(),
                   ),
                 ),
                 ////////////////////////////////////// LECTURES CARDS  ////////////////////////////////////////
