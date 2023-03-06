@@ -190,11 +190,14 @@ class WebAuth with ChangeNotifier {
 
       print(roles);
       var oneLecture;
+      List temp2 = [];
       responseMap['lectures'].forEach((lecture) {
         oneLecture = lecture;
 
-        _lectures.add(oneLecture);
+        temp2.add(oneLecture);
       });
+      Set set2 = Set.from(temp2);
+      _lectures = set2.toList();
       firstRole = _roles.isNotEmpty ? _roles[0] : null;
       if (firstRole != null) {
         final firstRoleLectures = _lectures
