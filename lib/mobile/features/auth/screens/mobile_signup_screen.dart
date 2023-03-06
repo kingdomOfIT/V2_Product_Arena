@@ -825,7 +825,7 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                             height: deviceHeight * 0.07,
                             width: deviceHeight * 0.07,
                             child: Image.asset(
-                              'assets/images/tech.png',
+                              'assets/images/group2.png',
                               fit: BoxFit.cover,
                             ),
                           ),
