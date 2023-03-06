@@ -19,7 +19,6 @@ class SignupConfirmation extends StatefulWidget {
 
 class _SignupConfirmationState extends State<SignupConfirmation> {
   final _formKey = GlobalKey();
-  bool isLoadingEr = false;
 
   final _otpController1 = TextEditingController();
   final _otpController2 = TextEditingController();
@@ -32,6 +31,8 @@ class _SignupConfirmationState extends State<SignupConfirmation> {
   Widget build(BuildContext context) {
     final webAuth = Provider.of<WebAuth>(context, listen: false);
     final isError = Provider.of<WebAuth>(context, listen: false).isOTPerror;
+    final isLoad = Provider.of<WebAuth>(context, listen: false).isLoading;
+
     double maxwidth = MediaQuery.of(context).size.width;
     double maxheight = MediaQuery.of(context).size.height;
 

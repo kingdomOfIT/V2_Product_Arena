@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,6 +17,7 @@ class WebContactScreen extends StatefulWidget {
 }
 
 bool isContactFormSent = false;
+bool isEnabled = true;
 
 class _WebContactScreenState extends State<WebContactScreen> {
   final formKey = GlobalKey<FormState>();
@@ -203,55 +206,67 @@ class _WebContactScreenState extends State<WebContactScreen> {
                                   SizedBox(
                                     height: deviceHeight * 0.05,
                                   ),
-                                  ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.black87,
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                        top: deviceHeight * (7.5 / 803),
-                                        right: deviceWidth * (2 / 360),
-                                        bottom: deviceHeight * (7.5 / 803),
-                                        left: deviceWidth * (2 / 360),
+                                  AbsorbPointer(
+                                    absorbing: !isEnabled,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.black87,
                                       ),
-                                      child: Text(
-                                        'Submit',
-                                        textAlign: TextAlign.center,
-                                        style: GoogleFonts.notoSans(
-                                          textStyle: TextStyle(
-                                              fontSize:
-                                                  deviceHeight * (14 / 803),
-                                              fontWeight: FontWeight.w700,
-                                              fontStyle: FontStyle.normal,
-                                              color: const Color(0xFFFFFFFF)),
+                                      child: Padding(
+                                        padding: EdgeInsets.only(
+                                          top: deviceHeight * (7.5 / 803),
+                                          right: deviceWidth * (2 / 360),
+                                          bottom: deviceHeight * (7.5 / 803),
+                                          left: deviceWidth * (2 / 360),
+                                        ),
+                                        child: Text(
+                                          'Submit',
+                                          textAlign: TextAlign.center,
+                                          style: GoogleFonts.notoSans(
+                                            textStyle: TextStyle(
+                                                fontSize:
+                                                    deviceHeight * (14 / 803),
+                                                fontWeight: FontWeight.w700,
+                                                fontStyle: FontStyle.normal,
+                                                color: const Color(0xFFFFFFFF)),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    onPressed: () async {
-                                      if (formKey.currentState!.validate()) {
-                                        try {
-                                          final restOperation =
-                                              Amplify.API.post(
-                                            'api/user/form',
-                                            apiName: 'sendFormEmailAlfa',
-                                            body: HttpPayload.json(
-                                              {
-                                                'question': contactUsController
-                                                    .text
-                                                    .toString(),
-                                              },
-                                            ),
-                                          );
-                                          final response =
-                                              await restOperation.response;
-                                          safePrint('POST call succeeded');
-                                          safePrint(response.decodeBody());
-                                        } on ApiException catch (e) {
-                                          safePrint(
-                                              'POST call failed: ${e.message}');
+                                      onPressed: () async {
+                                        if (!isEnabled) {
+                                          return;
+                                        } // do nothing if button is disabled
+                                        if (formKey.currentState!.validate()) {
+                                          try {
+                                            isEnabled =
+                                                false; // disable the button
+                                            Timer(
+                                                const Duration(seconds: 100),
+                                                () => isEnabled =
+                                                    true); // enable the button after 100 seconds
+                                            final restOperation =
+                                                Amplify.API.post(
+                                              'api/user/form',
+                                              apiName: 'sendFormEmailAlfa',
+                                              body: HttpPayload.json(
+                                                {
+                                                  'question':
+                                                      contactUsController.text
+                                                          .toString()
+                                                },
+                                              ),
+                                            );
+                                            final response =
+                                                await restOperation.response;
+                                            safePrint('POST call succeeded');
+                                            safePrint(response.decodeBody());
+                                          } on ApiException catch (e) {
+                                            safePrint(
+                                                'POST call failed: ${e.message}');
+                                          }
                                         }
-                                      }
-                                    },
+                                      },
+                                    ),
                                   ),
                                   SizedBox(
                                     height: deviceHeight * (53 / 1024),

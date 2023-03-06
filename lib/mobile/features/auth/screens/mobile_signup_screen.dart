@@ -75,14 +75,12 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
   bool isLoading = false;
   String dialCodeDigits = '+387';
 
-  DateTime date = DateTime(2022, 02, 02);
-
   void _selectBirthDate() {
     showDatePicker(
       context: context,
-      initialDate: date,
+      initialDate: DateTime(2010),
       firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
+      lastDate: DateTime(2010),
     ).then((pickedDate) {
       if (pickedDate == null) {
         return;
@@ -362,6 +360,10 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                         fontWeight: FontWeight.w700,
                                       ),
                                     ),
+                                    hintText: 'DD-MM-GGGG',
+                                    hintStyle: TextStyle(
+                                      color: Colors.grey[400],
+                                    ),
                                     prefixIcon: InkWell(
                                       key: const Key('datePicker'),
                                       onTap: _selectBirthDate,
@@ -542,6 +544,10 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                         fontSize: 14,
                                         fontWeight: FontWeight.w700,
                                       ),
+                                    ),
+                                    hintText: '+3876xxxxxxx',
+                                    hintStyle: TextStyle(
+                                      color: Colors.grey[400],
                                     ),
                                     // prefix: Container(
                                     //   child: SizedBox(

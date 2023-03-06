@@ -122,6 +122,7 @@ class WebAuth with ChangeNotifier {
     //Loader
     showDialog(
         context: context,
+        barrierDismissible: false,
         builder: (context) {
           return Center(child: CircularProgressIndicator());
         });

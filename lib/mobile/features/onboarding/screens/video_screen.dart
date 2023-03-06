@@ -28,7 +28,7 @@ class _LinkVideoScreenState extends State<LinkVideoScreen> {
   void initState() {
     super.initState();
     _controller = YoutubePlayerController.fromVideoId(
-      videoId: '2_uX7GxPzDI', // https://www.youtube.com/watch?v=Tb9k9_Bo-G4
+      videoId: 'd2lPRffORYQ', // https://www.youtube.com/watch?v=Tb9k9_Bo-G4
       autoPlay: false,
     );
   }
