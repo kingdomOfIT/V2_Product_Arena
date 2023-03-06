@@ -6,7 +6,6 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:googleapis_auth/googleapis_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:v2_product_arena/mobile/features/home/models/mob_lectures.dart';
 
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 //import 'package:amplify_datastore/amplify_datastore.dart';
