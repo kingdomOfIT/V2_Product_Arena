@@ -7,7 +7,7 @@ class VideoTile extends StatelessWidget {
   VideoTile({super.key});
 
   final _controller = YoutubePlayerController.fromVideoId(
-    videoId: '2_uX7GxPzDI',
+    videoId: 'd2lPRffORYQ',
     autoPlay: false,
     params: const YoutubePlayerParams(showFullscreenButton: true),
   );
