@@ -51,8 +51,9 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final deviceWidth = MediaQuery.of(context).size.width;
-    final deviceHeight = MediaQuery.of(context).size.height;
+    final mediaQuery = MediaQuery.of(context);
+    final double screenWidth = mediaQuery.size.width;
+    final double screenHeight = mediaQuery.size.height;
     final mobileAuth = Provider.of<MobileAuth>(
       context,
     );
@@ -69,37 +70,49 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(
-                  top: deviceHeight * 0.053,
-                  right: deviceWidth * 0.091,
-                  left: deviceWidth * 0.091,
-                ),
-                child: Column(
-                  children: <Widget>[
-                    Text(
+              Column(
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(
+                      top: screenHeight * (40 / 749),
+                      left: screenWidth * (65 / 360),
+                      right: screenWidth * (55 / 360),
+                    ),
+                    child: Text(
                       'Just to be sure...',
                       style: GoogleFonts.notoSans(
                         color: Colors.black,
                         fontWeight: FontWeight.w400,
-                        fontSize: deviceHeight * 0.037,
+                        fontSize: screenHeight * (32 / 749),
                       ),
                     ),
-                    SizedBox(
-                      height: deviceHeight * 0.027,
+                  ),
+                  SizedBox(
+                    height: screenHeight * (20 / 749),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: screenWidth * (32 / 360),
+                      right: screenWidth * (32 / 360),
                     ),
-                    Text(
+                    child: Text(
                       'We’ve sent a 6-digit code to your e-mail',
                       style: GoogleFonts.notoSans(
                         color: Colors.black54,
                         fontWeight: FontWeight.w400,
-                        fontSize: deviceHeight * 0.016,
+                        fontSize: screenHeight * (16 / 749),
                       ),
                     ),
-                    SizedBox(
-                      height: deviceHeight * 0.093,
+                  ),
+                  SizedBox(
+                    height: screenHeight * (70 / 749),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: screenWidth * (33 / 360),
+                      right: screenWidth * (33 / 360),
                     ),
-                    Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         TextFieldOTP(
@@ -109,12 +122,18 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                           controller: firstController,
                           focusNode: firstFocusNode,
                         ),
+                        SizedBox(
+                          width: screenWidth * (3.5 / 360),
+                        ),
                         TextFieldOTP(
                           key: const Key('emailverificationField2'),
                           first: false,
                           last: false,
                           controller: secondController,
                           focusNode: secondFocusNode,
+                        ),
+                        SizedBox(
+                          width: screenWidth * (3.5 / 360),
                         ),
                         TextFieldOTP(
                           key: const Key('emailverificationField3'),
@@ -123,6 +142,9 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                           controller: thirdController,
                           focusNode: thirdFocusNode,
                         ),
+                        SizedBox(
+                          width: screenWidth * (3.5 / 360),
+                        ),
                         TextFieldOTP(
                           key: const Key('emailverificationField4'),
                           first: false,
@@ -130,12 +152,18 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                           controller: fourthController,
                           focusNode: fourthFocusNode,
                         ),
+                        SizedBox(
+                          width: screenWidth * (3.5 / 360),
+                        ),
                         TextFieldOTP(
                           key: const Key('emailverificationField5'),
                           first: false,
                           last: false,
                           controller: fifthController,
                           focusNode: fifthFocusNode,
+                        ),
+                        SizedBox(
+                          width: screenWidth * (3.5 / 360),
                         ),
                         TextFieldOTP(
                           key: const Key('emailverificationField6'),
@@ -146,32 +174,43 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: deviceHeight * 0.013,
-                    ),
-                    mobileAuth.isOTPerror
-                        ? Text(
-                            'Confirmation code does not match',
-                            style: GoogleFonts.notoSans(
-                              color: Colors.red,
-                              fontWeight: FontWeight.w700,
-                              fontSize: deviceHeight * 0.019,
-                            ),
-                          )
-                        : SizedBox(
-                            height: deviceHeight * 0.07,
+                  ),
+                  SizedBox(
+                    height: screenHeight * (1 / 749),
+                  ),
+                  mobileAuth.isOTPerror
+                      ? Text(
+                          'Confirmation code does not match',
+                          style: GoogleFonts.notoSans(
+                            color: Colors.red,
+                            fontWeight: FontWeight.w700,
+                            fontSize: screenHeight * (14 / 749),
                           ),
-                    SizedBox(
-                      height: deviceHeight * 0.05,
-                    ),
-                    CustomButton(
+                        )
+                      : SizedBox(
+                          height: screenHeight * (52 / 749),
+                        ),
+                  SizedBox(
+                    height: screenHeight * (37 / 749),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        left: screenWidth * (32 / 360),
+                        right: screenWidth * (32 / 360)),
+                    child: CustomButton(
                       key: const Key('emailVerifyButton'),
-                      content: Text(
-                        'Verify',
-                        style: GoogleFonts.notoSans(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700,
-                          fontSize: deviceHeight * 0.019,
+                      content: Padding(
+                        padding: EdgeInsets.only(
+                          top: screenHeight * (11 / 749),
+                          bottom: screenHeight * (10 / 749),
+                        ),
+                        child: Text(
+                          'Verify',
+                          style: GoogleFonts.notoSans(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                            fontSize: screenHeight * (14 / 749),
+                          ),
                         ),
                       ),
                       buttonFunction: () {
@@ -192,16 +231,21 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                       },
                       color: Colors.black,
                     ),
-                    SizedBox(
-                      height: deviceHeight * 0.013,
-                    ),
-                    Row(
+                  ),
+                  SizedBox(
+                    height: screenHeight * (10 / 749),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        left: screenWidth * (104 / 360),
+                        right: screenWidth * (103 / 360)),
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
                           'Already have an account?',
                           style: GoogleFonts.notoSans(
-                            fontSize: deviceHeight * 0.013,
+                            fontSize: screenHeight * (10 / 749),
                             color: Colors.black,
                             fontWeight: FontWeight.w400,
                           ),
@@ -218,7 +262,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                           child: Text(
                             'Log in',
                             style: GoogleFonts.notoSans(
-                              fontSize: deviceHeight * 0.013,
+                              fontSize: screenHeight * (10 / 749),
                               color: Colors.black,
                               fontWeight: FontWeight.w700,
                             ),
@@ -226,21 +270,24 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: deviceHeight * 0.15,
+                  ),
+                  SizedBox(
+                    height: screenHeight * (150 / 749),
+                  ),
+                  SizedBox(
+                    height: screenHeight * (60 / 749),
+                    width: screenWidth * (60 / 360),
+                    child: Image.asset(
+                      'assets/images/group2.png',
+                      fit: BoxFit.cover,
                     ),
-                    SizedBox(
-                      height: deviceHeight * 0.07,
-                      width: deviceHeight * 0.07,
-                      child: Image.asset(
-                        'assets/images/tech.png',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              const MobileFooter(),
+              Padding(
+                padding: EdgeInsets.only(top: screenHeight * (38.1 / 749)),
+                child: const MobileFooter(),
+              ),
             ],
           ),
         ),

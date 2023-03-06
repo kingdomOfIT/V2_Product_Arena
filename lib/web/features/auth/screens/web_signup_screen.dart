@@ -85,14 +85,12 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
     });
   }
 
-  DateTime date = DateTime(2022, 02, 02);
-
   void _selectBirthDate() {
     showDatePicker(
       context: context,
-      initialDate: date,
+      initialDate: DateTime(2010),
       firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
+      lastDate: DateTime(2010),
     ).then((pickedDate) {
       if (pickedDate == null) {
         return;
@@ -349,6 +347,10 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                             fontWeight: FontWeight.w700,
                                           ),
                                         ),
+                                        hintText: 'DD-MM-GGGG',
+                                        hintStyle: TextStyle(
+                                          color: Colors.grey[400],
+                                        ),
                                       ),
                                       controller: birthdateController,
                                       validator: (value) {
@@ -512,6 +514,10 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                               fontSize: 14,
                                               fontWeight: FontWeight.w700,
                                             ),
+                                          ),
+                                          hintText: '+3876xxxxxxx',
+                                          hintStyle: TextStyle(
+                                            color: Colors.grey[400],
                                           ),
                                         ),
                                         controller: phoneController,
@@ -702,7 +708,7 @@ class _WebSignUpScreenState extends State<WebSignUpScreen> {
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.black,
                                   ),
-                                  onPressed: onSubmitSignUp,
+                                  onPressed: isLoading ? null : onSubmitSignUp,
                                   child: Text(
                                     'Create your Account',
                                     style: GoogleFonts.notoSans(
