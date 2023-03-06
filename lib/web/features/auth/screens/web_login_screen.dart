@@ -6,7 +6,7 @@ import 'package:v2_product_arena/web/reusable_web_widgets/web_appbar.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_footer.dart';
 
 class WebLoginScreen extends StatelessWidget {
-  static const routeName = '/web-login';
+  static const routeName = '/login';
 
   const WebLoginScreen({Key? key}) : super(key: key);
 

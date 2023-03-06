@@ -303,6 +303,7 @@ class _WebLoginFormState extends State<WebLoginForm> {
                           safePrint(e.toString());
                         }
                       }
+                      webAuth.fetchCurrentUserAttributes();
                       webAuth.getUserLectures();
                       setState(() {
                         isLoading = false;

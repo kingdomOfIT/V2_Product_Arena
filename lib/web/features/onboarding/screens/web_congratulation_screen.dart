@@ -9,7 +9,7 @@ import '../../../reusable_web_widgets/web_ob_appbar.dart';
 import '../../home/screens/web_home_screen.dart';
 
 class WebCongratulationObScreen extends StatefulWidget {
-  static const routeName = '/web-verified-onboarding';
+  static const routeName = '/verified-onboarding';
   const WebCongratulationObScreen({super.key});
 
   @override

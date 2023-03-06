@@ -8,7 +8,7 @@ import '../../../reusable_web_widgets/web_appbar.dart';
 import '../../../reusable_web_widgets/web_footer.dart';
 
 class WebEmailVerified extends StatefulWidget {
-  static const routeName = '/web-email-verified';
+  static const routeName = '/email-verified';
   const WebEmailVerified({super.key});
 
   @override

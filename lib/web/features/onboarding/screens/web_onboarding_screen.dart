@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:v2_product_arena/web/features/onboarding/screens/web_congratulations_screen.dart';
 import 'package:v2_product_arena/web/providers/web_ob_answers.dart';
 import 'package:v2_product_arena/web/providers/web_ob_role.dart';
@@ -20,7 +21,7 @@ import 'package:provider/provider.dart';
 
 class WebOnboardingView extends StatefulWidget {
   const WebOnboardingView({super.key});
-  static const routeName = '/web-onboarding-view';
+  static const routeName = '/onboarding';
 
   @override
   State<WebOnboardingView> createState() => _WebOnboardingViewState();
@@ -28,25 +29,12 @@ class WebOnboardingView extends StatefulWidget {
 
 class _WebOnboardingViewState extends State<WebOnboardingView>
     with SingleTickerProviderStateMixin {
-  // final _formKey = GlobalKey<FormState>();
+  bool isLoading = false;
   @override
   void initState() {
     super.initState();
     // _configureAmplify();
   }
-
-  // Future<void> _configureAmplify() async {
-  //   // Add any Amplify plugins you want to use
-  //   final authPlugin = AmplifyAuthCognito();
-  //   final api = AmplifyAPI();
-  //   await Amplify.addPlugins([authPlugin, api]);
-  //   try {
-  //     await Amplify.configure(amplifyconfig);
-  //   } on AmplifyAlreadyConfiguredException {
-  //     safePrint(
-  //         'Tried to reconfigure Amplify; this can occur when your app restarts on Android.');
-  //   }
-  // }
 
   Future<void> signInUser() async {
     // await _configureAmplify();
@@ -72,7 +60,9 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
   }
 
   Future<void> submitOnboarding(List<String> s1, List<String> s2) async {
-    //final isValid = _formKey.currentState!.validate();
+    setState(() {
+      isLoading = true;
+    });
     await signInUser();
 
     try {
@@ -99,6 +89,9 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
     } on ApiException catch (e) {
       safePrint('POST call failed: $e');
     }
+    setState(() {
+      isLoading = false;
+    });
   }
 
   TextEditingController linkController = TextEditingController();
@@ -141,192 +134,215 @@ class _WebOnboardingViewState extends State<WebOnboardingView>
           preferredSize:
               Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
           child: WebOBAppBar(text: 'Tech387')),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          key: const Key('scrollWebOnboarding'),
-          child: Column(
-            children: [
-              Container(
-                padding:
-                    EdgeInsets.only(top: 72, left: (252 / 1440) * maxWidth),
-                width: maxWidth,
-                height: 160,
-                decoration: const BoxDecoration(
-                  color: Color(0xFF000000),
-                ),
-                child: SizedBox(
-                  width: maxWidth * 0.1902,
-                  height: 65,
-                  child: CustomText('Dobrodošli!', 48, FontWeight.w700,
-                      const Color(0xFFFFFFFF)),
-                ),
+      body: isLoading
+          ? const Center(
+              child: SpinKitRing(
+                color: Color.fromRGBO(34, 233, 116, 1),
+                size: 90.0,
+                lineWidth: 10.0,
               ),
-              SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.only(
-                      left: maxWidth * 0.1757,
-                      right: 0.1757 * maxWidth,
-                      bottom: 202),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        height: 54,
+            )
+          : SafeArea(
+              child: SingleChildScrollView(
+                key: const Key('scrollWebOnboarding'),
+                child: Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.only(
+                          top: 72, left: (252 / 1440) * maxWidth),
+                      width: maxWidth,
+                      height: 160,
+                      decoration: const BoxDecoration(
+                        color: Color(0xFF000000),
                       ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: SizedBox(
-                          height: 44,
-                          child: CustomText('Upitnik', 32, FontWeight.w500),
-                        ),
+                      child: SizedBox(
+                        width: maxWidth * 0.1902,
+                        height: 65,
+                        child: CustomText('Dobrodošli!', 48, FontWeight.w700,
+                            const Color(0xFFFFFFFF)),
                       ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: SizedBox(
-                          height: 22,
-                          child: CustomText(
-                              'Ne zaboravite da odvojite vrijeme i pažljivo pročitajte svako pitanje. Sretno!',
-                              16,
-                              FontWeight.w700),
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: SizedBox(
-                          height: 22,
-                          child: CustomText(
-                              'Molimo vas da popunite dole potrebne podatke:',
-                              16,
-                              FontWeight.w400),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      const OptionsTile(),
-                      const SizedBox(
-                        height: 37,
-                      ),
-                      SizedBox(
-                        width: maxWidth * 0.6486,
-                        // height:
-                        //     (859 / 1080) * MediaQuery.of(context).size.width,
-                        child: ListView.separated(
-                            shrinkWrap: true,
-                            itemBuilder: (BuildContext context, int index) {
-                              return QATile(
-                                height: tileHeights[index],
-                                question: tileQuestions[index],
-                                controller: controllers[index],
-                                formKey: globalKey[index],
-                                i: index,
-                              );
-                            },
-                            separatorBuilder:
-                                (BuildContext context, int index) =>
-                                    const SizedBox(
-                                      height: 34,
-                                    ),
-                            itemCount: tileHeights.length),
-                      ),
-                      const SizedBox(
-                        height: 34,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Flexible(
-                            flex: 1,
-                            child: VideoTile(),
-                          ),
-                          SizedBox(
-                            width: (24 / 1440) * maxWidth,
-                          ),
-                          Flexible(
-                            flex: 1,
-                            child: LinkTile(
-                              controller: linkController,
+                    ),
+                    SingleChildScrollView(
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            left: maxWidth * 0.1757,
+                            right: 0.1757 * maxWidth,
+                            bottom: 202),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const SizedBox(
+                              height: 54,
                             ),
-                          )
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 45,
-                      ),
-                      const RoleBox(),
-                      const SizedBox(height: 35),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          CustomButton(
-                              key: const Key('onboardingSubmitWeb'),
-                              onPressed: () {
-                                // ignore: unused_local_variable
-                                int i, j;
-                                int count = 0;
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: SizedBox(
+                                height: 44,
+                                child:
+                                    CustomText('Upitnik', 32, FontWeight.w500),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 12,
+                            ),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: SizedBox(
+                                height: 22,
+                                child: CustomText(
+                                    'Ne zaboravite da odvojite vrijeme i pažljivo pročitajte svako pitanje. Sretno!',
+                                    16,
+                                    FontWeight.w700),
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: SizedBox(
+                                height: 22,
+                                child: CustomText(
+                                    'Molimo vas da popunite dole potrebne podatke:',
+                                    16,
+                                    FontWeight.w400),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 12,
+                            ),
+                            const OptionsTile(),
+                            const SizedBox(
+                              height: 37,
+                            ),
+                            SizedBox(
+                              width: maxWidth * 0.6486,
+                              // height:
+                              //     (859 / 1080) * MediaQuery.of(context).size.width,
+                              child: ListView.separated(
+                                  shrinkWrap: true,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return QATile(
+                                      height: tileHeights[index],
+                                      question: tileQuestions[index],
+                                      controller: controllers[index],
+                                      formKey: globalKey[index],
+                                      i: index,
+                                    );
+                                  },
+                                  separatorBuilder:
+                                      (BuildContext context, int index) =>
+                                          const SizedBox(
+                                            height: 34,
+                                          ),
+                                  itemCount: tileHeights.length),
+                            ),
+                            const SizedBox(
+                              height: 34,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Flexible(
+                                  flex: 1,
+                                  child: VideoTile(),
+                                ),
+                                SizedBox(
+                                  width: (24 / 1440) * maxWidth,
+                                ),
+                                Flexible(
+                                  flex: 1,
+                                  child: LinkTile(
+                                    controller: linkController,
+                                  ),
+                                )
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 45,
+                            ),
+                            const RoleBox(),
+                            const SizedBox(height: 35),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                CustomButton(
+                                    key: const Key('onboardingSubmitWeb'),
+                                    onPressed: () {
+                                      // ignore: unused_local_variable
+                                      int i, j;
+                                      int count = 0;
 
-                                for (i = 0; i < 6; i++) {
-                                  if (context
-                                      .read<WebAnswerProvider>()
-                                      .formKeys[i]
-                                      .currentState!
-                                      .validate()) {
-                                    if (i != 5) {
-                                      count++;
-                                    }
-                                  }
-                                }
-                                // print(s1);
+                                      for (i = 0; i < 6; i++) {
+                                        if (context
+                                            .read<WebAnswerProvider>()
+                                            .formKeys[i]
+                                            .currentState!
+                                            .validate()) {
+                                          if (i != 5) {
+                                            count++;
+                                          }
+                                        }
+                                      }
+                                      // print(s1);
 
-                                // print(s2);
-                                // print(s2.length);
-                                // print(count);
-                                // print(context.read<WebRole>().length);
-                                // print(context.read<WebAnswerProvider>().da);
-                                // print(context.read<WebAnswerProvider>().ne);
+                                      // print(s2);
+                                      // print(s2.length);
+                                      // print(count);
+                                      // print(context.read<WebRole>().length);
+                                      // print(context.read<WebAnswerProvider>().da);
+                                      // print(context.read<WebAnswerProvider>().ne);
 
-                                if (count == 5 &&
-                                    (context.read<WebRole>().length == 2 ||
-                                        context.read<WebRole>().length == 1) &&
-                                    (context.read<WebAnswerProvider>().da ==
-                                            true ||
-                                        context.read<WebAnswerProvider>().ne ==
-                                            true)) {
-                                  submitOnboarding(s1, s2);
-                                }
-                                if (!(context.read<WebAnswerProvider>().da ==
-                                        true ||
-                                    context.read<WebAnswerProvider>().ne ==
-                                        true)) {
-                                  context
-                                      .read<WebErrorMessage>()
-                                      .changeFirstErrorHeight();
-                                  context.read<WebErrorMessage>().change();
-                                } else {
-                                  context
-                                      .read<WebErrorMessage>()
-                                      .resetFirstErrorHeight();
-                                  context.read<WebErrorMessage>().reset();
-                                }
-                                Provider.of<WebAuth>(context, listen: false)
-                                    .signOutCurrentUser(context);
-                              }),
-                        ],
+                                      if (count == 5 &&
+                                          (context.read<WebRole>().length ==
+                                                  2 ||
+                                              context.read<WebRole>().length ==
+                                                  1) &&
+                                          (context
+                                                      .read<WebAnswerProvider>()
+                                                      .da ==
+                                                  true ||
+                                              context
+                                                      .read<WebAnswerProvider>()
+                                                      .ne ==
+                                                  true)) {
+                                        submitOnboarding(s1, s2);
+                                      }
+                                      if (!(context
+                                                  .read<WebAnswerProvider>()
+                                                  .da ==
+                                              true ||
+                                          context
+                                                  .read<WebAnswerProvider>()
+                                                  .ne ==
+                                              true)) {
+                                        context
+                                            .read<WebErrorMessage>()
+                                            .changeFirstErrorHeight();
+                                        context
+                                            .read<WebErrorMessage>()
+                                            .change();
+                                      } else {
+                                        context
+                                            .read<WebErrorMessage>()
+                                            .resetFirstErrorHeight();
+                                        context.read<WebErrorMessage>().reset();
+                                      }
+                                      Provider.of<WebAuth>(context,
+                                              listen: false)
+                                          .signOutCurrentUser(context);
+                                    }),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ],
-                  ),
+                    ),
+                    const WebFooter(),
+                  ],
                 ),
               ),
-              const WebFooter(),
-            ],
-          ),
-        ),
-      ),
+            ),
     );
   }
 }
