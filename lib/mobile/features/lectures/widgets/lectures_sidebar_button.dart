@@ -57,10 +57,15 @@ class SidebarButton extends StatelessWidget {
 
             safePrint(res);
             // ignore: use_build_context_synchronously
-            // Navigator.of(context)
-            //     .pushReplacementNamed(MobileLoginScreen.routeName);
+
             dataProvider.changeSidebar(false);
             errorProvider.selectedRole.clear();
+            dataProvider.clearLectures();
+            dataProvider.clearRoles();
+            dataProvider.clearLecture1();
+            dataProvider.clearLecture2();
+            print(dataProvider.lecture.length);
+
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => MobileLoginScreen()),
