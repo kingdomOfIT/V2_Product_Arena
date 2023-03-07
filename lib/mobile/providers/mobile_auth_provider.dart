@@ -41,6 +41,7 @@ class MobileAuth with ChangeNotifier {
   List<String> _roles = [];
   List _lecturesRole1 = [];
   List _lecturesRole2 = [];
+  late Map<String, Map<String, int>> orderMap;
 
   void clearLectures() {
     _lecture.clear();
@@ -161,11 +162,13 @@ class MobileAuth with ChangeNotifier {
       notifyListeners();
 
       safePrint('logged in');
+      await fetchCurrentUserAttributes();
+      //await getLecturesOrder();
 
       await getUserLectures();
 
       // ignore: use_build_context_synchronously
-      await fetchCurrentUserAttributes();
+
       Navigator.of(context).pushReplacementNamed(routeName);
     } on AuthException catch (e) {
       safePrint(e.message);
@@ -233,10 +236,21 @@ class MobileAuth with ChangeNotifier {
     return thumbnailUrl;
   }
 
+  Future<void> getLecturesOrder() async {
+    try {
+      final restOperation = Amplify.API.get('/api/user/lectures',
+          apiName: 'getLecturesOrder', queryParameters: {'paDate': 'Feb2023'});
+      final response = await restOperation.response;
+      orderMap = jsonDecode(response.decodeBody());
+    } on ApiException catch (e) {
+      safePrint('GET call failed: $e');
+    }
+  }
+
   Future<void> getUserLectures() async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      final cachedData = prefs.getString('aws_data');
+      final cachedData = prefs.getString(emailUser);
       if (cachedData != null) {
         safePrint('nije prazan');
         Map<String, dynamic> responseMap = jsonDecode(cachedData);
@@ -259,7 +273,7 @@ class MobileAuth with ChangeNotifier {
           _lecturesRole1 = _lecture
               .where((lecture) => lecture['roles'].contains(_roles[0]))
               .toList();
-          //'https://img.youtube.com/vi/${uri.queryParameters['v']}/0.jpg' ovo probat
+
           int i;
           for (i = 0; i < _lecturesRole1.length; i++) {
             _lecturesRole1[i]['imageSrc'] =
@@ -290,7 +304,7 @@ class MobileAuth with ChangeNotifier {
         final response = await restOperation.response;
         Map<String, dynamic> responseMap = jsonDecode(response.decodeBody());
 
-        await prefs.setString('aws_data', jsonEncode(responseMap));
+        await prefs.setString(emailUser, jsonEncode(responseMap));
 
         List temp = [];
         responseMap['lectures'].forEach((lecture) {
