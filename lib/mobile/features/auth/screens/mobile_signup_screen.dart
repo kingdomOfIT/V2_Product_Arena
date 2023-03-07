@@ -172,7 +172,7 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                             style: GoogleFonts.notoSans(
                               fontSize: deviceHeight * 0.04,
                               color: Colors.black,
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.w400,
                             ),
                           ),
                           Text(
@@ -180,7 +180,7 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                             style: GoogleFonts.notoSans(
                               fontSize: deviceHeight * 0.04,
                               color: Colors.black,
-                              fontWeight: FontWeight.w800,
+                              fontWeight: FontWeight.w700,
                             ),
                           ),
                           SizedBox(
@@ -754,9 +754,9 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                               ],
                             ),
                           ),
-                          SizedBox(
-                            height: deviceHeight * 0.04,
-                          ),
+                          // SizedBox(
+                          //   height: deviceHeight * 0.04,
+                          // ),
                           Text(
                             'By creating an account, you agree to our  Terms and have read and acknowledge the Global Privacy Statement.',
                             style: GoogleFonts.notoSans(
@@ -768,7 +768,7 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                             softWrap: true,
                           ),
                           SizedBox(
-                            height: deviceHeight * 0.032,
+                            height: deviceHeight * 0.05,
                           ),
                           CustomButton(
                             key: const Key('createYourAccount'),

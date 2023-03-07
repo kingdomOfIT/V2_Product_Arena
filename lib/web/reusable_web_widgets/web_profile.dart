@@ -26,13 +26,13 @@ class WebProfile extends StatelessWidget {
             PopupMenuItem(
               enabled: true,
               //value: 1,
-              padding: EdgeInsets.all(0),
+              padding: const EdgeInsets.all(0),
               onTap: () {},
-              child: Container(
+              child: SizedBox(
                 height: deviceHeight * (500 / 1024),
                 child: Column(
                   children: [
-                    Container(
+                    SizedBox(
                       height: deviceHeight * (120 / 1024),
                       child: Stack(
                         children: [
@@ -91,7 +91,7 @@ class WebProfile extends StatelessWidget {
                           Image.asset(
                             'assets/images/profileUser.png',
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           Text(

@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:v2_product_arena/mobile/features/lectures/screens/hello_screen.dart';
-import 'package:v2_product_arena/mobile/features/lectures/widgets/lectures_appbar.dart';
 import 'package:v2_product_arena/mobile/features/lectures/widgets/lectures_sidebar.dart';
 import 'package:v2_product_arena/mobile/providers/error_message_provider.dart';
 import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
@@ -34,7 +33,7 @@ class _MobileContactUsState extends State<MobileContactUs> {
       appBar: AppBar(
         backgroundColor: const Color(0xFFFFFFFF),
         elevation: 0,
-        leading: Container(
+        leading: SizedBox(
           height: 55,
           width: MediaQuery.of(context).size.width,
           child: Padding(
@@ -97,7 +96,7 @@ class _MobileContactUsState extends State<MobileContactUs> {
         },
         backgroundColor: Colors.black,
         body: SingleChildScrollView(
-          child: Container(
+          child: SizedBox(
             height: deviceHeight * 0.88,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -209,7 +208,7 @@ class _MobileContactUsState extends State<MobileContactUs> {
                       SizedBox(
                         height: deviceHeight * (25 / 800),
                       ),
-                      Container(
+                      SizedBox(
                         height: deviceHeight * (34 / 803),
                         width: deviceWidth * (94 / 360),
                         child: ElevatedButton(

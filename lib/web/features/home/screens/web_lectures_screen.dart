@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:v2_product_arena/mobile/features/lectures/screens/mobile_lectures_screens.dart';
 import 'package:v2_product_arena/web/features/home/screens/web_lecturevideo_screen.dart';
 import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
-import 'package:v2_product_arena/web/reusable_web_widgets/web_green_profile.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_lecture_card.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_profile.dart';
 import '../../../reusable_web_widgets/web_homepage_sidebar.dart';
