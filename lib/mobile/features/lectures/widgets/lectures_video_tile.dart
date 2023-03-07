@@ -41,7 +41,7 @@ class LecturesVideoTile extends StatelessWidget {
                 ),
                 child: Image.network(
                   linkImage,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                 ),
               ),
             ),

@@ -90,7 +90,7 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
             )
           : SingleChildScrollView(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Center(
                     child: Column(
@@ -101,26 +101,46 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
                         Padding(
                           padding:
                               EdgeInsets.only(top: screenHeight * (40 / 800)),
-                          child: Text(
-                            'Welcome to',
-                            style: GoogleFonts.notoSans(
-                              fontSize: screenHeight * (32 / 800),
-                              color: Colors.black,
-                              fontWeight: FontWeight.w400,
-                            ),
+                          child: RichText(
+                            textAlign: TextAlign.center,
+                            text: TextSpan(
+                                text: 'Welcome to\n',
+                                style: GoogleFonts.notoSans(
+                                  fontSize: screenHeight * (32 / 800),
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                children: [
+                                  TextSpan(
+                                    text: 'Product Arena',
+                                    style: GoogleFonts.notoSans(
+                                      fontSize: screenHeight * (32 / 800),
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ]),
                           ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: screenWidth * (65 / 360)),
-                          child: Text(
-                            'Product Arena',
-                            style: GoogleFonts.notoSans(
-                              fontSize: screenHeight * (32 / 800),
-                              color: Colors.black,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
+                          //   child: Text(
+                          //     'Welcome to',
+                          //     style: GoogleFonts.notoSans(
+                          //       fontSize: screenHeight * (32 / 800),
+                          //       color: Colors.black,
+                          //       fontWeight: FontWeight.w400,
+                          //     ),
+                          //   ),
+                          // ),
+                          // Padding(
+                          //   padding: EdgeInsets.symmetric(
+                          //       horizontal: screenWidth * (65 / 360)),
+                          //   child: Text(
+                          //     'Product Arena',
+                          //     style: GoogleFonts.notoSans(
+                          //       fontSize: screenHeight * (32 / 800),
+                          //       color: Colors.black,
+                          //       fontWeight: FontWeight.w700,
+                          //     ),
+                          //   ),
                         ),
                         SizedBox(
                           height: screenHeight * (128 / 800),
@@ -172,9 +192,9 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
                         SizedBox(
                           height: screenHeight * (10 / 800),
                         ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: screenWidth * (96 / 360)),
+
+                        //removan padding od 96 sa obe strane
+                        Center(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
