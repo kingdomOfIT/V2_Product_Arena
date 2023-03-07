@@ -6,7 +6,6 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:googleapis_auth/googleapis_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:v2_product_arena/mobile/features/home/models/mob_lectures.dart';
 
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 //import 'package:amplify_datastore/amplify_datastore.dart';
@@ -239,7 +238,7 @@ class MobileAuth with ChangeNotifier {
       final prefs = await SharedPreferences.getInstance();
       final cachedData = prefs.getString('aws_data');
       if (cachedData != null) {
-        print('nije prazan');
+        safePrint('nije prazan');
         Map<String, dynamic> responseMap = jsonDecode(cachedData);
         List temp = [];
         responseMap['lectures'].forEach((lecture) {
@@ -285,7 +284,7 @@ class MobileAuth with ChangeNotifier {
           }
         }
       } else {
-        print('prazan');
+        safePrint('prazan');
         final restOperation = Amplify.API.get('/api/user/lectures',
             apiName: 'getLecturesAlfa', queryParameters: {'paDate': 'Feb2023'});
         final response = await restOperation.response;

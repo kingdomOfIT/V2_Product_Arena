@@ -65,7 +65,8 @@ class SidebarButton extends StatelessWidget {
             dataProvider.clearLecture1();
             dataProvider.clearLecture2();
             print(dataProvider.lecture.length);
-
+            Provider.of<MobileAuth>(context, listen: false)
+                .changeSidebar(false);
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => MobileLoginScreen()),
