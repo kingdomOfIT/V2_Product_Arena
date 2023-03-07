@@ -4,7 +4,6 @@ import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:v2_product_arena/web/reusable_web_widgets/web_green_profile.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_homepage_sidebar.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_profile.dart';
 
@@ -57,7 +56,7 @@ class _WebContactScreenState extends State<WebContactScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: <Widget>[
-                                Container(
+                                SizedBox(
                                   width: deviceWidth * (375 / 1440),
                                   child: RichText(
                                     textAlign: TextAlign.right,
@@ -88,32 +87,32 @@ class _WebContactScreenState extends State<WebContactScreen> {
                                 Row(
                                   children: <Widget>[
                                     InkWell(
-                                        onTap: () => launch(
-                                            'https://www.facebook.com/tech387'),
+                                        onTap: () => launchUrl(Uri.parse(
+                                            'https://www.facebook.com/tech387')),
                                         child: Image.asset(
                                             'assets/images/facebook.png')),
                                     SizedBox(
                                       width: deviceWidth * (16 / 1440),
                                     ),
                                     InkWell(
-                                        onTap: () => launch(
-                                            'https://www.instagram.com/tech387/?hl=en'),
+                                        onTap: () => launchUrl(Uri.parse(
+                                            'https://www.instagram.com/tech387/?hl=en')),
                                         child: Image.asset(
                                             'assets/images/instagram.png')),
                                     SizedBox(
                                       width: deviceWidth * (16 / 1440),
                                     ),
                                     InkWell(
-                                        onTap: () => launch(
-                                            'https://www.linkedin.com/company/tech-387/mycompany/'),
+                                        onTap: () => launchUrl(Uri.parse(
+                                            'https://www.linkedin.com/company/tech-387/mycompany/')),
                                         child: Image.asset(
                                             'assets/images/linked.png')),
                                     SizedBox(
                                       width: deviceWidth * (16 / 1440),
                                     ),
                                     InkWell(
-                                        onTap: () =>
-                                            launch('https://www.tech387.com/'),
+                                        onTap: () => launchUrl(Uri.parse(
+                                            'https://www.tech387.com/')),
                                         child: Image.asset(
                                             'assets/images/tech.png')),
                                   ],
@@ -123,7 +122,7 @@ class _WebContactScreenState extends State<WebContactScreen> {
                             SizedBox(
                               width: deviceWidth * (44 / 1440),
                             ),
-                            Container(
+                            SizedBox(
                               width: deviceWidth * (400 / 1440),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -328,15 +327,15 @@ class _WebContactScreenState extends State<WebContactScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Text('Privacy Policy'),
+                              const Text('Privacy Policy'),
                               SizedBox(
                                 width: deviceWidth * 0.05,
                               ),
-                              Text('© Credits, 2023, Product Arena'),
+                              const Text('© Credits, 2023, Product Arena'),
                               SizedBox(
                                 width: deviceWidth * 0.05,
                               ),
-                              Text('Terms & Conditions'),
+                              const Text('Terms & Conditions'),
                             ],
                           ),
                         ),
