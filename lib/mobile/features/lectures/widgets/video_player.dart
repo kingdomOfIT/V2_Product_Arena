@@ -187,7 +187,7 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          '${widget.pageController.page!.toInt()}. Tools: ${widget.lectureName}',
+                          '${widget.pageController.page!.toInt()}. : ${widget.lectureName}',
                           style: GoogleFonts.notoSans(
                               fontSize: 16,
                               fontWeight: FontWeight.w700,
