@@ -298,6 +298,7 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
                                 text: 'Back',
                                 borderColor: Colors.black,
                                 onPressed: () {
+                                  _controller.pause();
                                   if (widget.pageController.page!.toInt() <
                                       widget.numb) {
                                     widget.pageController.previousPage(
@@ -324,6 +325,7 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
                                 text: 'Next',
                                 borderColor: Colors.black,
                                 onPressed: () {
+                                  _controller.pause();
                                   widget.pageController.nextPage(
                                       duration:
                                           const Duration(milliseconds: 400),

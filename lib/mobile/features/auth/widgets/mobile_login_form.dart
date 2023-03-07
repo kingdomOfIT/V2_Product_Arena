@@ -75,9 +75,9 @@ class _LoginFormState extends State<LoginForm> {
                 style: GoogleFonts.notoSans(
                   // ignore: prefer_const_constructors
                   textStyle: TextStyle(
-                      fontSize: screenHeight * (14 / 800),
-                      fontWeight: FontWeight.w700,
-                      color: const Color(0xFF605D66)),
+                    fontSize: screenHeight * (14 / 800),
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
               suffixIcon: Icon(
@@ -156,9 +156,9 @@ class _LoginFormState extends State<LoginForm> {
                 "Password",
                 style: GoogleFonts.notoSans(
                   textStyle: TextStyle(
-                      fontSize: screenHeight * (14 / 800),
-                      fontWeight: FontWeight.w700,
-                      color: const Color(0xFF605D66)),
+                    fontSize: screenHeight * (14 / 800),
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
             ),
