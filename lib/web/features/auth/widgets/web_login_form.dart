@@ -304,7 +304,7 @@ class _WebLoginFormState extends State<WebLoginForm> {
                         }
                       }
                       webAuth.fetchCurrentUserAttributes();
-                      webAuth.getUserLectures();
+                      // webAuth.getUserLectures();
                       setState(() {
                         isLoading = false;
                       });
