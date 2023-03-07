@@ -7,7 +7,7 @@ import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/mobile_appbar.da
 import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/mobile_footer.dart';
 
 class EmailVerified extends StatefulWidget {
-  static const routeName = '/email-verified';
+  static const routeName = '/mob-email-verified';
   const EmailVerified({super.key});
   @override
   State<EmailVerified> createState() => _EmailVerifiedState();
@@ -99,7 +99,7 @@ class Verified extends StatelessWidget {
                           height: deviceHeight * 0.07,
                           width: deviceHeight * 0.07,
                           child: Image.asset(
-                            'assets/images/tech.png',
+                            'assets/images/group2.png',
                             fit: BoxFit.cover,
                           ),
                         ),

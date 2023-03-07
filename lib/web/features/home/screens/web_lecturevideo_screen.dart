@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:v2_product_arena/web/providers/web_auth_provider.dart';
-import 'package:v2_product_arena/web/reusable_web_widgets/web_green_profile.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_homepage_sidebar.dart';
-import 'package:video_player/video_player.dart';
+import 'package:v2_product_arena/web/reusable_web_widgets/web_profile.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 class WebLectureVideoScreen extends StatefulWidget {
-  static const routeName = '/web-video';
+  static const routeName = '/lecture-details';
 
   const WebLectureVideoScreen({super.key});
 
@@ -54,7 +52,7 @@ class _WebLectureVideoScreenState extends State<WebLectureVideoScreen> {
                 children: [
                   const Align(
                     alignment: Alignment.topRight,
-                    child: WebProfilePopup(),
+                    child: WebProfile(),
                   ),
                   Padding(
                     padding:
@@ -118,7 +116,7 @@ class _WebLectureVideoScreenState extends State<WebLectureVideoScreen> {
                             padding: const EdgeInsets.all(15.0),
                             child: Column(
                               children: [
-                                Container(
+                                SizedBox(
                                   width: double.infinity,
                                   height:
                                       MediaQuery.of(context).size.height * 0.57,

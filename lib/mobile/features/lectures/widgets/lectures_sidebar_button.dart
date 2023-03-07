@@ -2,7 +2,10 @@
 
 import 'package:amplify_flutter/amplify_flutter.dart';
 import "package:flutter/material.dart";
+import 'package:provider/provider.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/mobile_login_screen.dart';
+import 'package:v2_product_arena/mobile/providers/error_message_provider.dart';
+import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
 import 'package:v2_product_arena/web/features/auth/screens/web_login_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -11,6 +14,8 @@ class SidebarButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dataProvider = Provider.of<MobileAuth>(context, listen: false);
+    final errorProvider = Provider.of<ErrorMessage>(context, listen: false);
     final mediaQuery = MediaQuery.of(context);
     final double screenWidth = mediaQuery.size.width;
     final double screenHeight = mediaQuery.size.height;
@@ -52,8 +57,16 @@ class SidebarButton extends StatelessWidget {
 
             safePrint(res);
             // ignore: use_build_context_synchronously
-            // Navigator.of(context)
-            //     .pushReplacementNamed(MobileLoginScreen.routeName);
+
+            dataProvider.changeSidebar(false);
+            errorProvider.selectedRole.clear();
+            dataProvider.clearLectures();
+            dataProvider.clearRoles();
+            dataProvider.clearLecture1();
+            dataProvider.clearLecture2();
+            print(dataProvider.lecture.length);
+            Provider.of<MobileAuth>(context, listen: false)
+                .changeSidebar(false);
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => MobileLoginScreen()),

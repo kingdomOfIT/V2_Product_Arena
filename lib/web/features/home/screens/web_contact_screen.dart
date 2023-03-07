@@ -1,12 +1,14 @@
+import 'dart:async';
+
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:v2_product_arena/web/reusable_web_widgets/web_green_profile.dart';
 import 'package:v2_product_arena/web/reusable_web_widgets/web_homepage_sidebar.dart';
+import 'package:v2_product_arena/web/reusable_web_widgets/web_profile.dart';
 
 class WebContactScreen extends StatefulWidget {
-  static const routeName = '/web-contact';
+  static const routeName = '/contact-us';
   const WebContactScreen({super.key});
 
   @override
@@ -14,6 +16,7 @@ class WebContactScreen extends StatefulWidget {
 }
 
 bool isContactFormSent = false;
+bool isEnabled = true;
 
 class _WebContactScreenState extends State<WebContactScreen> {
   final formKey = GlobalKey<FormState>();
@@ -35,7 +38,7 @@ class _WebContactScreenState extends State<WebContactScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  const WebProfilePopup(),
+                  const WebProfile(),
                   SizedBox(
                     height: deviceHeight * (130 / 1024),
                   ),
@@ -53,7 +56,7 @@ class _WebContactScreenState extends State<WebContactScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: <Widget>[
-                                Container(
+                                SizedBox(
                                   width: deviceWidth * (375 / 1440),
                                   child: RichText(
                                     textAlign: TextAlign.right,
@@ -84,32 +87,32 @@ class _WebContactScreenState extends State<WebContactScreen> {
                                 Row(
                                   children: <Widget>[
                                     InkWell(
-                                        onTap: () => launch(
-                                            'https://www.facebook.com/tech387'),
+                                        onTap: () => launchUrl(Uri.parse(
+                                            'https://www.facebook.com/tech387')),
                                         child: Image.asset(
                                             'assets/images/facebook.png')),
                                     SizedBox(
                                       width: deviceWidth * (16 / 1440),
                                     ),
                                     InkWell(
-                                        onTap: () => launch(
-                                            'https://www.instagram.com/tech387/?hl=en'),
+                                        onTap: () => launchUrl(Uri.parse(
+                                            'https://www.instagram.com/tech387/?hl=en')),
                                         child: Image.asset(
                                             'assets/images/instagram.png')),
                                     SizedBox(
                                       width: deviceWidth * (16 / 1440),
                                     ),
                                     InkWell(
-                                        onTap: () => launch(
-                                            'https://www.linkedin.com/company/tech-387/mycompany/'),
+                                        onTap: () => launchUrl(Uri.parse(
+                                            'https://www.linkedin.com/company/tech-387/mycompany/')),
                                         child: Image.asset(
                                             'assets/images/linked.png')),
                                     SizedBox(
                                       width: deviceWidth * (16 / 1440),
                                     ),
                                     InkWell(
-                                        onTap: () =>
-                                            launch('https://www.tech387.com/'),
+                                        onTap: () => launchUrl(Uri.parse(
+                                            'https://www.tech387.com/')),
                                         child: Image.asset(
                                             'assets/images/tech.png')),
                                   ],
@@ -119,7 +122,7 @@ class _WebContactScreenState extends State<WebContactScreen> {
                             SizedBox(
                               width: deviceWidth * (44 / 1440),
                             ),
-                            Container(
+                            SizedBox(
                               width: deviceWidth * (400 / 1440),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -202,55 +205,67 @@ class _WebContactScreenState extends State<WebContactScreen> {
                                   SizedBox(
                                     height: deviceHeight * 0.05,
                                   ),
-                                  ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.black87,
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                        top: deviceHeight * (7.5 / 803),
-                                        right: deviceWidth * (2 / 360),
-                                        bottom: deviceHeight * (7.5 / 803),
-                                        left: deviceWidth * (2 / 360),
+                                  AbsorbPointer(
+                                    absorbing: !isEnabled,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.black87,
                                       ),
-                                      child: Text(
-                                        'Submit',
-                                        textAlign: TextAlign.center,
-                                        style: GoogleFonts.notoSans(
-                                          textStyle: TextStyle(
-                                              fontSize:
-                                                  deviceHeight * (14 / 803),
-                                              fontWeight: FontWeight.w700,
-                                              fontStyle: FontStyle.normal,
-                                              color: const Color(0xFFFFFFFF)),
+                                      child: Padding(
+                                        padding: EdgeInsets.only(
+                                          top: deviceHeight * (7.5 / 803),
+                                          right: deviceWidth * (2 / 360),
+                                          bottom: deviceHeight * (7.5 / 803),
+                                          left: deviceWidth * (2 / 360),
+                                        ),
+                                        child: Text(
+                                          'Submit',
+                                          textAlign: TextAlign.center,
+                                          style: GoogleFonts.notoSans(
+                                            textStyle: TextStyle(
+                                                fontSize:
+                                                    deviceHeight * (14 / 803),
+                                                fontWeight: FontWeight.w700,
+                                                fontStyle: FontStyle.normal,
+                                                color: const Color(0xFFFFFFFF)),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    onPressed: () async {
-                                      if (formKey.currentState!.validate()) {
-                                        try {
-                                          final restOperation =
-                                              Amplify.API.post(
-                                            'api/user/form',
-                                            apiName: 'sendFormEmailAlfa',
-                                            body: HttpPayload.json(
-                                              {
-                                                'question': contactUsController
-                                                    .text
-                                                    .toString(),
-                                              },
-                                            ),
-                                          );
-                                          final response =
-                                              await restOperation.response;
-                                          safePrint('POST call succeeded');
-                                          safePrint(response.decodeBody());
-                                        } on ApiException catch (e) {
-                                          safePrint(
-                                              'POST call failed: ${e.message}');
+                                      onPressed: () async {
+                                        if (!isEnabled) {
+                                          return;
+                                        } // do nothing if button is disabled
+                                        if (formKey.currentState!.validate()) {
+                                          try {
+                                            isEnabled =
+                                                false; // disable the button
+                                            Timer(
+                                                const Duration(seconds: 100),
+                                                () => isEnabled =
+                                                    true); // enable the button after 100 seconds
+                                            final restOperation =
+                                                Amplify.API.post(
+                                              'api/user/form',
+                                              apiName: 'sendFormEmailAlfa',
+                                              body: HttpPayload.json(
+                                                {
+                                                  'question':
+                                                      contactUsController.text
+                                                          .toString()
+                                                },
+                                              ),
+                                            );
+                                            final response =
+                                                await restOperation.response;
+                                            safePrint('POST call succeeded');
+                                            safePrint(response.decodeBody());
+                                          } on ApiException catch (e) {
+                                            safePrint(
+                                                'POST call failed: ${e.message}');
+                                          }
                                         }
-                                      }
-                                    },
+                                      },
+                                    ),
                                   ),
                                   SizedBox(
                                     height: deviceHeight * (53 / 1024),
@@ -312,15 +327,15 @@ class _WebContactScreenState extends State<WebContactScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Text('Privacy Policy'),
+                              const Text('Privacy Policy'),
                               SizedBox(
                                 width: deviceWidth * 0.05,
                               ),
-                              Text('© Credits, 2023, Product Arena'),
+                              const Text('© Credits, 2023, Product Arena'),
                               SizedBox(
                                 width: deviceWidth * 0.05,
                               ),
-                              Text('Terms & Conditions'),
+                              const Text('Terms & Conditions'),
                             ],
                           ),
                         ),

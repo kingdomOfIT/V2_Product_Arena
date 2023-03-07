@@ -187,7 +187,7 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          '${widget.pageController.page!.toInt()}. Tools: ${widget.lectureName}',
+                          '${widget.pageController.page!.toInt()}. : ${widget.lectureName}',
                           style: GoogleFonts.notoSans(
                               fontSize: 16,
                               fontWeight: FontWeight.w700,
@@ -298,6 +298,7 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
                                 text: 'Back',
                                 borderColor: Colors.black,
                                 onPressed: () {
+                                  _controller.pause();
                                   if (widget.pageController.page!.toInt() <
                                       widget.numb) {
                                     widget.pageController.previousPage(
@@ -324,6 +325,7 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
                                 text: 'Next',
                                 borderColor: Colors.black,
                                 onPressed: () {
+                                  _controller.pause();
                                   widget.pageController.nextPage(
                                       duration:
                                           const Duration(milliseconds: 400),

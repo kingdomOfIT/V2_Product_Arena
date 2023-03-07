@@ -6,7 +6,7 @@ import '../../../reusable_web_widgets/web_footer.dart';
 import '../../../reusable_web_widgets/web_ob_appbar.dart';
 
 class WebCongratulationsScreen extends StatefulWidget {
-  static const routeName = '/web-congratulations';
+  static const routeName = '/congratulations';
   const WebCongratulationsScreen({super.key});
 
   @override

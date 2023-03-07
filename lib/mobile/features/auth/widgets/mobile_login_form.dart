@@ -34,8 +34,9 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    final deviceHeight = MediaQuery.of(context).size.height;
-    final deviceWidth = MediaQuery.of(context).size.width;
+    final mediaQuery = MediaQuery.of(context);
+    final double screenWidth = mediaQuery.size.width;
+    final double screenHeight = mediaQuery.size.height;
     final mobileAuth = Provider.of<MobileAuth>(context, listen: false);
     return Form(
       key: widget.formKey,
@@ -46,12 +47,12 @@ class _LoginFormState extends State<LoginForm> {
             controller: widget.emailController,
             style: TextStyle(
               color: mobileAuth.isLoginEmailError ? Colors.red : Colors.black,
-              fontSize: deviceHeight * 0.0187,
+              fontSize: screenHeight * (14 / 800),
               fontWeight: FontWeight.w700,
             ),
             decoration: InputDecoration(
               isDense: true,
-              labelStyle: const TextStyle(fontSize: 20),
+              labelStyle: TextStyle(fontSize: screenHeight * (14 / 800)),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
@@ -66,21 +67,23 @@ class _LoginFormState extends State<LoginForm> {
                     color: Colors.black,
                   )),
               contentPadding: EdgeInsets.symmetric(
-                vertical: deviceHeight * 0.018,
-                horizontal: deviceWidth * 0.05,
+                vertical: screenHeight * (10.5 / 800),
+                horizontal: screenWidth * (16 / 360),
               ),
               label: Text(
                 "Email",
                 style: GoogleFonts.notoSans(
                   // ignore: prefer_const_constructors
-                  textStyle: const TextStyle(
-                      fontSize: 14, fontWeight: FontWeight.w700),
+                  textStyle: TextStyle(
+                    fontSize: screenHeight * (14 / 800),
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
               suffixIcon: Icon(
                 mobileAuth.isLoginEmailError ? Icons.error : null,
                 color: Colors.red,
-                size: deviceHeight * 0.03,
+                size: screenWidth * (24 / 360),
               ),
             ),
             validator: (value) {
@@ -99,7 +102,7 @@ class _LoginFormState extends State<LoginForm> {
                 FocusScope.of(context).requestFocus(widget.passwordFocusNode),
           ),
           SizedBox(
-            height: deviceHeight * 0.028,
+            height: screenHeight * (30 / 800),
           ),
           TextFormField(
             key: const Key('passwordLoginTextField'),
@@ -107,13 +110,13 @@ class _LoginFormState extends State<LoginForm> {
             style: TextStyle(
               color:
                   mobileAuth.isLoginPasswordError ? Colors.red : Colors.black,
-              fontSize: deviceHeight * 0.0187,
+              fontSize: screenHeight * (14 / 800),
               fontWeight: FontWeight.w700,
             ),
             obscureText: widget.isHiddenPassword,
             decoration: InputDecoration(
               isDense: true,
-              labelStyle: const TextStyle(fontSize: 20),
+              labelStyle: TextStyle(fontSize: screenHeight * (14 / 800)),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
@@ -128,28 +131,34 @@ class _LoginFormState extends State<LoginForm> {
                     color: Colors.black,
                   )),
               contentPadding: EdgeInsets.symmetric(
-                vertical: deviceHeight * 0.018,
-                horizontal: deviceWidth * 0.05,
+                vertical: screenHeight * (15 / 800),
+                horizontal: screenWidth * (16 / 360),
               ),
               suffixIcon: _text.isNotEmpty
                   ? InkWell(
                       key: const Key('togglePasswordViewLogin'),
                       onTap: widget.togglePasswordView,
-                      child: Icon(
-                        widget.isHiddenPassword
-                            ? Icons.visibility
-                            : Icons.visibility_off,
-                        color:
-                            mobileAuth.isLoginPasswordError ? Colors.red : null,
-                        size: deviceHeight * 0.03,
+                      child: SizedBox(
+                        height: screenWidth * (30 / 360),
+                        width: screenWidth * (30 / 360),
+                        child: Icon(
+                          widget.isHiddenPassword
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: mobileAuth.isLoginPasswordError
+                              ? Colors.red
+                              : null,
+                        ),
                       ),
                     )
                   : null,
               label: Text(
                 "Password",
                 style: GoogleFonts.notoSans(
-                  textStyle: const TextStyle(
-                      fontSize: 14, fontWeight: FontWeight.w700),
+                  textStyle: TextStyle(
+                    fontSize: screenHeight * (14 / 800),
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
             ),

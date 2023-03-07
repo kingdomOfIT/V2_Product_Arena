@@ -1,8 +1,14 @@
+//
 import 'dart:convert';
-
+import 'package:googleapis/youtube/v3.dart';
 import 'package:flutter/material.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
+import 'package:googleapis_auth/googleapis_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+//import 'package:amplify_datastore/amplify_datastore.dart';
 
 class MobileAuth with ChangeNotifier {
   String errorText = '';
@@ -29,25 +35,33 @@ class MobileAuth with ChangeNotifier {
   bool isLoginEmailError = false;
   bool isLoginPasswordError = false;
 
-  // Future<void> _configureAmplify() async {
-  //   try {
-  //     // amplify plugins
-
-  //     final apiPlugin = AmplifyAPI();
-  //     final authPlugin = AmplifyAuthCognito();
-
-  //     // add Amplify plugins
-  //     await Amplify.addPlugins([apiPlugin, authPlugin]);
-
-  //     await Amplify.configure(amplifyconfig);
-  //   } catch (e) {}
-  // }
   final List _lecture = [];
   final List _lectureVideos = [];
   int numberOfLessons = 0;
   List<String> _roles = [];
   List _lecturesRole1 = [];
   List _lecturesRole2 = [];
+  late Map<String, Map<String, int>> orderMap;
+
+  void clearLectures() {
+    _lecture.clear();
+    notifyListeners();
+  }
+
+  void clearRoles() {
+    _roles.clear();
+    notifyListeners();
+  }
+
+  void clearLecture1() {
+    _lecturesRole1.clear();
+    notifyListeners();
+  }
+
+  void clearLecture2() {
+    _lecturesRole2.clear();
+    notifyListeners();
+  }
 
   List get lecture => _lecture;
   List get lectureVideos => _lectureVideos;
@@ -148,9 +162,13 @@ class MobileAuth with ChangeNotifier {
       notifyListeners();
 
       safePrint('logged in');
-      await getUserLectures();
-      // ignore: use_build_context_synchronously
       await fetchCurrentUserAttributes();
+      //await getLecturesOrder();
+
+      await getUserLectures();
+
+      // ignore: use_build_context_synchronously
+
       Navigator.of(context).pushReplacementNamed(routeName);
     } on AuthException catch (e) {
       safePrint(e.message);
@@ -196,42 +214,141 @@ class MobileAuth with ChangeNotifier {
     }
   }
 
-  Future<void> getUserLectures() async {
-    // await signInUser(username, password, context, routeName);
+  String getVideoId(String s) {
+    return YoutubePlayer.convertUrlToId(s) as String;
+  }
 
+  Future<String?> getDefaultThumbnail(String s) async {
+    const apiKey = 'AIzaSyCzk5aj9W2ZNDVQDo-PY34NuKIrLLVMjWA';
+
+    final client = clientViaApiKey(apiKey);
+    final youtube = YouTubeApi(client);
+    List<String> videoId = [getVideoId(s)];
+
+    final videoListResponse = await youtube.videos.list(
+      ['snippet'],
+      id: videoId,
+    );
+
+    final video = videoListResponse.items![0];
+    final thumbnailUrl = video.snippet!.thumbnails!.medium!.url;
+
+    return thumbnailUrl;
+  }
+
+  Future<void> getLecturesOrder() async {
     try {
       final restOperation = Amplify.API.get('/api/user/lectures',
-          apiName: 'getLecturesAlfa', queryParameters: {'paDate': 'Feb2023'});
+          apiName: 'getLecturesOrder', queryParameters: {'paDate': 'Feb2023'});
       final response = await restOperation.response;
-      Map<String, dynamic> responseMap = jsonDecode(response.decodeBody());
+      orderMap = jsonDecode(response.decodeBody());
+    } on ApiException catch (e) {
+      safePrint('GET call failed: $e');
+    }
+  }
 
-      List temp = [];
-      responseMap['lectures'].forEach((lecture) {
-        temp.addAll(lecture['roles']);
-      });
+  Future<void> getUserLectures() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final cachedData = prefs.getString(emailUser);
+      if (cachedData != null) {
+        safePrint('nije prazan');
+        Map<String, dynamic> responseMap = jsonDecode(cachedData);
+        List temp = [];
+        responseMap['lectures'].forEach((lecture) {
+          temp.addAll(lecture['roles']);
+        });
 
-      Set<String> set = Set<String>.from(temp);
-      _roles = set.toList();
+        Set<String> set = Set<String>.from(temp);
+        _roles = set.toList();
 
-      safePrint(_roles);
-      var oneLecture;
-      responseMap['lectures'].forEach((lecture) {
-        oneLecture = lecture;
+        safePrint(_roles);
+        var oneLecture;
+        responseMap['lectures'].forEach((lecture) {
+          oneLecture = lecture;
 
-        _lecture.add(oneLecture);
-      });
-      if (_roles.length == 1) {
-        _lecturesRole1 = _lecture
-            .where((lecture) => lecture['roles'].contains(_roles[0]))
-            .toList();
+          _lecture.add(oneLecture);
+        });
+        if (_roles.length == 1) {
+          _lecturesRole1 = _lecture
+              .where((lecture) => lecture['roles'].contains(_roles[0]))
+              .toList();
+
+          int i;
+          for (i = 0; i < _lecturesRole1.length; i++) {
+            _lecturesRole1[i]['imageSrc'] =
+                await getDefaultThumbnail(_lecturesRole1[i]['contentLink']);
+          }
+        } else {
+          _lecturesRole1 = _lecture
+              .where((lecture) => lecture['roles'].contains(_roles[0]))
+              .toList();
+          int i;
+          for (i = 0; i < _lecturesRole1.length; i++) {
+            _lecturesRole1[i]['imageSrc'] =
+                await getDefaultThumbnail(_lecturesRole1[i]['contentLink']);
+          }
+
+          _lecturesRole2 = _lecture
+              .where((lecture) => lecture['roles'].contains(_roles[1]))
+              .toList();
+          for (i = 0; i < _lecturesRole2.length; i++) {
+            _lecturesRole2[i]['imageSrc'] =
+                await getDefaultThumbnail(_lecturesRole2[i]['contentLink']);
+          }
+        }
       } else {
-        _lecturesRole1 = _lecture
-            .where((lecture) => lecture['roles'].contains(_roles[0]))
-            .toList();
+        safePrint('prazan');
+        final restOperation = Amplify.API.get('/api/user/lectures',
+            apiName: 'getLecturesAlfa', queryParameters: {'paDate': 'Feb2023'});
+        final response = await restOperation.response;
+        Map<String, dynamic> responseMap = jsonDecode(response.decodeBody());
 
-        _lecturesRole2 = _lecture
-            .where((lecture) => lecture['roles'].contains(_roles[1]))
-            .toList();
+        await prefs.setString(emailUser, jsonEncode(responseMap));
+
+        List temp = [];
+        responseMap['lectures'].forEach((lecture) {
+          temp.addAll(lecture['roles']);
+        });
+
+        Set<String> set = Set<String>.from(temp);
+        _roles = set.toList();
+
+        safePrint(_roles);
+        var oneLecture;
+        responseMap['lectures'].forEach((lecture) {
+          oneLecture = lecture;
+
+          _lecture.add(oneLecture);
+        });
+        if (_roles.length == 1) {
+          _lecturesRole1 = _lecture
+              .where((lecture) => lecture['roles'].contains(_roles[0]))
+              .toList();
+          //'https://img.youtube.com/vi/${uri.queryParameters['v']}/0.jpg' ovo probat
+          int i;
+          for (i = 0; i < _lecturesRole1.length; i++) {
+            _lecturesRole1[i]['imageSrc'] =
+                await getDefaultThumbnail(_lecturesRole1[i]['contentLink']);
+          }
+        } else {
+          _lecturesRole1 = _lecture
+              .where((lecture) => lecture['roles'].contains(_roles[0]))
+              .toList();
+          int i;
+          for (i = 0; i < _lecturesRole1.length; i++) {
+            _lecturesRole1[i]['imageSrc'] =
+                await getDefaultThumbnail(_lecturesRole1[i]['contentLink']);
+          }
+
+          _lecturesRole2 = _lecture
+              .where((lecture) => lecture['roles'].contains(_roles[1]))
+              .toList();
+          for (i = 0; i < _lecturesRole2.length; i++) {
+            _lecturesRole2[i]['imageSrc'] =
+                await getDefaultThumbnail(_lecturesRole2[i]['contentLink']);
+          }
+        }
       }
     } on ApiException catch (e) {
       safePrint('GET call failed: $e');

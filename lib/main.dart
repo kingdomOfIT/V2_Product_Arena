@@ -108,7 +108,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Product Arena V2',
+        title: 'Product Arena',
         theme: ThemeData(
           // primaryColor: GlobalVariables.myColor,
           primarySwatch: const MaterialColor(0xff22E974, {

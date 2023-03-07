@@ -75,14 +75,12 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
   bool isLoading = false;
   String dialCodeDigits = '+387';
 
-  DateTime date = DateTime(2022, 02, 02);
-
   void _selectBirthDate() {
     showDatePicker(
       context: context,
-      initialDate: date,
+      initialDate: DateTime(2010),
       firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
+      lastDate: DateTime(2010),
     ).then((pickedDate) {
       if (pickedDate == null) {
         return;
@@ -174,7 +172,7 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                             style: GoogleFonts.notoSans(
                               fontSize: deviceHeight * 0.04,
                               color: Colors.black,
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.w400,
                             ),
                           ),
                           Text(
@@ -182,7 +180,7 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                             style: GoogleFonts.notoSans(
                               fontSize: deviceHeight * 0.04,
                               color: Colors.black,
-                              fontWeight: FontWeight.w800,
+                              fontWeight: FontWeight.w700,
                             ),
                           ),
                           SizedBox(
@@ -361,6 +359,10 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                         fontSize: 14,
                                         fontWeight: FontWeight.w700,
                                       ),
+                                    ),
+                                    hintText: 'DD-MM-GGGG',
+                                    hintStyle: TextStyle(
+                                      color: Colors.grey[400],
                                     ),
                                     prefixIcon: InkWell(
                                       key: const Key('datePicker'),
@@ -542,6 +544,10 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                                         fontSize: 14,
                                         fontWeight: FontWeight.w700,
                                       ),
+                                    ),
+                                    hintText: '+3876xxxxxxx',
+                                    hintStyle: TextStyle(
+                                      color: Colors.grey[400],
                                     ),
                                     // prefix: Container(
                                     //   child: SizedBox(
@@ -748,9 +754,9 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                               ],
                             ),
                           ),
-                          SizedBox(
-                            height: deviceHeight * 0.04,
-                          ),
+                          // SizedBox(
+                          //   height: deviceHeight * 0.04,
+                          // ),
                           Text(
                             'By creating an account, you agree to our  Terms and have read and acknowledge the Global Privacy Statement.',
                             style: GoogleFonts.notoSans(
@@ -762,7 +768,7 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                             softWrap: true,
                           ),
                           SizedBox(
-                            height: deviceHeight * 0.032,
+                            height: deviceHeight * 0.05,
                           ),
                           CustomButton(
                             key: const Key('createYourAccount'),
@@ -825,7 +831,7 @@ class _MobileSignupScreenState extends State<MobileSignupScreen> {
                             height: deviceHeight * 0.07,
                             width: deviceHeight * 0.07,
                             child: Image.asset(
-                              'assets/images/tech.png',
+                              'assets/images/group2.png',
                               fit: BoxFit.cover,
                             ),
                           ),

@@ -24,6 +24,10 @@ class WebAuth with ChangeNotifier {
   bool isEmailError = false;
   bool isPasswordError = false;
 
+  String userName = '';
+  String userSurname = '';
+  String emailUser = '';
+
   List _lectures = [];
   List _roles = [];
 
@@ -118,6 +122,7 @@ class WebAuth with ChangeNotifier {
     //Loader
     showDialog(
         context: context,
+        barrierDismissible: false,
         builder: (context) {
           return Center(child: CircularProgressIndicator());
         });
@@ -144,6 +149,7 @@ class WebAuth with ChangeNotifier {
         password: userPassword,
       );
       print('Loginovan');
+      //await fetchCurrentUserAttributes();
     } on AuthException catch (e) {
       safePrint(e.message);
     }
@@ -163,8 +169,6 @@ class WebAuth with ChangeNotifier {
 ///////////////////////////////GETTING LECTURES/////////////////////////////////////
 
   Future<void> getUserLectures() async {
-    await signInUser();
-
     try {
       final restOperation = Amplify.API.get('/api/user/lectures',
           apiName: 'getLecturesAlfa',
@@ -185,11 +189,14 @@ class WebAuth with ChangeNotifier {
 
       print(roles);
       var oneLecture;
+      List temp2 = [];
       responseMap['lectures'].forEach((lecture) {
         oneLecture = lecture;
 
-        _lectures.add(oneLecture);
+        temp2.add(oneLecture);
       });
+      Set set2 = Set.from(temp2);
+      _lectures = set2.toList();
       firstRole = _roles.isNotEmpty ? _roles[0] : null;
       if (firstRole != null) {
         final firstRoleLectures = _lectures
@@ -256,4 +263,32 @@ class WebAuth with ChangeNotifier {
 //       print('GET call failed: ${e.message}');
 //     }
 //   }
+
+  Future<void> fetchCurrentUserAttributes() async {
+    try {
+      final result = await Amplify.Auth.fetchUserAttributes();
+
+      // for (final element in result) {
+      //   print('key: ${element.userAttributeKey}; value: ${element.value}');
+      // }
+      userName = result
+          .firstWhere((element) =>
+              element.userAttributeKey.toString() ==
+              'CognitoUserAttributeKey "given_name"')
+          .value;
+      userSurname = result
+          .firstWhere((element) =>
+              element.userAttributeKey.toString() ==
+              'CognitoUserAttributeKey "family_name"')
+          .value;
+      emailUser = result
+          .firstWhere((element) =>
+              element.userAttributeKey.toString() ==
+              'CognitoUserAttributeKey "email"')
+          .value;
+      safePrint(userName);
+    } on AuthException catch (e) {
+      safePrint(e.message);
+    }
+  }
 }
