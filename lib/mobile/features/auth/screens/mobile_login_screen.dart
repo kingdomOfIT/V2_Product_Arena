@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:v2_product_arena/mobile/features/auth/screens/mobile_signup_screen.dart';
 import 'package:v2_product_arena/mobile/features/auth/widgets/mobile_login_form.dart';
+import 'package:v2_product_arena/mobile/features/home/screens/mobile_home_screen.dart';
 import 'package:v2_product_arena/mobile/features/lectures/screens/hello_screen.dart';
+import 'package:v2_product_arena/mobile/features/lectures/screens/welcome_lectures_screen.dart';
 import 'package:v2_product_arena/mobile/providers/mobile_auth_provider.dart';
 import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/custom_button.dart';
 import 'package:v2_product_arena/mobile/reusalbe_mobile_widgets/mobile_appbar.dart';
@@ -92,38 +94,43 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                      left: screenWidth * (32 / 360),
-                      right: screenWidth * (32 / 360),
-                      top: screenHeight * (40 / 800),
-                    ),
-                    child: Center(
-                      child: Column(
-                        children: <Widget>[
-                          Column(
-                            children: const <Widget>[],
-                          ),
-                          Text(
+                  Center(
+                    child: Column(
+                      children: <Widget>[
+                        // Column(
+                        //   children: const <Widget>[],
+                        // ),
+                        Padding(
+                          padding:
+                              EdgeInsets.only(top: screenHeight * (40 / 800)),
+                          child: Text(
                             'Welcome to',
                             style: GoogleFonts.notoSans(
                               fontSize: screenHeight * (32 / 800),
                               color: Colors.black,
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.w400,
                             ),
                           ),
-                          Text(
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: screenWidth * (65 / 360)),
+                          child: Text(
                             'Product Arena',
                             style: GoogleFonts.notoSans(
                               fontSize: screenHeight * (32 / 800),
                               color: Colors.black,
-                              fontWeight: FontWeight.w800,
+                              fontWeight: FontWeight.w700,
                             ),
                           ),
-                          SizedBox(
-                            height: screenHeight * (138 / 800),
-                          ),
-                          LoginForm(
+                        ),
+                        SizedBox(
+                          height: screenHeight * (128 / 800),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: screenWidth * (32 / 360)),
+                          child: LoginForm(
                             emailController: emailController,
                             passwordController: passwordController,
                             passwordFocusNode: passwordFocusNode,
@@ -131,25 +138,26 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
                             isHiddenPassword: isHiddenPassword,
                             togglePasswordView: togglePasswordView,
                           ),
-                          mobileAuth.loginErrorText.isNotEmpty
-                              ? Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: screenHeight * (10 / 800)),
-                                  child: Text(
-                                    mobileAuth.loginErrorText,
-                                    style: const TextStyle(
-                                      color: Colors.red,
-                                    ),
+                        ),
+                        mobileAuth.loginErrorText.isNotEmpty
+                            ? Padding(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: screenHeight * (10 / 800)),
+                                child: Text(
+                                  mobileAuth.loginErrorText,
+                                  style: const TextStyle(
+                                    color: Colors.red,
                                   ),
-                                )
-                              :
-                              // : SizedBox(
-                              //     height: deviceHeight * 0.00,
-                              //   ),
-                              SizedBox(
-                                  height: screenHeight * (40 / 800),
                                 ),
-                          CustomButton(
+                              )
+                            : SizedBox(height: screenHeight * (0 / 800)),
+                        SizedBox(
+                          height: screenHeight * (40 / 800),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: screenWidth * (32 / 360)),
+                          child: CustomButton(
                             key: const Key('loginButton'),
                             content: Text(
                               'Login',
@@ -162,10 +170,14 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
                             buttonFunction: onSubmitLogin,
                             color: Colors.black,
                           ),
-                          SizedBox(
-                            height: screenHeight * (10 / 800),
-                          ),
-                          Row(
+                        ),
+                        SizedBox(
+                          height: screenHeight * (10 / 800),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: screenWidth * (96 / 360)),
+                          child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Text(
@@ -198,19 +210,23 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
                               ),
                             ],
                           ),
-                          SizedBox(
-                            height: screenHeight * (130 / 800),
-                          ),
-                          SizedBox(
-                            height: screenWidth * (60 / 360),
+                        ),
+                        SizedBox(
+                          height: screenHeight * (167 / 800),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: screenWidth * (150 / 360)),
+                          child: SizedBox(
+                            height: screenHeight * (60 / 800),
                             width: screenWidth * (60 / 360),
                             child: Image.asset(
-                              'assets/images/tech.png',
+                              'assets/images/group2.png',
                               fit: BoxFit.cover,
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                   Padding(
