@@ -67,7 +67,7 @@ class _LoginFormState extends State<LoginForm> {
                     color: Colors.black,
                   )),
               contentPadding: EdgeInsets.symmetric(
-                vertical: screenHeight * (10.5 / 800),
+                vertical: screenHeight * (15 / 800),
                 horizontal: screenWidth * (16 / 360),
               ),
               label: Text(
