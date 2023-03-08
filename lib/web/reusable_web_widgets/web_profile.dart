@@ -32,21 +32,35 @@ class WebProfile extends StatelessWidget {
                 height: deviceHeight * (500 / 1024),
                 child: Column(
                   children: [
-                    SizedBox(
-                      height: deviceHeight * (120 / 1024),
+                    Container(
+                      height: deviceHeight * (150 / 1024),
                       child: Stack(
                         children: [
-                          Image.asset(
-                            'assets/images/prodarena.png',
-                          ),
-                          Positioned(
-                            top: deviceHeight * 0.03,
-                            left: deviceWidth * 0.067,
+                          Container(
+                            height: deviceHeight * (100 / 1024),
+                            width: double.infinity,
                             child: Image.asset(
-                              'assets/images/blackProfile.png',
-                              height: deviceHeight * (100 / 1024),
+                              'assets/images/prodarena.png',
+                              fit: BoxFit.cover,
                             ),
                           ),
+                          Positioned.fill(
+                            top: deviceHeight * (30 / 1024),
+                            child: Center(
+                              child: Image.asset(
+                                'assets/images/blackProfile.png',
+                                height: deviceHeight * (130 / 1024),
+                              ),
+                            ),
+                          )
+                          // Positioned(
+                          //   top: deviceHeight * 0.03,
+                          //   left: deviceWidth * 0.067,
+                          //   // child: Image.asset(
+                          //   //   'assets/images/blackProfile.png',
+                          //   //   height: deviceHeight * (100 / 1024),
+                          //   // ),
+                          // ),
                           // Row(
                           //   children: const [
                           //     Icon(Icons.logout),
@@ -137,9 +151,9 @@ class WebProfile extends StatelessWidget {
                                                               ? 'assets/images/rolevectorblack2.png'
                                                               : 'assets/images/rolevectorblack4.png',
                                             ),
-                                            SizedBox(
-                                                width:
-                                                    deviceWidth * (5 / 1440)),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
                                             Text(
                                               webAuth.firstRole == 'backend'
                                                   ? 'Backend Development'
@@ -156,7 +170,7 @@ class WebProfile extends StatelessWidget {
                                               style: GoogleFonts.notoSans(
                                                 fontWeight: FontWeight.w700,
                                                 fontSize:
-                                                    deviceWidth * (14 / 1440),
+                                                    deviceHeight * (17 / 1024),
                                               ),
                                             ),
                                           ],
@@ -183,9 +197,9 @@ class WebProfile extends StatelessWidget {
                                                                 : 'assets/images/rolevectorblack4.png',
                                               ),
                                             ),
-                                            SizedBox(
-                                                width:
-                                                    deviceWidth * (5 / 1440)),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
                                             Text(
                                               webAuth.secondRole == 'backend'
                                                   ? 'Backend Development'
@@ -202,7 +216,7 @@ class WebProfile extends StatelessWidget {
                                               style: GoogleFonts.notoSans(
                                                 fontWeight: FontWeight.w700,
                                                 fontSize:
-                                                    deviceWidth * (16 / 1440),
+                                                    deviceHeight * (17 / 1024),
                                               ),
                                             ),
                                           ],
