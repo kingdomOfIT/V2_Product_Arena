@@ -82,7 +82,10 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
                   ),
                   child: GestureDetector(
                     onTap: () {
-                      _controller.pause();
+                      if (_controller.value.playerState ==
+                          PlayerState.playing) {
+                        _controller.pause();
+                      }
                       Provider.of<ErrorMessage>(context, listen: false)
                           .selectedRole
                           .clear();
@@ -107,9 +110,17 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
                       return GestureDetector(
                         onTap: () {
                           if (value.isSidebarOpened) {
+                            if (_controller.value.playerState ==
+                                PlayerState.paused) {
+                              _controller.play();
+                            }
                             _key.currentState!.closeEndDrawer();
                             value.changeSidebar(false);
                           } else {
+                            if (_controller.value.playerState ==
+                                PlayerState.playing) {
+                              _controller.pause();
+                            }
                             _key.currentState!.openEndDrawer();
                             value.changeSidebar(true);
                           }
@@ -148,6 +159,15 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
             width: MediaQuery.of(context).size.width,
             child: const MobileSidebar()),
         onEndDrawerChanged: (isOpen) {
+          if (isOpen == true) {
+            if (_controller.value.playerState == PlayerState.playing) {
+              _controller.pause();
+            }
+          } else {
+            if (_controller.value.playerState == PlayerState.paused) {
+              _controller.play();
+            }
+          }
           dataProvider.changeSidebar(isOpen);
         },
         backgroundColor: const Color(0xFFE9E9E9),
